@@ -37,6 +37,7 @@ public final class Config
 	public static final String PLAYERS_FILE = "./config/players.properties";
 	public static final String SERVER_FILE = "./config/server.properties";
 	public static final String SIEGE_FILE = "./config/siege.properties";
+	public static final String CUSTOM_FILE = "./config/custom.properties";
 	
 	// --------------------------------------------------
 	// Clans settings
@@ -148,6 +149,7 @@ public final class Config
 	public static int ALT_OLY_DIVIDER_CLASSED;
 	public static int ALT_OLY_DIVIDER_NON_CLASSED;
 	public static boolean ALT_OLY_ANNOUNCE_GAMES;
+	public static boolean ALT_OLY_END_ANNOUNCE;
 	
 	/** SevenSigns Festival */
 	public static boolean ALT_GAME_CASTLE_DAWN;
@@ -623,6 +625,20 @@ public final class Config
 	public static int ZONE_TOWN;
 	public static boolean DISABLE_TUTORIAL;
 	
+	/** Config PvP Announce */
+	public static boolean ANNOUNCE_PVP_KILL;
+	public static boolean ANNOUNCE_PK_KILL;
+	
+	/** NPC Raid Boss Info */
+	public static int RAID_BOSS_INFO_PAGE_LIMIT;
+	public static int RAID_BOSS_DROP_PAGE_LIMIT;
+	public static String RAID_BOSS_DATE_FORMAT;
+	public static String RAID_BOSS_IDS;
+	public static List<Integer> LIST_RAID_BOSS_IDS;
+	
+	/** Olympiad Grade A */
+	public static boolean OLLY_GRADE_A;
+	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
 	// You still can experiment changing values here. But don't say I didn't warn you.
@@ -831,6 +847,7 @@ public final class Config
 		ALT_OLY_DIVIDER_CLASSED = events.getProperty("AltOlyDividerClassed", 3);
 		ALT_OLY_DIVIDER_NON_CLASSED = events.getProperty("AltOlyDividerNonClassed", 3);
 		ALT_OLY_ANNOUNCE_GAMES = events.getProperty("AltOlyAnnounceGames", true);
+		ALT_OLY_END_ANNOUNCE = events.getProperty("AltOlyEndAnnounce", false);
 		
 		ALT_GAME_CASTLE_DAWN = events.getProperty("AltCastleForDawn", true);
 		ALT_GAME_CASTLE_DUSK = events.getProperty("AltCastleForDusk", true);
@@ -1327,6 +1344,31 @@ public final class Config
 	}
 	
 	/**
+	 * Loads custom settings.<br>
+	 * PvP/Announce, PC Bang Mob, etc.
+	 */
+	private static final void loadCustom()
+	{
+		final ExProperties custom = initProperties(CUSTOM_FILE);
+		
+		ANNOUNCE_PVP_KILL = custom.getProperty("AnnouncePvPKill", false);
+		ANNOUNCE_PK_KILL = custom.getProperty("AnnouncePkKill", false);
+		
+		RAID_BOSS_INFO_PAGE_LIMIT = custom.getProperty("RaidBossInfoPageLimit", 15);
+		RAID_BOSS_DROP_PAGE_LIMIT = custom.getProperty("RaidBossDropPageLimit", 15);
+		RAID_BOSS_DATE_FORMAT = custom.getProperty("RaidBossDateFormat", "MMM dd, HH:mm");
+		RAID_BOSS_IDS = custom.getProperty("RaidBossIds", "");
+		LIST_RAID_BOSS_IDS = new ArrayList<>();
+		for (final String val : RAID_BOSS_IDS.split(","))
+		{
+			int npcId = Integer.parseInt(val);
+			LIST_RAID_BOSS_IDS.add(npcId);
+		}
+		
+		OLLY_GRADE_A = custom.getProperty("AllowOllyGradeS", false);
+	}
+	
+	/**
 	 * Loads loginserver settings.<br>
 	 * IP addresses, database, account, misc.
 	 */
@@ -1394,6 +1436,9 @@ public final class Config
 		
 		// server settings
 		loadServer();
+		
+		// custom settings
+		loadCustom();
 	}
 	
 	public static final void loadLoginServer()

@@ -1,9 +1,11 @@
 package net.sf.l2j.gameserver.model.olympiad;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.MapRegionTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.model.L2Skill;
@@ -16,11 +18,14 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.group.Party;
 import net.sf.l2j.gameserver.model.group.Party.MessageType;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
+import net.sf.l2j.gameserver.model.item.kind.Item;
+import net.sf.l2j.gameserver.model.item.type.CrystalType;
 import net.sf.l2j.gameserver.model.zone.type.L2OlympiadStadiumZone;
 import net.sf.l2j.gameserver.model.zone.type.L2TownZone;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.ExOlympiadMode;
 import net.sf.l2j.gameserver.network.serverpackets.InventoryUpdate;
+import net.sf.l2j.gameserver.network.serverpackets.ItemList;
 import net.sf.l2j.gameserver.network.serverpackets.L2GameServerPacket;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 
@@ -166,6 +171,11 @@ public abstract class AbstractOlympiadGame
 			{
 				for (L2Skill skill : player.getClan().getClanSkills())
 					player.removeSkill(skill, false);
+			}
+			
+			if(!Config.OLLY_GRADE_A)
+			{
+				checkItems(player);
 			}
 			
 			// Abort casting if player casting
@@ -382,6 +392,49 @@ public abstract class AbstractOlympiadGame
 		{
 			_log.log(Level.WARNING, e.getMessage(), e);
 		}
+	}
+	
+	protected static void checkItems(Player player)
+	{
+		ItemInstance item;
+		int slot;
+		for(int i=1; i < 15; i++)
+		{
+			item = player.getInventory().getPaperdollItem(i);
+			if(item==null)
+				continue;
+			if(item.getItem().getItemGrade() == CrystalType.S)
+			{
+				slot = item.getItem().getBodyPart();
+				switch(item.getEquipSlot())
+				{
+					case 1:
+						slot = Item.SLOT_L_EAR;
+						break;
+					case 2:
+						slot = Item.SLOT_R_EAR;
+						break;
+					case 4:
+						slot = Item.SLOT_L_FINGER;
+						break;
+					case 5:
+						slot = Item.SLOT_R_FINGER;
+						break;
+					case 6:
+						slot = Item.SLOT_UNDERWEAR;
+						break;
+					default:
+						break;
+				}
+				
+				ItemInstance[] items = player.getInventory().unEquipItemInBodySlotAndRecord(slot);
+				InventoryUpdate iu = new InventoryUpdate();
+				iu.addItems(Arrays.asList(items));
+				player.sendPacket(iu);
+			}
+		}
+		player.sendPacket(new ItemList(player, true));
+		player.broadcastUserInfo();
 	}
 	
 	public abstract CompetitionType getType();

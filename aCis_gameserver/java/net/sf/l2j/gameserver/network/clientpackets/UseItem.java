@@ -12,9 +12,11 @@ import net.sf.l2j.gameserver.model.holder.IntIntHolder;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.item.kind.Item;
 import net.sf.l2j.gameserver.model.item.type.ActionType;
+import net.sf.l2j.gameserver.model.item.type.CrystalType;
 import net.sf.l2j.gameserver.model.item.type.EtcItemType;
 import net.sf.l2j.gameserver.model.item.type.WeaponType;
 import net.sf.l2j.gameserver.model.itemcontainer.Inventory;
+import net.sf.l2j.gameserver.model.olympiad.OlympiadManager;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.ItemList;
 import net.sf.l2j.gameserver.network.serverpackets.PetItemList;
@@ -102,6 +104,13 @@ public final class UseItem extends L2GameClientPacket
 		if (activeChar.isFishing() && item.getItem().getDefaultAction() != ActionType.fishingshot)
 		{
 			activeChar.sendPacket(SystemMessageId.CANNOT_DO_WHILE_FISHING_3);
+			return;
+		}
+		
+		if(!Config.OLLY_GRADE_A && item.getItem().getItemGrade() == CrystalType.S &&
+			(activeChar.isInOlympiadMode() || OlympiadManager.getInstance().isRegistered(activeChar)))
+		{
+			activeChar.sendMessage(activeChar.getName() +" the Olympiad no accept Items Grade S, change to Items Grade A.");
 			return;
 		}
 		

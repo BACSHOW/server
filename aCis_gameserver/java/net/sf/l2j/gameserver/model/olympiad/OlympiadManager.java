@@ -1,6 +1,7 @@
 package net.sf.l2j.gameserver.model.olympiad;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -8,7 +9,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
+import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
+import net.sf.l2j.gameserver.model.item.kind.Item;
+import net.sf.l2j.gameserver.model.item.type.CrystalType;
 import net.sf.l2j.gameserver.network.SystemMessageId;
+import net.sf.l2j.gameserver.network.serverpackets.InventoryUpdate;
+import net.sf.l2j.gameserver.network.serverpackets.ItemList;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.StatsSet;
@@ -255,6 +261,11 @@ public class OlympiadManager
 			return false;
 		}
 		
+		if(!Config.OLLY_GRADE_A)
+		{
+			checkItems(player);
+		}
+		
 		if (player.getInventoryLimit() * 0.8 <= player.getInventory().getSize())
 		{
 			player.sendPacket(SystemMessageId.SINCE_80_PERCENT_OR_MORE_OF_YOUR_INVENTORY_SLOTS_ARE_FULL_YOU_CANNOT_PARTICIPATE_IN_THE_OLYMPIAD);
@@ -294,6 +305,49 @@ public class OlympiadManager
 		}
 		
 		return true;
+	}
+	
+	protected void checkItems(Player player)
+	{
+		ItemInstance item;
+		int slot;
+		for(int i=1; i < 15; i++)
+		{
+			item = player.getInventory().getPaperdollItem(i);
+			if(item==null)
+				continue;
+			if(item.getItem().getItemGrade() == CrystalType.S)
+			{
+				slot = item.getItem().getBodyPart();
+				switch(item.getEquipSlot())
+				{
+					case 1:
+						slot = Item.SLOT_L_EAR;
+						break;
+					case 2:
+						slot = Item.SLOT_R_EAR;
+						break;
+					case 4:
+						slot = Item.SLOT_L_FINGER;
+						break;
+					case 5:
+						slot = Item.SLOT_R_FINGER;
+						break;
+					case 6:
+						slot = Item.SLOT_UNDERWEAR;
+						break;
+					default:
+						break;
+				}
+				
+				ItemInstance[] items = player.getInventory().unEquipItemInBodySlotAndRecord(slot);
+				InventoryUpdate iu = new InventoryUpdate();
+				iu.addItems(Arrays.asList(items));
+				player.sendPacket(iu);
+			}
+		}
+		player.sendPacket(new ItemList(player, true));
+		player.broadcastUserInfo();
 	}
 	
 	private static class SingletonHolder

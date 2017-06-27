@@ -1262,4 +1262,15 @@ public final class ItemInstance extends WorldObject implements Runnable, Compara
 		
 		return Integer.compare(item.getObjectId(), getObjectId());
 	}
+	
+	/**
+	 * Returns the slot where the item is stored.
+	 * @return int
+	 */
+	public int getEquipSlot()
+	{
+		assert _loc == ItemLocation.PAPERDOLL || _loc == ItemLocation.PET_EQUIP || _loc == ItemLocation.FREIGHT;
+		
+		return _locData;
+	}
 }

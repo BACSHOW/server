@@ -218,6 +218,7 @@ import net.sf.l2j.gameserver.scripting.EventType;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
 import net.sf.l2j.gameserver.scripting.ScriptManager;
+import net.sf.l2j.gameserver.skills.AbnormalEffect;
 import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.skills.Formulas;
 import net.sf.l2j.gameserver.skills.Stats;
@@ -2969,11 +2970,13 @@ public final class Player extends Playable
 						sendMessage("The spawn protection has ended.");
 					}
 				}, Config.PLAYER_SPAWN_PROTECTION * 1000);
+			startAbnormalEffect(AbnormalEffect.IMPRISIONING_2);
 		}
 		else
 		{
 			_protectTask.cancel(true);
 			_protectTask = null;
+			stopAbnormalEffect(AbnormalEffect.IMPRISIONING_2);
 		}
 		broadcastUserInfo();
 	}
@@ -4147,6 +4150,13 @@ public final class Player extends Playable
 				// Add PvP point to attacker.
 				setPvpKills(getPvpKills() + 1);
 				
+				SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S1_S2);
+				
+				if (Config.ANNOUNCE_PVP_KILL)
+					sm.addString("@ " + getName() + " defeated " + target.getName() + " in ");
+					sm.addZoneName(getPosition());
+					Broadcast.toAllOnlinePlayers(sm);
+				
 				// Send UserInfo packet to attacker with its Karma and PK Counter
 				sendPacket(new UserInfo(this));
 			}
@@ -4157,6 +4167,13 @@ public final class Player extends Playable
 			// PK Points are increased only if you kill a player.
 			if (target instanceof Player)
 				setPkKills(getPkKills() + 1);
+			
+			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S1_S2);
+			
+			if (Config.ANNOUNCE_PK_KILL)
+				sm.addString("@ " + getName() + " murdered " + target.getName() + " in ");
+				sm.addZoneName(getPosition());
+				Broadcast.toAllOnlinePlayers(sm);
 			
 			// Calculate new karma.
 			setKarma(getKarma() + Formulas.calculateKarmaGain(getPkKills(), target instanceof Summon));

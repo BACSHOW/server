@@ -578,4 +578,16 @@ public abstract class Item
 	{
 		return _questEvents;
 	}
+	
+	/**
+	 * Returns the grade of the item.<BR>
+	 * <BR>
+	 * <U><I>Concept :</I></U><BR>
+	 * In fact, this fucntion returns the type of crystal of the item.
+	 * @return int
+	 */
+	public final CrystalType getItemGrade()
+	{
+		return getCrystalType();
+	}
 }

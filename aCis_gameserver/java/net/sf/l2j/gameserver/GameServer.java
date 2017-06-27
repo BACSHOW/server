@@ -75,6 +75,7 @@ import net.sf.l2j.gameserver.instancemanager.FourSepulchersManager;
 import net.sf.l2j.gameserver.instancemanager.GrandBossManager;
 import net.sf.l2j.gameserver.instancemanager.MovieMakerManager;
 import net.sf.l2j.gameserver.instancemanager.PetitionManager;
+import net.sf.l2j.gameserver.instancemanager.RaidBossInfoManager;
 import net.sf.l2j.gameserver.instancemanager.RaidBossPointsManager;
 import net.sf.l2j.gameserver.instancemanager.RaidBossSpawnManager;
 import net.sf.l2j.gameserver.instancemanager.SevenSigns;
@@ -250,6 +251,7 @@ public class GameServer
 		SpawnTable.getInstance();
 		RaidBossSpawnManager.getInstance();
 		GrandBossManager.getInstance();
+		RaidBossInfoManager.getInstance();
 		DayNightSpawnManager.getInstance();
 		DimensionalRiftManager.getInstance();
 		

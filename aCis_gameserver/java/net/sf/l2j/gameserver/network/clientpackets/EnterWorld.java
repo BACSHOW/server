@@ -209,6 +209,11 @@ public class EnterWorld extends L2GameClientPacket
 		activeChar.sendPacket(SevenSigns.getInstance().getCurrentPeriod().getMessageId());
 		AnnouncementTable.getInstance().showAnnouncements(activeChar, false);
 		
+		if (Config.ALT_OLY_END_ANNOUNCE)
+		{
+			Olympiad.olympiadEnd(activeChar);
+		}
+		
 		// if player is DE, check for shadow sense skill at night
 		if (activeChar.getRace() == ClassRace.DARK_ELF && activeChar.getSkillLevel(294) == 1)
 			activeChar.sendPacket(SystemMessage.getSystemMessage((GameTimeTaskManager.getInstance().isNight()) ? SystemMessageId.NIGHT_S1_EFFECT_APPLIES : SystemMessageId.DAY_S1_EFFECT_DISAPPEARS).addSkillName(294));
