@@ -11,14 +11,23 @@ import net.sf.l2j.commons.math.MathUtil;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.BufferTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
+import net.sf.l2j.gameserver.model.L2Skill;
+import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.Summon;
 import net.sf.l2j.gameserver.model.actor.template.NpcTemplate;
+import net.sf.l2j.gameserver.model.zone.ZoneId;
+import net.sf.l2j.gameserver.network.SystemMessageId;
+import net.sf.l2j.gameserver.network.serverpackets.MagicSkillUse;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
+import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.scripting.QuestState;
 
 public class SchemeBuffer extends Folk
 {
 	private static final int PAGE_LIMIT = 6;
+	
+	private static final int _seconds = 30;
 	
 	public SchemeBuffer(int objectId, NpcTemplate template)
 	{
@@ -30,6 +39,8 @@ public class SchemeBuffer extends Folk
 	{
 		StringTokenizer st = new StringTokenizer(command, " ");
 		String currentCommand = st.nextToken();
+		
+		QuestState cd = player.getQuestState(getName());
 		
 		if (currentCommand.startsWith("menu"))
 		{
@@ -53,6 +64,17 @@ public class SchemeBuffer extends Folk
 		}
 		else if (currentCommand.startsWith("heal"))
 		{
+			final NpcHtmlMessage html = new NpcHtmlMessage(0);
+			html.setFile(getHtmlPath(getNpcId(), 0));
+			html.replace("%objectId%", getObjectId());
+			
+			if (player.getPvpFlag() != 0 || player.getKarma() != 0 || player.isInCombat())
+			{
+				player.sendMessage("You cannot be healed while in combat mode.");
+				player.sendPacket(html);
+			}
+			else
+			{
 			player.setCurrentHpMp(player.getMaxHp(), player.getMaxMp());
 			player.setCurrentCp(player.getMaxCp());
 			
@@ -60,10 +82,8 @@ public class SchemeBuffer extends Folk
 			if (summon != null)
 				summon.setCurrentHpMp(summon.getMaxHp(), summon.getMaxMp());
 			
-			final NpcHtmlMessage html = new NpcHtmlMessage(0);
-			html.setFile(getHtmlPath(getNpcId(), 0));
-			html.replace("%objectId%", getObjectId());
 			player.sendPacket(html);
+			}
 		}
 		else if (currentCommand.startsWith("support"))
 		{
@@ -168,6 +188,161 @@ public class SchemeBuffer extends Folk
 				player.sendMessage("This scheme name is invalid.");
 			}
 			showGiveBuffsWindow(player);
+		}
+		else if (currentCommand.equalsIgnoreCase("getbuff"))
+		{
+			int buffid = 0;
+			int bufflevel = 1;
+			String nextWindow = null;
+			if (st.countTokens() == 3)
+			{
+				buffid = Integer.valueOf(st.nextToken()).intValue();
+				bufflevel = Integer.valueOf(st.nextToken()).intValue();
+				nextWindow = st.nextToken();
+			}
+			else if (st.countTokens() == 1)
+			{
+				buffid = Integer.valueOf(st.nextToken()).intValue();
+			}
+			if (buffid != 0)
+			{
+				player.broadcastPacket(new MagicSkillUse(this, player, buffid, bufflevel, 5, 0));
+				
+				player.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.YOU_FEEL_S1_EFFECT).addSkillName(buffid, bufflevel));
+				SkillTable.getInstance().getInfo(buffid, bufflevel).getEffects(this, player);
+				showChatWindow(player, nextWindow);
+			}
+		}
+		else if (currentCommand.equalsIgnoreCase("warrior_w_zerk"))
+		{
+			player.stopAllEffects();
+			SkillTable.getInstance().getInfo(1040, 3).getEffects(this, player); //shield
+			SkillTable.getInstance().getInfo(1068, 3).getEffects(this, player); //might
+			SkillTable.getInstance().getInfo(1077, 3).getEffects(this, player); //focus
+			SkillTable.getInstance().getInfo(1204, 2).getEffects(this, player); //wind walk
+			SkillTable.getInstance().getInfo(1036, 2).getEffects(this, player); // Magic Barrier
+			SkillTable.getInstance().getInfo(1045, 6).getEffects(this, player); // Blessed Body
+			SkillTable.getInstance().getInfo(1048, 6).getEffects(this, player); // Blessed Soul
+			SkillTable.getInstance().getInfo(1086, 2).getEffects(this, player); // Haste
+			SkillTable.getInstance().getInfo(1240, 3).getEffects(this, player); // Guidance
+			SkillTable.getInstance().getInfo(1062, 2).getEffects(this, player); // Berserker Spirit
+			SkillTable.getInstance().getInfo(1242, 3).getEffects(this, player); // Death Whisper
+			SkillTable.getInstance().getInfo(1388, 3).getEffects(this, player); // Greater Might
+			SkillTable.getInstance().getInfo(1035, 4).getEffects(this, player); // Mental Shield
+			SkillTable.getInstance().getInfo(4699, 13).getEffects(this, player); // Blessing of Queen
+			SkillTable.getInstance().getInfo(1363, 1).getEffects(this, player); // Victory Chant
+			SkillTable.getInstance().getInfo(271, 1).getEffects(this, player); // Dance of the Warrior
+			SkillTable.getInstance().getInfo(272, 1).getEffects(this, player); // Dance of Inspiration
+			SkillTable.getInstance().getInfo(274, 1).getEffects(this, player); // Dance of Fire
+			SkillTable.getInstance().getInfo(275, 1).getEffects(this, player); // Dance of Fury
+			SkillTable.getInstance().getInfo(264, 1).getEffects(this, player); // Song of Earth
+			SkillTable.getInstance().getInfo(267, 1).getEffects(this, player); // Song of Warding
+			SkillTable.getInstance().getInfo(268, 1).getEffects(this, player); // Song of Wind
+			SkillTable.getInstance().getInfo(269, 1).getEffects(this, player); // Song of Hunter
+			SkillTable.getInstance().getInfo(304, 1).getEffects(this, player); // Song of Vitality
+			SkillTable.getInstance().getInfo(349, 1).getEffects(this, player); // Song of Renewal
+			SkillTable.getInstance().getInfo(364, 1).getEffects(this, player); // Song of Champion
+			
+			final NpcHtmlMessage html = new NpcHtmlMessage(0);
+			html.setFile(getHtmlPath(getNpcId(), 0));
+			html.replace("%objectId%", getObjectId());
+			player.sendPacket(html);
+		}
+		else if (currentCommand.equalsIgnoreCase("warrior_w/o_zerk"))
+		{
+			player.stopAllEffects();
+			SkillTable.getInstance().getInfo(1040, 3).getEffects(this, player); //shield
+			SkillTable.getInstance().getInfo(1068, 3).getEffects(this, player); //might
+			SkillTable.getInstance().getInfo(1077, 3).getEffects(this, player); //focus
+			SkillTable.getInstance().getInfo(1204, 2).getEffects(this, player); //wind walk
+			SkillTable.getInstance().getInfo(1036, 2).getEffects(this, player); // Magic Barrier
+			SkillTable.getInstance().getInfo(1045, 6).getEffects(this, player); // Blessed Body
+			SkillTable.getInstance().getInfo(1048, 6).getEffects(this, player); // Blessed Soul
+			SkillTable.getInstance().getInfo(1086, 2).getEffects(this, player); // Haste
+			SkillTable.getInstance().getInfo(1240, 3).getEffects(this, player); // Guidance
+			SkillTable.getInstance().getInfo(1242, 3).getEffects(this, player); // Death Whisper
+			SkillTable.getInstance().getInfo(1388, 3).getEffects(this, player); // Greater Might
+			SkillTable.getInstance().getInfo(1035, 4).getEffects(this, player); // Mental Shield
+			SkillTable.getInstance().getInfo(4699, 13).getEffects(this, player); // Blessing of Queen
+			SkillTable.getInstance().getInfo(1363, 1).getEffects(this, player); // Victory Chant
+			SkillTable.getInstance().getInfo(271, 1).getEffects(this, player); // Dance of the Warrior
+			SkillTable.getInstance().getInfo(272, 1).getEffects(this, player); // Dance of Inspiration
+			SkillTable.getInstance().getInfo(274, 1).getEffects(this, player); // Dance of Fire
+			SkillTable.getInstance().getInfo(275, 1).getEffects(this, player); // Dance of Fury
+			SkillTable.getInstance().getInfo(264, 1).getEffects(this, player); // Song of Earth
+			SkillTable.getInstance().getInfo(267, 1).getEffects(this, player); // Song of Warding
+			SkillTable.getInstance().getInfo(268, 1).getEffects(this, player); // Song of Wind
+			SkillTable.getInstance().getInfo(269, 1).getEffects(this, player); // Song of Hunter
+			SkillTable.getInstance().getInfo(304, 1).getEffects(this, player); // Song of Vitality
+			SkillTable.getInstance().getInfo(349, 1).getEffects(this, player); // Song of Renewal
+			SkillTable.getInstance().getInfo(364, 1).getEffects(this, player); // Song of Champion
+			
+			final NpcHtmlMessage html = new NpcHtmlMessage(0);
+			html.setFile(getHtmlPath(getNpcId(), 0));
+			html.replace("%objectId%", getObjectId());
+			player.sendPacket(html);
+			
+		}
+		else if (currentCommand.equalsIgnoreCase("mage_w_zerk"))
+		{
+			player.stopAllEffects();
+			SkillTable.getInstance().getInfo(1040, 3).getEffects(this, player); // Shield
+			SkillTable.getInstance().getInfo(1078, 6).getEffects(this, player); // Concentration
+			SkillTable.getInstance().getInfo(1085, 3).getEffects(this, player); // Acumen
+			SkillTable.getInstance().getInfo(1204, 2).getEffects(this, player); // Wind Walk
+			SkillTable.getInstance().getInfo(1036, 2).getEffects(this, player); // Magic Barrier
+			SkillTable.getInstance().getInfo(1045, 6).getEffects(this, player); // Blessed Body
+			SkillTable.getInstance().getInfo(1048, 6).getEffects(this, player); // Blessed Soul
+			SkillTable.getInstance().getInfo(1062, 2).getEffects(this, player); // Berserker Spirit
+			SkillTable.getInstance().getInfo(1059, 3).getEffects(this, player); // Empower
+			SkillTable.getInstance().getInfo(1303, 2).getEffects(this, player); // Wild Magic
+			SkillTable.getInstance().getInfo(1389, 3).getEffects(this, player); // Greater Shield
+			SkillTable.getInstance().getInfo(1035, 4).getEffects(this, player); // Mental Shield 
+			SkillTable.getInstance().getInfo(4703, 13).getEffects(this, player); // Gift of Seraphim
+			SkillTable.getInstance().getInfo(1363, 1).getEffects(this, player); // Victory Chant
+			SkillTable.getInstance().getInfo(273, 1).getEffects(this, player); // Dance of the Mystic
+			SkillTable.getInstance().getInfo(276, 1).getEffects(this, player); // Dance of Concentration
+			SkillTable.getInstance().getInfo(365, 1).getEffects(this, player); // Siren's Dance 
+			SkillTable.getInstance().getInfo(264, 1).getEffects(this, player); // Song of Earth
+			SkillTable.getInstance().getInfo(267, 1).getEffects(this, player); // Song of Warding
+			SkillTable.getInstance().getInfo(268, 1).getEffects(this, player); // Song of Wind
+			SkillTable.getInstance().getInfo(304, 1).getEffects(this, player); // Song of Vitality
+			SkillTable.getInstance().getInfo(349, 1).getEffects(this, player); // Song of Renewal
+			
+			final NpcHtmlMessage html = new NpcHtmlMessage(0);
+			html.setFile(getHtmlPath(getNpcId(), 0));
+			html.replace("%objectId%", getObjectId());
+			player.sendPacket(html);
+		}
+		else if (currentCommand.equalsIgnoreCase("mage_w/o_zerk"))
+		{
+			player.stopAllEffects();
+			SkillTable.getInstance().getInfo(1040, 3).getEffects(this, player); // Shield
+			SkillTable.getInstance().getInfo(1078, 6).getEffects(this, player); // Concentration
+			SkillTable.getInstance().getInfo(1085, 3).getEffects(this, player); // Acumen
+			SkillTable.getInstance().getInfo(1204, 2).getEffects(this, player); // Wind Walk
+			SkillTable.getInstance().getInfo(1036, 2).getEffects(this, player); // Magic Barrier
+			SkillTable.getInstance().getInfo(1045, 6).getEffects(this, player); // Blessed Body
+			SkillTable.getInstance().getInfo(1048, 6).getEffects(this, player); // Blessed Soul
+			SkillTable.getInstance().getInfo(1059, 3).getEffects(this, player); // Empower
+			SkillTable.getInstance().getInfo(1303, 2).getEffects(this, player); // Wild Magic
+			SkillTable.getInstance().getInfo(1389, 3).getEffects(this, player); // Greater Shield
+			SkillTable.getInstance().getInfo(1035, 4).getEffects(this, player); // Mental Shield 
+			SkillTable.getInstance().getInfo(4703, 13).getEffects(this, player); // Gift of Seraphim
+			SkillTable.getInstance().getInfo(1363, 1).getEffects(this, player); // Victory Chant
+			SkillTable.getInstance().getInfo(273, 1).getEffects(this, player); // Dance of the Mystic
+			SkillTable.getInstance().getInfo(276, 1).getEffects(this, player); // Dance of Concentration
+			SkillTable.getInstance().getInfo(365, 1).getEffects(this, player); // Siren's Dance 
+			SkillTable.getInstance().getInfo(264, 1).getEffects(this, player); // Song of Earth
+			SkillTable.getInstance().getInfo(267, 1).getEffects(this, player); // Song of Warding
+			SkillTable.getInstance().getInfo(268, 1).getEffects(this, player); // Song of Wind
+			SkillTable.getInstance().getInfo(304, 1).getEffects(this, player); // Song of Vitality
+			SkillTable.getInstance().getInfo(349, 1).getEffects(this, player); // Song of Renewal
+			
+			final NpcHtmlMessage html = new NpcHtmlMessage(0);
+			html.setFile(getHtmlPath(getNpcId(), 0));
+			html.replace("%objectId%", getObjectId());
+			player.sendPacket(html);
 		}
 		
 		super.onBypassFeedback(player, command);

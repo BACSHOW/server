@@ -19,7 +19,7 @@ import net.sf.l2j.gameserver.model.item.DropData;
 import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
 
-   public class L2RaidBossInfoInstance extends Folk
+   public class RaidBossInfo extends Folk
 	{
    private final Map<Integer, Integer> _lastPage = new ConcurrentHashMap<>();
   
@@ -35,7 +35,7 @@ import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
        },
    };
   
-   public L2RaidBossInfoInstance(int objectId, NpcTemplate template)
+   public RaidBossInfo(int objectId, NpcTemplate template)
    {
        super(objectId, template);
    }
@@ -49,7 +49,8 @@ import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
       
       NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
        html.setFile(name);
-      html.replace("%objectId%", getObjectId());
+       html.replace("%objectId%", getObjectId());
+       html.replace("%player%", player.getName());
        player.sendPacket(html);
        player.sendPacket(ActionFailed.STATIC_PACKET);
    }

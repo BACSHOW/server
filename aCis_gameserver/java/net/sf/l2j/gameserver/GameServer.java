@@ -18,6 +18,7 @@ import net.sf.l2j.commons.util.SysUtil;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
+import net.sf.l2j.Team;
 import net.sf.l2j.gameserver.cache.CrestCache;
 import net.sf.l2j.gameserver.cache.HtmCache;
 import net.sf.l2j.gameserver.communitybbs.Manager.ForumsBBSManager;
@@ -141,6 +142,9 @@ public class GameServer
 			LogManager.getLogManager().readConfiguration(is);
 		}
 		
+		StringUtil.printSection("Team");
+		Team.info();
+		
 		StringUtil.printSection("aCis");
 		
 		// Initialize config
@@ -155,10 +159,6 @@ public class GameServer
 		
 		StringUtil.printSection("IdFactory");
 		IdFactory.getInstance();
-		
-		// custom by fissban
-		StringUtil.printSection("EngineMods");
-		EngineModsManager.init();
 		
 		StringUtil.printSection("World");
 		World.getInstance();
@@ -251,7 +251,6 @@ public class GameServer
 		SpawnTable.getInstance();
 		RaidBossSpawnManager.getInstance();
 		GrandBossManager.getInstance();
-		RaidBossInfoManager.getInstance();
 		DayNightSpawnManager.getInstance();
 		DimensionalRiftManager.getInstance();
 		
@@ -292,6 +291,12 @@ public class GameServer
 		_log.config("ItemHandler: Loaded " + ItemHandler.getInstance().size() + " handlers.");
 		_log.config("SkillHandler: Loaded " + SkillHandler.getInstance().size() + " handlers.");
 		_log.config("UserCommandHandler: Loaded " + UserCommandHandler.getInstance().size() + " handlers.");
+		
+		StringUtil.printSection("Custom");
+		EngineModsManager.init();
+		
+		StringUtil.printSection("NPC Custom");
+		RaidBossInfoManager.getInstance();
 		
 		StringUtil.printSection("System");
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());

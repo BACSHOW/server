@@ -4153,7 +4153,7 @@ public final class Player extends Playable
 				SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S1_S2);
 				
 				if (Config.ANNOUNCE_PVP_KILL)
-					sm.addString("@ " + getName() + " defeated " + target.getName() + " in ");
+					sm.addString("@ " + getName() + " defeated " + target.getName() + " in");
 					sm.addZoneName(getPosition());
 					Broadcast.toAllOnlinePlayers(sm);
 				
@@ -4171,7 +4171,7 @@ public final class Player extends Playable
 			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S1_S2);
 			
 			if (Config.ANNOUNCE_PK_KILL)
-				sm.addString("@ " + getName() + " murdered " + target.getName() + " in ");
+				sm.addString("@ " + getName() + " murdered " + target.getName() + " in");
 				sm.addZoneName(getPosition());
 				Broadcast.toAllOnlinePlayers(sm);
 			
