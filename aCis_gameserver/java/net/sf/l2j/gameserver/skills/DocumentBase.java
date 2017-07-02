@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.ChanceCondition;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.base.ClassRace;
@@ -212,7 +213,27 @@ abstract class DocumentBase
 			count = Integer.decode(getValue(attrs.getNamedItem("count").getNodeValue(), template));
 		
 		if (attrs.getNamedItem("time") != null)
+		{
 			time = Integer.decode(getValue(attrs.getNamedItem("time").getNodeValue(), template));
+			if(Config.ENABLE_MODIFY_SKILL_DURATION)
+			{
+				if(Config.SKILL_DURATION_LIST.containsKey(((L2Skill) template).getId()))
+				{
+					if(((L2Skill) template).getLevel() < 100)
+					{
+						time = Config.SKILL_DURATION_LIST.get(((L2Skill) template).getId());
+					}
+					else if(((L2Skill) template).getLevel() >= 100 && ((L2Skill) template).getLevel() < 140)
+					{
+						time += Config.SKILL_DURATION_LIST.get(((L2Skill) template).getId());
+					}
+					else if(((L2Skill) template).getLevel() > 140)
+					{
+						time = Config.SKILL_DURATION_LIST.get(((L2Skill) template).getId());
+					}
+				}
+			}
+		}
 		else if (((L2Skill) template).getBuffDuration() > 0)
 			time = ((L2Skill) template).getBuffDuration() / 1000 / count;
 		

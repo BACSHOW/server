@@ -315,6 +315,8 @@ public class EnterWorld extends L2GameClientPacket
 		
 		activeChar.onPlayerEnter();
 		
+		activeChar.showPcBangWindow();
+		
 		sendPacket(new SkillCoolTime(activeChar));
 		
 		// If player logs back in a stadium, port him in nearest town.

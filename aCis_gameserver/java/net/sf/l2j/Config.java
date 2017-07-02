@@ -639,6 +639,14 @@ public final class Config
 	/** Olympiad Grade A */
 	public static boolean OLLY_GRADE_A;
 	
+	/** PCBang Point peer mob */
+	public static int PC_BANG_POINTS_MOB_ID;
+	public static int PC_BANG_POINTS_PER_MOB;
+	
+	/** Timed Buffs */
+	public static boolean ENABLE_MODIFY_SKILL_DURATION;
+	public static Map<Integer, Integer> SKILL_DURATION_LIST;
+	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
 	// You still can experiment changing values here. But don't say I didn't warn you.
@@ -1366,6 +1374,44 @@ public final class Config
 		}
 		
 		OLLY_GRADE_A = custom.getProperty("AllowOllyGradeS", false);
+		
+		PC_BANG_POINTS_MOB_ID = custom.getProperty("PCBangMobID", 21364);
+		PC_BANG_POINTS_PER_MOB = custom.getProperty("PCBangPointsPerMob", 150);
+		
+		ENABLE_MODIFY_SKILL_DURATION = custom.getProperty("EnableModifySkillDuration", false);
+		if(ENABLE_MODIFY_SKILL_DURATION)
+		{
+			SKILL_DURATION_LIST = new HashMap<>();
+			
+			String[] propertySplit;
+			propertySplit = custom.getProperty("SkillDurationList", "").split(";");
+			
+			for(String skill : propertySplit)
+			{
+				String[] skillSplit = skill.split(",");
+				if(skillSplit.length != 2)
+				{
+					System.out.println("[SkillDurationList]: invalid config property -> SkillDurationList \"" + skill + "\"");
+				}
+				else
+				{
+					try
+					{
+						SKILL_DURATION_LIST.put(Integer.parseInt(skillSplit[0]), Integer.parseInt(skillSplit[1]));
+					}
+					catch(NumberFormatException nfe)
+					{
+						nfe.printStackTrace();
+						
+						if(!skill.equals(""))
+						{
+							System.out.println("[SkillDurationList]: invalid config property -> SkillList \"" + skillSplit[0] + "\"" + skillSplit[1]);
+						}
+					}
+				}
+			}
+		}
+		
 	}
 	
 	/**
