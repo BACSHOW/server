@@ -647,6 +647,27 @@ public final class Config
 	public static boolean ENABLE_MODIFY_SKILL_DURATION;
 	public static Map<Integer, Integer> SKILL_DURATION_LIST;
 	
+	/** Quest Nobles Custom */
+	public static int QUEST_NOBLES_ITEM_ID1;
+	public static String QUEST_ITEM_NAME1;
+	public static int QUEST_NOBLES_ITEM_COUNT_MIN1;
+	public static int QUEST_NOBLES_ITEM_COUNT_MAX1;
+	public static int QUEST_NOBLES_ITEM_CHANCE1;
+	public static int QUEST_NOBLES_ITEM_ID2;
+	public static String QUEST_ITEM_NAME2;
+	public static int QUEST_NOBLES_ITEM_COUNT_MIN2;
+	public static int QUEST_NOBLES_ITEM_COUNT_MAX2;
+	public static int QUEST_NOBLES_ITEM_CHANCE2;
+	
+	/** NPC Custom Nobles */
+	public static int NOBLES_ITEM_ID1;
+	public static int NOBLES_ITEM_COUNT1;
+	public static int NOBLES_ITEM_ID2;
+	public static int NOBLES_ITEM_COUNT2;
+	public static int NOBLES_ITEM_ID3;
+	public static int NOBLES_ITEM_COUNT3;
+	public static int PVP_BECOME_NOBLES;
+	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
 	// You still can experiment changing values here. But don't say I didn't warn you.
@@ -1410,6 +1431,25 @@ public final class Config
 					}
 				}
 			}
+			
+			QUEST_NOBLES_ITEM_ID1 = custom.getProperty("QuestNoblesItemID1", 57);
+			QUEST_ITEM_NAME1 = custom.getProperty("QuestItemName1", "Adena");
+			QUEST_NOBLES_ITEM_COUNT_MIN1 = custom.getProperty("QuestNoblesItemCountMin1", 50);
+			QUEST_NOBLES_ITEM_COUNT_MAX1 = custom.getProperty("QuestNoblesItemCountMax1", 100);
+			QUEST_NOBLES_ITEM_CHANCE1 = custom.getProperty("QuestNoblesItemChance1", 100);
+			QUEST_NOBLES_ITEM_ID1 = custom.getProperty("QuestNoblesItemID2", 57);
+			QUEST_ITEM_NAME2 = custom.getProperty("QuestItemName2", "Adena");
+			QUEST_NOBLES_ITEM_COUNT_MIN2 = custom.getProperty("QuestNoblesItemCountMin2", 50);
+			QUEST_NOBLES_ITEM_COUNT_MAX2 = custom.getProperty("QuestNoblesItemCountMax2", 100);
+			QUEST_NOBLES_ITEM_ID1 = custom.getProperty("QuestNoblesItemChance2", 100);
+			
+			NOBLES_ITEM_ID1 = custom.getProperty("NoblesItemID1", 57);
+			NOBLES_ITEM_COUNT1 = custom.getProperty("NoblesItemCount1", 50);
+			NOBLES_ITEM_ID2 = custom.getProperty("NoblesItemID2", 57);
+			NOBLES_ITEM_COUNT2 = custom.getProperty("NoblesItemCount2", 50);
+			NOBLES_ITEM_ID3 = custom.getProperty("NoblesItemID3", 57);
+			NOBLES_ITEM_COUNT3 = custom.getProperty("NoblesItemCount3", 50);
+			PVP_BECOME_NOBLES = custom.getProperty("PvpToBecomeNobles", 100);
 		}
 		
 	}
