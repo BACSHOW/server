@@ -73,7 +73,7 @@ public class NoblessDrops extends Quest
 		}
 		if (Rnd.get(100) < GOLDEN_CHANCE)
 		{
-			player.addItem(Config.QUEST_ITEM_NAME1, Config.QUEST_NOBLES_ITEM_ID2, Rnd.get(ItemCountMin2, ItemCountMax2), player, true);
+			player.addItem(Config.QUEST_ITEM_NAME2, Config.QUEST_NOBLES_ITEM_ID2, Rnd.get(ItemCountMin2, ItemCountMax2), player, true);
 		}
 
 		return null;
