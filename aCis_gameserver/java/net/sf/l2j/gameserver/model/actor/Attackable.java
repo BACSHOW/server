@@ -1172,6 +1172,7 @@ public class Attackable extends Npc
 		{
 			// Init the dropped ItemInstance and add it in the world as a visible object at the position where mob was last
 			item = ItemTable.getInstance().createItem("Loot", holder.getId(), holder.getValue(), mainDamageDealer, this);
+			item.setInstanceId(getInstanceId());
 			item.dropMe(this, getX() + Rnd.get(-70, 70), getY() + Rnd.get(-70, 70), Math.max(getZ(), mainDamageDealer.getZ()) + 20);
 			
 			// If stackable, end loop as entire count is included in 1 instance of item

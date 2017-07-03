@@ -12,6 +12,8 @@ import net.sf.l2j.gameserver.datatables.NpcTable;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.Npc;
+import net.sf.l2j.gameserver.model.actor.instance.Door;
+import net.sf.l2j.gameserver.model.actor.instance.Fence;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.actor.template.NpcTemplate;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
@@ -40,6 +42,8 @@ public abstract class WorldObject
 	
 	private SpawnLocation _position = new SpawnLocation(0, 0, 0, 0);
 	private WorldRegion _region;
+	
+	private int _instance = 0;
 	
 	private boolean _isVisible;
 	
@@ -206,6 +210,18 @@ public abstract class WorldObject
 	public Player getActingPlayer()
 	{
 		return null;
+	}
+	
+	public void setInstanceId(int val)
+	{
+		_instance = val;
+		decayMe();
+		spawnMe();
+	}
+	
+	public int getInstanceId()
+	{
+		return _instance;
 	}
 	
 	/**
@@ -394,6 +410,12 @@ public abstract class WorldObject
 		}
 		
 		_region = newRegion;
+		
+		for (WorldObject object : getDifferentInstanceObjects())
+		{
+			object.removeKnownObject(this);
+			removeKnownObject(object);
+		}
 	}
 	
 	/**
@@ -410,6 +432,28 @@ public abstract class WorldObject
 	 */
 	public void removeKnownObject(WorldObject object)
 	{
+	}
+	
+	private final List<WorldObject> getDifferentInstanceObjects()
+	{
+		final WorldRegion region = _region;
+		if (region == null)
+			return Collections.emptyList();
+		
+		final List<WorldObject> result = new ArrayList<>();
+		
+		for (WorldRegion reg : region.getSurroundingRegions())
+		{
+			for (WorldObject obj : reg.getObjects())
+			{
+				if (obj == this || obj.getInstanceId() == getInstanceId() || obj instanceof Door || obj instanceof Fence)
+					continue;
+				
+				result.add(obj);
+			}
+		}
+		
+		return result;
 	}
 	
 	/**
@@ -432,6 +476,9 @@ public abstract class WorldObject
 			for (WorldObject obj : reg.getObjects())
 			{
 				if (obj == this || !type.isAssignableFrom(obj.getClass()))
+					continue;
+				
+				if (obj.getInstanceId() != getInstanceId() && !(obj instanceof Door || obj instanceof Fence))
 					continue;
 				
 				result.add((A) obj);
@@ -462,6 +509,9 @@ public abstract class WorldObject
 			for (WorldObject obj : reg.getObjects())
 			{
 				if (obj == this || !type.isAssignableFrom(obj.getClass()) || !MathUtil.checkIfInRange(radius, this, obj, true))
+					continue;
+				
+				if (obj.getInstanceId() != getInstanceId() && !(obj instanceof Door || obj instanceof Fence))
 					continue;
 				
 				result.add((A) obj);
