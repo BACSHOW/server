@@ -668,6 +668,16 @@ public final class Config
 	public static int NOBLES_ITEM_COUNT3;
 	public static int PVP_BECOME_NOBLES;
 	
+	/** Monument PvP/PK */
+	public static boolean CKM_ENABLED;
+	public static String CKM_CYCLE_LENGTH;
+	public static String CKM_PVP_NPC_TITLE;
+	public static int CKM_PVP_NPC_TITLE_COLOR;
+	public static int CKM_PVP_NPC_NAME_COLOR;
+	public static String CKM_PK_NPC_TITLE;
+	public static int CKM_PK_NPC_TITLE_COLOR;
+	public static int CKM_PK_NPC_NAME_COLOR;
+	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
 	// You still can experiment changing values here. But don't say I didn't warn you.
@@ -1450,6 +1460,15 @@ public final class Config
 			NOBLES_ITEM_ID3 = custom.getProperty("NoblesItemID3", 57);
 			NOBLES_ITEM_COUNT3 = custom.getProperty("NoblesItemCount3", 50);
 			PVP_BECOME_NOBLES = custom.getProperty("PvpToBecomeNobles", 100);
+			
+			CKM_ENABLED = custom.getProperty("CKMEnabled", false);
+			CKM_CYCLE_LENGTH = custom.getProperty("CKMCycleLength", "12:00");
+			CKM_PVP_NPC_TITLE = custom.getProperty("CKMPvPNpcTitle", "%kills% PvPs in the last 24h");
+			CKM_PVP_NPC_TITLE_COLOR = Integer.decode("0x" + custom.getProperty("CKMPvPNpcTitleColor", "00CCFF"));
+			CKM_PVP_NPC_NAME_COLOR = Integer.decode("0x" + custom.getProperty("CKMPvPNpcNameColor", "FFFFFF"));
+			CKM_PK_NPC_TITLE = custom.getProperty("CKMPKNpcTitle", "%kills% PKs in the last 24h");
+			CKM_PK_NPC_TITLE_COLOR = Integer.decode("0x" + custom.getProperty("CKMPKNpcTitleColor", "00CCFF"));
+			CKM_PK_NPC_NAME_COLOR = Integer.decode("0x" + custom.getProperty("CKMPKNpcNameColor", "FFFFFF"));
 		}
 		
 	}

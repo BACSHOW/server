@@ -2946,6 +2946,26 @@ public abstract class Creature extends WorldObject
 		_isCastingSimultaneouslyNow = value;
 	}
 	
+	public float getMovementSpeedMultiplier()
+	{
+		return getStat().getMovementSpeedMultiplier();
+	}
+	
+	public int getRunSpeed()
+	{
+		return getStat().getBaseRunSpeed();
+	}
+	
+	public final int getWalkSpeed()
+	{
+		return getStat().getBaseWalkSpeed();
+	}
+	
+	public final float getAttackSpeedMultiplier()
+	{
+		return getStat().getAttackSpeedMultiplier();
+	}
+	
 	/**
 	 * @return True if the cast of the Creature can be aborted.
 	 */

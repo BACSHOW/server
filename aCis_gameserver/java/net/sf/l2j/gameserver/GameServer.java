@@ -66,6 +66,7 @@ import net.sf.l2j.gameserver.instancemanager.AutoSpawnManager;
 import net.sf.l2j.gameserver.instancemanager.BoatManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManorManager;
+import net.sf.l2j.gameserver.instancemanager.CharacterKillingManager;
 import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
 import net.sf.l2j.gameserver.instancemanager.CoupleManager;
 import net.sf.l2j.gameserver.instancemanager.CursedWeaponsManager;
@@ -294,7 +295,9 @@ public class GameServer
 		
 		StringUtil.printSection("Custom");
 		EngineModsManager.init();
-		
+		if (Config.CKM_ENABLED)
+			CharacterKillingManager.getInstance().init();
+
 		StringUtil.printSection("NPC Custom");
 		RaidBossInfoManager.getInstance();
 		
