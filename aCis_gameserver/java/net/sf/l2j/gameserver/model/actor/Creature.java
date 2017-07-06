@@ -1480,7 +1480,8 @@ public abstract class Creature extends WorldObject
 		
 		// Stop Regeneration task, and removes all current effects
 		getStatus().stopHpMpRegeneration();
-		stopAllEffectsExceptThoseThatLastThroughDeath();
+		if (Config.LEAVE_BUFFS_ON_DIE)
+			stopAllEffectsExceptThoseThatLastThroughDeath();
 		
 		calculateRewards(killer);
 		

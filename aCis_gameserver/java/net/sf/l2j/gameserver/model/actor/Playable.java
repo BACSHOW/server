@@ -125,7 +125,7 @@ public abstract class Playable extends Creature
 			if (getCharmOfLuck())
 				stopCharmOfLuck(null);
 		}
-		else
+		else if (Config.LEAVE_BUFFS_ON_DIE)
 			stopAllEffectsExceptThoseThatLastThroughDeath();
 		
 		// Send the Server->Client packet StatusUpdate with current HP and MP to all other Player to inform

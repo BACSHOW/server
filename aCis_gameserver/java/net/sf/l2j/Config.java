@@ -37,7 +37,7 @@ public final class Config
 	public static final String PLAYERS_FILE = "./config/players.properties";
 	public static final String SERVER_FILE = "./config/server.properties";
 	public static final String SIEGE_FILE = "./config/siege.properties";
-	public static final String CUSTOM_FILE = "./config/custom.properties";
+	public static final String CUSTOM_FILE = "./config/mods/custom.properties";
 	public static final String SECURITY_FILE = "./config/protect/security.properties";
 	
 	// --------------------------------------------------
@@ -693,6 +693,9 @@ public final class Config
 	
 	/** Item Restrictions */
 	public static boolean MASTERY_RESTRICTION;
+	
+	/** No remove buff on die */
+	public static boolean LEAVE_BUFFS_ON_DIE;
 	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
@@ -1516,6 +1519,8 @@ public final class Config
 			CKM_PK_NPC_TITLE = custom.getProperty("CKMPKNpcTitle", "%kills% PKs in the last 24h");
 			CKM_PK_NPC_TITLE_COLOR = Integer.decode("0x" + custom.getProperty("CKMPKNpcTitleColor", "00CCFF"));
 			CKM_PK_NPC_NAME_COLOR = Integer.decode("0x" + custom.getProperty("CKMPKNpcNameColor", "FFFFFF"));
+			
+			LEAVE_BUFFS_ON_DIE = custom.getProperty("LeaveBuffsOnDie", true);
 		}
 		
 	}
