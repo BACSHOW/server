@@ -6,7 +6,6 @@ import java.util.Map;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.item.kind.Item;
-import net.sf.l2j.gameserver.model.item.kind.Weapon;
 import net.sf.l2j.gameserver.model.item.type.CrystalType;
 import net.sf.l2j.gameserver.model.item.type.WeaponType;
 
@@ -106,17 +105,39 @@ public abstract class AbstractEnchantPacket extends L2GameClientPacket
 			
 			double chance = 0;
 			
-			// Armor formula : 0.66^(current-2), chance is lower and lower for each enchant.
-			if (enchantItem.isArmor())
-				chance = Math.pow(Config.ENCHANT_CHANCE_ARMOR, (enchantItem.getEnchantLevel() - 2));
-			// Weapon formula is 70% for fighter weapon, 40% for mage weapon. Special rates after +14.
-			else if (enchantItem.isWeapon())
-			{
-				if (((Weapon) enchantItem.getItem()).isMagical())
-					chance = (enchantItem.getEnchantLevel() > 14) ? Config.ENCHANT_CHANCE_WEAPON_MAGIC_15PLUS : Config.ENCHANT_CHANCE_WEAPON_MAGIC;
-				else
-					chance = (enchantItem.getEnchantLevel() > 14) ? Config.ENCHANT_CHANCE_WEAPON_NONMAGIC_15PLUS : Config.ENCHANT_CHANCE_WEAPON_NONMAGIC;
-			}
+			if (this._isBlessed)
+		    {
+		        if ((enchantItem.isWeapon()) && (Config.BLESSED_ENCHANT_CHANCE_WEAPON.containsKey(Integer.valueOf(enchantItem.getEnchantLevel()))))
+		        {
+		          return (Config.BLESSED_ENCHANT_CHANCE_WEAPON.get(Integer.valueOf(enchantItem.getEnchantLevel()))).doubleValue();
+		        }
+		        if ((enchantItem.isArmor()) && (Config.BLESSED_ENCHANT_CHANCE_ARMOR.containsKey(Integer.valueOf(enchantItem.getEnchantLevel()))))
+		        {
+		          return (Config.BLESSED_ENCHANT_CHANCE_ARMOR.get(Integer.valueOf(enchantItem.getEnchantLevel()))).doubleValue();
+		        }
+		      }
+		      else if (this._isCrystal)
+		      {
+		        if ((enchantItem.isWeapon()) && (Config.CRYSTAL_ENCHANT_CHANCE_WEAPON.containsKey(Integer.valueOf(enchantItem.getEnchantLevel()))))
+		        {
+		          return (Config.CRYSTAL_ENCHANT_CHANCE_WEAPON.get(Integer.valueOf(enchantItem.getEnchantLevel()))).doubleValue();
+		        }
+		        if ((enchantItem.isArmor()) && (Config.CRYSTAL_ENCHANT_CHANCE_ARMOR.containsKey(Integer.valueOf(enchantItem.getEnchantLevel()))))
+		        {
+		          return (Config.CRYSTAL_ENCHANT_CHANCE_ARMOR.get(Integer.valueOf(enchantItem.getEnchantLevel()))).doubleValue();
+		        }
+		      }
+		      else
+		      {
+		        if ((enchantItem.isWeapon()) && (Config.ENCHANT_CHANCE_WEAPON.containsKey(Integer.valueOf(enchantItem.getEnchantLevel()))))
+		        {
+		          return (Config.ENCHANT_CHANCE_WEAPON.get(Integer.valueOf(enchantItem.getEnchantLevel()))).doubleValue();
+		        }
+		        if ((enchantItem.isArmor()) && (Config.ENCHANT_CHANCE_ARMOR.containsKey(Integer.valueOf(enchantItem.getEnchantLevel()))))
+		        {
+		          return (Config.ENCHANT_CHANCE_ARMOR.get(Integer.valueOf(enchantItem.getEnchantLevel()))).doubleValue();
+		        }
+		      }
 			
 			return chance;
 		}

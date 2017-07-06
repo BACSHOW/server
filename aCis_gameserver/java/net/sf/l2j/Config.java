@@ -383,11 +383,12 @@ public final class Config
 	public static int ALT_GAME_FREIGHT_PRICE;
 	
 	/** Enchant */
-	public static double ENCHANT_CHANCE_WEAPON_MAGIC;
-	public static double ENCHANT_CHANCE_WEAPON_MAGIC_15PLUS;
-	public static double ENCHANT_CHANCE_WEAPON_NONMAGIC;
-	public static double ENCHANT_CHANCE_WEAPON_NONMAGIC_15PLUS;
-	public static double ENCHANT_CHANCE_ARMOR;
+	public static Map<Integer, Double> ENCHANT_CHANCE_WEAPON;
+	public static Map<Integer, Double> ENCHANT_CHANCE_ARMOR;
+	public static Map<Integer, Double> BLESSED_ENCHANT_CHANCE_WEAPON;
+	public static Map<Integer, Double> BLESSED_ENCHANT_CHANCE_ARMOR;
+	public static Map<Integer, Double> CRYSTAL_ENCHANT_CHANCE_WEAPON;
+	public static Map<Integer, Double> CRYSTAL_ENCHANT_CHANCE_ARMOR;
 	public static int ENCHANT_MAX_WEAPON;
 	public static int ENCHANT_MAX_ARMOR;
 	public static int ENCHANT_SAFE_MAX;
@@ -686,6 +687,9 @@ public final class Config
 	/** Restriction on create name */
 	public static String RESTRICTED_CHAR_NAMES;
 	public static List<String> LIST_RESTRICTED_CHAR_NAMES = new ArrayList<>();
+	
+	/** Do not enchant near the NPC */
+	public static boolean ENCHANT_PROTECTOR;
 	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
@@ -1139,11 +1143,42 @@ public final class Config
 		ALT_GAME_FREIGHTS = players.getProperty("AltGameFreights", false);
 		ALT_GAME_FREIGHT_PRICE = players.getProperty("AltGameFreightPrice", 1000);
 		
-		ENCHANT_CHANCE_WEAPON_MAGIC = players.getProperty("EnchantChanceMagicWeapon", 0.4);
-		ENCHANT_CHANCE_WEAPON_MAGIC_15PLUS = players.getProperty("EnchantChanceMagicWeapon15Plus", 0.2);
-		ENCHANT_CHANCE_WEAPON_NONMAGIC = players.getProperty("EnchantChanceNonMagicWeapon", 0.7);
-		ENCHANT_CHANCE_WEAPON_NONMAGIC_15PLUS = players.getProperty("EnchantChanceNonMagicWeapon15Plus", 0.35);
-		ENCHANT_CHANCE_ARMOR = players.getProperty("EnchantChanceArmor", 0.66);
+		String[] property = players.getProperty("EnchantChanceWeapon", (String[])null, ",");
+	    for (String data : property)
+	    {
+	    	String[] enchant = data.split("-");
+	      	ENCHANT_CHANCE_WEAPON.put(Integer.valueOf(Integer.parseInt(enchant[0])), Double.valueOf(Double.parseDouble(enchant[1])));
+	    }
+	    property = players.getProperty("EnchantChanceArmor", (String[])null, ",");
+	    for (String data : property)
+	    {
+	    	String[] enchant = data.split("-");
+	      	ENCHANT_CHANCE_ARMOR.put(Integer.valueOf(Integer.parseInt(enchant[0])), Double.valueOf(Double.parseDouble(enchant[1])));
+	    }
+	    property = players.getProperty("BlessedEnchantChanceWeapon", (String[])null, ",");
+	    for (String data : property)
+	    {
+	    	String[] enchant = data.split("-");
+	      	BLESSED_ENCHANT_CHANCE_WEAPON.put(Integer.valueOf(Integer.parseInt(enchant[0])), Double.valueOf(Double.parseDouble(enchant[1])));
+	    }
+	    property = players.getProperty("BlessedEnchantChanceArmor", (String[])null, ",");
+	    for (String data : property)
+	    {
+	    	String[] enchant = data.split("-");
+	      	BLESSED_ENCHANT_CHANCE_ARMOR.put(Integer.valueOf(Integer.parseInt(enchant[0])), Double.valueOf(Double.parseDouble(enchant[1])));
+	    }
+	    property = players.getProperty("CrystalEnchantChanceWeapon", (String[])null, ",");
+	    for (String data : property)
+	    {
+	    	String[] enchant = data.split("-");
+	    	CRYSTAL_ENCHANT_CHANCE_WEAPON.put(Integer.valueOf(Integer.parseInt(enchant[0])), Double.valueOf(Double.parseDouble(enchant[1])));
+	    }
+	    property = players.getProperty("CrystalEnchantChanceArmor", (String[])null, ",");
+	    for (String data : property)
+	    {
+	    	String[] enchant = data.split("-");
+	    	CRYSTAL_ENCHANT_CHANCE_ARMOR.put(Integer.valueOf(Integer.parseInt(enchant[0])), Double.valueOf(Double.parseDouble(enchant[1])));
+	    }
 		ENCHANT_MAX_WEAPON = players.getProperty("EnchantMaxWeapon", 0);
 		ENCHANT_MAX_ARMOR = players.getProperty("EnchantMaxArmor", 0);
 		ENCHANT_SAFE_MAX = players.getProperty("EnchantSafeMax", 3);
@@ -1503,6 +1538,8 @@ public final class Config
 		{
 			LIST_RESTRICTED_CHAR_NAMES.add(name);
 		}
+		
+		ENCHANT_PROTECTOR = security.getProperty("EnchantProtector", true);
 	}
 	
 	/**

@@ -1,2 +1,10 @@
+/banned_ips.properties
+/clans.properties
+/custom.properties
+/engine/
+/events.properties
+/geoengine.properties
+/logging.properties
+/loginserver.properties
 /net/
 /protect/

@@ -1,11 +1,16 @@
 package net.sf.l2j.gameserver.network.clientpackets;
 
+import java.util.List;
+
 import net.sf.l2j.commons.random.Rnd;
 
 import net.sf.l2j.gameserver.datatables.ArmorSetsTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.World;
+import net.sf.l2j.gameserver.model.WorldObject;
+import net.sf.l2j.gameserver.model.actor.Creature;
+import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.item.ArmorSet;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
@@ -36,6 +41,7 @@ public final class RequestEnchantItem extends AbstractEnchantPacket
 	protected void runImpl()
 	{
 		final Player activeChar = getClient().getActiveChar();
+		List<Creature> knowns = activeChar.getKnownTypeInRadius(Creature.class, 400);
 		if (activeChar == null || _objectId == 0)
 			return;
 		
@@ -76,6 +82,15 @@ public final class RequestEnchantItem extends AbstractEnchantPacket
 			activeChar.setActiveEnchantItem(null);
 			activeChar.sendPacket(EnchantResult.CANCELLED);
 			return;
+		}
+		
+		for (WorldObject wh1 : knowns)
+		{
+			if (wh1 instanceof Npc)
+			{
+				 activeChar.sendMessage("You Cannot enchant near Npcs.");
+				 return;
+			}
 		}
 		
 		// attempting to destroy scroll
