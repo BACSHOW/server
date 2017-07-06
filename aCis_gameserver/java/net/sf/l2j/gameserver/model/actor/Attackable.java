@@ -1095,7 +1095,7 @@ public class Attackable extends Npc
 				if (item != null)
 				{
 					// Check if the autoLoot mode is active
-					if ((isRaid() && Config.AUTO_LOOT_RAID) || (!isRaid() && Config.AUTO_LOOT))
+					if (!player.isFullAdenaInventory(item.getId()) && ((isRaid() && Config.AUTO_LOOT_RAID) || (Config.AUTO_LOOT && !isRaid())))
 						player.doAutoLoot(this, item); // Give this or these Item(s) to the Player that has killed the L2Attackable
 					else
 						dropItem(player, item); // drop the item on the ground

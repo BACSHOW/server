@@ -38,6 +38,7 @@ public final class Config
 	public static final String SERVER_FILE = "./config/server.properties";
 	public static final String SIEGE_FILE = "./config/siege.properties";
 	public static final String CUSTOM_FILE = "./config/custom.properties";
+	public static final String SECURITY_FILE = "./config/protect/security.properties";
 	
 	// --------------------------------------------------
 	// Clans settings
@@ -670,13 +671,21 @@ public final class Config
 	
 	/** Monument PvP/PK */
 	public static boolean CKM_ENABLED;
-	public static String CKM_CYCLE_LENGTH;
+	public static long CKM_CYCLE_LENGTH;
 	public static String CKM_PVP_NPC_TITLE;
 	public static int CKM_PVP_NPC_TITLE_COLOR;
 	public static int CKM_PVP_NPC_NAME_COLOR;
 	public static String CKM_PK_NPC_TITLE;
 	public static int CKM_PK_NPC_TITLE_COLOR;
 	public static int CKM_PK_NPC_NAME_COLOR;
+	
+	/** Protect Wyvern in City */
+	public static boolean ALLOW_WYVERN_RESTRITION_CITY;
+	public static int[] WYVERN_RESTRITION_LOC = new int[3];
+	
+	/** Restriction on create name */
+	public static String RESTRICTED_CHAR_NAMES;
+	public static List<String> LIST_RESTRICTED_CHAR_NAMES = new ArrayList<>();
 	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
@@ -1462,7 +1471,7 @@ public final class Config
 			PVP_BECOME_NOBLES = custom.getProperty("PvpToBecomeNobles", 100);
 			
 			CKM_ENABLED = custom.getProperty("CKMEnabled", false);
-			CKM_CYCLE_LENGTH = custom.getProperty("CKMCycleLength", "12:00");
+			CKM_CYCLE_LENGTH = custom.getProperty("CKMCycleLength", 86400000);
 			CKM_PVP_NPC_TITLE = custom.getProperty("CKMPvPNpcTitle", "%kills% PvPs in the last 24h");
 			CKM_PVP_NPC_TITLE_COLOR = Integer.decode("0x" + custom.getProperty("CKMPvPNpcTitleColor", "00CCFF"));
 			CKM_PVP_NPC_NAME_COLOR = Integer.decode("0x" + custom.getProperty("CKMPvPNpcNameColor", "FFFFFF"));
@@ -1471,6 +1480,29 @@ public final class Config
 			CKM_PK_NPC_NAME_COLOR = Integer.decode("0x" + custom.getProperty("CKMPKNpcNameColor", "FFFFFF"));
 		}
 		
+	}
+	
+	/**
+	 * Loads custom settings.<br>
+	 * PvP/Announce, PC Bang Mob, etc.
+	 */
+	private static final void loadSecurity()
+	{
+		final ExProperties security = initProperties(CUSTOM_FILE);
+		
+		ALLOW_WYVERN_RESTRITION_CITY = security.getProperty("AllowWyvernRestrictionCity", false);
+		WYVERN_RESTRITION_LOC = new int[3];
+		String[] propertySplit = security.getProperty("WyvernRestrictionLocation", "0,0,0").split(",");
+		WYVERN_RESTRITION_LOC[0] = Integer.parseInt(propertySplit[0]);
+		WYVERN_RESTRITION_LOC[1] = Integer.parseInt(propertySplit[1]);
+		WYVERN_RESTRITION_LOC[2] = Integer.parseInt(propertySplit[2]);
+		
+		RESTRICTED_CHAR_NAMES = security.getProperty("ListOfRestrictedCharNames", "DoctorQ");
+		LIST_RESTRICTED_CHAR_NAMES = new ArrayList<>();
+		for (String name : RESTRICTED_CHAR_NAMES.split(","))
+		{
+			LIST_RESTRICTED_CHAR_NAMES.add(name);
+		}
 	}
 	
 	/**
@@ -1544,6 +1576,9 @@ public final class Config
 		
 		// custom settings
 		loadCustom();
+		
+		// security settings
+		loadSecurity();
 	}
 	
 	public static final void loadLoginServer()

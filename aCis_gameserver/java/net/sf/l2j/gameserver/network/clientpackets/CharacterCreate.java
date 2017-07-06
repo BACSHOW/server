@@ -63,6 +63,14 @@ public final class CharacterCreate extends L2GameClientPacket
 	@Override
 	protected void runImpl()
 	{
+		if (Config.LIST_RESTRICTED_CHAR_NAMES.contains(_name))
+		{
+			if(Config.DEBUG)
+				_log.fine("DEBUG "+getType()+": charname: " + _name + " is invalid.");
+			sendPacket(new CharCreateFail(CharCreateFail.REASON_NAME_ALREADY_EXISTS));
+			return;
+		}
+		
 		if (!StringUtil.isValidPlayerName(_name))
 		{
 			sendPacket(new CharCreateFail((_name.length() > 16) ? CharCreateFail.REASON_16_ENG_CHARS : CharCreateFail.REASON_INCORRECT_NAME));

@@ -33,7 +33,7 @@ public final class CharacterKillingManager
        private volatile CharSelectInfoPackage _winnerPvPKillsInfo;
        private volatile CharSelectInfoPackage _winnerPKKillsInfo;
       
-       private long _scheduledKillingCycleTask;
+       private ScheduledFuture<?> _scheduledKillingCycleTask;
       
        private List<PcPolymorph> pvpMorphListeners = new CopyOnWriteArrayList<>();
        private List<PcPolymorph> pkMorphListeners = new CopyOnWriteArrayList<>();
@@ -65,47 +65,14 @@ public final class CharacterKillingManager
               
                broadcastMorphUpdate();
               
-               String hour = Config.CKM_CYCLE_LENGTH.split(":")[0];
-               String minutes = Config.CKM_CYCLE_LENGTH.split(":")[1];
-               
-               int h = 0;int m = 0;
-               long timeL = 0L;
-            	   try
+               if (_scheduledKillingCycleTask != null)
                {
-            		   h = Integer.valueOf(hour).intValue();
-            		   m = Integer.valueOf(minutes).intValue();
-            		   Calendar currentTime = Calendar.getInstance();
-            		   Calendar testStartTime = Calendar.getInstance();
-            		   testStartTime.setLenient(true);
-            		   
-            		   testStartTime.set(11, h);
-            		   testStartTime.set(12, m);
-            		   testStartTime.set(13, 0);
-            		   if (testStartTime.getTimeInMillis() < currentTime.getTimeInMillis())
-            		   {
-            			   testStartTime.add(5, 1);
-            		   }
-            		   timeL = testStartTime.getTimeInMillis() - currentTime.getTimeInMillis();
-            		   
-            		   ThreadPool.schedule(new CharacterKillingCycleTask(), timeL);
-            		   
-            		   System.out.println("[EventMonumentStatuet]Periodo to refresh statuet: " + testStartTime.getTime());
-               }
-               catch (Exception e)
-               {
-            	   System.out.println("[EventMonumentStatuet]:ConfiguratePereiod()]Fail to load period");
-            	   e.printStackTrace();
-               }
-               
-               
-               /*if (_scheduledKillingCycleTask != null)
-               {
-                       _scheduledKillingCycleTask.cancel(true);
+            	   _scheduledKillingCycleTask.cancel(true);
                }
                long millisToNextCycle = (_cycleStart + Config.CKM_CYCLE_LENGTH) - System.currentTimeMillis();
                _scheduledKillingCycleTask = ThreadPool.schedule(new CharacterKillingCycleTask(), millisToNextCycle);
-              
-               _log.info(getClass().getSimpleName() + ": Started! Cycle: " + _cycle + " - Next cycle in: " + _scheduledKillingCycleTask.getDelay(TimeUnit.SECONDS) + "s");*/
+            	   
+               _log.info(getClass().getSimpleName() + ": Started! Cycle: " + _cycle + " - Next cycle in: " + _scheduledKillingCycleTask.getDelay(TimeUnit.SECONDS) + "s");
        }
       
        public synchronized void newKillingCycle()
@@ -135,40 +102,16 @@ public final class CharacterKillingManager
                }
                catch (Exception e)
                {
-                       _log.log(Level.WARNING, "Could not create characters killing cycle: " + e.getMessage(), e);
+            	   _log.log(Level.WARNING, "Could not create characters killing cycle: " + e.getMessage(), e);
                }
-              
+               
                broadcastMorphUpdate();
-              
-               String hour = Config.CKM_CYCLE_LENGTH.split(":")[0];
-               String minutes = Config.CKM_CYCLE_LENGTH.split(":")[1];
                
-               int h = 0;int m = 0;
-               long timeL = 0L;
-            	   try
+               if (_scheduledKillingCycleTask != null)
                {
-            		   h = Integer.valueOf(hour).intValue();
-            		   m = Integer.valueOf(minutes).intValue();
-            		   Calendar currentTime = Calendar.getInstance();
-            		   Calendar testStartTime = Calendar.getInstance();
-            		   testStartTime.setLenient(true);
-               
-            		   testStartTime.set(11, h);
-            		   testStartTime.set(12, m);
-            		   testStartTime.set(13, 0);
-            		   if (testStartTime.getTimeInMillis() < currentTime.getTimeInMillis())
-            		   {
-            			   testStartTime.add(5, 1);
-            		   }
-            		   timeL = testStartTime.getTimeInMillis() - currentTime.getTimeInMillis();
+            	   _scheduledKillingCycleTask.cancel(true);
                }
-               ThreadPool.schedule(new CharacterKillingCycleTask(), timeL);
-               
-               /*if (_scheduledKillingCycleTask)
-               {
-                       _scheduledKillingCycleTask.cancel(true);
-               }
-               _scheduledKillingCycleTask = ThreadPool.schedule(new CharacterKillingCycleTask(), Config.CKM_CYCLE_LENGTH);*/
+               _scheduledKillingCycleTask = ThreadPool.schedule(new CharacterKillingCycleTask(), Config.CKM_CYCLE_LENGTH);
        }
       
        private void computateCyclePvPWinner()

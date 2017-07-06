@@ -3477,6 +3477,12 @@ public final class Player extends Playable
 	 */
 	public void doAutoLoot(Attackable target, IntIntHolder item)
 	{
+		if (getInventory().getAdena() >= Integer.MAX_VALUE)
+		{
+			sendMessage("You have reached adena limit, you can not keep joining");
+			return;
+		}
+		
 		if (isInParty())
 			getParty().distributeItem(this, item, false, target);
 		else if (item.getId() == 57)
@@ -3549,6 +3555,10 @@ public final class Player extends Playable
 			
 			if (item.getOwnerId() != 0 && !isLooterOrInLooterParty(item.getOwnerId()))
 			{
+				if (isFullAdenaInventory(item.getItemId()))
+				{
+					return;
+				}
 				if (item.getItemId() == 57)
 					sendPacket(SystemMessage.getSystemMessage(SystemMessageId.FAILED_TO_PICKUP_S1_ADENA).addNumber(item.getCount()));
 				else if (item.getCount() > 1)
@@ -10644,5 +10654,22 @@ public final class Player extends Playable
 	{
 		ExPCCafePointInfo wnd = new ExPCCafePointInfo(this, 0, false, 24, false);
 		sendPacket(wnd);
+	}
+	
+	/**
+	 * @param itemId
+	 * @return
+	 */
+	public boolean isFullAdenaInventory(int itemId)
+	{
+		if (itemId == 57)
+		{
+			if (getInventory().getAdena() >= Integer.MAX_VALUE)
+			{
+				sendMessage("You have reached adena limit, you can not keep joining.");
+				return true;
+			}
+		}
+		return false;
 	}
 }

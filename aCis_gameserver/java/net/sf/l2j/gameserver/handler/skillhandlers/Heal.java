@@ -9,7 +9,9 @@ import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.Summon;
 import net.sf.l2j.gameserver.model.actor.instance.Door;
+import net.sf.l2j.gameserver.model.actor.instance.GrandBoss;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
+import net.sf.l2j.gameserver.model.actor.instance.RaidBoss;
 import net.sf.l2j.gameserver.model.actor.instance.SiegeFlag;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.StatusUpdate;
@@ -91,6 +93,27 @@ public class Heal implements ISkillHandler
 			
 			if (target instanceof Door || target instanceof SiegeFlag)
 				continue;
+			
+			// Can't Heal Raid Boss
+			if (target instanceof RaidBoss)
+			{
+				activeChar.getActingPlayer().sendMessage("You cannot heal the RaidBoss!");
+				continue;
+			}
+			
+			// Can't Heal Grand Boss
+			if (target instanceof GrandBoss)
+			{
+				activeChar.getActingPlayer().sendMessage("You cannot heal the GrandBoss!");
+				continue;
+			}
+			
+			// Can't Heal Siege Flags
+			if (target instanceof Npc && ((Npc) target).getNpcId() == 35062)
+			{
+				activeChar.getActingPlayer().sendMessage("You can not heal the siege flag!");
+				continue;
+			}
 			
 			// Player holding a cursed weapon can't be healed and can't heal
 			if (target != activeChar)
