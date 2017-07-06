@@ -12,6 +12,7 @@ import net.sf.l2j.gameserver.model.holder.IntIntHolder;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.item.kind.Item;
 import net.sf.l2j.gameserver.model.item.type.ActionType;
+import net.sf.l2j.gameserver.model.item.type.ArmorType;
 import net.sf.l2j.gameserver.model.item.type.CrystalType;
 import net.sf.l2j.gameserver.model.item.type.EtcItemType;
 import net.sf.l2j.gameserver.model.item.type.WeaponType;
@@ -99,6 +100,12 @@ public final class UseItem extends L2GameClientPacket
 						return;
 				}
 			}
+		}
+		
+		if ((activeChar.getPvpFlag() != 0) && (item.getItemType() == EtcItemType.SCROLL))
+		{
+			activeChar.sendMessage("You can not run away when you are flag. Finish what you started.");
+			return;
 		}
 		
 		if (activeChar.isFishing() && item.getItem().getDefaultAction() != ActionType.fishingshot)
@@ -207,6 +214,37 @@ public final class UseItem extends L2GameClientPacket
 			
 			if (activeChar.isCursedWeaponEquipped() && item.getItemId() == 6408) // Don't allow to put formal wear
 				return;
+			
+			if (Config.MASTERY_RESTRICTION)
+			{
+				if (!activeChar.isInOlympiadMode())
+				{
+					if (item.getItemType() == ArmorType.HEAVY)
+					{
+						if (activeChar.getSkillLevel(231) == -1 && activeChar.getSkillLevel(232) == -1 && activeChar.getSkillLevel(253) == -1 && activeChar.getSkillLevel(259) == -1)
+						{
+							activeChar.sendMessage("You can not use it since, do not have Heavy Mastery.");
+							return;
+						}
+					}
+					else if (item.getItemType() == ArmorType.LIGHT)
+					{
+						if (activeChar.getSkillLevel(227) == -1 && activeChar.getSkillLevel(233) == -1 && activeChar.getSkillLevel(236) == -1 && activeChar.getSkillLevel(258) == -1 && activeChar.getSkillLevel(252) == -1)
+						{
+							activeChar.sendMessage("You can not use it since, do not have Light Mastery.");
+							return;
+						}
+					}
+					else if (item.getItemType() == ArmorType.MAGIC)
+					{
+						if (activeChar.getSkillLevel(234) == -1 && activeChar.getSkillLevel(235) == -1 && activeChar.getSkillLevel(251) == -1)
+						{
+							activeChar.sendMessage("You can not use it since, do not have Robe Mastery.");
+							return;
+						}
+					}
+				}
+			}
 			
 			if (activeChar.isAttackingNow())
 				ThreadPool.schedule(new WeaponEquipTask(item, activeChar), (activeChar.getAttackEndTime() - System.currentTimeMillis()));

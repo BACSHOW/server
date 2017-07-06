@@ -1712,6 +1712,39 @@ public final class Player extends Playable
 		if (!_subclassLock.tryLock())
 			return;
 		
+		if (Config.MASTERY_RESTRICTION)
+		{
+			final ItemInstance rhand = getInventory().getPaperdollItem(Inventory.PAPERDOLL_RHAND);
+			if (rhand != null)
+			{
+				final ItemInstance[] unequipped = getInventory().unEquipItemInBodySlotAndRecord(rhand.getItem().getBodyPart());
+				final InventoryUpdate iu = new InventoryUpdate();
+				for (final ItemInstance element : unequipped)
+					iu.addModifiedItem(element);
+				sendPacket(iu);
+			}
+			
+			final ItemInstance chest = getInventory().getPaperdollItem(Inventory.PAPERDOLL_CHEST);
+			if (chest != null)
+			{
+				final ItemInstance[] unequipped = getInventory().unEquipItemInBodySlotAndRecord(chest.getItem().getBodyPart());
+				final InventoryUpdate iu = new InventoryUpdate();
+				for (final ItemInstance element : unequipped)
+					iu.addModifiedItem(element);
+				sendPacket(iu);
+			}
+			
+			final ItemInstance legs = getInventory().getPaperdollItem(Inventory.PAPERDOLL_LEGS);
+			if (legs != null)
+			{
+				final ItemInstance[] unequipped = getInventory().unEquipItemInBodySlotAndRecord(legs.getItem().getBodyPart());
+				final InventoryUpdate iu = new InventoryUpdate();
+				for (final ItemInstance element : unequipped)
+					iu.addModifiedItem(element);
+				sendPacket(iu);
+			}
+		}
+		
 		try
 		{
 			if (getLvlJoinedAcademy() != 0 && _clan != null && ClassId.VALUES[Id].level() == 2)
@@ -8157,6 +8190,28 @@ public final class Player extends Playable
 		if (!_subclassLock.tryLock())
 			return false;
 		
+		if (Config.MASTERY_RESTRICTION)
+		{
+			final ItemInstance rhand = getInventory().getPaperdollItem(Inventory.PAPERDOLL_RHAND);
+			if (rhand != null)
+			{
+				final ItemInstance[] unequipped = getInventory().unEquipItemInBodySlotAndRecord(rhand.getItem().getBodyPart());
+				final InventoryUpdate iu = new InventoryUpdate();
+				for (final ItemInstance element : unequipped)
+					iu.addModifiedItem(element);
+				sendPacket(iu);
+			}
+			
+			final ItemInstance chest = getInventory().getPaperdollItem(Inventory.PAPERDOLL_CHEST);
+			if (chest != null)
+			{
+				final ItemInstance[] unequipped = getInventory().unEquipItemInBodySlotAndRecord(chest.getItem().getBodyPart());
+				final InventoryUpdate iu = new InventoryUpdate();
+				for (final ItemInstance element : unequipped)
+					iu.addModifiedItem(element);
+				sendPacket(iu);
+			}
+		}
 		try
 		{
 			if (_subClasses.size() == 3 || classIndex == 0 || _subClasses.containsKey(classIndex))

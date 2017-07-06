@@ -691,6 +691,9 @@ public final class Config
 	/** Do not enchant near the NPC */
 	public static boolean ENCHANT_PROTECTOR;
 	
+	/** Item Restrictions */
+	public static boolean MASTERY_RESTRICTION;
+	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
 	// You still can experiment changing values here. But don't say I didn't warn you.
@@ -1540,6 +1543,8 @@ public final class Config
 		}
 		
 		ENCHANT_PROTECTOR = security.getProperty("EnchantProtector", true);
+		
+		MASTERY_RESTRICTION = security.getProperty("MasteryRestriction", true);
 	}
 	
 	/**

@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.SystemMessageId;
+import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.network.serverpackets.SendTradeRequest;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 
@@ -44,6 +45,26 @@ public final class TradeRequest extends L2GameClientPacket
 		if (target.isInOlympiadMode() || player.isInOlympiadMode())
 		{
 			player.sendMessage("You or your target cannot trade during Olympiad.");
+			return;
+		}
+		
+		if (target.isInCombat() || player.isInCombat())
+		{
+			player.sendMessage("You can't request a Trade when is in combat.");
+			return;
+		}
+		
+		if (target.isInParty() || player.isInParty())
+		{
+			player.sendMessage("You can't request a Trade when is in party.");
+			player.sendPacket(ActionFailed.STATIC_PACKET);
+			return;
+		}
+		
+		if (target.isInBoat() || player.isInBoat())
+		{
+			player.sendMessage("You can't request a Trade on a Boat.");
+			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
 		

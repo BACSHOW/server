@@ -967,6 +967,13 @@ public abstract class Inventory extends ItemContainer
 				if (item == null)
 					continue;
 				
+				if (World.getInstance().getObject(inv.getInt("object_id")) != null)
+				{
+					_log.log(Level.WARNING, "Item: "+ item.getObjectId() +" has dupliqued on World and cannot be load.");
+					World.getInstance().removeObject(item);
+					continue;
+				}
+				
 				if (getOwner() instanceof Player)
 				{
 					if (!((Player) getOwner()).isHero() && item.isHeroItem())
