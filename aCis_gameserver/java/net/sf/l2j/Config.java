@@ -1149,6 +1149,12 @@ public final class Config
 		ALT_GAME_FREIGHTS = players.getProperty("AltGameFreights", false);
 		ALT_GAME_FREIGHT_PRICE = players.getProperty("AltGameFreightPrice", 1000);
 		
+		ENCHANT_CHANCE_WEAPON = new HashMap<>();
+	    ENCHANT_CHANCE_ARMOR = new HashMap<>();
+	    BLESSED_ENCHANT_CHANCE_WEAPON = new HashMap<>();
+	    BLESSED_ENCHANT_CHANCE_ARMOR = new HashMap<>();
+	    CRYSTAL_ENCHANT_CHANCE_WEAPON = new HashMap<>();
+	    CRYSTAL_ENCHANT_CHANCE_ARMOR = new HashMap<>();
 		String[] property = players.getProperty("EnchantChanceWeapon", (String[])null, ",");
 	    for (String data : property)
 	    {

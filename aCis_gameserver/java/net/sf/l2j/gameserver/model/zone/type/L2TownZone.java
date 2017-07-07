@@ -39,9 +39,10 @@ public class L2TownZone extends L2SpawnZone
 	{
 		if (character instanceof Player)
 		{
-			if(((Player) character).isFlying() && Config.ALLOW_WYVERN_RESTRITION_CITY)
+			if(((Player) character).isFlying() || ((Player) character).isMounted() && Config.ALLOW_WYVERN_RESTRITION_CITY)
 			{
 				((Player) character).teleToLocation(Config.WYVERN_RESTRITION_LOC[0], Config.WYVERN_RESTRITION_LOC[1], Config.WYVERN_RESTRITION_LOC[2], 0);
+				((Player) character).dismount();
 				showHtmlWyvern((Player) character);
 			}
 			

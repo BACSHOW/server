@@ -3512,7 +3512,7 @@ public final class Player extends Playable
 	{
 		if (getInventory().getAdena() >= Integer.MAX_VALUE)
 		{
-			sendMessage("You have reached adena limit, you can not keep joining");
+			sendMessage("You have reached adena limit, you can not keep joining.");
 			return;
 		}
 		

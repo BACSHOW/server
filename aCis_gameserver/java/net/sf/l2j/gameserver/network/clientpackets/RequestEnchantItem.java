@@ -88,7 +88,7 @@ public final class RequestEnchantItem extends AbstractEnchantPacket
 		{
 			if (wh1 instanceof Npc)
 			{
-				 activeChar.sendMessage("You Cannot enchant near Npcs.");
+				 activeChar.sendMessage("You cannot enchant near npcs.");
 				 return;
 			}
 		}

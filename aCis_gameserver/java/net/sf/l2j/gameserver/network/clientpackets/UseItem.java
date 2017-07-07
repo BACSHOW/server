@@ -18,7 +18,9 @@ import net.sf.l2j.gameserver.model.item.type.EtcItemType;
 import net.sf.l2j.gameserver.model.item.type.WeaponType;
 import net.sf.l2j.gameserver.model.itemcontainer.Inventory;
 import net.sf.l2j.gameserver.model.olympiad.OlympiadManager;
+import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.network.SystemMessageId;
+import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.network.serverpackets.ItemList;
 import net.sf.l2j.gameserver.network.serverpackets.PetItemList;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
@@ -99,6 +101,16 @@ public final class UseItem extends L2GameClientPacket
 					if (skill != null && (skill.getSkillType() == L2SkillType.TELEPORT || skill.getSkillType() == L2SkillType.RECALL))
 						return;
 				}
+			}
+		}
+		
+		if(Config.ALLOW_WYVERN_RESTRITION_CITY && activeChar.isInsideZone(ZoneId.PEACE))
+		{
+			if(item.getItemId() == 8663)
+			{
+				activeChar.sendMessage("You can not use this item here in the city.");
+				activeChar.sendPacket(ActionFailed.STATIC_PACKET);
+				return;
 			}
 		}
 		
