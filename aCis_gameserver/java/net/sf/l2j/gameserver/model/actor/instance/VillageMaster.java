@@ -10,6 +10,7 @@ import net.sf.l2j.gameserver.datatables.CharTemplateTable;
 import net.sf.l2j.gameserver.datatables.ClanTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SkillTreeTable;
+import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.L2Clan.SubPledge;
@@ -162,6 +163,12 @@ public class VillageMaster extends Folk
 			// Affecting subclasses (add/del/change) if registered in Olympiads makes you ineligible to compete.
 			if (OlympiadManager.getInstance().isRegisteredInComp(player))
 				OlympiadManager.getInstance().unRegisterNoble(player);
+			
+			if (EventManager.getInstance().players.contains(player))
+			{
+				player.sendMessage("Subclass cannot be changed while registered to event.");
+				return;
+			}
 			
 			final NpcHtmlMessage html = new NpcHtmlMessage(getObjectId());
 			

@@ -54,12 +54,16 @@ import net.sf.l2j.gameserver.datatables.SpellbookTable;
 import net.sf.l2j.gameserver.datatables.StaticObjects;
 import net.sf.l2j.gameserver.datatables.SummonItemsData;
 import net.sf.l2j.gameserver.datatables.TeleportLocationTable;
+import net.sf.l2j.gameserver.event.EventBuffer;
+import net.sf.l2j.gameserver.event.EventManager;
+import net.sf.l2j.gameserver.event.EventStats;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.handler.AdminCommandHandler;
 import net.sf.l2j.gameserver.handler.ChatHandler;
 import net.sf.l2j.gameserver.handler.ItemHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
 import net.sf.l2j.gameserver.handler.UserCommandHandler;
+import net.sf.l2j.gameserver.handler.VoicedCommandHandler;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.instancemanager.AuctionManager;
 import net.sf.l2j.gameserver.instancemanager.AutoSpawnManager;
@@ -292,6 +296,7 @@ public class GameServer
 		_log.config("ItemHandler: Loaded " + ItemHandler.getInstance().size() + " handlers.");
 		_log.config("SkillHandler: Loaded " + SkillHandler.getInstance().size() + " handlers.");
 		_log.config("UserCommandHandler: Loaded " + UserCommandHandler.getInstance().size() + " handlers.");
+		_log.config("VoicedCommandHandler: Loaded " + VoicedCommandHandler.getInstance().size() + " handlers.");
 		
 		StringUtil.printSection("Custom");
 		EngineModsManager.init();
@@ -300,6 +305,11 @@ public class GameServer
 
 		StringUtil.printSection("NPC Custom");
 		RaidBossInfoManager.getInstance();
+		
+		EventManager.getInstance();
+		EventStats.getInstance();
+		if (EventManager.getInstance().getBoolean("eventBufferEnabled"))
+			EventBuffer.getInstance();
 		
 		StringUtil.printSection("System");
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
