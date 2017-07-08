@@ -6,7 +6,6 @@ import net.sf.l2j.commons.lang.StringUtil;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
-import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.CoupleManager;
 import net.sf.l2j.gameserver.model.World;
@@ -119,7 +118,7 @@ public class WeddingManagerNpc extends Folk
 			}
 			
 			// Simple checks to avoid exploits
-			if (EventManager.getInstance().isRegistered(partner) || partner.isInJail() || partner.isInOlympiadMode() || partner.isInDuel() || partner.isFestivalParticipant() || (partner.isInParty() && partner.getParty().isInDimensionalRift()) || partner.isInObserverMode())
+			if (partner.isInJail() || partner.isInOlympiadMode() || partner.isInDuel() || partner.isFestivalParticipant() || (partner.isInParty() && partner.getParty().isInDimensionalRift()) || partner.isInObserverMode())
 			{
 				player.sendMessage("Due to the current partner's status, the teleportation failed.");
 				return;

@@ -11,7 +11,6 @@ import net.sf.l2j.commons.mmocore.MMOConnection;
 import net.sf.l2j.commons.mmocore.ReceivablePacket;
 
 import net.sf.l2j.Config;
-import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.network.L2GameClient.GameClientState;
 import net.sf.l2j.gameserver.network.clientpackets.*;
 
@@ -82,9 +81,6 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 				}
 				break;
 			case IN_GAME:
-				if (EventManager.getInstance().isRunning() && EventManager.getInstance().getInt("antiAfkTime") > 0 && EventManager.getInstance().isRegistered(client.getActiveChar()))
-					client.getActiveChar().setAntiAfk(EventManager.getInstance().getInt("antiAfkTime"));
-				
 				switch (opcode)
 				{
 					case 0x01:

@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import net.sf.l2j.Config;
-import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.item.kind.Item;
@@ -143,12 +142,6 @@ public class OlympiadManager
 		if (Olympiad.getInstance().getMillisToCompEnd() < 600000)
 		{
 			player.sendPacket(SystemMessageId.GAME_REQUEST_CANNOT_BE_MADE);
-			return false;
-		}
-		
-		if (EventManager.getInstance().players.contains(player))
-		{
-			player.sendMessage("You can't join olympiad while participating in an Event.");
 			return false;
 		}
 		

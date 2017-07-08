@@ -8,9 +8,6 @@ import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.communitybbs.CommunityBoard;
 import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
 import net.sf.l2j.gameserver.datatables.ItemTable;
-import net.sf.l2j.gameserver.event.EventBuffer;
-import net.sf.l2j.gameserver.event.EventManager;
-import net.sf.l2j.gameserver.event.EventStats;
 import net.sf.l2j.gameserver.handler.AdminCommandHandler;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.model.World;
@@ -88,18 +85,6 @@ public final class RequestBypassToServer extends L2GameClientPacket
 				
 				ach.useAdminCommand(_command, activeChar);
 			}
-			else if (_command.startsWith("event_vote"))
-			{
-				EventManager.getInstance().addVote(activeChar, Integer.parseInt(_command.substring(11)));
-			}
-			else if (_command.equals("event_register"))
-			{
-				EventManager.getInstance().registerPlayer(activeChar);
-			}
-			else if (_command.equals("event_unregister"))
-			{
-				EventManager.getInstance().unregisterPlayer(activeChar);
-			}
 			else if (_command.startsWith("player_help "))
 			{
 				playerHelp(activeChar, _command.substring(12));
@@ -151,51 +136,6 @@ public final class RequestBypassToServer extends L2GameClientPacket
 				else
 					activeChar.processQuestEvent(str[0], str[1]);
 			}
-			else if (_command.startsWith("eventvote ")) 
-			{
-				EventManager.getInstance().addVote(activeChar, Integer.parseInt(_command.substring(10)));
-			}
-			else if (_command.startsWith("eventstats "))
-			{
-				try
-				{
-					EventStats.getInstance().showHtml(Integer.parseInt(_command.substring(11)),activeChar);
-				}
-				catch (Exception e)
-				{
-					activeChar.sendMessage("Currently there are no statistics to show.");
-				}
-			}
-			else if (_command.startsWith("eventstats_show "))
-			{
-				EventStats.getInstance().showPlayerStats(Integer.parseInt(_command.substring(16)),activeChar);
-			}
-			else if (_command.equals("eventbuffershow"))
-			{
-				EventBuffer.getInstance().showHtml(activeChar);
-			}
-			else if (_command.startsWith("eventbuffer "))
-			{
-				EventBuffer.getInstance().changeList(activeChar, Integer.parseInt(_command.substring(12,_command.length()-2)), (Integer.parseInt(_command.substring(_command.length()-1)) == 0 ? false : true));
-				EventBuffer.getInstance().showHtml(activeChar);
-			}
-			else if (_command.startsWith("eventinfo "))
-			{
-				int eventId = Integer.valueOf(_command.substring(10));
-				
-				NpcHtmlMessage html = new NpcHtmlMessage(0);
-				html.setFile("data/html/eventinfo/" + eventId + ".htm");
-				html.replace("%amount%", String.valueOf(EventManager.getInstance().getInt(eventId, "rewardAmmount")));
-				html.replace("%item%", ItemTable.getInstance().createDummyItem(EventManager.getInstance().getInt(eventId, "rewardId")).getItemName());
-				html.replace("%minlvl%", String.valueOf(EventManager.getInstance().getInt(eventId, "minLvl")));
-				html.replace("%maxlvl%", String.valueOf(EventManager.getInstance().getInt(eventId, "maxLvl")));
-				html.replace("%time%", String.valueOf(EventManager.getInstance().getInt(eventId, "matchTime") / 60));
-				html.replace("%players%", String.valueOf(EventManager.getInstance().getInt(eventId, "minPlayers")));
-				html.replace("%url%", EventManager.getInstance().getString("siteUrl"));
-				html.replace("%buffs%", EventManager.getInstance().getBoolean(eventId, "removeBuffs") ? "Self" : "Full");
-				activeChar.sendPacket(html);
-				activeChar.sendPacket(ActionFailed.STATIC_PACKET);
-			}
 			else if (_command.startsWith("_match"))
 			{
 				String params = _command.substring(_command.indexOf("?") + 1);
@@ -229,12 +169,6 @@ public final class RequestBypassToServer extends L2GameClientPacket
 				if (OlympiadManager.getInstance().isRegisteredInComp(activeChar))
 				{
 					activeChar.sendPacket(SystemMessageId.WHILE_YOU_ARE_ON_THE_WAITING_LIST_YOU_ARE_NOT_ALLOWED_TO_WATCH_THE_GAME);
-					return;
-				}
-				
-				if (EventManager.getInstance().players.contains(activeChar))
-				{
-					activeChar.sendMessage("You can not observe games while registered for an event!");
 					return;
 				}
 				

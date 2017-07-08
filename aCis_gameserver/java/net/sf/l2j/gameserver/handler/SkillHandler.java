@@ -5,9 +5,7 @@ import java.util.Map;
 
 import net.sf.l2j.gameserver.handler.skillhandlers.BalanceLife;
 import net.sf.l2j.gameserver.handler.skillhandlers.Blow;
-import net.sf.l2j.gameserver.handler.skillhandlers.Bomb;
 import net.sf.l2j.gameserver.handler.skillhandlers.Cancel;
-import net.sf.l2j.gameserver.handler.skillhandlers.Capture;
 import net.sf.l2j.gameserver.handler.skillhandlers.CombatPointHeal;
 import net.sf.l2j.gameserver.handler.skillhandlers.Continuous;
 import net.sf.l2j.gameserver.handler.skillhandlers.CpDamPercent;
@@ -80,8 +78,6 @@ public class SkillHandler
 		registerSkillHandler(new Sweep());
 		registerSkillHandler(new TakeCastle());
 		registerSkillHandler(new Unlock());
-		registerSkillHandler(new Bomb());
-		registerSkillHandler(new Capture());
 	}
 	
 	public void registerSkillHandler(ISkillHandler handler)

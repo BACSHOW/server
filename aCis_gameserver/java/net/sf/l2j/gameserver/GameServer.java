@@ -54,9 +54,6 @@ import net.sf.l2j.gameserver.datatables.SpellbookTable;
 import net.sf.l2j.gameserver.datatables.StaticObjects;
 import net.sf.l2j.gameserver.datatables.SummonItemsData;
 import net.sf.l2j.gameserver.datatables.TeleportLocationTable;
-import net.sf.l2j.gameserver.event.EventBuffer;
-import net.sf.l2j.gameserver.event.EventManager;
-import net.sf.l2j.gameserver.event.EventStats;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.handler.AdminCommandHandler;
 import net.sf.l2j.gameserver.handler.ChatHandler;
@@ -305,11 +302,6 @@ public class GameServer
 
 		StringUtil.printSection("NPC Custom");
 		RaidBossInfoManager.getInstance();
-		
-		EventManager.getInstance();
-		EventStats.getInstance();
-		if (EventManager.getInstance().getBoolean("eventBufferEnabled"))
-			EventBuffer.getInstance();
 		
 		StringUtil.printSection("System");
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());

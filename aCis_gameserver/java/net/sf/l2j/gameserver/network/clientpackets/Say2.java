@@ -5,7 +5,6 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import net.sf.l2j.Config;
-import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.handler.ChatHandler;
 import net.sf.l2j.gameserver.handler.IChatHandler;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
@@ -178,13 +177,7 @@ public final class Say2 extends L2GameClientPacket
 		}
 		
 		_text = _text.replaceAll("\\\\n", "");
-		
-		if (EventManager.getInstance().isRegistered(activeChar) && !EventManager.getInstance().getCurrentEvent().onSay(_type, activeChar, _text))
-		{
-			activeChar.sendMessage("You cannot talk right now.");
-			return;
-		}
-		
+
 		if (EngineModsManager.onVoiced(activeChar, _text))
 			return;
 		

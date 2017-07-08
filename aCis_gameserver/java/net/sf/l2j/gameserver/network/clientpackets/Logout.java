@@ -1,7 +1,6 @@
 package net.sf.l2j.gameserver.network.clientpackets;
 
 import net.sf.l2j.gameserver.instancemanager.SevenSignsFestival;
-import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.network.SystemMessageId;
@@ -40,13 +39,6 @@ public final class Logout extends L2GameClientPacket
 		if (AttackStanceTaskManager.getInstance().isInAttackStance(player))
 		{
 			player.sendPacket(SystemMessageId.CANT_LOGOUT_WHILE_FIGHTING);
-			player.sendPacket(ActionFailed.STATIC_PACKET);
-			return;
-		}
-		
-		if (EventManager.getInstance().isRegistered(player))
-		{
-			player.sendMessage("You cannot logout while you are a participant of an event.");
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}

@@ -1,6 +1,5 @@
 package net.sf.l2j.gameserver.network.serverpackets;
 
-import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.actor.Attackable;
@@ -31,8 +30,6 @@ public class Die extends L2GameServerPacket
 			Player player = (Player) cha;
 			_allowFixedRes = player.getAccessLevel().allowFixedRes();
 			_clan = player.getClan();
-			
-			_event = EventManager.getInstance().isRegistered(cha);
 		}
 		else if (cha instanceof Attackable)
 			_sweepable = ((Attackable) cha).isSpoiled();

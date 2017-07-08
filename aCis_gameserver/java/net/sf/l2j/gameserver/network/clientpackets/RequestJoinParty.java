@@ -1,6 +1,5 @@
 package net.sf.l2j.gameserver.network.clientpackets;
 
-import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.model.BlockList;
 import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
@@ -28,12 +27,6 @@ public final class RequestJoinParty extends L2GameClientPacket
 		final Player requestor = getClient().getActiveChar();
 		if (requestor == null)
 			return;
-		
-		if (EventManager.getInstance().isRegistered(requestor) && EventManager.getInstance().isSpecialEvent())
-		{
-			requestor.sendMessage("You cannot make a party while in LMS or DM events.");
-			return;
-		}
 		
 		final Player target = World.getInstance().getPlayer(_name);
 		if (target == null)
