@@ -1,7 +1,7 @@
 package net.sf.l2j.gameserver.event;
 
-import java.util.HashMap;
 import java.util.Map;
+import javolution.util.FastMap;
 
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.model.L2Spawn;
@@ -19,8 +19,8 @@ public class Battlefield extends Event
 	protected EventState eventState;
 	protected int winnerTeam;
 	private Core task = new Core();
-	private HashMap<Integer,L2Spawn> bases = new HashMap<>();
-	private HashMap<Integer,Integer> owners = new HashMap<>();
+	private FastMap<Integer,L2Spawn> bases = new FastMap<>();
+	private FastMap<Integer,Integer> owners = new FastMap<>();
 	private enum EventState
 	{
 		START, FIGHT, END, TELEPORT, INACTIVE
@@ -93,7 +93,7 @@ public class Battlefield extends Event
 	@Override
 	protected void endEvent()
 	{
-		winnerTeam = players.hashCode();
+		winnerTeam = players.head().getNext().getValue()[0];
 		
 		setStatus(EventState.END);
 		schedule(1);

@@ -113,13 +113,13 @@ public class FenceTable
 		final byte[][] geoData = GeoEngine.calculateGeoObject(inside);
 		
 		// create new fence
-		Fence fence = new Fence(type, sizeX, sizeY, height, geoX, geoY, geoZ, geoData);
+		Fence fence = new Fence(type, sizeX, sizeY, height, geoX, geoY);
 		
 		// spawn fence to world
 		fence.spawnMe(x, y, z);
 		
 		// add fence to geoengine and list
-		GeoEngine.getInstance().addGeoObject(fence);
+		//GeoEngine.getInstance().addGeoObject(fence);
 		_fences.add(fence);
 		
 		return fence;
@@ -135,7 +135,7 @@ public class FenceTable
 		fence.decayMe();
 		
 		// remove fence from geoengine and list
-		GeoEngine.getInstance().removeGeoObject(fence);
+		//GeoEngine.getInstance().removeGeoObject(fence);
 		_fences.remove(fence);
 	}
 	

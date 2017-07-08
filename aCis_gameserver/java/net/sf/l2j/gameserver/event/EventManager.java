@@ -1,9 +1,11 @@
 package net.sf.l2j.gameserver.event;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
+import main.util.builders.html.HtmlBuilder;
 
 import net.sf.l2j.commons.concurrent.ThreadPool;
 import net.sf.l2j.gameserver.datatables.DoorTable;
@@ -16,30 +18,27 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
 import net.sf.l2j.gameserver.util.Broadcast;
-
-import main.util.builders.html.HtmlBuilder;
-
 import net.sf.l2j.commons.random.Rnd;
 
 public final class EventManager
 {
 	private EventConfig config;
-	public HashMap<Integer, Event> disabled;
-	public HashMap<Integer, Event> events;
-	public ArrayList<Player> players;
-	public HashMap<String, Integer> afkers;
+	public FastMap<Integer, Event> disabled;
+	public FastMap<Integer, Event> events;
+	public FastList<Player> players;
+	public FastMap<String, Integer> afkers;
 	private Event current;
-	protected HashMap<Player, Integer> colors;
-	protected HashMap<Player, String> titles;
-	protected HashMap<Player, int[]> positions;
-	protected HashMap<Player, Integer> votes;
+	protected FastMap<Player, Integer> colors;
+	protected FastMap<Player, String> titles;
+	protected FastMap<Player, int[]> positions;
+	protected FastMap<Player, Integer> votes;
 	protected State status;
 	protected int counter;
 	protected Countdown cdtask;
 	protected ThreadPool tpm;
 	private Scheduler task;
 	protected Random rnd = new Random();
-	protected ArrayList<Integer> eventIds;
+	protected FastList<Integer> eventIds;
 	protected enum State
 	{
 		REGISTERING, VOTING, RUNNING, END
@@ -70,10 +69,10 @@ public final class EventManager
 						break;
 					case 30:
 					case 10:
-					announce(counter + " seconds left to register!");
+						announce(counter + " seconds left to register!");
 						break;
 				}
-		}
+			}
 			
 			if (status == State.VOTING && counter == getInt("showVotePopupAt") && getBoolean("votePopupEnabled"))
 			{
@@ -161,7 +160,7 @@ public final class EventManager
 				_player.setTitle(titles.get(_player));
 				
 				if (_player.getParty() != null)
-					_player.leaveParty();
+					_player.getParty().removePartyMember(_player, null);
 				
 				_player.broadcastUserInfo();
 				
@@ -312,22 +311,22 @@ public final class EventManager
 	{
 		config = EventConfig.getInstance();
 		
-		events = new HashMap<>();
-		disabled = new HashMap<>();
-		players = new HashMap<>();
-		afkers = new HashMap<>();
-		votes = new HashMap<>();
-		titles = new HashMap<>();
-		colors = new HashMap<>();
-		positions = new HashMap<>();
-		eventIds = new HashMap<>();
+		events = new FastMap<>();
+		disabled = new FastMap<>();
+		players = new FastList<>();
+		afkers = new FastMap<>();
+		votes = new FastMap<>();
+		titles = new FastMap<>();
+		colors = new FastMap<>();
+		positions = new FastMap<>();
+		eventIds = new FastList<>();
 		status = State.VOTING;
 		tpm = ThreadPool.getInstance();
 		task = new Scheduler();
 		cdtask = new Countdown();
 		counter = 0;
 		
-		ArrayList<Integer> disabledEvents = getRestriction("disabledEvents");
+		FastList<Integer> disabledEvents = getRestriction("disabledEvents");
 		
 		// Add the events to the list
 		if (!disabledEvents.contains(1))
@@ -425,7 +424,7 @@ public final class EventManager
 		
 		// Start the scheduler
 		counter = getInt("firstAfterStartTime") - 1;
-		tpm.scheduleGeneral(cdtask, 1);
+		tpm.schedule(cdtask, 1);
 		
 		setZombiesEvent();
 		
@@ -510,7 +509,7 @@ public final class EventManager
 		if (!getBoolean("dualboxAllowed"))
 		{
 			String ip = player.getClient().getConnection().getInetAddress().getHostAddress();
-			for (L2PcInstance p : players)
+			for (Player p : players)
 			{
 				if (p.getClient().getConnection().getInetAddress().getHostAddress().equalsIgnoreCase(ip))
 				{
@@ -553,18 +552,18 @@ public final class EventManager
 		return current;
 	}
 	
-	public ArrayList<String> getEventNames()
+	public FastList<String> getEventNames()
 	{
-		ArrayList<String> map = new ArrayList<>();
+		FastList<String> map = new FastList<>();
 		for (Event event : events.values())
 			map.add(event.getString("eventName"));
 		
 		return map;
 	}
 	
-	public HashMap<Integer, String> getEventMap()
+	public FastMap<Integer, String> getEventMap()
 	{
-		HashMap<Integer, String> map = new HashMap<>();
+		FastMap<Integer, String> map = new FastMap<>();
 		for (Event event : disabled.values())
 			map.put(event.getInt("ids"), event.getString("eventName"));
 		for (Event event : events.values())
@@ -664,7 +663,7 @@ public final class EventManager
 	protected int getVoteWinner()
 	{
 		int old = 0;
-		HashMap<Integer, Integer> temp = new HashMap<>();
+		FastMap<Integer, Integer> temp = new FastMap<>();
 		
 		for (int vote : votes.values())
 		{
@@ -816,10 +815,10 @@ public final class EventManager
 			
 			sb.append("</td><td width=130><center><a action=\"bypass -h eventinfo " + getCurrentEvent().getInt("ids") + "\">" + getCurrentEvent().getString("eventName") + "</a></td><td width=70>Time: " + cdtask.getTime() + "</td></tr></table><br>");
 			
-			for (L2PcInstance p : EventManager.getInstance().players)
+			for (Player p : EventManager.getInstance().players)
 			{
 				count++;
-				sb.append("<center><table width=270 " + (count % 2 == 1 ? "" : "bgcolor=5A5A5A") + "><tr><td width=120>" + p.getName() + "</td><td width=40>lvl " + p.getLevel() + "</td><td width=110>" + p.getTemplate().className + "</td></tr></table>");
+				sb.append("<center><table width=270 " + (count % 2 == 1 ? "" : "bgcolor=5A5A5A") + "><tr><td width=120>" + p.getName() + "</td><td width=40>lvl " + p.getLevel() + "</td><td width=110>" + p.getTemplate().getClassName() + "</td></tr></table>");
 			}
 			
 			sb.append("</body></html>");
@@ -849,7 +848,7 @@ public final class EventManager
 			player.setTitle(titles.get(player));
 			
 			if (player.getParty() != null)
-				player.leaveParty();
+				player.getParty().removePartyMember(player, null);
 			
 			player.broadcastUserInfo();
 		}
@@ -875,7 +874,7 @@ public final class EventManager
 		return true;
 	}
 	
-	public boolean areTeammates(Player player, L2PcInstance target) 
+	public boolean areTeammates(Player player, Player target) 
 	{ 
 		if (getCurrentEvent() == null) 
 			return false; 

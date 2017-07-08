@@ -17,10 +17,11 @@ package net.sf.l2j.gameserver.event;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.commons.concurrent.ThreadPool;
@@ -32,8 +33,8 @@ import main.util.builders.html.HtmlBuilder;
 
 public class EventBuffer
 {
-	private HashMap<String, ArrayList<Integer>> buffTemplates;
-	private HashMap<String, Boolean> changes;
+	private FastMap<String, FastList<Integer>> buffTemplates;
+	private FastMap<String, Boolean> changes;
 	private UpdateTask updateTask;
 	
 	private static class SingletonHolder
@@ -58,8 +59,8 @@ public class EventBuffer
 	public EventBuffer()
 	{
 		updateTask = new UpdateTask();
-		changes = new HashMap<>();
-		buffTemplates = new HashMap<>();
+		changes = new FastMap<>();
+		buffTemplates = new FastMap<>();
 		loadSQL();
 		ThreadPool.scheduleAtFixedRate(updateTask, 600000, 600000);
 	}
@@ -81,7 +82,7 @@ public class EventBuffer
 		
 		if (!buffTemplates.containsKey(playerId))
 		{
-			buffTemplates.put(playerId, new ArrayList<Integer>());
+			buffTemplates.put(playerId, new FastList<Integer>());
 			changes.put(playerId, true);
 		}
 		else
@@ -111,9 +112,9 @@ public class EventBuffer
 			
 			while (rset.next())
 			{
-				buffTemplates.put(rset.getString("player"), new ArrayList<Integer>());
+				buffTemplates.put(rset.getString("player"), new FastList<Integer>());
 				StringTokenizer st = new StringTokenizer(rset.getString("buffs"), ",");
-				ArrayList<Integer> templist = new ArrayList<>();
+				FastList<Integer> templist = new FastList<>();
 				while (st.hasMoreTokens())
 					templist.add(Integer.parseInt(st.nextToken()));
 				buffTemplates.getEntry(rset.getString("player")).setValue(templist);
@@ -158,12 +159,12 @@ public class EventBuffer
 			
 			if (!buffTemplates.containsKey(playerId))
 			{
-				buffTemplates.put(playerId, new ArrayList<Integer>());
+				buffTemplates.put(playerId, new FastList<Integer>());
 				changes.put(playerId, true);
 			}
 			
 			StringTokenizer st = new StringTokenizer(EventManager.getInstance().getString("allowedBuffsList"), ",");
-			ArrayList<Integer> skillList = new ArrayList<>();
+			FastList<Integer> skillList = new FastList<>();
 			
 			while (st.hasMoreTokens())
 				skillList.add(Integer.parseInt(st.nextToken()));

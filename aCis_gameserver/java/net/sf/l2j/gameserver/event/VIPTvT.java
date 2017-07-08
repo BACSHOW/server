@@ -1,6 +1,6 @@
 package net.sf.l2j.gameserver.event;
 
-import java.util.HashMap;
+import javolution.util.FastMap;
 
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
@@ -12,7 +12,7 @@ public class VIPTvT extends Event
 {
 	protected EventState eventState;
 	private Core task = new Core();
-	private HashMap<Integer, Player> vips = new HashMap<>();
+	private FastMap<Integer, Player> vips = new FastMap<>();
 	private enum EventState
 	{
 		START, FIGHT, END, TELEPORT, INACTIVE
@@ -83,7 +83,7 @@ public class VIPTvT extends Event
 	@Override
 	protected void endEvent()
 	{
-		winnerTeam = players.hashCode();
+		winnerTeam = players.head().getNext().getValue()[0];
 		
 		setStatus(EventState.END);
 		clock.setTime(0);

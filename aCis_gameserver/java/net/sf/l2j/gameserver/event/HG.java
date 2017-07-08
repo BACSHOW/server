@@ -150,7 +150,7 @@ public class HG extends Event
 			i++;
 			sb.append("<tr><td><font color=" + team.getHexaColor() + ">" + team.getName() + "</font> team</td><td></td><td></td><td></td></tr>");
 			for (Player p : getPlayersOfTeam(i))
-				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + getScore(p) + "</td></tr>");
+				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + getScore(p) + "</td></tr>");
 		}
 		
 		sb.append("</table></body></html>");
@@ -179,7 +179,7 @@ public class HG extends Event
 	
 	protected void giveBows()
 	{
-		ItemInstance bow = ItemTable.getInstance().createItem("Hunting Grounds", 9999, 1, null);
+		ItemInstance bow = ItemTable.getInstance().createItem("Hunting Grounds", 9999, 1, null, null);
 		for (Player player : players.keySet())
 		{
 			player.addItem("Hunting Grounds", bow, player, false);

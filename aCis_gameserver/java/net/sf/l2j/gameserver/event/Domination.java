@@ -1,6 +1,6 @@
 package net.sf.l2j.gameserver.event;
 
-import java.util.ArrayList;
+import javolution.util.FastList;
 
 import net.sf.l2j.gameserver.datatables.SpawnTable;
 import net.sf.l2j.gameserver.model.L2Spawn;
@@ -14,7 +14,7 @@ public class Domination extends Event
 {
 	protected EventState eventState;
 	private Core task = new Core();
-	private ArrayList<L2Spawn> zones = new ArrayList<>();
+	private FastList<L2Spawn> zones = new FastList<>();
 	private enum EventState
 	{
 		START, FIGHT, END, INACTIVE
@@ -156,7 +156,7 @@ public class Domination extends Event
 			i++;
 			sb.append("<tr><td><font color=" + team.getHexaColor() + ">" + team.getName() + "</font> team</td><td></td><td></td><td></td></tr>");
 			for (Player p : getPlayersOfTeam(i))
-				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + getScore(p) + "</td></tr>");
+				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + getScore(p) + "</td></tr>");
 		}
 		
 		sb.append("</table></body></html>");
@@ -189,8 +189,8 @@ public class Domination extends Event
 	{
 		for (L2Spawn s : zones)
 		{
-			s.getLastSpawn().deleteMe();
-			s.stopRespawn();
+			s.getNpc().deleteMe();
+			s.doRespawn();
 			SpawnTable.getInstance().deleteSpawn(s, true);
 			zones.remove(s);
 		}

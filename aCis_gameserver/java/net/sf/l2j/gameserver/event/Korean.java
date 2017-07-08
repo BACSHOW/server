@@ -1,7 +1,7 @@
 package net.sf.l2j.gameserver.event;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
@@ -17,7 +17,7 @@ public class Korean extends Event
 	private int round = 1;
 	private int eventType;
 	private int counter;
-	private HashMap<Integer, ArrayList<Player>> fighters = new HashMap<>();
+	private FastMap<Integer, FastList<Player>> fighters = new FastMap<>();
 	private enum EventState
 	{
 		START, FIGHT, END, TELEPORT, INACTIVE
@@ -230,7 +230,7 @@ public class Korean extends Event
 			i++;
 			sb.append("<tr><td><font color=" + team.getHexaColor() + ">" + team.getName() + "</font> team</td><td></td><td></td><td></td></tr>");
 			for (Player p : getPlayersOfTeam(i))
-				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + getScore(p) + "</td></tr>");
+				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + getScore(p) + "</td></tr>");
 		}
 		
 		sb.append("</table></body></html>");
@@ -241,8 +241,8 @@ public class Korean extends Event
 	@Override
 	protected void start()
 	{
-		fighters.put(1, new ArrayList<Player>());
-		fighters.put(2, new ArrayList<Player>());
+		fighters.put(1, new FastList<Player>());
+		fighters.put(2, new FastList<Player>());
 		if (players.size() < 9)
 			eventType = 1;
 		else if (players.size() < 15)

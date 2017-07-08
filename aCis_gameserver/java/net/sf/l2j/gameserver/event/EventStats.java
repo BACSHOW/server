@@ -113,14 +113,14 @@ public class EventStats
 				{
 					sb.append("</table></body></html>");
 					htmls.put(count / 10, new ShowBoard(sb.toString(), "101"));
-					sb.clear();
+					//sb.clear();
 				}
 			}
 			if (count % 10 != 0 && !htmls.containsKey(count / 10 + 1))
 			{
 				sb.append("</table></body></html>");
 				htmls.put((count / 10 + 1), new ShowBoard(sb.toString(), "101"));
-				sb.clear();
+				//sb.clear();
 			}
 			rset.close();
 			statement.close();

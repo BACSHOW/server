@@ -14,7 +14,7 @@
  */
 package net.sf.l2j.gameserver.event;
 
-import java.util.ArrayList;
+import javolution.util.FastList;
 
 import net.sf.l2j.commons.random.Rnd;
 import net.sf.l2j.gameserver.datatables.SpawnTable;
@@ -31,7 +31,7 @@ import main.util.builders.html.HtmlBuilder;
 public class Treasure extends Event
 {
 	protected EventState eventState;
-	protected ArrayList<L2Spawn> chests = new ArrayList<>();
+	protected FastList<L2Spawn> chests = new FastList<>();
 	protected Player finder;
 	private Core task = new Core();
 	private String current;
@@ -123,7 +123,7 @@ public class Treasure extends Event
 		}
 
 		npc.deleteMe();
-		npc.getSpawn().stopRespawn();
+		npc.getSpawn().doRespawn();
 		SpawnTable.getInstance().deleteSpawn(npc.getSpawn(), true);
 		chests.remove(npc.getSpawn());
 		current = player.getName();
@@ -168,7 +168,7 @@ public class Treasure extends Event
 			sb.append("<html><body><table width=270><tr><td width=200>Event Engine </td><td><a action=\"bypass -h eventstats 1\">Statistics</a></td></tr></table><br><center><table width=270 bgcolor=5A5A5A><tr><td width=70>Running</td><td width=130><center>" + getString("eventName") + "</td><td width=70>Time: " + clock.getTime() + "</td></tr></table><table width=270><tr><td><center>" + getPlayerWithMaxScore().getName() + " - " + getScore(getPlayerWithMaxScore()) + "</td></tr></table><br><table width=270>");
 			
 			for (Player p : getPlayersOfTeam(1))
-				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + getScore(p) + "</td></tr>");
+				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + getScore(p) + "</td></tr>");
 			
 			sb.append("</table></body></html>");
 			html.setHtml(sb.toString());
@@ -197,8 +197,8 @@ public class Treasure extends Event
 				continue;
 			}
 			
-			s.getLastSpawn().deleteMe();
-			s.stopRespawn();
+			s.getNpc().deleteMe();
+			s.doRespawn();
 			SpawnTable.getInstance().deleteSpawn(s, true);
 			chests.remove(s);
 		}

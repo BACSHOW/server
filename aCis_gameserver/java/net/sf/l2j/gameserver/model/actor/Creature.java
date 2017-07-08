@@ -511,7 +511,7 @@ public abstract class Creature extends WorldObject
 			return;
 		}
 		
-		if (this instanceof Player && EventManager.getInstance().isRegistered(this) || this instanceof Servitor && EventManager.getInstance().isRegistered(((L2Summon) this).getOwner()))
+		if (this instanceof Player && EventManager.getInstance().isRegistered(this) || this instanceof Servitor && EventManager.getInstance().isRegistered(((Summon) this).getOwner()))
 		{
 			Player p = getActingPlayer();
 			Player t = null;
@@ -1086,13 +1086,13 @@ public abstract class Creature extends WorldObject
 					{
 						if (!EventManager.getInstance().getCurrentEvent().canAttack(p, getTarget()))
 						{
-							getAI().setIntention(AI_INTENTION_ACTIVE);
+							getAI().setIntention(CtrlIntention.ACTIVE);
 							return;
 						}
 						
 						if (getTarget() instanceof Player && EventManager.getInstance().areTeammates(p, (Player) getTarget()) && skill.isOffensive())
 						{
-							getAI().setIntention(AI_INTENTION_ACTIVE);
+							getAI().setIntention(CtrlIntention.ACTIVE);
 							return;
 						}
 					}

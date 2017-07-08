@@ -136,7 +136,7 @@ public class RaidBoss extends Event
 			i++;
 			sb.append("<tr><td><font color=" + team.getHexaColor() + ">" + team.getName() + "</font> team</td><td></td><td></td><td></td></tr>");
 			for (Player p : getPlayersOfTeam(i))
-				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + getScore(p) + "</td></tr>");
+				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + getScore(p) + "</td></tr>");
 		}
 		
 		sb.append("</table></body></html>");
@@ -170,8 +170,8 @@ public class RaidBoss extends Event
 	
 	protected void removeRaid()
 	{
-		raid.getLastSpawn().deleteMe();
-		raid.stopRespawn();
+		raid.getNpc().deleteMe();
+		raid.doRespawn();
 		SpawnTable.getInstance().deleteSpawn(raid, true);
 	}
 }

@@ -1,7 +1,7 @@
 package net.sf.l2j.gameserver.event;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.model.L2Skill;
@@ -18,7 +18,7 @@ import main.util.builders.html.HtmlBuilder;
 
 public class Bomb extends Event
 {
-	protected HashMap<L2Spawn, Player> bombs = new HashMap<>();
+	protected FastMap<L2Spawn, Player> bombs = new FastMap<>();
 	protected EventState eventState;
 	private Core task = new Core();
 	private Bomber bomber = new Bomber();
@@ -32,7 +32,7 @@ public class Bomb extends Event
 		@Override
 		public void run()
 		{
-			explode(bombs.entrySet().add(null));
+			explode(bombs.entrySet().addAll(null));
 			bombs.remove(bombs.head().getNext().getKey());
 		}
 	}
@@ -104,19 +104,19 @@ public class Bomb extends Event
 	public void dropBomb(Player player)
 	{
 		bombs.put(spawnNPC(player.getX(), player.getY(), player.getZ(), getInt("bombNpcId")), player);
-		bombs.tail().getPrevious().getKey().getLastSpawn().setTitle((getTeam(player) == 1 ? "Blue" : "Red"));
-		bombs.tail().getPrevious().getKey().getLastSpawn().broadcastStatusUpdate();
+		bombs.get(getTeam(player) == 1 ? "Blue" : "Red");
+		bombs.tail().getPrevious().getKey().getNpc().broadcastStatusUpdate();
 		
-		for(L2PcInstance p : getPlayerList())
-			p.sendPacket(new NpcInfo(bombs.tail().getPrevious().getKey().getLastSpawn(), p));
+		for(Player p : getPlayerList())
+			p.sendPacket(new NpcInfo(bombs.values().tail().getPrevious().getKey().getLastSpawn(), p));
 		
-		tpm.scheduleGeneral(bomber, 3000);
+		tpm.schedule(bomber, 3000);
 	}
 	
 	@Override
 	protected void endEvent()
 	{
-		winnerTeam = players.head().getNext().getValue()[0];
+		//winnerTeam = players.head().getNext().getValue()[0];
 		
 		setStatus(EventState.END);
 		clock.setTime(0);
@@ -124,7 +124,7 @@ public class Bomb extends Event
 	
 	protected void explode(L2Spawn bomb)
 	{
-		ArrayList<WorldObject> victims = new ArrayList<>();
+		FastList<WorldObject> victims = new FastList<>();
 		
 		for (Player player : getPlayerList())
 		{
@@ -134,9 +134,9 @@ public class Bomb extends Event
 			if(player.isInvul())
 				continue;
 			
-			if (getTeam(bombs.get(bomb)) != getTeam(player) && Math.sqrt(player.getPlanDistanceSq(bomb.getLastSpawn().getX(), bomb.getLastSpawn().getY())) <= getInt("bombRadius"))
+			if (getTeam(bombs.get(bomb)) != getTeam(player) && Math.sqrt(player.getPlanDistanceSq(bomb.getLocX(), bomb.getLocY())) <= getInt("bombRadius"))
 			{
-				player.doDie(bomb.getLastSpawn());
+				player.doDie(bomb.getNpc());
 				increasePlayersScore(bombs.get(bomb));
 				EventStats.getInstance().tempTable.get(player.getObjectId())[2] = EventStats.getInstance().tempTable.get(player.getObjectId())[2] + 1;
 				addToResurrector(player);
@@ -150,8 +150,8 @@ public class Bomb extends Event
 			}
 			if (victims.size() != 0)
 			{
-				bomb.getLastSpawn().broadcastPacket(new MagicSkillUse(bomb.getLastSpawn(), (Player) victims.head().getNext().getValue(), 18, 1, 0, 0));
-				bomb.getLastSpawn().broadcastPacket(new MagicSkillLaunched(bomb.getLastSpawn(), 18, 1, victims.toArray(new WorldObject[victims.size()])));
+				bomb.getNpc().broadcastPacket(new MagicSkillUse(bomb.getNpc(), (Player) victims.head().getNext().getValue(), 18, 1, 0, 0));
+				bomb.getNpc().broadcastPacket(new MagicSkillLaunched(bomb.getNpc(), 18, 1, victims.toArray(new WorldObject[victims.size()])));
 				victims.clear();
 			}
 		}
@@ -198,7 +198,7 @@ public class Bomb extends Event
 	@Override
 	protected void schedule(int time)
 	{
-		tpm.scheduleGeneral(task, time);
+		tpm.schedule(task, time);
 	}
 	
 	protected void setStatus(EventState s)
@@ -219,7 +219,7 @@ public class Bomb extends Event
 			i++;
 			sb.append("<tr><td><font color=" + team.getHexaColor() + ">" + team.getName() + "</font> team</td><td></td><td></td><td></td></tr>");
 			for (Player p : getPlayersOfTeam(i))
-				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + getScore(p) + "</td></tr>");
+				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + getScore(p) + "</td></tr>");
 		}
 		
 		sb.append("</table></body></html>");

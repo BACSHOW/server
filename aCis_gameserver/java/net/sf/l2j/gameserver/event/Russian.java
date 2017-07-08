@@ -1,8 +1,9 @@
 package net.sf.l2j.gameserver.event;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 import net.sf.l2j.gameserver.model.WorldObject;
 import net.sf.l2j.gameserver.model.L2Spawn;
@@ -18,8 +19,8 @@ public class Russian extends Event
 {
 	protected EventState eventState;
 	protected int round;
-	protected HashMap<Integer, L2Spawn> russians = new HashMap<>();
-	protected HashMap<Integer, ArrayList<Player>> choses = new HashMap<>();
+	protected FastMap<Integer, L2Spawn> russians = new FastMap<>();
+	protected FastMap<Integer, FastList<Player>> choses = new FastMap<>();
 	private Core task = new Core();
 	private enum EventState
 	{
@@ -71,7 +72,7 @@ public class Russian extends Event
 									player.broadcastUserInfo();
 								}
 								
-								for (ArrayList<Player> chose : choses.values())
+								for (FastList<Player> chose : choses.values())
 									chose.reset();
 								
 								setStatus(EventState.CHOOSE);
@@ -126,7 +127,7 @@ public class Russian extends Event
 	
 	protected void killRandomRussian()
 	{
-		ArrayList<Integer> ids = new ArrayList<>();
+		FastList<Integer> ids = new FastList<>();
 		for (int id : russians.keySet())
 			ids.add(id);
 		int russnum = ids.get(Rnd.get(ids.size()));
@@ -138,7 +139,7 @@ public class Russian extends Event
 		{
 			setStatus(victim, -1);
 			victim.stopAllEffects();
-			victim.doDie(russian.getLastSpawn());
+			victim.doDie(russian.getNpc());
 			victim.sendMessage("Your russian died!");
 			victim.getAppearance().setNameColor(255, 255, 255);
 		}
@@ -150,7 +151,7 @@ public class Russian extends Event
 	{
 		super.onLogout(player);
 		
-		for (ArrayList<Player> list : choses.values())
+		for (FastList<Player> list : choses.values())
 			if (list.contains(player))
 				list.remove(player);
 	}
@@ -166,7 +167,7 @@ public class Russian extends Event
 		
 		for (Map.Entry<Integer, L2Spawn> russian : russians.entrySet())
 		{
-			if (russian.getValue().getLastSpawn().getObjectId() == npc.getObjectId())
+			if (russian.getValue().getNpc().getObjectId() == npc.getObjectId())
 			{
 				choses.get(russian.getKey()).add(player);
 				player.getAppearance().setNameColor(0, 255, 0);
@@ -221,7 +222,7 @@ public class Russian extends Event
 		sb.append("<html><body><table width=270><tr><td width=200>Event Engine </td><td><a action=\"bypass -h eventstats 1\">Statistics</a></td></tr></table><br><center><table width=270 bgcolor=5A5A5A><tr><td width=70>Running</td><td width=130><center>" + getString("eventName") + "</td><td width=70>Time: " + clock.getTime() + "</td></tr></table><table width=270><tr><td><center>Russians left: " + russians.size() + "</td></tr></table><br><table width=270>");
 		
 		for (Player p : getPlayersOfTeam(1))
-			sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + (getStatus(p) == 1 ? "Dead" : "Alive") + "</td></tr>");
+			sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + (getStatus(p) == 1 ? "Dead" : "Alive") + "</td></tr>");
 		
 		sb.append("</table></body></html>");
 		html.setHtml(sb.toString());
@@ -234,8 +235,8 @@ public class Russian extends Event
 		{
 			int[] pos = getPosition("Russian", i);
 			russians.put(i, spawnNPC(pos[0], pos[1], pos[2], getInt("russianNpcId")));
-			choses.put(i, new ArrayList<Player>());
-			russians.get(i).getLastSpawn().setTitle("--" + i + "--");
+			choses.put(i, new FastList<Player>());
+			russians.get(i).getNpc().setTitle("--" + i + "--");
 		}
 	}
 	

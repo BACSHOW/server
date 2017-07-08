@@ -18,7 +18,6 @@ public class Bomb implements ISkillHandler
 		if (!(activeChar instanceof Player))
 			return;
 		EventManager.getInstance().getCurrentEvent().dropBomb((Player)activeChar);
-		rentEvent().dropBomb((Creature)activeChar);
 	}
 	
 	@Override

@@ -1,8 +1,10 @@
 package net.sf.l2j.gameserver.event;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Set;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 import net.sf.l2j.commons.concurrent.ThreadPool;
 import net.sf.l2j.commons.random.Rnd;
@@ -16,7 +18,6 @@ import net.sf.l2j.gameserver.model.WorldObject;
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
-import net.sf.l2j.gameserver.model.actor.instance.RaidBoss;
 import net.sf.l2j.gameserver.model.group.Party;
 import net.sf.l2j.gameserver.model.actor.template.NpcTemplate;
 import net.sf.l2j.gameserver.network.serverpackets.CreatureSay;
@@ -30,7 +31,7 @@ public abstract class Event
 	protected static final int[] ITEMS = {6707, 6709, 6708, 6710, 6704, 6701, 6702, 6703, 6706, 6705, 6713, 6714, 6712, 6711, 6697, 6688, 6696, 6691, 7579, 6695, 6694, 6689, 6693, 6690};
 	protected int eventId;
 	protected EventConfig config = EventConfig.getInstance();
-	protected HashMap<Integer, EventTeam> teams;
+	protected FastMap<Integer, EventTeam> teams;
 	protected ThreadPool tpm;
 	protected ResurrectorTask resurrectorTask;
 	protected Clock clock;
@@ -38,10 +39,10 @@ public abstract class Event
 	protected int time;
 	protected int winnerTeam;
 	protected int loserTeam;
-	private HashMap<Player, ArrayList<L2Skill>> summons;
+	private FastMap<Player, ArrayList<L2Skill>> summons;
 	
 	// TEAM-STATUS-SCORE
-	protected HashMap<Player, int[]> players;
+	protected FastMap<Player, int[]> players;
 	
 	protected class Clock implements Runnable
 	{
@@ -118,11 +119,11 @@ public abstract class Event
 
 	public Event()
 	{
-		teams = new HashMap<>();
+		teams = new FastMap<>();
 		clock = new Clock();
 		tpm = ThreadPool.getInstance();
-		players = new HashMap<>();
-		summons = new HashMap<>();
+		players = new FastMap<>();
+		summons = new FastMap<>();
 		time = 0;
 	}
 	
@@ -193,7 +194,7 @@ public abstract class Event
 			if (count % 9 == 0 && list.size() - count != 1)
 				party = new Party(player, 1);
 			if (count % 9 < 9)
-				player.joinParty(party);
+				player.setParty(party);
 			count++;
 		}
 	}
@@ -309,9 +310,9 @@ public abstract class Event
 		return teams.get(players.get(player)[0]);
 	}
 	
-	protected ArrayList<Player> getPlayersWithStatus(int status)
+	protected FastList<Player> getPlayersWithStatus(int status)
 	{
-		ArrayList<Player> list = new ArrayList<>();
+		FastList<Player> list = new FastList<>();
 		
 		for (Player player : getPlayerList())
 			if (getStatus(player) == status)
@@ -382,7 +383,7 @@ public abstract class Event
 		return temp.get(Rnd.get(temp.size()));
 	}
 	
-	public ArrayList<Integer> getRestriction(String type)
+	public FastList<Integer> getRestriction(String type)
 	{
 		return config.getRestriction(eventId, type);
 	}
@@ -409,7 +410,7 @@ public abstract class Event
 	
 	protected int getWinnerTeam()
 	{
-		ArrayList<EventTeam> t = new ArrayList<>();
+		FastList<EventTeam> t = new FastList<>();
 		
 		for (EventTeam team : teams.values())
 		{
@@ -598,8 +599,8 @@ public abstract class Event
 		
 		if (player.getParty() != null)
 		{
-			L2Party party = player.getParty();
-			party.removePartyMember(player);
+			Party party = player.getParty();
+			party.removePartyMember(player, null);
 		}
 		
 		int[] nameColor = getPlayersTeam(player).getTeamColor();
@@ -635,7 +636,7 @@ public abstract class Event
 	{
 		players.clear();
 		summons.clear();
-		tpm.purge();
+		//tpm.purge();
 		winnerTeam = 0;
 		
 		for (EventTeam team : teams.values())
@@ -677,13 +678,9 @@ public abstract class Event
 		try
 		{
 			final L2Spawn spawn = new L2Spawn(template);
-			spawn.setLocx(xPos);
-			spawn.setLocy(yPos);
-			spawn.setLocz(zPos);
-			spawn.setHeading(0);
+			spawn.setLoc(xPos, yPos, zPos, 0);
 			spawn.setRespawnDelay(1);
 			SpawnTable.getInstance().addNewSpawn(spawn, false);
-			spawn.init();
 			return spawn;
 		}
 		catch (Exception e)
@@ -714,8 +711,8 @@ public abstract class Event
 		if (npcSpawn == null)
 			return;
 		
-		npcSpawn.getLastSpawn().deleteMe();
-		npcSpawn.stopRespawn();
+		npcSpawn.getNpc().deleteMe();
+		npcSpawn.doRespawn();
 		SpawnTable.getInstance().deleteSpawn(npcSpawn, true);
 	}
 	

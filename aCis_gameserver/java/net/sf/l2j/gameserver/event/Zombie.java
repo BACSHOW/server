@@ -156,7 +156,7 @@ public class Zombie extends Event
 	@Override
 	protected void schedule(int time)
 	{
-		tpm.scheduleGeneral(task, time);
+		tpm.schedule(task, time);
 	}
 	
 	protected void setStatus(EventState s)
@@ -172,7 +172,7 @@ public class Zombie extends Event
 		sb.append("<html><body><table width=270><tr><td width=200>Event Engine </td><td><a action=\"bypass -h eventstats 1\">Statistics</a></td></tr></table><br><center><table width=270 bgcolor=5A5A5A><tr><td width=70>Running</td><td width=130><center>" + getString("eventName") + "</td><td width=70>Time: " + clock.getTime() + "</td></tr></table><table width=270><tr><td><center>Players left: " + getPlayersWithStatus(0).size() + "</td></tr></table><br><table width=270>");
 		
 		for (Player p : getPlayersOfTeam(1))
-			sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + (getStatus(p) == 1 ? "Zombie" : "Human") + "</td></tr>");
+			sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + (getStatus(p) == 1 ? "Zombie" : "Human") + "</td></tr>");
 		
 		sb.append("</table></body></html>");
 		html.setHtml(sb.toString());
@@ -205,7 +205,7 @@ public class Zombie extends Event
 	
 	protected void giveBows()
 	{
-		ItemInstance bow = ItemTable.getInstance().createItem("Zombies", 9999, 1, null);
+		ItemInstance bow = ItemTable.getInstance().createItem("Zombies", 9999, 1, null, null);
 		for (Player player : players.keySet())
 		{
 			try

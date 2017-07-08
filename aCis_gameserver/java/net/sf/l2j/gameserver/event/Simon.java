@@ -214,7 +214,7 @@ public class Simon extends Event
 		players.clear();
 		say = "";
 		npc.deleteMe();
-		spawn.stopRespawn();
+		spawn.doRespawn();
 		SpawnTable.getInstance().deleteSpawn(spawn, true);
 		npc = null;
 		spawn = null;
@@ -269,7 +269,7 @@ public class Simon extends Event
 		sb.append("<html><body><table width=270><tr><td width=200>Event Engine </td><td><a action=\"bypass -h eventstats 1\">Statistics</a></td></tr></table><br><center><table width=270 bgcolor=5A5A5A><tr><td width=70>Running</td><td width=130><center>" + getString("eventName") + "</td><td width=70>Time: ?</td></tr></table><table width=270><tr><td><center>Players left: " + getPlayersWithStatus(0).size() + "</td></tr></table><br><table width=270>");
 		
 		for (Player p : getPlayersOfTeam(1))
-			sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + getScore(p) + "</td></tr>");
+			sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + getScore(p) + "</td></tr>");
 		
 		sb.append("</table></body></html>");
 		html.setHtml(sb.toString());
@@ -281,7 +281,7 @@ public class Simon extends Event
 	{
 		int[] npcpos = getPosition("Simon", 1);
 		spawn = spawnNPC(npcpos[0], npcpos[1], npcpos[2], getInt("simonNpcId"));
-		npc = spawn.getLastSpawn();
+		npc = spawn.getNpc();
 		setStatus(EventState.START);
 		schedule(1);
 	}

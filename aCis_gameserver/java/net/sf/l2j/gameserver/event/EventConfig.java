@@ -1,10 +1,11 @@
 package net.sf.l2j.gameserver.event;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,10 +19,10 @@ import net.sf.l2j.commons.random.Rnd;
 public class EventConfig
 {
 	private Logger _log = Logger.getLogger(EventConfig.class.getName());
-	public HashMap<Integer, HashMap<String, String>> config;
-	public HashMap<Integer, HashMap<String, HashMap<Integer, int[]>>> positions;
-	public HashMap<Integer, HashMap<String, int[]>> colors;
-	public HashMap<Integer, HashMap<String, ArrayList<Integer>>> restrictions;
+	public FastMap<Integer, FastMap<String, String>> config;
+	public FastMap<Integer, FastMap<String, FastMap<Integer, int[]>>> positions;
+	public FastMap<Integer, FastMap<String, int[]>> colors;
+	public FastMap<Integer, FastMap<String, FastList<Integer>>> restrictions;
 	
 	private static class SingletonHolder
 	{
@@ -35,17 +36,17 @@ public class EventConfig
 	
 	public EventConfig()
 	{
-		config = new HashMap<>();
-		positions = new HashMap<>();
-		colors = new HashMap<>();
-		restrictions = new HashMap<>();
+		config = new FastMap<>();
+		positions = new FastMap<>();
+		colors = new FastMap<>();
+		restrictions = new FastMap<>();
 		loadConfigs();
 	}
 	
 	private void addColor(int id, String owner, int[] color)
 	{
 		if (!colors.containsKey(id))
-			colors.put(id, new HashMap<String, int[]>());
+			colors.put(id, new FastMap<String, int[]>());
 		
 		colors.get(id).put(owner, color);
 	}
@@ -53,9 +54,9 @@ public class EventConfig
 	private void addPosition(int id, String owner, int x, int y, int z, int radius)
 	{
 		if (!positions.containsKey(id))
-			positions.put(id, new HashMap<String, HashMap<Integer, int[]>>());
+			positions.put(id, new FastMap<String, FastMap<Integer, int[]>>());
 		if (!positions.get(id).containsKey(owner))
-			positions.get(id).put(owner, new HashMap<Integer, int[]>());
+			positions.get(id).put(owner, new FastMap<Integer, int[]>());
 		
 		positions.get(id).get(owner).put(positions.get(id).get(owner).size() + 1, new int[] { x, y, z, radius });
 	}
@@ -63,7 +64,7 @@ public class EventConfig
 	public void addProperty(int id, String propName, String value)
 	{
 		if (!config.containsKey(id))
-			config.put(id, new HashMap<String, String>());
+			config.put(id, new FastMap<String, String>());
 		
 		config.get(id).put(propName, value);
 	}
@@ -71,9 +72,9 @@ public class EventConfig
 	private void addRestriction(int id, String type, String ids)
 	{
 		if (!restrictions.containsKey(id))
-			restrictions.put(id, new HashMap<String, ArrayList<Integer>>());
+			restrictions.put(id, new FastMap<String, FastList<Integer>>());
 		
-		ArrayList<Integer> idlist = new ArrayList<>();
+		FastList<Integer> idlist = new FastList<>();
 		StringTokenizer st = new StringTokenizer(ids, ",");
 		while (st.hasMoreTokens())
 			idlist.add(Integer.parseInt(st.nextToken()));
@@ -149,7 +150,7 @@ public class EventConfig
 		return positions.get(event).get(owner).get(num);
 	}
 	
-	public ArrayList<Integer> getRestriction(int event, String type)
+	public FastList<Integer> getRestriction(int event, String type)
 	{
 		if (!(restrictions.containsKey(event)))
 		{
