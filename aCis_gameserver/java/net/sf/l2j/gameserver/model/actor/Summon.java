@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.datatables.ItemTable;
+import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.handler.IItemHandler;
 import net.sf.l2j.gameserver.handler.ItemHandler;
@@ -61,6 +62,12 @@ public abstract class Summon extends Playable
 		
 		_showSummonAnimation = true;
 		_owner = owner;
+		
+		setXYZInvisible(owner.getX() + 50, owner.getY() + 100, owner.getZ() + 100);
+		
+		if (EventManager.getInstance().isRunning() && EventManager.getInstance().isRegistered(owner))
+			for (L2Skill skill : EventManager.getInstance().getCurrentEvent().getSummonBuffs(owner))
+				skill.getEffects(owner, this);
 	}
 	
 	@Override

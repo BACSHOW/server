@@ -3,6 +3,7 @@ package net.sf.l2j.gameserver.network.clientpackets;
 import net.sf.l2j.commons.concurrent.ThreadPool;
 
 import net.sf.l2j.Config;
+import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.handler.IItemHandler;
 import net.sf.l2j.gameserver.handler.ItemHandler;
 import net.sf.l2j.gameserver.model.L2Skill;
@@ -119,6 +120,9 @@ public final class UseItem extends L2GameClientPacket
 			activeChar.sendMessage("You can not run away when you are flag. Finish what you started.");
 			return;
 		}
+		
+		if (EventManager.getInstance().isRunning() && EventManager.getInstance().isRegistered(activeChar) && !EventManager.getInstance().getCurrentEvent().onUseItem(activeChar, item))
+			return;
 		
 		if (activeChar.isFishing() && item.getItem().getDefaultAction() != ActionType.fishingshot)
 		{

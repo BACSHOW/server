@@ -19,6 +19,7 @@ import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
+import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.instancemanager.DimensionalRiftManager;
 import net.sf.l2j.gameserver.model.ChanceSkillList;
 import net.sf.l2j.gameserver.model.CharEffectList;
@@ -40,6 +41,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Door;
 import net.sf.l2j.gameserver.model.actor.instance.Pet;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.actor.instance.RiftInvader;
+import net.sf.l2j.gameserver.model.actor.instance.Servitor;
 import net.sf.l2j.gameserver.model.actor.instance.Walker;
 import net.sf.l2j.gameserver.model.actor.stat.CreatureStat;
 import net.sf.l2j.gameserver.model.actor.status.CreatureStatus;
@@ -509,6 +511,27 @@ public abstract class Creature extends WorldObject
 			return;
 		}
 		
+		if (this instanceof Player && EventManager.getInstance().isRegistered(this) || this instanceof Servitor && EventManager.getInstance().isRegistered(((L2Summon) this).getOwner()))
+		{
+			Player p = getActingPlayer();
+			Player t = null;
+			if (target instanceof Player || target instanceof Servitor)
+			{
+				t = target.getActingPlayer();
+				if (EventManager.getInstance().areTeammates(p, t))
+				{
+					sendPacket(ActionFailed.STATIC_PACKET);
+					return;
+				}
+			}
+			
+			if (!EventManager.getInstance().getCurrentEvent().canAttack(p, target))
+			{
+				sendPacket(ActionFailed.STATIC_PACKET);
+				return;
+			}
+		}
+		
 		if (!isAlikeDead())
 		{
 			if (this instanceof Npc && target.isAlikeDead() || !getKnownType(Creature.class).contains(target))
@@ -666,6 +689,9 @@ public abstract class Creature extends WorldObject
 			if (player.getPet() != target)
 				player.updatePvPStatus(target);
 		}
+		
+		if (this instanceof Player && target instanceof Player && EventManager.getInstance().isRegistered(this))
+			EventManager.getInstance().getCurrentEvent().onHit((Player) this, (Player) target);
 		
 		// Check if hit isn't missed
 		if (!hitted)
@@ -1036,6 +1062,46 @@ public abstract class Creature extends WorldObject
 			
 			return;
 		}
+		
+		try
+		{
+			if (getTarget() != null && (this instanceof Player || this instanceof Servitor))
+			{
+				boolean isArea = false;
+				switch (skill.getTargetType())
+				{
+					case TARGET_AREA:
+					case TARGET_FRONT_AREA:
+					case TARGET_BEHIND_AREA:
+					case TARGET_AURA:
+					case TARGET_FRONT_AURA:
+					case TARGET_BEHIND_AURA:
+						isArea = true;
+				}
+				
+				if (!isArea)
+				{
+					Player p = getActingPlayer();
+					if (p != null && EventManager.getInstance().isRegistered(p))
+					{
+						if (!EventManager.getInstance().getCurrentEvent().canAttack(p, getTarget()))
+						{
+							getAI().setIntention(AI_INTENTION_ACTIVE);
+							return;
+						}
+						
+						if (getTarget() instanceof Player && EventManager.getInstance().areTeammates(p, (Player) getTarget()) && skill.isOffensive())
+						{
+							getAI().setIntention(AI_INTENTION_ACTIVE);
+							return;
+						}
+					}
+				}
+			}
+		}
+		catch(ClassCastException e){}
+		
+		
 		// Override casting type
 		if (skill.isSimultaneousCast() && !simultaneously)
 			simultaneously = true;

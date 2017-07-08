@@ -44,6 +44,7 @@ import net.sf.l2j.gameserver.datatables.RecipeTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
 import net.sf.l2j.gameserver.datatables.SkillTreeTable;
+import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.handler.IItemHandler;
 import net.sf.l2j.gameserver.handler.ItemHandler;
@@ -58,6 +59,7 @@ import net.sf.l2j.gameserver.instancemanager.SevenSigns.CabalType;
 import net.sf.l2j.gameserver.instancemanager.SevenSigns.SealType;
 import net.sf.l2j.gameserver.instancemanager.SevenSignsFestival;
 import net.sf.l2j.gameserver.instancemanager.ZoneManager;
+import net.sf.l2j.gameserver.model.Announcement;
 import net.sf.l2j.gameserver.model.BlockList;
 import net.sf.l2j.gameserver.model.FishData;
 import net.sf.l2j.gameserver.model.L2AccessLevel;
@@ -513,6 +515,8 @@ public final class Player extends Playable
 	private ScheduledFuture<?> _chargeTask;
 	
 	private Location _currentSkillWorldPosition;
+	
+	private int antiAfkTime;
 	
 	private L2AccessLevel _accessLevel;
 	
@@ -1710,6 +1714,9 @@ public final class Player extends Playable
 	public void setClassId(int Id)
 	{
 		if (!_subclassLock.tryLock())
+			return;
+		
+		if (EventManager.getInstance().players.contains(this))
 			return;
 		
 		if (Config.MASTERY_RESTRICTION)
@@ -3216,6 +3223,12 @@ public final class Player extends Playable
 	@Override
 	public void onAction(Player player)
 	{
+		if (!EventManager.getInstance().canTargetPlayer(this, player))
+		{
+			player.sendPacket(ActionFailed.STATIC_PACKET);
+			return;
+		}
+		
 		// Set the target of the player
 		if (player.getTarget() != this)
 			player.setTarget(this);
@@ -4004,6 +4017,17 @@ public final class Player extends Playable
 				CursedWeaponsManager.getInstance().drop(_cursedWeaponEquippedId, killer);
 			else
 			{
+				if (EventManager.getInstance().isRunning() && EventManager.getInstance().isRegistered(this))
+				{
+					if (killer.isRaid() || killer.isRaidMinion())
+						EventManager.getInstance().getCurrentEvent().onDie(this, killer);
+					else if (pk != null && EventManager.getInstance().isRegistered(pk))
+					{
+						EventManager.getInstance().getCurrentEvent().onKill(this, pk);
+						EventManager.getInstance().getCurrentEvent().onDie(this, pk);
+					}
+				}
+				
 				if (pk == null || !pk.isCursedWeaponEquipped())
 				{
 					onDieDropItem(killer); // Check if any item should be dropped
@@ -4172,6 +4196,18 @@ public final class Player extends Playable
 		if (isInDuel() && targetPlayer.isInDuel())
 			return;
 		
+		if (EventManager.getInstance().isRunning() && EventManager.getInstance().isRegistered(this) && EventManager.getInstance().isRegistered(targetPlayer))
+		{
+			if (!(target instanceof Summon))
+			{
+				getPvpKills();
+				SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S1_S2);
+				sm.addZoneName(getPosition());
+				sm.addString("- " + getName() + " killed " + targetPlayer.getName() + ".");
+				Broadcast.toAllOnlinePlayers(sm);
+			}
+		}
+		
 		// If in pvp zone, do nothing.
 		if (isInsideZone(ZoneId.PVP) && targetPlayer.isInsideZone(ZoneId.PVP))
 		{
@@ -4236,6 +4272,9 @@ public final class Player extends Playable
 		if (isInsideZone(ZoneId.PVP))
 			return;
 		
+		if (EventManager.getInstance().isRegistered(this) && EventManager.getInstance().isRunning())
+			return;
+		
 		PvpFlagTaskManager.getInstance().add(this, Config.PVP_NORMAL_TIME);
 		
 		if (getPvpFlag() == 0)
@@ -4246,6 +4285,9 @@ public final class Player extends Playable
 	{
 		final Player player = target.getActingPlayer();
 		if (player == null)
+			return;
+		
+		if (EventManager.getInstance().isRegistered(this) && EventManager.getInstance().isRunning())
 			return;
 		
 		if (isInDuel() && player.getDuelId() == getDuelId())
@@ -4302,6 +4344,9 @@ public final class Player extends Playable
 			else if (killedByPlayable)
 				return;
 		}
+		
+		if (EventManager.getInstance().isRegistered(this) && EventManager.getInstance().isRunning())
+			return;
 		
 		// Get the level of the Player
 		final int lvl = getLevel();
@@ -4800,6 +4845,9 @@ public final class Player extends Playable
 		ItemInstance wpn = getInventory().getPaperdollItem(Inventory.PAPERDOLL_RHAND);
 		if (wpn != null)
 		{
+			if (wpn.getItemId() == 9999)
+				return false;
+			
 			ItemInstance[] unequipped = getInventory().unEquipItemInBodySlotAndRecord(wpn);
 			InventoryUpdate iu = new InventoryUpdate();
 			for (ItemInstance itm : unequipped)
@@ -4826,6 +4874,9 @@ public final class Player extends Playable
 		ItemInstance sld = getInventory().getPaperdollItem(Inventory.PAPERDOLL_LHAND);
 		if (sld != null)
 		{
+			if (sld.getItemId() == 17 && EventManager.getInstance().isRegistered(this))
+				return false;
+			
 			ItemInstance[] unequipped = getInventory().unEquipItemInBodySlotAndRecord(sld);
 			InventoryUpdate iu = new InventoryUpdate();
 			for (ItemInstance itm : unequipped)
@@ -6585,6 +6636,9 @@ public final class Player extends Playable
 			// Now check again if the Player is in pvp zone (as arenas check was made before, it ends with sieges).
 			if (isInsideZone(ZoneId.PVP) && attacker.isInsideZone(ZoneId.PVP))
 				return true;
+			
+			if (EventManager.getInstance().isRunning() && EventManager.getInstance().isRegistered(this) && EventManager.getInstance().isRegistered(attacker))
+				return true;
 		}
 		else if (attacker instanceof SiegeGuard)
 		{
@@ -6623,6 +6677,21 @@ public final class Player extends Playable
 	@Override
 	public boolean useMagic(L2Skill skill, boolean forceUse, boolean dontMove)
 	{
+		if (EventManager.getInstance().isRunning() && EventManager.getInstance().isRegistered(this))
+		{
+			if (!EventManager.getInstance().getCurrentEvent().getBoolean("allowUseMagic"))
+			{
+				sendPacket(ActionFailed.STATIC_PACKET);
+				return false;
+			}
+			
+			if (!EventManager.getInstance().getCurrentEvent().onUseMagic(skill))
+			{
+				sendPacket(ActionFailed.STATIC_PACKET);
+				return false;
+			}
+		}
+		
 		// Check if the skill is active
 		if (skill.isPassive())
 		{
@@ -8966,6 +9035,10 @@ public final class Player extends Playable
 	@Override
 	public void deleteMe()
 	{
+		EventManager.getInstance().onLogout(this);
+		if (EventManager.getInstance().isRegistered(this))
+			EventManager.getInstance().getCurrentEvent().onLogout(this);
+		
 		cleanup();
 		store();
 		super.deleteMe();
@@ -9716,6 +9789,16 @@ public final class Player extends Playable
 		return _punishTimer;
 	}
 	
+	public int getAntiAfk()
+	{
+		return antiAfkTime;
+	}
+	
+	public void setAntiAfk(int antiAfk)
+	{
+		antiAfkTime = antiAfk;
+	}
+	
 	public void setPunishTimer(long time)
 	{
 		_punishTimer = time;
@@ -9833,6 +9916,9 @@ public final class Player extends Playable
 	public void calculateDeathPenaltyBuffLevel(Creature killer)
 	{
 		if (_deathPenaltyBuffLevel >= 15) // maximum level reached
+			return;
+		
+		if (EventManager.getInstance().isRegistered(this) && EventManager.getInstance().isRunning())
 			return;
 		
 		if ((getKarma() > 0 || Rnd.get(1, 100) <= Config.DEATH_PENALTY_CHANCE) && !(killer instanceof Player) && !isGM() && !(getCharmOfLuck() && (killer == null || killer.isRaid())) && !isPhoenixBlessed() && !(isInsideZone(ZoneId.PVP) || isInsideZone(ZoneId.SIEGE)))
@@ -10241,7 +10327,7 @@ public final class Player extends Playable
 		if (summonerChar == null)
 			return false;
 		
-		if (summonerChar.isInOlympiadMode() || summonerChar.isInObserverMode() || summonerChar.isInsideZone(ZoneId.NO_SUMMON_FRIEND) || summonerChar.isMounted())
+		if (summonerChar.isInOlympiadMode() || summonerChar.isInObserverMode() || summonerChar.isInsideZone(ZoneId.NO_SUMMON_FRIEND) || summonerChar.isMounted() || EventManager.getInstance().isRegistered(summonerChar))
 			return false;
 		
 		return true;
@@ -10287,6 +10373,12 @@ public final class Player extends Playable
 		if (targetChar.isInObserverMode() || targetChar.isInsideZone(ZoneId.NO_SUMMON_FRIEND))
 		{
 			summonerChar.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.S1_IN_SUMMON_BLOCKING_AREA).addCharName(targetChar));
+			return false;
+		}
+		
+		if (EventManager.getInstance().isRegistered(targetChar))
+		{
+			summonerChar.sendMessage("Your cannot summon a player that is in event.");
 			return false;
 		}
 		

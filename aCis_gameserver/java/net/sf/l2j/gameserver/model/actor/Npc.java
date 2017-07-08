@@ -18,6 +18,7 @@ import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.datatables.MultisellData;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
+import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.instancemanager.DimensionalRiftManager;
 import net.sf.l2j.gameserver.instancemanager.SevenSigns;
@@ -1218,6 +1219,19 @@ public class Npc extends Creature
 		html.setFile(filename);
 		html.replace("%objectId%", getObjectId());
 		player.sendPacket(html);
+		
+		if (npcId == EventManager.getInstance().getInt("managerNpcId"))
+		{
+			EventManager.getInstance().showFirstHtml(player,getObjectId());
+			player.sendPacket(ActionFailed.STATIC_PACKET);
+			return;
+		}
+		
+		if (EventManager.getInstance().isRunning() && EventManager.getInstance().isRegistered(player) && EventManager.getInstance().getCurrentEvent().onTalkNpc(this, player))
+		{
+			player.sendPacket(ActionFailed.STATIC_PACKET);
+			return;
+		}
 		
 		// Send a Server->Client ActionFailed to the Player in order to avoid that the client wait another packet
 		player.sendPacket(ActionFailed.STATIC_PACKET);

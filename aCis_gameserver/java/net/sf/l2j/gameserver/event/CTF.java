@@ -101,7 +101,7 @@ public class CTF extends Event
 	@Override
 	protected void endEvent()
 	{
-		winnerTeam = players.head().getNext().getValue()[0];
+		winnerTeam = players.hashCode();
 		
 		setStatus(EventState.END);
 		clock.setTime(0);
@@ -317,7 +317,7 @@ public class CTF extends Event
 	@Override
 	protected void schedule(int time)
 	{
-		tpm.scheduleGeneral(task, time);
+		tpm.schedule(task, time);
 	}
 	
 	protected void setStatus(EventState s)
@@ -338,8 +338,8 @@ public class CTF extends Event
 		{
 			i++;
 			sb.append("<tr><td><font color=" + team.getHexaColor() + ">" + team.getName() + "</font> team</td><td></td><td></td><td></td></tr>");
-			for (L2PcInstance p : getPlayersOfTeam(i))
-				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + getScore(p) + "</td></tr>");
+			for (Player p : getPlayersOfTeam(i))
+				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + getScore(p) + "</td></tr>");
 		}
 		
 		sb.append("</table></body></html>");

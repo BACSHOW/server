@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.network.serverpackets;
 
+import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.actor.Attackable;
@@ -17,6 +18,7 @@ public class Die extends L2GameServerPacket
 	private boolean _sweepable;
 	private boolean _allowFixedRes;
 	private L2Clan _clan;
+	private boolean _event;
 	
 	public Die(Creature cha)
 	{
@@ -30,6 +32,7 @@ public class Die extends L2GameServerPacket
 			_allowFixedRes = player.getAccessLevel().allowFixedRes();
 			_clan = player.getClan();
 			
+			_event = EventManager.getInstance().isRegistered(cha);
 		}
 		else if (cha instanceof Attackable)
 			_sweepable = ((Attackable) cha).isSpoiled();
@@ -43,28 +46,39 @@ public class Die extends L2GameServerPacket
 		
 		writeC(0x06);
 		writeD(_charObjId);
-		writeD(0x01); // to nearest village
 		
-		if (_clan != null)
+		if (_event)
 		{
-			SiegeSide side = null;
-			
-			final Siege siege = CastleManager.getInstance().getSiege(_activeChar);
-			if (siege != null)
-				side = siege.getSide(_clan);
-			
-			writeD((_clan.hasHideout()) ? 0x01 : 0x00); // to clanhall
-			writeD((_clan.hasCastle() || side == SiegeSide.OWNER || side == SiegeSide.DEFENDER) ? 0x01 : 0x00); // to castle
-			writeD((side == SiegeSide.ATTACKER && _clan.getFlag() != null) ? 0x01 : 0x00); // to siege HQ
+			writeD(0x00);
+			writeD(0x00);
+			writeD(0x00);
+			writeD(0x00);
 		}
 		else
 		{
-			writeD(0x00); // to clanhall
-			writeD(0x00); // to castle
-			writeD(0x00); // to siege HQ
-		}
+			writeD(0x01); // to nearest village
 		
-		writeD((_sweepable) ? 0x01 : 0x00); // sweepable (blue glow)
-		writeD((_allowFixedRes) ? 0x01 : 0x00); // FIXED
+			if (_clan != null)
+			{
+				SiegeSide side = null;
+			
+				final Siege siege = CastleManager.getInstance().getSiege(_activeChar);
+				if (siege != null)
+					side = siege.getSide(_clan);
+			
+				writeD((_clan.hasHideout()) ? 0x01 : 0x00); // to clanhall
+				writeD((_clan.hasCastle() || side == SiegeSide.OWNER || side == SiegeSide.DEFENDER) ? 0x01 : 0x00); // to castle
+				writeD((side == SiegeSide.ATTACKER && _clan.getFlag() != null) ? 0x01 : 0x00); // to siege HQ
+			}
+			else
+			{
+				writeD(0x00); // to clanhall
+				writeD(0x00); // to castle
+				writeD(0x00); // to siege HQ
+			}
+		
+			writeD((_sweepable) ? 0x01 : 0x00); // sweepable (blue glow)
+			writeD((_allowFixedRes) ? 0x01 : 0x00); // FIXED
+		}
 	}
 }

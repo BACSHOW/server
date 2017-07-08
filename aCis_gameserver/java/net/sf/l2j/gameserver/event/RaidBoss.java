@@ -1,15 +1,18 @@
 package net.sf.l2j.gameserver.event;
 
+import net.sf.l2j.gameserver.datatables.SpawnTable;
+import net.sf.l2j.gameserver.model.L2Spawn;
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
 
 import main.util.builders.html.HtmlBuilder;
 
-public class TvT extends Event
+public class RaidBoss extends Event
 {
 	protected EventState eventState;
 	private Core task = new Core();
+	private L2Spawn raid;
 	private enum EventState
 	{
 		START, FIGHT, END, TELEPORT, INACTIVE
@@ -37,6 +40,7 @@ public class TvT extends Event
 						
 					case FIGHT:
 						forceStandAll();
+						spawnRaid();
 						sendMsg();
 						setStatus(EventState.END);
 						clock.startClock(getInt("matchTime"));
@@ -48,13 +52,14 @@ public class TvT extends Event
 							winnerTeam = getWinnerTeam();
 						
 						setStatus(EventState.INACTIVE);
+						removeRaid();
 						
 						if (winnerTeam == 0)
-							EventManager.getInstance().end("The event ended in a tie! both teams had " + teams.get(1).getScore() + " kills!");
+							EventManager.getInstance().end("The event ended in a tie! no-one killed the Raid Boss.");
 						else
 						{
 							giveReward(getPlayersOfTeam(winnerTeam), getInt("rewardId"), getInt("rewardAmmount"));
-							EventManager.getInstance().end("Congratulation! The " + teams.get(winnerTeam).getName() + " team won the event with " + teams.get(winnerTeam).getScore() + " kills!");
+							EventManager.getInstance().end("Congratulation! The " + teams.get(winnerTeam).getName() + " team has killed the Raid Boss!");
 						}
 						break;
 				}
@@ -67,10 +72,10 @@ public class TvT extends Event
 		}
 	}
 	
-	public TvT()
+	public RaidBoss()
 	{
 		super();
-		eventId = 7;
+		eventId = 16;
 		createNewTeam(1, "Blue", getColor("Blue"), getPosition("Blue", 1));
 		createNewTeam(2, "Red", getColor("Red"), getPosition("Red", 1));
 	}
@@ -78,7 +83,7 @@ public class TvT extends Event
 	@Override
 	protected void endEvent()
 	{
-		winnerTeam = players.hashCode();
+		winnerTeam = players.head().getNext().getValue()[0];
 		
 		setStatus(EventState.END);
 		clock.setTime(0);
@@ -87,19 +92,24 @@ public class TvT extends Event
 	@Override
 	public void onDie(Player victim, Creature killer)
 	{
-		super.onDie(victim, killer);
-		addToResurrector(victim);
+		if (killer.isRaid() || killer.isRaidMinion())
+			addToResurrector(victim);
+		else
+			super.onDie(victim, killer);
 	}
 	
 	@Override
 	public void onKill(Creature victim, Player killer)
 	{
-		super.onKill(victim, killer);
-		if (getPlayersTeam(killer) != getPlayersTeam((Player) victim))
+		if (victim.isRaid() || victim.isRaidMinion())
 		{
 			getPlayersTeam(killer).increaseScore();
 			increasePlayersScore(killer);
+			setStatus(EventState.END);
+			clock.setTime(0);
 		}
+		else
+			super.onKill(victim, killer);
 	}
 	
 	@Override
@@ -116,22 +126,21 @@ public class TvT extends Event
 	@Override
 	protected void showHtml(Player player, int obj)
 	{
-		HtmlBuilder hb = new HtmlBuilder();
 		NpcHtmlMessage html = new NpcHtmlMessage(obj);
-		
-		hb.append("<html><body><table width=270><tr><td width=200>Event Engine </td><td><a action=\"bypass -h eventstats 1\">Statistics</a></td></tr></table><br><center><table width=270 bgcolor=5A5A5A><tr><td width=70>Running</td><td width=130><center>" + getString("eventName") + "</td><td width=70>Time: " + clock.getTime() + "</td></tr></table><center><table width=270><tr><td><center><font color=" + teams.get(1).getHexaColor() + ">" + teams.get(1).getScore() + "</font> - " + "<font color=" + teams.get(2).getHexaColor() + ">" + teams.get(2).getScore() + "</font></td></tr></table><br><table width=270>");
+		HtmlBuilder sb = new HtmlBuilder();
+		sb.append("<html><body><table width=270><tr><td width=200>Event Engine </td><td><a action=\"bypass -h eventstats 1\">Statistics</a></td></tr></table><br><center><table width=270 bgcolor=5A5A5A><tr><td width=70>Running</td><td width=130><center>" + getString("eventName") + "</td><td width=70>Time: " + clock.getTime() + "</td></tr></table><center><table width=270><tr><td><center><font color=" + teams.get(1).getHexaColor() + ">" + teams.get(1).getScore() + "</font> - <font color=" + teams.get(2).getHexaColor() + ">" + teams.get(2).getScore() + "</font></td></tr></table><br><table width=270>");
 		
 		int i = 0;
 		for (EventTeam team : teams.values())
 		{
 			i++;
-			hb.append("<tr><td><font color=" + team.getHexaColor() + ">" + team.getName() + "</font> team</td><td></td><td></td><td></td></tr>");
+			sb.append("<tr><td><font color=" + team.getHexaColor() + ">" + team.getName() + "</font> team</td><td></td><td></td><td></td></tr>");
 			for (Player p : getPlayersOfTeam(i))
-				hb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + getScore(p) + "</td></tr>");
+				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + getScore(p) + "</td></tr>");
 		}
 		
-		hb.append("</table></body></html>");
-		html.setHtml(hb.toString());
+		sb.append("</table></body></html>");
+		html.setHtml(sb.toString());
 		player.sendPacket(html);
 	}
 	
@@ -145,12 +154,24 @@ public class TvT extends Event
 	@Override
 	protected String getStartingMsg()
 	{
-		return "Go and kill your enemies!";
+		return "Kill the Raid Boss!";
 	}
 	
 	@Override
 	protected String getScorebar()
 	{
-		return teams.get(1).getName() + ": " + teams.get(1).getScore() + "  " + teams.get(2).getName() + ": " + teams.get(2).getScore() + "  Time: " + clock.getTime();
+		return "Time: " + clock.getTime();
+	}
+	
+	protected void spawnRaid()
+	{
+		raid = spawnNPC(106037, 114816, -1587, getInt("raidId"));
+	}
+	
+	protected void removeRaid()
+	{
+		raid.getLastSpawn().deleteMe();
+		raid.stopRespawn();
+		SpawnTable.getInstance().deleteSpawn(raid, true);
 	}
 }

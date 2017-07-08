@@ -1,12 +1,14 @@
 package net.sf.l2j.gameserver.event;
 
+import net.sf.l2j.gameserver.datatables.ItemTable;
+import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
 
 import main.util.builders.html.HtmlBuilder;
 
-public class TvT extends Event
+public class HG extends Event
 {
 	protected EventState eventState;
 	private Core task = new Core();
@@ -30,6 +32,7 @@ public class TvT extends Event
 						teleportToTeamPos();
 						createPartyOfTeam(1);
 						createPartyOfTeam(2);
+						giveBows();
 						forceSitAll();
 						setStatus(EventState.FIGHT);
 						schedule(20000);
@@ -45,9 +48,10 @@ public class TvT extends Event
 					case END:
 						clock.setTime(0);
 						if (winnerTeam == 0)
-							winnerTeam = getWinnerTeam();
+						winnerTeam = getWinnerTeam();
 						
 						setStatus(EventState.INACTIVE);
+						removeBows();
 						
 						if (winnerTeam == 0)
 							EventManager.getInstance().end("The event ended in a tie! both teams had " + teams.get(1).getScore() + " kills!");
@@ -67,10 +71,10 @@ public class TvT extends Event
 		}
 	}
 	
-	public TvT()
+	public HG()
 	{
 		super();
-		eventId = 7;
+		eventId = 15;
 		createNewTeam(1, "Blue", getColor("Blue"), getPosition("Blue", 1));
 		createNewTeam(2, "Red", getColor("Red"), getPosition("Red", 1));
 	}
@@ -78,7 +82,7 @@ public class TvT extends Event
 	@Override
 	protected void endEvent()
 	{
-		winnerTeam = players.hashCode();
+		winnerTeam = players.head().getNext().getValue()[0];
 		
 		setStatus(EventState.END);
 		clock.setTime(0);
@@ -108,6 +112,26 @@ public class TvT extends Event
 		tpm.schedule(task, time);
 	}
 	
+	@Override
+	public void onHit(Player actor, Player target)
+	{
+		target.doDie(actor);
+	}
+	
+	@Override
+	public boolean onUseItem(Player player, ItemInstance item)
+	{
+		return false;
+	}
+	
+	@Override
+	public void onLogout(Player player)
+	{
+		player.destroyItem("Hunting Grounds", player.getInventory().getItemByItemId(9999), player, false);
+		player.destroyItem("Hunting Grounds", player.getInventory().getItemByItemId(17), player, false);
+		super.onLogout(player);
+	}
+	
 	protected void setStatus(EventState s)
 	{
 		eventState = s;
@@ -116,22 +140,21 @@ public class TvT extends Event
 	@Override
 	protected void showHtml(Player player, int obj)
 	{
-		HtmlBuilder hb = new HtmlBuilder();
 		NpcHtmlMessage html = new NpcHtmlMessage(obj);
-		
-		hb.append("<html><body><table width=270><tr><td width=200>Event Engine </td><td><a action=\"bypass -h eventstats 1\">Statistics</a></td></tr></table><br><center><table width=270 bgcolor=5A5A5A><tr><td width=70>Running</td><td width=130><center>" + getString("eventName") + "</td><td width=70>Time: " + clock.getTime() + "</td></tr></table><center><table width=270><tr><td><center><font color=" + teams.get(1).getHexaColor() + ">" + teams.get(1).getScore() + "</font> - " + "<font color=" + teams.get(2).getHexaColor() + ">" + teams.get(2).getScore() + "</font></td></tr></table><br><table width=270>");
+		HtmlBuilder sb = new HtmlBuilder();
+		sb.append("<html><body><table width=270><tr><td width=200>Event Engine </td><td><a action=\"bypass -h eventstats 1\">Statistics</a></td></tr></table><br><center><table width=270 bgcolor=5A5A5A><tr><td width=70>Running</td><td width=130><center>" + getString("eventName") + "</td><td width=70>Time: " + clock.getTime() + "</td></tr></table><center><table width=270><tr><td><center><font color=" + teams.get(1).getHexaColor() + ">" + teams.get(1).getScore() + "</font> - " + "<font color=" + teams.get(2).getHexaColor() + ">" + teams.get(2).getScore() + "</font></td></tr></table><br><table width=270>");
 		
 		int i = 0;
 		for (EventTeam team : teams.values())
 		{
 			i++;
-			hb.append("<tr><td><font color=" + team.getHexaColor() + ">" + team.getName() + "</font> team</td><td></td><td></td><td></td></tr>");
+			sb.append("<tr><td><font color=" + team.getHexaColor() + ">" + team.getName() + "</font> team</td><td></td><td></td><td></td></tr>");
 			for (Player p : getPlayersOfTeam(i))
-				hb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().getClassName() + "</td><td>" + getScore(p) + "</td></tr>");
+				sb.append("<tr><td>" + p.getName() + "</td><td>lvl " + p.getLevel() + "</td><td>" + p.getTemplate().className + "</td><td>" + getScore(p) + "</td></tr>");
 		}
 		
-		hb.append("</table></body></html>");
-		html.setHtml(hb.toString());
+		sb.append("</table></body></html>");
+		html.setHtml(sb.toString());
 		player.sendPacket(html);
 	}
 	
@@ -152,5 +175,25 @@ public class TvT extends Event
 	protected String getScorebar()
 	{
 		return teams.get(1).getName() + ": " + teams.get(1).getScore() + "  " + teams.get(2).getName() + ": " + teams.get(2).getScore() + "  Time: " + clock.getTime();
+	}
+	
+	protected void giveBows()
+	{
+		ItemInstance bow = ItemTable.getInstance().createItem("Hunting Grounds", 9999, 1, null);
+		for (Player player : players.keySet())
+		{
+			player.addItem("Hunting Grounds", bow, player, false);
+			player.addItem("Hunting Grounds", 17, 200, player, false);
+			player.getInventory().equipItem(bow);
+		}
+	}
+	
+	protected void removeBows()
+	{
+		for (Player player : players.keySet())
+		{
+			player.destroyItem("Hunting Grounds", player.getInventory().getItemByItemId(9999), player, false);
+			player.destroyItem("Hunting Grounds", player.getInventory().getItemByItemId(17), player, false);
+		}
 	}
 }

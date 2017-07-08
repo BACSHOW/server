@@ -1,6 +1,7 @@
 package net.sf.l2j.gameserver.model.actor;
 
 import net.sf.l2j.Config;
+import net.sf.l2j.gameserver.event.EventManager;
 import net.sf.l2j.gameserver.model.L2Effect;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.WorldObject;
@@ -107,8 +108,12 @@ public abstract class Playable extends Creature
 		// Stop HP/MP/CP Regeneration task
 		getStatus().stopHpMpRegeneration();
 		
+		if (EventManager.getInstance().isRunning() && EventManager.getInstance().isRegistered(this))
+		{
+			// do nothing
+		}
 		// Stop all active skills effects in progress
-		if (isPhoenixBlessed())
+		else if (isPhoenixBlessed())
 		{
 			// remove Lucky Charm if player has SoulOfThePhoenix/Salvation buff
 			if (getCharmOfLuck())

@@ -146,6 +146,10 @@ public enum L2SkillType
 	// Skill is done within the core.
 	COREDONE,
 	
+	/// Event
+	BOMB,
+	CAPTURE,
+	
 	// unimplemented
 	NOTDONE;
 	

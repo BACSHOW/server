@@ -32,7 +32,7 @@ public class Bomb extends Event
 		@Override
 		public void run()
 		{
-			explode(bombs.head().getNext().getKey());
+			explode(bombs.entrySet().add(null));
 			bombs.remove(bombs.head().getNext().getKey());
 		}
 	}
