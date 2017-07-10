@@ -38,6 +38,7 @@ public final class Config
 	public static final String SERVER_FILE = "./config/server.properties";
 	public static final String SIEGE_FILE = "./config/siege.properties";
 	public static final String CUSTOM_FILE = "./config/mods/custom.properties";
+	public static final String NEWBIE_FILE = "./config/mods/newscharacters.properties";
 	public static final String SECURITY_FILE = "./config/protect/security.properties";
 	
 	// --------------------------------------------------
@@ -696,6 +697,29 @@ public final class Config
 	
 	/** No remove buff on die */
 	public static boolean LEAVE_BUFFS_ON_DIE;
+	
+	/** Starting Level System */
+	public static int START_LEVEL;
+	
+	/** Newbie System */
+	public static boolean ENABLE_STARTUP;
+	public static int NEWBIE_LVL;
+	public static String NEWBIE_MAGE_SET;
+	public static int[] NEWBIE_MAGE_BUFFS;
+	public static String NEWBIE_FIGHTER_SET;
+	public static int[] NEWBIE_FIGHTER_BUFFS;
+	public static String ZONE_NAME_PRE;
+	public static String ZONE_NAME_DESC;
+	public static String ZONE_NAME_PRE2;
+	public static String ZONE_NAME_DESC2;
+	public static String PVPZONE_NAME_PRE;
+	public static String PVPZONE_NAME_DESC;
+	
+	public static int[] TELE_TO_LOCATION = new int[3];
+	
+	/** Starting Spawn System */
+	public static boolean NEW_SPAWN;
+	public static int[] SPAWN_LOCATION = new int[3];
 	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
@@ -1527,13 +1551,13 @@ public final class Config
 			CKM_PK_NPC_NAME_COLOR = Integer.decode("0x" + custom.getProperty("CKMPKNpcNameColor", "FFFFFF"));
 			
 			LEAVE_BUFFS_ON_DIE = custom.getProperty("LeaveBuffsOnDie", true);
+			
 		}
 		
 	}
 	
 	/**
-	 * Loads custom settings.<br>
-	 * PvP/Announce, PC Bang Mob, etc.
+	 * Loads security settings.<br>
 	 */
 	private static final void loadSecurity()
 	{
@@ -1556,6 +1580,67 @@ public final class Config
 		ENCHANT_PROTECTOR = security.getProperty("EnchantProtector", true);
 		
 		MASTERY_RESTRICTION = security.getProperty("MasteryRestriction", true);
+	}
+	
+	/**
+	 * Loads custom settings.<br>
+	 * PvP/Announce, PC Bang Mob, etc.
+	 */
+	private static final void loadNewbie()
+	{
+		final ExProperties newbie = initProperties(NEWBIE_FILE);
+		
+		START_LEVEL = newbie.getProperty("StartLevel", 1);
+		
+		ENABLE_STARTUP = newbie.getProperty("StartupEnabled", true);
+		NEWBIE_LVL = Integer.parseInt(newbie.getProperty("NewbiesLevel", "80"));
+		NEWBIE_FIGHTER_SET = newbie.getProperty("FighterSet", "2375,3500,3501,3502,4422,4423,4424,4425,6648,6649,6650");
+		NEWBIE_MAGE_SET = newbie.getProperty("MageSet", "2375,3500,3501,3502,4422,4423,4424,4425,6648,6649,6650");
+		
+		String[] NewFighterList = NEWBIE_FIGHTER_SET.split(",");
+		NEWBIE_FIGHTER_BUFFS = new int[NewFighterList.length];
+		for (int i = 0; i < NewFighterList.length; i++)
+		NEWBIE_FIGHTER_BUFFS[i] = Integer.parseInt(NewFighterList[i]);
+		
+		String[] NewMageList = NEWBIE_MAGE_SET.split(",");
+		NEWBIE_MAGE_BUFFS = new int[NewMageList.length];
+		for (int i = 0; i < NewMageList.length; i++)
+		NEWBIE_MAGE_BUFFS[i] = Integer.parseInt(NewMageList[i]);
+		
+		ZONE_NAME_PRE = newbie.getProperty("ZoneNamePreview", "DROP");
+		ZONE_NAME_DESC = newbie.getProperty("ZoneNameDescription", "ADENA");
+		
+		ZONE_NAME_PRE2 = newbie.getProperty("ZoneNamePreview2", "DROP");
+		ZONE_NAME_DESC2 = newbie.getProperty("ZoneNameDescription2", "COINS, LS, BOG");
+
+		PVPZONE_NAME_PRE = newbie.getProperty("PvPZoneNamePreview", "PVP ZONE");
+		PVPZONE_NAME_DESC = newbie.getProperty("PvPZoneNameDescription", "BE READY FOR PVP!");
+		
+		String[] TelepropertySplit = newbie.getProperty("TeleToLocation", "0,0,0").split(",");
+		
+		if (TelepropertySplit.length < 3)
+		{
+			TELE_TO_LOCATION[0] = Integer.parseInt(TelepropertySplit[0]);
+			TELE_TO_LOCATION[1] = Integer.parseInt(TelepropertySplit[1]);
+			TELE_TO_LOCATION[2] = Integer.parseInt(TelepropertySplit[2]);
+		}
+		
+		NEW_SPAWN = newbie.getProperty("NewCharLocation", false);
+		String[] propertyCords = newbie.getProperty("SpawnLocation", "0,0,0").split(",");
+		if (NEW_SPAWN)
+		{
+			if (propertyCords.length < 3)
+			{
+				NEW_SPAWN = false;
+				System.out.println("Error : config/customs.properties \"NewCharLocation\" coord locations");
+			}
+			else
+			{
+				SPAWN_LOCATION[0] = Integer.parseInt(propertyCords[0]);
+				SPAWN_LOCATION[1] = Integer.parseInt(propertyCords[1]);
+				SPAWN_LOCATION[2] = Integer.parseInt(propertyCords[2]);
+			}
+		}
 	}
 	
 	/**
@@ -1632,6 +1717,9 @@ public final class Config
 		
 		// security settings
 		loadSecurity();
+		
+		// news characters settings
+		loadNewbie();
 	}
 	
 	public static final void loadLoginServer()

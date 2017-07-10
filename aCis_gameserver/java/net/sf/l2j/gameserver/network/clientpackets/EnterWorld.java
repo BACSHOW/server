@@ -18,6 +18,7 @@ import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
 import net.sf.l2j.gameserver.instancemanager.CoupleManager;
 import net.sf.l2j.gameserver.instancemanager.DimensionalRiftManager;
+import net.sf.l2j.gameserver.instancemanager.NewbiesSystemManager;
 import net.sf.l2j.gameserver.instancemanager.PetitionManager;
 import net.sf.l2j.gameserver.instancemanager.SevenSigns;
 import net.sf.l2j.gameserver.instancemanager.SevenSigns.CabalType;
@@ -209,7 +210,7 @@ public class EnterWorld extends L2GameClientPacket
 		activeChar.sendPacket(SevenSigns.getInstance().getCurrentPeriod().getMessageId());
 		AnnouncementTable.getInstance().showAnnouncements(activeChar, false);
 		
-		if (Config.ALT_OLY_END_ANNOUNCE)
+		if (Config.ALT_OLY_END_ANNOUNCE || activeChar.isNoble() && activeChar.isGM())
 		{
 			Olympiad.olympiadEnd(activeChar);
 		}
@@ -309,6 +310,15 @@ public class EnterWorld extends L2GameClientPacket
 			final NpcHtmlMessage html = new NpcHtmlMessage(0);
 			html.setFile("data/html/servnews.htm");
 			sendPacket(html);
+		}
+		
+		if (activeChar.getLevel() == Config.START_LEVEL)
+		{
+			if (Config.ENABLE_STARTUP)
+			{
+				NewbiesSystemManager.Welcome(activeChar);
+				activeChar.getAppearance().setInvisible();
+			}
 		}
 		
 		PetitionManager.getInstance().checkPetitionMessages(activeChar);

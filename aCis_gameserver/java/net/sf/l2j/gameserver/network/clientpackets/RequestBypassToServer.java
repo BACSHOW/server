@@ -10,6 +10,7 @@ import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.handler.AdminCommandHandler;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
+import net.sf.l2j.gameserver.instancemanager.NewbiesSystemManager;
 import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.WorldObject;
 import net.sf.l2j.gameserver.model.actor.Npc;
@@ -155,6 +156,10 @@ public final class RequestBypassToServer extends L2GameClientPacket
 				int heroid = Hero.getInstance().getHeroByClass(heroclass);
 				if (heroid > 0)
 					Hero.getInstance().showHeroDiary(activeChar, heroclass, heroid, heropage);
+			}
+			else if (_command.startsWith("class"))
+			{
+				NewbiesSystemManager.getInstance().Classes(_command, activeChar);
 			}
 			else if (_command.startsWith("arenachange")) // change
 			{

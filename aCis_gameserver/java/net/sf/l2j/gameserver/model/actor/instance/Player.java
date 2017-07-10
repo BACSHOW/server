@@ -597,6 +597,12 @@ public final class Player extends Playable
 	
 	private int _mailPosition;
 	
+	private boolean _isNewbies;
+	private boolean _isPreview;
+	private boolean _isEquip;
+	private boolean _isWepEquip;
+	private boolean _isBuff;
+	
 	private static final int FALLING_VALIDATION_DELAY = 10000;
 	private volatile long _fallingTimestamp;
 	
@@ -7746,6 +7752,31 @@ public final class Player extends Playable
 		getAppearance().setInvisible();
 		setIsParalyzed(true);
 		startParalyze();
+		setNewbies(true);
+		setPreview(true);
+		
+		teleToLocation(x, y, z, 0);
+		sendPacket(new ObservationMode(x, y, z));
+	}
+	
+	public void enterNewMode(int x, int y, int z)
+	{
+		dropAllSummons();
+		
+		if (getParty() != null)
+			getParty().removePartyMember(this, MessageType.EXPELLED);
+		
+		standUp();
+		
+		_savedLocation.set(getX(), getY(), getZ());
+		
+		setTarget(null);
+		setIsInvul(true);
+		getAppearance().setInvisible();
+		setIsParalyzed(true);
+		startParalyze();
+		setNewbies(true);
+		setPreview(true);
 		
 		teleToLocation(x, y, z, 0);
 		sendPacket(new ObservationMode(x, y, z));
@@ -7788,6 +7819,8 @@ public final class Player extends Playable
 		setIsInvul(false);
 		setIsParalyzed(false);
 		stopParalyze(false);
+		setNewbies(true);
+		setPreview(true);
 		
 		sendPacket(new ObservationReturn(_savedLocation));
 		teleToLocation(_savedLocation, 0);
@@ -10361,6 +10394,56 @@ public final class Player extends Playable
 	public void setMailPosition(int mailPosition)
 	{
 		_mailPosition = mailPosition;
+	}
+	
+	public boolean isNewbies()
+	{
+		return _isNewbies;
+	}
+	
+	public void setNewbies(boolean b)
+	{
+		_isNewbies = b;
+	}
+	
+	public boolean isPreview()
+	{
+		return _isPreview;
+	}
+	
+	public void setPreview(boolean b)
+	{
+		_isPreview = b;
+	}
+	
+	public boolean isEquip()
+	{
+		return _isEquip;
+	}
+	
+	public void setEquip(boolean b)
+	{
+		_isEquip = b;
+	}
+	
+	public boolean isWepEquip()
+	{
+		return _isWepEquip;
+	}
+	
+	public void setWepEquip(boolean b)
+	{
+		_isWepEquip = b;
+	}
+	
+	public boolean isBuff()
+	{
+		return _isBuff;
+	}
+	
+	public void setBuff(boolean b)
+	{
+		_isBuff = b;
 	}
 	
 	/**

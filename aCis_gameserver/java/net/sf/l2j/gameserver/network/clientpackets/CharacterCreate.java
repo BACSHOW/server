@@ -130,6 +130,9 @@ public final class CharacterCreate extends L2GameClientPacket
 		
 		World.getInstance().addObject(newChar);
 		
+		if (Config.NEW_SPAWN)
+			newChar.setXYZInvisible(Config.SPAWN_LOCATION[0], Config.SPAWN_LOCATION[1], Config.SPAWN_LOCATION[2]);
+		else
 		newChar.getPosition().set(template.getSpawn());
 		newChar.setTitle("");
 		
