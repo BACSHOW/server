@@ -101,7 +101,7 @@ public final class ClassMaster extends Folk
 			super.onBypassFeedback(player, command);
 	}
 	
-	private static final void showHtmlMenu(Player player, int objectId, int level)
+	static final void showHtmlMenu(Player player, int objectId, int level)
 	{
 		final NpcHtmlMessage html = new NpcHtmlMessage(objectId);
 		
@@ -196,7 +196,7 @@ public final class ClassMaster extends Folk
 		player.sendPacket(html);
 	}
 	
-	private static final boolean checkAndChangeClass(Player player, int val)
+	static final boolean checkAndChangeClass(Player player, int val)
 	{
 		final ClassId currentClassId = player.getClassId();
 		if (getMinLevel(currentClassId.level()) > player.getLevel() && !Config.ALLOW_ENTIRE_TREE)
