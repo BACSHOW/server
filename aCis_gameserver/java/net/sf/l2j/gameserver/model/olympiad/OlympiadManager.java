@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import net.sf.l2j.Config;
+import net.sf.l2j.gameserver.events.TvTEvent;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.item.kind.Item;
@@ -246,6 +247,12 @@ public class OlympiadManager
 		if (!player.isNoble())
 		{
 			player.sendPacket(SystemMessageId.ONLY_NOBLESS_CAN_PARTICIPATE_IN_THE_OLYMPIAD);
+			return false;
+		}
+		
+		if (!TvTEvent.isInactive() && TvTEvent.isPlayerParticipant(player.getName()))
+		{
+			player.sendMessage("You can not register in olympiad while registered at TvT.");
 			return false;
 		}
 		

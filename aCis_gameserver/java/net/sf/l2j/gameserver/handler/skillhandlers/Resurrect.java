@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.handler.skillhandlers;
 
+import net.sf.l2j.gameserver.events.TvTEvent;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.ShotType;
@@ -21,6 +22,11 @@ public class Resurrect implements ISkillHandler
 	@Override
 	public void useSkill(Creature activeChar, L2Skill skill, WorldObject[] targets)
 	{
+		if (!TvTEvent.isInactive() && TvTEvent.isPlayerParticipant(activeChar.getName()))
+		{
+			activeChar.sendMessage("You can not use this action when it is participating in this event.");
+			return;
+		}
 		for (WorldObject cha : targets)
 		{
 			final Creature target = (Creature) cha;

@@ -37,6 +37,7 @@ public final class Config
 	public static final String PLAYERS_FILE = "./config/players.properties";
 	public static final String SERVER_FILE = "./config/server.properties";
 	public static final String SIEGE_FILE = "./config/siege.properties";
+	public static final String EVENT_FILE = "./config/events/tvt.properties";
 	public static final String CUSTOM_FILE = "./config/mods/custom.properties";
 	public static final String NEWBIE_FILE = "./config/mods/newscharacters.properties";
 	public static final String SECURITY_FILE = "./config/protect/security.properties";
@@ -729,6 +730,37 @@ public final class Config
 	public static boolean BANKING_SYSTEM_ENABLED;
 	public static int BANKING_SYSTEM_GOLDBARS;
 	public static int BANKING_SYSTEM_ADENA;
+	
+	// Events settings
+	// --------------------------------------------------
+	public static boolean TVT_EVENT_ENABLED;
+	public static int TVT_EVENT_INTERVAL;
+	public static int TVT_EVENT_PARTICIPATION_TIME;
+	public static int TVT_EVENT_RUNNING_TIME;
+	public static int TVT_EVENT_PARTICIPATION_NPC_ID;
+	public static int TVT_EVENT_MIN_PLAYERS_IN_TEAMS;
+	public static int TVT_EVENT_MAX_PLAYERS_IN_TEAMS;
+	public static int TVT_EVENT_RESPAWN_TELEPORT_DELAY;
+	public static int TVT_EVENT_START_LEAVE_TELEPORT_DELAY;
+	public static String TVT_EVENT_TEAM_1_NAME;
+	public static int[] TVT_EVENT_BACK_COORDINATES = new int[3];
+	public static int[] TVT_EVENT_TEAM_1_COORDINATES = new int[3];
+	public static String TVT_EVENT_TEAM_2_NAME;
+	public static int[] TVT_EVENT_TEAM_2_COORDINATES = new int[3];
+	public static List<int[]> TVT_EVENT_REWARDS = new ArrayList<>();
+	public static boolean TVT_EVENT_TARGET_TEAM_MEMBERS_ALLOWED;
+	public static boolean TVT_EVENT_POTIONS_ALLOWED;
+	public static boolean TVT_EVENT_SUMMON_BY_ITEM_ALLOWED;
+	public static List<Integer> TVT_EVENT_DOOR_IDS = new ArrayList<>();
+	public static byte TVT_EVENT_MIN_LVL;
+	public static byte TVT_EVENT_MAX_LVL;
+	public static boolean TVT_EVENT_REMOVE_BUFFS;
+	public static boolean TVT_EVENT_HEAL_PLAYERS;
+	public static boolean TVT_KILLS_REWARD_ENABLED;
+	public static List<int[]> TVT_KILLS_REWARD = new ArrayList<>();
+	
+	/** Online List */
+	public static boolean ENABLE_ONLINE;
 	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
@@ -1630,6 +1662,11 @@ public final class Config
 		
 		if (TelepropertySplit.length < 3)
 		{
+			TVT_EVENT_ENABLED = false;
+			System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TeleToLocation");
+		}
+		else
+		{
 			TELE_TO_LOCATION[0] = Integer.parseInt(TelepropertySplit[0]);
 			TELE_TO_LOCATION[1] = Integer.parseInt(TelepropertySplit[1]);
 			TELE_TO_LOCATION[2] = Integer.parseInt(TelepropertySplit[2]);
@@ -1663,6 +1700,152 @@ public final class Config
 		BANKING_SYSTEM_ENABLED = voiced.getProperty("BankingEnabled", false);
 		BANKING_SYSTEM_GOLDBARS = voiced.getProperty("BankingGoldbarCount", 1);
 		BANKING_SYSTEM_ADENA = voiced.getProperty("BankingAdenaCount", 1000000000);
+		ENABLE_ONLINE = voiced.getProperty("OnlineCmd", true);
+	}
+	
+	/**
+	 * Loads events settings.<br>
+	 */
+	private static final void loadEvent()
+	{
+		final ExProperties event = initProperties(EVENT_FILE);
+		
+		TVT_EVENT_ENABLED = event.getProperty("TvTEventEnabled", false);
+		TVT_EVENT_INTERVAL = event.getProperty("TvTEventInterval", 18000);
+		TVT_EVENT_PARTICIPATION_TIME = event.getProperty("TvTEventParticipationTime", 3600);
+		TVT_EVENT_RUNNING_TIME = event.getProperty("TvTEventRunningTime", 1800);
+		TVT_EVENT_PARTICIPATION_NPC_ID = event.getProperty("TvTEventParticipationNpcId", 0);
+		TVT_EVENT_REMOVE_BUFFS = event.getProperty("TvTEventRemoveBuffs", false);
+		TVT_KILLS_REWARD_ENABLED = event.getProperty("TvTKillsRewardEnable", false);
+		TVT_EVENT_HEAL_PLAYERS = event.getProperty("TvTHealPlayersEnable", false);
+		
+		if (TVT_EVENT_PARTICIPATION_NPC_ID == 0)
+		{
+			TVT_EVENT_ENABLED = false;
+			System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventParticipationNpcId");
+		}
+		else
+		{
+			String[] propertySplit = event.getProperty("TvTEventParticipationNpcCoordinates", "0,0,0").split(",");
+			
+			if (propertySplit.length < 3)
+			{
+				TVT_EVENT_ENABLED = false;
+				System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventParticipationNpcCoordinates");
+			}
+			else
+			{
+				TVT_EVENT_BACK_COORDINATES[0] = Integer.parseInt(propertySplit[0]);
+				TVT_EVENT_BACK_COORDINATES[1] = Integer.parseInt(propertySplit[1]);
+				TVT_EVENT_BACK_COORDINATES[2] = Integer.parseInt(propertySplit[2]);
+				
+				TVT_EVENT_MIN_PLAYERS_IN_TEAMS = Integer.parseInt(event.getProperty("TvTEventMinPlayersInTeams", "1"));
+				TVT_EVENT_MAX_PLAYERS_IN_TEAMS = Integer.parseInt(event.getProperty("TvTEventMaxPlayersInTeams", "20"));
+				TVT_EVENT_MIN_LVL = (byte) Integer.parseInt(event.getProperty("TvTEventMinPlayerLevel", "1"));
+				TVT_EVENT_MAX_LVL = (byte) Integer.parseInt(event.getProperty("TvTEventMaxPlayerLevel", "80"));
+				TVT_EVENT_RESPAWN_TELEPORT_DELAY = Integer.parseInt(event.getProperty("TvTEventRespawnTeleportDelay", "20"));
+				TVT_EVENT_START_LEAVE_TELEPORT_DELAY = Integer.parseInt(event.getProperty("TvTEventStartLeaveTeleportDelay", "20"));
+				
+				TVT_EVENT_TEAM_1_NAME = event.getProperty("TvTEventTeam1Name", "Team1");
+				propertySplit = event.getProperty("TvTEventTeam1Coordinates", "0,0,0").split(",");
+				
+				if (propertySplit.length < 3)
+				{
+					TVT_EVENT_ENABLED = false;
+					System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventTeam1Coordinates");
+				}
+				else
+				{
+					TVT_EVENT_TEAM_1_COORDINATES[0] = Integer.parseInt(propertySplit[0]);
+					TVT_EVENT_TEAM_1_COORDINATES[1] = Integer.parseInt(propertySplit[1]);
+					TVT_EVENT_TEAM_1_COORDINATES[2] = Integer.parseInt(propertySplit[2]);
+					
+					TVT_EVENT_TEAM_2_NAME = event.getProperty("TvTEventTeam2Name", "Team2");
+					propertySplit = event.getProperty("TvTEventTeam2Coordinates", "0,0,0").split(",");
+					
+					if (propertySplit.length < 3)
+					{
+						TVT_EVENT_ENABLED = false;
+						System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventTeam2Coordinates");
+					}
+					else
+					{
+						TVT_EVENT_TEAM_2_COORDINATES[0] = Integer.parseInt(propertySplit[0]);
+						TVT_EVENT_TEAM_2_COORDINATES[1] = Integer.parseInt(propertySplit[1]);
+						TVT_EVENT_TEAM_2_COORDINATES[2] = Integer.parseInt(propertySplit[2]);
+						propertySplit = event.getProperty("TvTEventReward", "57,100000").split(";");
+						
+						for (String reward : propertySplit)
+						{
+							String[] rewardSplit = reward.split(",");
+							
+							if (rewardSplit.length != 2)
+								System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \"" + reward + "\"");
+							else
+							{
+								try
+								{
+									TVT_EVENT_REWARDS.add(new int[]
+									{
+										Integer.valueOf(rewardSplit[0]),
+										Integer.valueOf(rewardSplit[1])
+									});
+								}
+								catch (NumberFormatException nfe)
+								{
+									if (!reward.equals(""))
+										System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \"" + reward + "\"");
+								}
+							}
+						}
+						
+						propertySplit = event.getProperty("TvTKillsReward", "57,100000").split(";");
+						
+						for (String rewardKills : propertySplit)
+						{
+							String[] rewardSplit = rewardKills.split(",");
+							
+							if (rewardSplit.length != 2)
+								System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \"" + rewardKills + "\"");
+							else
+							{
+								try
+								{
+									TVT_KILLS_REWARD.add(new int[]
+									{
+										Integer.valueOf(rewardSplit[0]),
+										Integer.valueOf(rewardSplit[1])
+									});
+								}
+								catch (NumberFormatException nfe)
+								{
+									if (!rewardKills.equals(""))
+										System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventReward \"" + rewardKills + "\"");
+								}
+							}
+						}
+						
+						TVT_EVENT_TARGET_TEAM_MEMBERS_ALLOWED = Boolean.parseBoolean(event.getProperty("TvTEventTargetTeamMembersAllowed", "true"));
+						TVT_EVENT_POTIONS_ALLOWED = Boolean.parseBoolean(event.getProperty("TvTEventPotionsAllowed", "false"));
+						TVT_EVENT_SUMMON_BY_ITEM_ALLOWED = Boolean.parseBoolean(event.getProperty("TvTEventSummonByItemAllowed", "false"));
+						propertySplit = event.getProperty("TvTEventDoorsCloseOpenOnStartEnd", "").split(";");
+						
+						for (String door : propertySplit)
+						{
+							try
+							{
+								TVT_EVENT_DOOR_IDS.add(Integer.valueOf(door));
+							}
+							catch (NumberFormatException nfe)
+							{
+								if (!door.equals(""))
+									System.out.println("TvTEventEngine[Config.load()]: invalid config property -> TvTEventDoorsCloseOpenOnStartEnd \"" + door + "\"");
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	/**
@@ -1745,6 +1928,9 @@ public final class Config
 		
 		// voiced settings
 		loadVoiced();
+		
+		// events settings
+		loadEvent();
 	}
 	
 	public static final void loadLoginServer()

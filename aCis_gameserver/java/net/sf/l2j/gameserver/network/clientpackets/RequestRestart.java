@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.network.clientpackets;
 
+import net.sf.l2j.gameserver.events.TvTEvent;
 import net.sf.l2j.gameserver.instancemanager.SevenSignsFestival;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
@@ -46,6 +47,13 @@ public final class RequestRestart extends L2GameClientPacket
 		if (AttackStanceTaskManager.getInstance().isInAttackStance(player))
 		{
 			player.sendPacket(SystemMessageId.CANT_RESTART_WHILE_FIGHTING);
+			sendPacket(RestartResponse.valueOf(false));
+			return;
+		}
+		
+		if (!TvTEvent.isInactive() && TvTEvent.isPlayerParticipant(player.getName()))
+		{
+			player.sendMessage("You can not restart when you registering in TvTEvent.");
 			sendPacket(RestartResponse.valueOf(false));
 			return;
 		}

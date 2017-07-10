@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.handler.skillhandlers;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
 import net.sf.l2j.gameserver.model.L2Skill;
@@ -64,6 +65,20 @@ public class HealPercent implements ISkillHandler
 			// Doors and flags can't be healed in any way
 			if (target instanceof Door || target instanceof SiegeFlag)
 				continue;
+			
+			// Mana potions can't be used on event
+			if (((Player) activeChar).isInFunEvent() && !Config.TVT_EVENT_POTIONS_ALLOWED)
+			{
+				if (skill.getSkillType() == L2SkillType.MANAHEAL_PERCENT)
+					continue;
+			}
+			
+			// Players can't be healed on event
+			if (((Player) activeChar).isInFunEvent() && !Config.TVT_EVENT_HEAL_PLAYERS)
+			{
+				if (skill.getSkillType() == L2SkillType.HEAL_PERCENT)
+					continue;
+			}
 			
 			targetPlayer = target instanceof Player;
 			

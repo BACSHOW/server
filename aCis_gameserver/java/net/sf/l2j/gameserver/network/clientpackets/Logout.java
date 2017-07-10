@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.network.clientpackets;
 
+import net.sf.l2j.gameserver.events.TvTEvent;
 import net.sf.l2j.gameserver.instancemanager.SevenSignsFestival;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
@@ -26,6 +27,12 @@ public final class Logout extends L2GameClientPacket
 		if (player.getActiveEnchantItem() != null || player.isLocked())
 		{
 			player.sendPacket(ActionFailed.STATIC_PACKET);
+			return;
+		}
+		
+		if (!TvTEvent.isInactive() && TvTEvent.isPlayerParticipant(player.getName()))
+		{
+			player.sendMessage("You can not leave the game while attending an event.");
 			return;
 		}
 		

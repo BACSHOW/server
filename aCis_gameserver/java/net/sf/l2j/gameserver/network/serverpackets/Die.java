@@ -18,6 +18,7 @@ public class Die extends L2GameServerPacket
 	private boolean _allowFixedRes;
 	private L2Clan _clan;
 	private boolean _event;
+	private boolean _funEvent;
 	
 	public Die(Creature cha)
 	{
@@ -30,6 +31,7 @@ public class Die extends L2GameServerPacket
 			Player player = (Player) cha;
 			_allowFixedRes = player.getAccessLevel().allowFixedRes();
 			_clan = player.getClan();
+			_funEvent = !player.isInFunEvent();
 		}
 		else if (cha instanceof Attackable)
 			_sweepable = ((Attackable) cha).isSpoiled();
@@ -55,7 +57,7 @@ public class Die extends L2GameServerPacket
 		{
 			writeD(0x01); // to nearest village
 		
-			if (_clan != null)
+			if (_funEvent && _clan != null)
 			{
 				SiegeSide side = null;
 			

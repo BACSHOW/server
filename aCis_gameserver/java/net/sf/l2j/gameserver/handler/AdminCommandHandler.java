@@ -48,6 +48,7 @@ import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminSkill;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminSpawn;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminTarget;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminTeleport;
+import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminTvTEvent;
 import net.sf.l2j.gameserver.handler.admincommandhandlers.AdminZone;
 
 public class AdminCommandHandler
@@ -107,6 +108,7 @@ public class AdminCommandHandler
 		registerAdminCommandHandler(new AdminTarget());
 		registerAdminCommandHandler(new AdminTeleport());
 		registerAdminCommandHandler(new AdminZone());
+		registerAdminCommandHandler(new AdminTvTEvent());
 	}
 	
 	public void registerAdminCommandHandler(IAdminCommandHandler handler)

@@ -54,6 +54,7 @@ import net.sf.l2j.gameserver.datatables.SpellbookTable;
 import net.sf.l2j.gameserver.datatables.StaticObjects;
 import net.sf.l2j.gameserver.datatables.SummonItemsData;
 import net.sf.l2j.gameserver.datatables.TeleportLocationTable;
+import net.sf.l2j.gameserver.events.TvTEventManager;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.handler.AdminCommandHandler;
 import net.sf.l2j.gameserver.handler.ChatHandler;
@@ -299,6 +300,8 @@ public class GameServer
 		EngineModsManager.init();
 		if (Config.CKM_ENABLED)
 			CharacterKillingManager.getInstance().init();
+		StringUtil.printSection("TvT Event");
+		TvTEventManager.getInstance();
 
 		StringUtil.printSection("NPC Custom");
 		RaidBossInfoManager.getInstance();

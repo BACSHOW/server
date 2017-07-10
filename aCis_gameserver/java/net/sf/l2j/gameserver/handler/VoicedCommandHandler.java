@@ -20,6 +20,8 @@ import java.util.Map;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.voicedcommandhandlers.BankingCmd;
 import net.sf.l2j.gameserver.handler.voicedcommandhandlers.Menu;
+import net.sf.l2j.gameserver.handler.voicedcommandhandlers.Online;
+import net.sf.l2j.gameserver.handler.voicedcommandhandlers.TvTEventCommand;
 
 public class VoicedCommandHandler
 {
@@ -37,6 +39,8 @@ public class VoicedCommandHandler
     		registerHandler(new BankingCmd());
     	}
     	registerHandler(new Menu());
+    	registerHandler(new TvTEventCommand());
+		registerHandler(new Online());
     }
     
     public void registerHandler(IVoicedCommandHandler handler)

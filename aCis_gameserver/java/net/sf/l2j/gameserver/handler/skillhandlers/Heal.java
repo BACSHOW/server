@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.handler.skillhandlers;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.handler.SkillHandler;
 import net.sf.l2j.gameserver.model.L2Skill;
@@ -121,6 +122,8 @@ public class Heal implements ISkillHandler
 				if (target instanceof Player && ((Player) target).isCursedWeaponEquipped())
 					continue;
 				else if (activeChar instanceof Player && ((Player) activeChar).isCursedWeaponEquipped())
+					continue;
+				else if (((Player) activeChar).isInFunEvent() && !Config.TVT_EVENT_HEAL_PLAYERS)
 					continue;
 			}
 			

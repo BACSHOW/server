@@ -44,6 +44,7 @@ import net.sf.l2j.gameserver.datatables.RecipeTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
 import net.sf.l2j.gameserver.datatables.SkillTreeTable;
+import net.sf.l2j.gameserver.events.TvTEvent;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.handler.IItemHandler;
 import net.sf.l2j.gameserver.handler.ItemHandler;
@@ -384,6 +385,7 @@ public final class Player extends Playable
 	private int pcBangPoint = 0;
 	
 	private long _expBeforeDeath;
+	public int _tvtkills;
 	private int _karma;
 	private int _pvpKills;
 	private int _pkKills;
@@ -394,6 +396,8 @@ public final class Player extends Playable
 	private int _lastCompassZone; // the last compass zone update send to the client
 	
 	private boolean _isIn7sDungeon;
+	
+	public boolean atEvent = false;
 	
 	private PunishLevel _punishLevel = PunishLevel.NONE;
 	private long _punishTimer;
@@ -3226,6 +3230,12 @@ public final class Player extends Playable
 	@Override
 	public void onAction(Player player)
 	{
+		if (!TvTEvent.onAction(player.getName(), getName()))
+		{
+			player.sendPacket(ActionFailed.STATIC_PACKET);
+			return;
+		}
+		
 		// Set the target of the player
 		if (player.getTarget() != this)
 			player.setTarget(this);
@@ -3997,11 +4007,15 @@ public final class Player extends Playable
 		if (isMounted())
 			stopFeed();
 		
+		_tvtkills = 0;
+		
 		synchronized (this)
 		{
 			if (isFakeDeath())
 				stopFakeDeath(true);
 		}
+		
+		TvTEvent.onKill(killer, this);
 		
 		if (killer != null)
 		{
@@ -4075,6 +4089,11 @@ public final class Player extends Playable
 		updateEffectIcons();
 		
 		return true;
+	}
+	
+	public boolean isInFunEvent()
+	{
+		return (atEvent || (TvTEvent.isStarted() && TvTEvent.isPlayerParticipant(getName())) && !isGM());
 	}
 	
 	private void onDieDropItem(Creature killer)
