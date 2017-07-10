@@ -23,6 +23,7 @@ import net.sf.l2j.Config;
 import net.sf.l2j.commons.concurrent.ThreadPool;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.model.L2Skill;
+import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.model.base.Experience;
@@ -1242,7 +1243,7 @@ public class NewbiesSystemManager
 				@Override
 				public void run()
 				{
-					NewbiesSystemManager.Teleport(player);
+					NewbiesSystemManager.Teleport(player, player);
 				}
 			}, 500 * 1);
 			
@@ -1328,10 +1329,10 @@ public class NewbiesSystemManager
 		}
 	}
 	
-	public static void Teleport(Player player)
+	public static void Teleport(Creature character, Player player)
 	{
 		NpcHtmlMessage html = new NpcHtmlMessage(1);
-		player.teleToLocation(108095, 205716, -3511, 0);
+		((Player) character).teleToLocation(Config.TELE_TO_LOCATION[0], Config.TELE_TO_LOCATION[1], Config.TELE_TO_LOCATION[3], 0);
 		player.getAppearance().setVisible();
 		player.setIsParalyzed(false);
 		removePreview(player);
