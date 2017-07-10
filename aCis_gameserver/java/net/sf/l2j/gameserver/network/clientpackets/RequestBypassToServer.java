@@ -10,6 +10,8 @@ import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
 import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.handler.AdminCommandHandler;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
+import net.sf.l2j.gameserver.handler.IVoicedCommandHandler;
+import net.sf.l2j.gameserver.handler.VoicedCommandHandler;
 import net.sf.l2j.gameserver.instancemanager.NewbiesSystemManager;
 import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.WorldObject;
@@ -85,6 +87,21 @@ public final class RequestBypassToServer extends L2GameClientPacket
 					GMAUDIT_LOG.info(activeChar.getName() + " [" + activeChar.getObjectId() + "] used '" + _command + "' command on: " + ((activeChar.getTarget() != null) ? activeChar.getTarget().getName() : "none"));
 				
 				ach.useAdminCommand(_command, activeChar);
+			}
+			if (_command.startsWith("voiced_"))
+			{
+				String command = _command.split(" ")[0];
+				
+				IVoicedCommandHandler ach = VoicedCommandHandler.getInstance().getHandler(_command.substring(7));
+				
+				if (ach == null)
+				{
+					activeChar.sendMessage("The command " + command.substring(7) + " does not exist!");
+					_log.warning("No handler registered for command '" + _command + "'");
+					return;
+				}
+				
+				ach.useVoicedCommand(_command.substring(7), activeChar, null);
 			}
 			else if (_command.startsWith("player_help "))
 			{

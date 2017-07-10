@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.handler.itemhandlers;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.IItemHandler;
 import net.sf.l2j.gameserver.model.ShotType;
 import net.sf.l2j.gameserver.model.actor.Playable;
@@ -51,7 +52,7 @@ public class BeastSoulShot implements IItemHandler
 			return;
 		
 		// If the player doesn't have enough beast soulshot remaining, remove any auto soulshot task.
-		if (!activeOwner.destroyItemWithoutTrace("Consume", item.getObjectId(), activePet.getSoulShotsPerHit(), null, false))
+		if (!Config.INFINITY_SS && !activeOwner.destroyItemWithoutTrace("Consume", item.getObjectId(), activePet.getSoulShotsPerHit(), null, false))
 		{
 			if (!activeOwner.disableAutoShot(item.getItemId()))
 				activeOwner.sendPacket(SystemMessageId.NOT_ENOUGH_SOULSHOTS_FOR_PET);

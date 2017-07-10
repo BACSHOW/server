@@ -58,7 +58,6 @@ import net.sf.l2j.gameserver.instancemanager.SevenSigns.CabalType;
 import net.sf.l2j.gameserver.instancemanager.SevenSigns.SealType;
 import net.sf.l2j.gameserver.instancemanager.SevenSignsFestival;
 import net.sf.l2j.gameserver.instancemanager.ZoneManager;
-import net.sf.l2j.gameserver.model.Announcement;
 import net.sf.l2j.gameserver.model.BlockList;
 import net.sf.l2j.gameserver.model.FishData;
 import net.sf.l2j.gameserver.model.L2AccessLevel;
@@ -522,6 +521,8 @@ public final class Player extends Playable
 	private boolean _messageRefusal; // message refusal mode
 	private boolean _tradeRefusal; // Trade refusal
 	private boolean _exchangeRefusal; // Exchange refusal
+	private boolean _isPartyInRefuse; // Party Refusal Mode
+	private boolean _cantGainXP;
 	
 	private Party _party;
 	private LootRule _lootRule;
@@ -7929,6 +7930,26 @@ public final class Player extends Playable
 	public boolean getTradeRefusal()
 	{
 		return _tradeRefusal;
+	}
+	
+	public void setIsPartyInRefuse(boolean mode)
+	{
+		_isPartyInRefuse = mode;
+	}
+	
+	public boolean isPartyInRefuse()
+	{
+		return _isPartyInRefuse;
+	}
+	
+	public void SetcantGainXP(boolean mode)
+	{
+		_cantGainXP = mode;
+	}
+	
+	public boolean cantGainXP()
+	{
+		return _cantGainXP;
 	}
 	
 	public void setExchangeRefusal(boolean mode)

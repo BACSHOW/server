@@ -47,6 +47,12 @@ public final class RequestJoinParty extends L2GameClientPacket
 			return;
 		}
 		
+		if (target.isPartyInRefuse())
+		{
+			requestor.sendMessage("[Party Refuse]: Player in refusal party.");
+			return;
+		}
+		
 		if (target.isInParty())
 		{
 			requestor.sendPacket(SystemMessage.getSystemMessage(SystemMessageId.S1_IS_ALREADY_IN_PARTY).addCharName(target));

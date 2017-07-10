@@ -75,6 +75,15 @@ public class Continuous implements ISkillHandler
 					if (target.getFirstEffect(L2EffectType.BLOCK_BUFF) != null)
 						continue;
 					
+					// Anti-Buff Protection prevents you from getting buffs by other players
+					if (activeChar instanceof Player && target != activeChar && target.isBuffProtected() && !skill.isHeroSkill()
+						&& (skill.getSkillType() == L2SkillType.BUFF
+						|| skill.getSkillType() == L2SkillType.HEAL_PERCENT
+						|| skill.getSkillType() == L2SkillType.MANAHEAL_PERCENT
+						|| skill.getSkillType() == L2SkillType.COMBATPOINTHEAL
+						|| skill.getSkillType() == L2SkillType.REFLECT))
+						continue;
+					
 					// Player holding a cursed weapon can't be buffed and can't buff
 					if (!(activeChar instanceof ClanHallManagerNpc) && target != activeChar)
 					{

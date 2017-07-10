@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.handler.itemhandlers;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.IItemHandler;
 import net.sf.l2j.gameserver.model.ShotType;
 import net.sf.l2j.gameserver.model.actor.Playable;
@@ -45,7 +46,7 @@ public class SpiritShot implements IItemHandler
 		}
 		
 		// Consume sps if player has enough of them
-		if (!activeChar.destroyItemWithoutTrace("Consume", item.getObjectId(), weaponItem.getSpiritShotCount(), null, false))
+		if (!Config.INFINITY_SS && !activeChar.destroyItemWithoutTrace("Consume", item.getObjectId(), weaponItem.getSpiritShotCount(), null, false))
 		{
 			if (!activeChar.disableAutoShot(itemId))
 				activeChar.sendPacket(SystemMessageId.NOT_ENOUGH_SPIRITSHOTS);

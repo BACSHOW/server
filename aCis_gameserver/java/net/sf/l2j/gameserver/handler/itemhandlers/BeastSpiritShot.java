@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.handler.itemhandlers;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.IItemHandler;
 import net.sf.l2j.gameserver.model.ShotType;
 import net.sf.l2j.gameserver.model.actor.Playable;
@@ -53,7 +54,7 @@ public class BeastSpiritShot implements IItemHandler
 		if (activePet.isChargedShot(isBlessed ? ShotType.BLESSED_SPIRITSHOT : ShotType.SPIRITSHOT))
 			return;
 		
-		if (!activeOwner.destroyItemWithoutTrace("Consume", item.getObjectId(), activePet.getSpiritShotsPerHit(), null, false))
+		if (!Config.INFINITY_SS && !activeOwner.destroyItemWithoutTrace("Consume", item.getObjectId(), activePet.getSpiritShotsPerHit(), null, false))
 		{
 			if (!activeOwner.disableAutoShot(itemId))
 				activeOwner.sendPacket(SystemMessageId.NOT_ENOUGH_SPIRITSHOTS_FOR_PET);

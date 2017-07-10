@@ -40,6 +40,7 @@ public final class Config
 	public static final String CUSTOM_FILE = "./config/mods/custom.properties";
 	public static final String NEWBIE_FILE = "./config/mods/newscharacters.properties";
 	public static final String SECURITY_FILE = "./config/protect/security.properties";
+	public static final String VOICED_FILE = "./config/voiced/voiced.properties";
 	
 	// --------------------------------------------------
 	// Clans settings
@@ -720,6 +721,14 @@ public final class Config
 	/** Starting Spawn System */
 	public static boolean NEW_SPAWN;
 	public static int[] SPAWN_LOCATION = new int[3];
+	
+	/** Infinity SS and Arrows */
+	public static boolean INFINITY_SS;
+	public static boolean INFINITY_ARROWS;
+	
+	public static boolean BANKING_SYSTEM_ENABLED;
+	public static int BANKING_SYSTEM_GOLDBARS;
+	public static int BANKING_SYSTEM_ADENA;
 	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
@@ -1552,6 +1561,8 @@ public final class Config
 			
 			LEAVE_BUFFS_ON_DIE = custom.getProperty("LeaveBuffsOnDie", true);
 			
+			INFINITY_SS = custom.getProperty("InfinitySS", false);
+			INFINITY_ARROWS = custom.getProperty("InfinityArrows", false);
 		}
 		
 	}
@@ -1561,7 +1572,7 @@ public final class Config
 	 */
 	private static final void loadSecurity()
 	{
-		final ExProperties security = initProperties(CUSTOM_FILE);
+		final ExProperties security = initProperties(SECURITY_FILE);
 		
 		ALLOW_WYVERN_RESTRITION_CITY = security.getProperty("AllowWyvernRestrictionCity", false);
 		WYVERN_RESTRITION_LOC = new int[3];
@@ -1583,8 +1594,7 @@ public final class Config
 	}
 	
 	/**
-	 * Loads custom settings.<br>
-	 * PvP/Announce, PC Bang Mob, etc.
+	 * Loads newbie settings.<br>
 	 */
 	private static final void loadNewbie()
 	{
@@ -1641,6 +1651,18 @@ public final class Config
 				SPAWN_LOCATION[2] = Integer.parseInt(propertyCords[2]);
 			}
 		}
+	}
+	
+	/**
+	 * Loads newbie settings.<br>
+	 */
+	private static final void loadVoiced()
+	{
+		final ExProperties voiced = initProperties(VOICED_FILE);
+		
+		BANKING_SYSTEM_ENABLED = voiced.getProperty("BankingEnabled", false);
+		BANKING_SYSTEM_GOLDBARS = voiced.getProperty("BankingGoldbarCount", 1);
+		BANKING_SYSTEM_ADENA = voiced.getProperty("BankingAdenaCount", 1000000000);
 	}
 	
 	/**
@@ -1720,6 +1742,9 @@ public final class Config
 		
 		// news characters settings
 		loadNewbie();
+		
+		// voiced settings
+		loadVoiced();
 	}
 	
 	public static final void loadLoginServer()

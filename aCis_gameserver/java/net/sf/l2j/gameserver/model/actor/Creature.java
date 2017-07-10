@@ -154,6 +154,18 @@ public abstract class Creature extends WorldObject
 	
 	private boolean _isRaid = false;
 	
+	// protect From Debuffs
+	private boolean _isBuffProtected = false;
+	public void setIsBuffProtected(boolean value)
+	{
+		_isBuffProtected = value;
+	}
+	
+	public boolean isBuffProtected()
+	{
+		return _isBuffProtected; 
+	}
+	
 	/**
 	 * Constructor of Creature.<BR>
 	 * <BR>
@@ -756,7 +768,8 @@ public abstract class Creature extends WorldObject
 		boolean miss1 = Formulas.calcHitMiss(this, target);
 		
 		// Consume arrows
-		reduceArrowCount();
+		if(!Config.INFINITY_ARROWS)
+			reduceArrowCount();
 		
 		_move = null;
 		

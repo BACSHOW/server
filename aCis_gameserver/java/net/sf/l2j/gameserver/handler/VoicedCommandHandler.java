@@ -17,6 +17,10 @@ package net.sf.l2j.gameserver.handler;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.l2j.Config;
+import net.sf.l2j.gameserver.handler.voicedcommandhandlers.BankingCmd;
+import net.sf.l2j.gameserver.handler.voicedcommandhandlers.Menu;
+
 public class VoicedCommandHandler
 {
     private final Map<Integer, IVoicedCommandHandler> _datatable = new HashMap<>();
@@ -28,6 +32,11 @@ public class VoicedCommandHandler
     
     protected VoicedCommandHandler()
     {
+    	if (Config.BANKING_SYSTEM_ENABLED)
+    	{
+    		registerHandler(new BankingCmd());
+    	}
+    	registerHandler(new Menu());
     }
     
     public void registerHandler(IVoicedCommandHandler handler)
