@@ -762,6 +762,9 @@ public final class Config
 	/** Online List */
 	public static boolean ENABLE_ONLINE;
 	
+	/** Olympiad Custom Date */
+	public static int OLY_WEEKS_PERIOD;
+	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
 	// You still can experiment changing values here. But don't say I didn't warn you.
@@ -1595,6 +1598,8 @@ public final class Config
 			
 			INFINITY_SS = custom.getProperty("InfinitySS", false);
 			INFINITY_ARROWS = custom.getProperty("InfinityArrows", false);
+			
+			OLY_WEEKS_PERIOD = custom.getProperty("OlyPeriodWeeks", 1);
 		}
 		
 	}
