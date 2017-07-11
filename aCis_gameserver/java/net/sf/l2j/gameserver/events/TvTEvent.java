@@ -45,6 +45,8 @@ import net.sf.l2j.gameserver.network.serverpackets.StatusUpdate;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.skills.AbnormalEffect;
 
+import main.data.PlayerData;
+
 public class TvTEvent
 {
 	enum EventState
@@ -484,7 +486,7 @@ public class TvTEvent
 		if (playerInstance == null || !isParticipating())
 			return;
 		
-		if (playerInstance.isAio())
+		if (PlayerData.get(playerInstance.getObjectId()).isAio())
 		{
 			playerInstance.sendMessage("AIO player can not register.");
 			return;

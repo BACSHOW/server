@@ -24,6 +24,8 @@ import net.sf.l2j.gameserver.network.clientpackets.Say2;
 import net.sf.l2j.gameserver.network.serverpackets.CreatureSay;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
 
+import main.data.PlayerData;
+
 /**
  * @author Baggos
  */
@@ -62,7 +64,7 @@ public class TvTEventCommand implements IVoicedCommandHandler
 			activeChar.sendPacket(new CreatureSay(0, Say2.HERO_VOICE, "TvT Event", "Cursed weapon owners are not allowed to participate."));
 		else if (activeChar.isInJail())
 			activeChar.sendPacket(new CreatureSay(0, Say2.HERO_VOICE, "TvT Event", "Nothing for you!."));
-		else if (activeChar.isAio())
+		else if (PlayerData.get(activeChar.getObjectId()).isAio())
 			activeChar.sendPacket(new CreatureSay(0, Say2.HERO_VOICE, "TvT Event", "AIO player can not register!."));
 		else if (OlympiadManager.getInstance().isRegisteredInComp(activeChar))
 			activeChar.sendPacket(new CreatureSay(0, Say2.HERO_VOICE, "TvT Event", "Olympiad participants can't register."));

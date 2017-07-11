@@ -25,7 +25,7 @@ public class Team
 	    _log.info("                              NAO DISTRIBUA SEM AUTORIZACAO");
 	    _log.info("                              Copyright  2017-2017");
 	    _log.info("-------------------------------------------------------------------------------");
-	    _log.info("                                    Revision 12");
+	    _log.info("                                    Revision 24");
 	    _log.info("-------------------------------------------------------------------------------");
    }
 }
