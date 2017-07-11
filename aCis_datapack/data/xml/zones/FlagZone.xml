@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+    <zone type="FlagZone" shape="NPoly" minZ="-4290" maxZ="-1290"><!-- Primeval Isle -->
+        <node X="10408" Y="-27395" />
+        <node X="12065" Y="-25334" />
+        <node X="15834" Y="-19850" />
+        <node X="8791" Y="-10223" />
+        <node X="3487" Y="-12137" />
+        <node X="4110" Y="-34245" />
+    </zone>
+</list>

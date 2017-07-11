@@ -234,12 +234,17 @@ import net.sf.l2j.gameserver.skills.funcs.FuncHennaWIT;
 import net.sf.l2j.gameserver.skills.funcs.FuncMaxCpMul;
 import net.sf.l2j.gameserver.skills.l2skills.L2SkillSiegeFlag;
 import net.sf.l2j.gameserver.skills.l2skills.L2SkillSummon;
+import net.sf.l2j.gameserver.taskmanager.ArmorTaskManager;
 import net.sf.l2j.gameserver.taskmanager.AttackStanceTaskManager;
+import net.sf.l2j.gameserver.taskmanager.BuffTaskManager;
 import net.sf.l2j.gameserver.taskmanager.GameTimeTaskManager;
 import net.sf.l2j.gameserver.taskmanager.ItemsOnGroundTaskManager;
+import net.sf.l2j.gameserver.taskmanager.NewCharTaskManager;
+import net.sf.l2j.gameserver.taskmanager.PreviewTaskManager;
 import net.sf.l2j.gameserver.taskmanager.PvpFlagTaskManager;
 import net.sf.l2j.gameserver.taskmanager.ShadowItemTaskManager;
 import net.sf.l2j.gameserver.taskmanager.WaterTaskManager;
+import net.sf.l2j.gameserver.taskmanager.WeaponTaskManager;
 import net.sf.l2j.gameserver.templates.skills.L2EffectFlag;
 import net.sf.l2j.gameserver.templates.skills.L2EffectType;
 import net.sf.l2j.gameserver.templates.skills.L2SkillType;
@@ -607,6 +612,7 @@ public final class Player extends Playable
 	private boolean _isEquip;
 	private boolean _isWepEquip;
 	private boolean _isBuff;
+	private boolean _isnewChar;
 	
 	private static final int FALLING_VALIDATION_DELAY = 10000;
 	private volatile long _fallingTimestamp;
@@ -4382,6 +4388,21 @@ public final class Player extends Playable
 		PvpFlagTaskManager.getInstance().remove(this);
 		GameTimeTaskManager.getInstance().remove(this);
 		ShadowItemTaskManager.getInstance().remove(this);
+		
+		if (isPreview())
+			PreviewTaskManager.getInstance().remove(this);
+		
+		if (isEquip())
+			ArmorTaskManager.getInstance().remove(this);
+		
+		if (isWepEquip())
+			WeaponTaskManager.getInstance().remove(this);
+		
+		if (isBuff())
+			BuffTaskManager.getInstance().remove(this);
+		
+		if (isNewChar())
+			NewCharTaskManager.getInstance().remove(this);
 	}
 	
 	/**
@@ -8545,6 +8566,21 @@ public final class Player extends Playable
 		if (isCursedWeaponEquipped())
 			CursedWeaponsManager.getInstance().getCursedWeapon(getCursedWeaponEquippedId()).cursedOnLogin();
 		
+		if (isPreview())
+			PreviewTaskManager.getInstance().add(this);
+		
+		if (isEquip())
+			ArmorTaskManager.getInstance().add(this);
+		
+		if (isWepEquip())
+			WeaponTaskManager.getInstance().add(this);
+		
+		if (isBuff())
+			BuffTaskManager.getInstance().add(this);
+		
+		if (isNewChar())
+			NewCharTaskManager.getInstance().add(this);
+		
 		// Add to the GameTimeTask to keep inform about activity time.
 		GameTimeTaskManager.getInstance().add(this);
 		
@@ -8647,6 +8683,30 @@ public final class Player extends Playable
 		
 		update.set(Calendar.HOUR_OF_DAY, 13);
 		_lastRecomUpdate = update.getTimeInMillis();
+	}
+	
+	public static void doNewChar(Player player, int time)
+	{
+		player.setNewChar(true);
+		NewCharTaskManager.getInstance().add(player);
+		long remainingTime = player.getMemos().getLong("newEndTime", 0);
+		if (remainingTime > 0)
+		{
+			player.getMemos().set("newEndTime", remainingTime + TimeUnit.MINUTES.toMillis(time));
+		}
+		else
+		{
+			player.getMemos().set("newEndTime", System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(time));
+			player.broadcastUserInfo();
+		}
+	}
+	
+	public static void removeNewChar(Player player)
+	{
+		NewCharTaskManager.getInstance().remove(player);
+		player.getMemos().set("newEndTime", 0);
+		player.setNewChar(false);
+		player.broadcastUserInfo();
 	}
 	
 	@Override
@@ -10429,6 +10489,16 @@ public final class Player extends Playable
 	public void setBuff(boolean b)
 	{
 		_isBuff = b;
+	}
+	
+	public boolean isNewChar()
+	{
+		return _isnewChar;
+	}
+	
+	public void setNewChar(boolean b)
+	{
+		_isnewChar = b;
 	}
 	
 	/**
