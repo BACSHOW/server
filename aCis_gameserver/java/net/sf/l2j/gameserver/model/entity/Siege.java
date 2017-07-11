@@ -836,16 +836,16 @@ public class Siege implements Siegable
 			case 4:
 			case 6:
 			case 7:
-				siegeDate.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+				siegeDate.set(Calendar.DAY_OF_WEEK, Config.SIEGE_DAY_1);
 				break;
 			
 			default:
-				siegeDate.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+				siegeDate.set(Calendar.DAY_OF_WEEK, Config.SIEGE_DAY_2);
 				break;
 		}
 		
 		// Set next siege date if siege has passed ; add 14 days (2 weeks).
-		siegeDate.add(Calendar.WEEK_OF_YEAR, 2);
+		siegeDate.add(Calendar.WEEK_OF_YEAR, Config.SIEGE_EVERY_WEEK);
 		
 		// Set default hour to 18:00. This can be changed - only once - by the castle leader via the chamberlain.
 		siegeDate.set(Calendar.HOUR_OF_DAY, 18);

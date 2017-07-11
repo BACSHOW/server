@@ -476,6 +476,9 @@ public final class Config
 	// Sieges
 	// --------------------------------------------------
 	
+	public static int SIEGE_DAY_1;
+	public static int SIEGE_DAY_2;
+    public static int SIEGE_EVERY_WEEK;
 	public static int SIEGE_LENGTH;
 	public static int MINIMUM_CLAN_LEVEL;
 	public static int MAX_ATTACKERS_NUMBER;
@@ -1358,6 +1361,9 @@ public final class Config
 	{
 		final ExProperties sieges = initProperties(Config.SIEGE_FILE);
 		
+		SIEGE_DAY_1 = sieges.getProperty("SiegeDay1", 1);
+		SIEGE_DAY_2 = sieges.getProperty("SiegeDay2", 2);
+		SIEGE_EVERY_WEEK = sieges.getProperty("EveryWeek", 1);
 		SIEGE_LENGTH = sieges.getProperty("SiegeLength", 120);
 		MINIMUM_CLAN_LEVEL = sieges.getProperty("SiegeClanMinLevel", 4);
 		MAX_ATTACKERS_NUMBER = sieges.getProperty("AttackerMaxClans", 10);
