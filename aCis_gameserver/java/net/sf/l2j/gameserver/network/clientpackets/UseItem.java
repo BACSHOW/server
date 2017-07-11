@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.handler.ItemHandler;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.actor.instance.Pet;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
+import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.model.holder.IntIntHolder;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.item.kind.Item;
@@ -89,6 +90,23 @@ public final class UseItem extends L2GameClientPacket
 		
 		if (activeChar.isAlikeDead() || activeChar.isStunned() || activeChar.isSleeping() || activeChar.isParalyzed() || activeChar.isAfraid())
 			return;
+		
+		if (Config.ANTIHEAVY_PROTECTION)
+		{
+			if ((item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 8) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 23) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 35) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 93) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 101) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 108) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 9) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 24) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 37) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 92) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 102) || (item.getItem().getItemType() == ArmorType.HEAVY) && (activeChar.getClassId().getId() == 109))
+			{
+				activeChar.sendMessage("Your class can't equip heavy type armors.");
+				return;
+			}
+		}
+		if (Config.ANTIBOW_PROTECTION)
+		{
+			if (item.getItemType() == WeaponType.BOW && activeChar.getClassId() == ClassId.TITAN || item.getItemType() == WeaponType.BOW && activeChar.getClassId() == ClassId.DREADNOUGHT || item.getItemType() == WeaponType.BOW && activeChar.getClassId() == ClassId.HELL_KNIGHT || item.getItemType() == WeaponType.BOW && activeChar.getClassId() == ClassId.PHOENIX_KNIGHT || item.getItemType() == WeaponType.BOW && activeChar.getClassId() == ClassId.EVAS_TEMPLAR || item.getItemType() == WeaponType.BOW && activeChar.getClassId() == ClassId.SHILLIEN_ELDER && !activeChar.isInOlympiadMode())
+			{
+				activeChar.sendMessage("You are allowedt to use this weapon only in Olympiad");
+				return;
+			}
+		}
 		
 		if (!Config.KARMA_PLAYER_CAN_TELEPORT && activeChar.getKarma() > 0)
 		{
@@ -226,37 +244,6 @@ public final class UseItem extends L2GameClientPacket
 			
 			if (activeChar.isCursedWeaponEquipped() && item.getItemId() == 6408) // Don't allow to put formal wear
 				return;
-			
-			if (Config.MASTERY_RESTRICTION)
-			{
-				if (!activeChar.isInOlympiadMode())
-				{
-					if (item.getItemType() == ArmorType.HEAVY)
-					{
-						if (activeChar.getSkillLevel(231) == -1 && activeChar.getSkillLevel(232) == -1 && activeChar.getSkillLevel(253) == -1 && activeChar.getSkillLevel(259) == -1)
-						{
-							activeChar.sendMessage("You can not use it since, do not have Heavy Mastery.");
-							return;
-						}
-					}
-					else if (item.getItemType() == ArmorType.LIGHT)
-					{
-						if (activeChar.getSkillLevel(227) == -1 && activeChar.getSkillLevel(233) == -1 && activeChar.getSkillLevel(236) == -1 && activeChar.getSkillLevel(258) == -1 && activeChar.getSkillLevel(252) == -1)
-						{
-							activeChar.sendMessage("You can not use it since, do not have Light Mastery.");
-							return;
-						}
-					}
-					else if (item.getItemType() == ArmorType.MAGIC)
-					{
-						if (activeChar.getSkillLevel(234) == -1 && activeChar.getSkillLevel(235) == -1 && activeChar.getSkillLevel(251) == -1)
-						{
-							activeChar.sendMessage("You can not use it since, do not have Robe Mastery.");
-							return;
-						}
-					}
-				}
-			}
 			
 			if (activeChar.isAttackingNow())
 				ThreadPool.schedule(new WeaponEquipTask(item, activeChar), (activeChar.getAttackEndTime() - System.currentTimeMillis()));

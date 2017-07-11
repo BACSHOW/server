@@ -694,8 +694,9 @@ public final class Config
 	/** Do not enchant near the NPC */
 	public static boolean ENCHANT_PROTECTOR;
 	
-	/** Item Restrictions */
-	public static boolean MASTERY_RESTRICTION;
+	/** Protections Bow/Heavy */
+	public static boolean ANTIHEAVY_PROTECTION;
+	public static boolean ANTIBOW_PROTECTION;
 	
 	/** No remove buff on die */
 	public static boolean LEAVE_BUFFS_ON_DIE;
@@ -764,6 +765,12 @@ public final class Config
 	
 	/** Olympiad Custom Date */
 	public static int OLY_WEEKS_PERIOD;
+	
+	/** RB Flag Zone */
+	public static boolean FLAG_RB;
+	
+	/** RB Spawn Announce */
+	public static boolean ANNOUNCE_RB_SPAWN;
 	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
@@ -1600,6 +1607,9 @@ public final class Config
 			INFINITY_ARROWS = custom.getProperty("InfinityArrows", false);
 			
 			OLY_WEEKS_PERIOD = custom.getProperty("OlyPeriodWeeks", 1);
+			
+			FLAG_RB = custom.getProperty("FlagRbZones", false);
+			ANNOUNCE_RB_SPAWN = custom.getProperty("AnnounceRbSpawn", false);
 		}
 		
 	}
@@ -1627,7 +1637,8 @@ public final class Config
 		
 		ENCHANT_PROTECTOR = security.getProperty("EnchantProtector", true);
 		
-		MASTERY_RESTRICTION = security.getProperty("MasteryRestriction", true);
+		ANTIHEAVY_PROTECTION = security.getProperty("AntiHeavyProtection", false);
+		ANTIBOW_PROTECTION = security.getProperty("AntiBowProtection", false);
 	}
 	
 	/**

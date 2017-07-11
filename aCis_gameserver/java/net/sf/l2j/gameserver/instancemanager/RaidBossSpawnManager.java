@@ -23,6 +23,7 @@ import net.sf.l2j.gameserver.model.L2Spawn;
 import net.sf.l2j.gameserver.model.actor.instance.RaidBoss;
 import net.sf.l2j.gameserver.model.actor.template.NpcTemplate;
 import net.sf.l2j.gameserver.templates.StatsSet;
+import net.sf.l2j.gameserver.util.Broadcast;
 
 /**
  * @author godson
@@ -125,6 +126,9 @@ public class RaidBossSpawnManager
 				_storedInfo.put(bossId, info);
 				
 				_log.info("RaidBoss: " + raidboss.getName() + " has spawned.");
+				
+				if (Config.ANNOUNCE_RB_SPAWN)
+					Broadcast.announceToOnlinePlayers("RaidBoss: " + raidboss.getName() + " has spawned in the world.", true);
 				
 				_bosses.put(bossId, raidboss);
 			}

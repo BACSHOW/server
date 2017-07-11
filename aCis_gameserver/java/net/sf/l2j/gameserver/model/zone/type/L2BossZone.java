@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.MapRegionTable.TeleportType;
 import net.sf.l2j.gameserver.model.actor.Attackable;
@@ -87,6 +88,10 @@ public class L2BossZone extends L2ZoneType
 				// Get player and set zone info.
 				final Player player = (Player) character;
 				player.setInsideZone(ZoneId.NO_SUMMON_FRIEND, true);
+				
+				// Enable to RB flag zone
+				if (Config.FLAG_RB)
+					player.updatePvPFlag(1);
 				
 				// Skip other checks for GM.
 				if (player.isGM())
