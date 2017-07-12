@@ -775,6 +775,10 @@ public final class Config
 	/** RB Spawn Announce */
 	public static boolean ANNOUNCE_RB_SPAWN;
 	
+	/** Custom Cancel Time */
+	public static boolean ALLOW_CUSTOM_CANCEL;
+	public static int CUSTOM_CANCEL_SECONDS;
+	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
 	// You still can experiment changing values here. But don't say I didn't warn you.
@@ -1616,6 +1620,9 @@ public final class Config
 			
 			FLAG_RB = custom.getProperty("FlagRbZones", false);
 			ANNOUNCE_RB_SPAWN = custom.getProperty("AnnounceRbSpawn", false);
+			
+			ALLOW_CUSTOM_CANCEL = custom.getProperty("AllowCustomCancelTask", false);
+			CUSTOM_CANCEL_SECONDS = custom.getProperty("CustomCancelSeconds", 5);
 		}
 		
 	}

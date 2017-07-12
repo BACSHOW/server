@@ -1,14 +1,19 @@
 package net.sf.l2j.gameserver.handler.skillhandlers;
 
+import java.util.Vector;
+
+import net.sf.l2j.commons.concurrent.ThreadPool;
 import net.sf.l2j.commons.random.Rnd;
 
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
+import net.sf.l2j.gameserver.taskmanager.CustomCancelTaskManager;
 import net.sf.l2j.gameserver.model.L2Effect;
 import net.sf.l2j.gameserver.model.L2Skill;
 import net.sf.l2j.gameserver.model.ShotType;
 import net.sf.l2j.gameserver.model.WorldObject;
 import net.sf.l2j.gameserver.model.actor.Creature;
+import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.skills.Formulas;
 import net.sf.l2j.gameserver.templates.skills.L2SkillType;
 
@@ -27,6 +32,7 @@ public class Cancel implements ISkillHandler
 	@Override
 	public void useSkill(Creature activeChar, L2Skill skill, WorldObject[] targets)
 	{
+		Vector<L2Skill> cancelledBuffs = new Vector<>();
 		// Delimit min/max % success.
 		final int minRate = (skill.getSkillType() == L2SkillType.CANCEL) ? 25 : 40;
 		final int maxRate = (skill.getSkillType() == L2SkillType.CANCEL) ? 75 : 95;
@@ -78,6 +84,14 @@ public class Cancel implements ISkillHandler
 						continue;
 				}
 				
+				if (Config.ALLOW_CUSTOM_CANCEL)
+				{
+					if (!cancelledBuffs.contains(effect.getSkill()))
+					{
+						cancelledBuffs.add(effect.getSkill());
+					}
+				}
+				
 				// If that skill effect was already canceled, continue.
 				if (effect.getSkill().getId() == lastCanceledSkillId)
 					continue;
@@ -87,6 +101,14 @@ public class Cancel implements ISkillHandler
 				{
 					// Stores the last canceled skill for further use.
 					lastCanceledSkillId = effect.getSkill().getId();
+					
+					if (Config.ALLOW_CUSTOM_CANCEL)
+					{
+						if (cancelledBuffs.size() > 0)
+						{
+							ThreadPool.schedule(new CustomCancelTaskManager((Player) target, cancelledBuffs), Config.CUSTOM_CANCEL_SECONDS * 1000);
+						}
+					}
 					
 					// Exit the effect.
 					effect.exit();
@@ -112,6 +134,9 @@ public class Cancel implements ISkillHandler
 			
 			skill.getEffectsSelf(activeChar);
 		}
+		if(!cancelledBuffs.isEmpty())
+			cancelledBuffs.clear();
+		
 		activeChar.setChargedShot(activeChar.isChargedShot(ShotType.BLESSED_SPIRITSHOT) ? ShotType.BLESSED_SPIRITSHOT : ShotType.SPIRITSHOT, skill.isStaticReuse());
 	}
 	
