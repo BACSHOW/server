@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 
+import net.sf.l2j.commons.util.SysUtil;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.communitybbs.Manager.MailBBSManager;
@@ -34,6 +36,7 @@ import net.sf.l2j.gameserver.model.entity.ClanHall;
 import net.sf.l2j.gameserver.model.entity.Siege;
 import net.sf.l2j.gameserver.model.entity.Siege.SiegeSide;
 import net.sf.l2j.gameserver.model.holder.IntIntHolder;
+import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.olympiad.Olympiad;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
 import net.sf.l2j.gameserver.network.SystemMessageId;
@@ -167,6 +170,24 @@ public class EnterWorld extends L2GameClientPacket
 			
 			activeChar.sendPacket(new UserInfo(activeChar));
 			activeChar.sendPacket(new PledgeStatusChanged(clan));
+		}
+		
+		for (ItemInstance i : activeChar.getInventory().getItems())
+		{
+			if (!activeChar.isGM())
+			{
+				if (i.isEquipable())
+				{
+					if (i.getEnchantLevel() > Config.ENCHANT_MAX_WEAPON || i.getEnchantLevel() > Config.ENCHANT_MAX_ARMOR)
+					{
+						activeChar.getInventory().destroyItem(null, i, activeChar, null);
+						activeChar.sendMessage("SYS: You have Items over enchanted you will be kicked!");
+						activeChar.setPunishLevel(Player.PunishLevel.JAIL, 1200);
+						_log.info("#### ATTENCTION ####");
+						_log.info(i+" item has been removed from player.");
+					}
+				}
+			}
 		}
 		
 		// Updating Seal of Strife Buff/Debuff

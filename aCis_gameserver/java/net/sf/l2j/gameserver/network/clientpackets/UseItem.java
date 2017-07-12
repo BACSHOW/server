@@ -216,6 +216,13 @@ public final class UseItem extends L2GameClientPacket
 		
 		if (item.isEquipable())
 		{
+			if (!activeChar.isGM() && item.getEnchantLevel() > Config.ENCHANT_MAX_WEAPON || item.getEnchantLevel() > Config.ENCHANT_MAX_ARMOR)
+			{
+				activeChar.sendMessage("You have been kicked for using an item overenchanted!");
+				activeChar.closeNetConnection(true);
+				return;
+			}
+			
 			if (activeChar.isCastingNow() || activeChar.isCastingSimultaneouslyNow())
 			{
 				activeChar.sendPacket(SystemMessageId.CANNOT_USE_ITEM_WHILE_USING_MAGIC);
