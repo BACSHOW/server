@@ -121,6 +121,11 @@ public final class Config
 	public static int CH_FRONT1_FEE;
 	public static int CH_FRONT2_FEE;
 	
+	/** Partisan Hideout */
+	public static int PARTISAN_DAY;
+	public static int PARTISAN_HOUR;
+	public static int PARTISAN_MINUTES;
+	
 	// --------------------------------------------------
 	// Events settings
 	// --------------------------------------------------
@@ -951,6 +956,9 @@ public final class Config
 		CH_FRONT_FEE_RATIO = clans.getProperty("ClanHallFrontPlatformFunctionFeeRatio", 86400000);
 		CH_FRONT1_FEE = clans.getProperty("ClanHallFrontPlatformFunctionFeeLvl1", 3031);
 		CH_FRONT2_FEE = clans.getProperty("ClanHallFrontPlatformFunctionFeeLvl2", 9331);
+		PARTISAN_DAY = clans.getProperty("PartisanDay", 5);
+		PARTISAN_HOUR = clans.getProperty("PartisanHour", 21);
+		PARTISAN_MINUTES = clans.getProperty("PartisanMinutes", 0);
 	}
 	
 	/**

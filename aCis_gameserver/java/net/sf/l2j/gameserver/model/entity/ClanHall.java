@@ -49,6 +49,7 @@ public class ClanHall
 	private final Map<Integer, ClanHallFunction> _functions = new ConcurrentHashMap<>();
 	
 	private int _ownerId;
+	private L2Clan _ownerClan;
 	private L2ClanHallZone _zone;
 	
 	protected long _paidUntil;
@@ -240,6 +241,21 @@ public class ClanHall
 	public final int getOwnerId()
 	{
 		return _ownerId;
+	}
+	
+	public L2Clan getOwnerClan()
+	{
+		if (_ownerId == 0)
+		{
+			return null;
+		}
+		
+		if (_ownerClan == null)
+		{
+			_ownerClan = ClanTable.getInstance().getClan(getOwnerId());
+		}
+		
+		return _ownerClan;
 	}
 	
 	/**
