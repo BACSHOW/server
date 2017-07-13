@@ -350,22 +350,46 @@
 
 	<script path="scripts.ai.L2AttackableAIScript"/>
 
+	<script path="scripts.ai.group.AncientEgg"/>
+	<script path="scripts.ai.group.ArimanesOfDestruction"/>
+	<script path="scripts.ai.group.AshurasOfDestruction"/>
+	<script path="scripts.ai.group.AssasinBeetle"/>
+	<script path="scripts.ai.group.BrekaOrcOverlord"/>
+	<script path="scripts.ai.group.CatsEyeBandit"/>				
 	<script path="scripts.ai.group.Chests"/>
+	<script path="scripts.ai.group.DeluLizardmanSpecialAgent"/>
+	<script path="scripts.ai.group.DeluLizardmanSpecialCommander"/>
+	<script path="scripts.ai.group.Elpy"/>
+	<script path="scripts.ai.group.FairyTrees"/>
 	<script path="scripts.ai.group.FeedableBeasts"/>
 	<script path="scripts.ai.group.FleeingNPCs"/>
 	<script path="scripts.ai.group.FrenzyOnAttack"/>
 	<script path="scripts.ai.group.FrozenLabyrinth"/>
 	<script path="scripts.ai.group.GatekeeperZombies"/>
 	<script path="scripts.ai.group.HotSpringDisease"/>
+	<script path="scripts.ai.group.KarulBugBear"/>
+	<script path="scripts.ai.group.MagmaDrake"/>
+	<script path="scripts.ai.group.MasterToma"/>
 	<script path="scripts.ai.group.Monastery"/>
+	<script path="scripts.ai.group.NecromancerOfDestruction"/>
+	<script path="scripts.ai.group.OlMahumGeneral"/>
 	<script path="scripts.ai.group.PlainsOfDion"/>
 	<script path="scripts.ai.group.PolymorphingAngel"/>
 	<script path="scripts.ai.group.PolymorphingOnAttack"/>
 	<script path="scripts.ai.group.PrimevalIsle"/>
+	<script path="scripts.ai.group.ScarletStokateNoble"/>
 	<script path="scripts.ai.group.SearchingMaster"/>
 	<script path="scripts.ai.group.SpeakingNPCs"/>
+	<script path="scripts.ai.group.Splendor"/>
+	<script path="scripts.ai.group.SummonOnAttack"/>
 	<script path="scripts.ai.group.StakatoNest"/>
 	<script path="scripts.ai.group.SummonMinions"/>
+	<script path="scripts.ai.group.TimakOrcOverlord"/>
+	<script path="scripts.ai.group.TimakOrcTroopLeader"/>
+	<script path="scripts.ai.group.TurekOrcFootman"/>
+	<script path="scripts.ai.group.TurekOrcSupplier"/>
+	<script path="scripts.ai.group.TurekOrcWarlord"/>
+	<script path="scripts.ai.group.ZombieGatekeepers"/>
 
 	<script path="scripts.ai.individual.Antharas"/>
 	<script path="scripts.ai.individual.Baium"/>
