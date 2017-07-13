@@ -738,7 +738,7 @@ public final class Config
 	// Events settings
 	// --------------------------------------------------
 	public static boolean TVT_EVENT_ENABLED;
-	public static int TVT_EVENT_INTERVAL;
+	public static String[] TVT_EVENT_INTERVAL;
 	public static int TVT_EVENT_PARTICIPATION_TIME;
 	public static int TVT_EVENT_RUNNING_TIME;
 	public static int TVT_EVENT_PARTICIPATION_NPC_ID;
@@ -1740,7 +1740,7 @@ public final class Config
 		final ExProperties event = initProperties(EVENT_FILE);
 		
 		TVT_EVENT_ENABLED = event.getProperty("TvTEventEnabled", false);
-		TVT_EVENT_INTERVAL = event.getProperty("TvTEventInterval", 18000);
+		TVT_EVENT_INTERVAL = event.getProperty("TvTEventInterval", "20:00").split(",");
 		TVT_EVENT_PARTICIPATION_TIME = event.getProperty("TvTEventParticipationTime", 3600);
 		TVT_EVENT_RUNNING_TIME = event.getProperty("TvTEventRunningTime", 1800);
 		TVT_EVENT_PARTICIPATION_NPC_ID = event.getProperty("TvTEventParticipationNpcId", 0);
