@@ -10,6 +10,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.events.TvTEvent;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
+import net.sf.l2j.gameserver.events.DMEvent;
+import net.sf.l2j.gameserver.events.LMEvent;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.item.kind.Item;
 import net.sf.l2j.gameserver.model.item.type.CrystalType;
@@ -17,6 +19,7 @@ import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.InventoryUpdate;
 import net.sf.l2j.gameserver.network.serverpackets.ItemList;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
+import net.sf.l2j.gameserver.network.serverpackets.RestartResponse;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
@@ -253,6 +256,18 @@ public class OlympiadManager
 		if (!TvTEvent.isInactive() && TvTEvent.isPlayerParticipant(player.getName()))
 		{
 			player.sendMessage("You can not register in olympiad while registered at TvT.");
+			return false;
+		}
+		
+		if (!DMEvent.isInactive() && DMEvent.isPlayerParticipant(player.getObjectId()))
+		{
+			player.sendMessage("You can not register in olympiad while registered at DMEvent.");
+			return false;
+		}
+		
+		if (!LMEvent.isInactive() && LMEvent.isPlayerParticipant(player.getObjectId()))
+		{
+			player.sendMessage("You can not register in olympiad while registered at LMEvent.");
 			return false;
 		}
 		

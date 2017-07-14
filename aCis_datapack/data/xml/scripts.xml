@@ -417,6 +417,7 @@
 	<script path="scripts.custom.HeroCirclet"/>
 	<script path="scripts.custom.HeroWeapon"/>
 	<script path="scripts.custom.PcPoint"/>
+	<script path="scripts.custom.NewbieHelper"/>
 
 	<!-- Events -->
 

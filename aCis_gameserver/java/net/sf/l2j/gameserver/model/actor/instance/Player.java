@@ -44,6 +44,8 @@ import net.sf.l2j.gameserver.datatables.RecipeTable;
 import net.sf.l2j.gameserver.datatables.SkillTable;
 import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
 import net.sf.l2j.gameserver.datatables.SkillTreeTable;
+import net.sf.l2j.gameserver.events.DMEvent;
+import net.sf.l2j.gameserver.events.LMEvent;
 import net.sf.l2j.gameserver.events.TvTEvent;
 import net.sf.l2j.gameserver.geoengine.GeoEngine;
 import net.sf.l2j.gameserver.handler.IItemHandler;
@@ -4068,7 +4070,7 @@ public final class Player extends Playable
 	
 	public boolean isInFunEvent()
 	{
-		return (atEvent || (TvTEvent.isStarted() && TvTEvent.isPlayerParticipant(getName())) && !isGM());
+		return (atEvent || (TvTEvent.isStarted() && TvTEvent.isPlayerParticipant(getName()) || (DMEvent.isStarted() && DMEvent.isPlayerParticipant(getObjectId())) || (LMEvent.isStarted() && LMEvent.isPlayerParticipant(getObjectId()))) && !isGM());
 	}
 	
 	private void onDieDropItem(Creature killer)
@@ -10895,5 +10897,18 @@ public final class Player extends Playable
 	public String getLastHwId()
 	{
 		return _hwid;
+	}
+	
+	private boolean _hideInfo = false;
+	public Integer _originalColorName, _originalColorTitle;
+	
+	public boolean isHideInfo()
+	{
+		return _hideInfo;
+	}
+	
+	public void setHideInfo(boolean hideInfo)
+	{
+		_hideInfo = hideInfo;
 	}
 }

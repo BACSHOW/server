@@ -14,6 +14,8 @@ import net.sf.l2j.gameserver.datatables.AnnouncementTable;
 import net.sf.l2j.gameserver.datatables.GmListTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable.TeleportType;
 import net.sf.l2j.gameserver.datatables.SkillTable.FrequentSkill;
+import net.sf.l2j.gameserver.events.DMEvent;
+import net.sf.l2j.gameserver.events.LMEvent;
 import net.sf.l2j.gameserver.events.TvTEvent;
 import net.sf.l2j.gameserver.instancemanager.CastleManager;
 import net.sf.l2j.gameserver.instancemanager.ClanHallManager;
@@ -343,6 +345,8 @@ public class EnterWorld extends L2GameClientPacket
 		
 		activeChar.onPlayerEnter();
 		TvTEvent.onLogin(activeChar, activeChar);
+		DMEvent.onLogin(activeChar);
+		LMEvent.onLogin(activeChar);
 		activeChar.showPcBangWindow();
 		
 		sendPacket(new SkillCoolTime(activeChar));

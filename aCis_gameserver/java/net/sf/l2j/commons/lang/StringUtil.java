@@ -171,4 +171,22 @@ public final class StringUtil
 		
 		return result;
 	}
+	
+	/**
+	 * Concatenates strings.
+	 * @param strings strings to be concatenated
+	 * @return concatenated string
+	 * @see StringUtil
+	 */
+	public static String concat(final String... strings)
+	{
+		final StringBuilder sbString = new StringBuilder();
+		
+		for (final String string : strings)
+		{
+			sbString.append(string);
+		}
+		
+		return sbString.toString();
+	}
 }

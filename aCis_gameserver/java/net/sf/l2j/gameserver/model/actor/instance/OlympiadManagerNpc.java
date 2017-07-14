@@ -6,6 +6,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import net.sf.l2j.commons.lang.StringUtil;
 
 import net.sf.l2j.gameserver.datatables.MultisellData;
+import net.sf.l2j.gameserver.events.DMEvent;
+import net.sf.l2j.gameserver.events.LMEvent;
 import net.sf.l2j.gameserver.events.TvTEvent;
 import net.sf.l2j.gameserver.model.actor.template.NpcTemplate;
 import net.sf.l2j.gameserver.model.entity.Hero;
@@ -178,7 +180,7 @@ public class OlympiadManagerNpc extends Folk
 		}
 		else if (command.startsWith("Olympiad"))
 		{
-			if (TvTEvent.isParticipating())
+			if (TvTEvent.isParticipating() || DMEvent.isParticipating() && LMEvent.isParticipating())
 			{
 				player.sendMessage("You can't do that while in a event.");
 				return;
@@ -218,7 +220,7 @@ public class OlympiadManagerNpc extends Folk
 					break;
 				
 				case 3: // Spectator overview
-					if (TvTEvent.isParticipating() || TvTEvent.isStarting() || TvTEvent.isStarted())
+					if (TvTEvent.isParticipating() || TvTEvent.isStarting() || TvTEvent.isStarted() || DMEvent.isParticipating() || DMEvent.isStarting() || DMEvent.isStarted() || LMEvent.isParticipating() || LMEvent.isStarting() || LMEvent.isStarted())
 					{
 						 player.sendMessage("You can't do that while in a event.");
 						 return;

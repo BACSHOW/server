@@ -2,6 +2,8 @@ package net.sf.l2j.gameserver.handler.skillhandlers;
 
 import net.sf.l2j.commons.math.MathUtil;
 
+import net.sf.l2j.gameserver.events.DMEvent;
+import net.sf.l2j.gameserver.events.LMEvent;
 import net.sf.l2j.gameserver.events.TvTEvent;
 import net.sf.l2j.gameserver.handler.ISkillHandler;
 import net.sf.l2j.gameserver.model.L2Skill;
@@ -36,7 +38,7 @@ public class SummonFriend implements ISkillHandler
 			return;
 		
 		// Players can't summon anyone on event
-		if (!TvTEvent.isInactive() && TvTEvent.isPlayerParticipant(player.getName()))
+		if (!TvTEvent.isInactive() && TvTEvent.isPlayerParticipant(player.getName()) || !DMEvent.isInactive() && DMEvent.isPlayerParticipant(player.getObjectId()) && !LMEvent.isInactive() && LMEvent.isPlayerParticipant(player.getObjectId()))
 		{
 			player.sendMessage("You can not use this action when it is participating in this event.");
 			return;

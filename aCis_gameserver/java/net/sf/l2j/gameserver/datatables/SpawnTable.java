@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
+import net.sf.l2j.commons.concurrent.ThreadPool;
+
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.instancemanager.DayNightSpawnManager;
@@ -30,7 +32,7 @@ public class SpawnTable
 	protected SpawnTable()
 	{
 		if (!Config.ALT_DEV_NO_SPAWNS)
-			fillSpawnTable();
+			ThreadPool.schedule(new NPCServerTask(), Config.NPC_SERVER_DELAY * 1000);
 	}
 	
 	public Set<L2Spawn> getSpawnTable()
@@ -170,6 +172,17 @@ public class SpawnTable
 	{
 		_spawntable.clear();
 		fillSpawnTable();
+	}
+	
+	class NPCServerTask implements Runnable
+	{
+		@SuppressWarnings("synthetic-access")
+		@Override
+		public void run()
+		{
+			fillSpawnTable();
+			_log.info("NPC Server: Task initialization..."); 
+		}
 	}
 	
 	private static class SingletonHolder

@@ -61,6 +61,7 @@ import net.sf.l2j.gameserver.scripting.EventType;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
 import net.sf.l2j.gameserver.scripting.ScriptManager;
+import net.sf.l2j.gameserver.skills.Stats;
 import net.sf.l2j.gameserver.taskmanager.DecayTaskManager;
 import net.sf.l2j.gameserver.taskmanager.RandomAnimationTaskManager;
 import net.sf.l2j.gameserver.templates.skills.L2SkillType;
@@ -460,6 +461,40 @@ public class Npc extends Creature
 			html.replace("%ai_spsinfo%", _currentSpsCount + "[" + getTemplate().getSpsCount() + "] - " + getTemplate().getSpsRate() + "%");
 			html.replace("%butt%", ((this instanceof Merchant) ? "<button value=\"Shop\" action=\"bypass -h admin_show_shop " + getNpcId() + "\" width=65 height=19 back=\"L2UI_ch3.smallbutton2_over\" fore=\"L2UI_ch3.smallbutton2\">" : ""));
 			player.sendPacket(html);
+		}
+		
+		else if (Config.ENABLE_SHIFT_CLICK_TO_NPCS)
+		{
+			String name = getName();
+			NpcHtmlMessage html = new NpcHtmlMessage(5);
+			html.setFile("data/html/mods/NpcShiftClick.htm");
+			if (name.length() >= 18)
+			{
+				name = name.substring(0, 16) + "...";
+			}
+			html.replace("%Name%", name);
+			html.replace("%RespawnTime%", (getSpawn() != null ? getSpawn().getRespawnDelay() / 1000 + "  Seconds" : "?  Seconds"));
+			html.replace("%MaxHp%", (int) (getMaxHp() / getStat().calcStat(Stats.MAX_HP, 1, this, null)) + " * " + (int) getStat().calcStat(Stats.MAX_HP, 1, this, null));
+			html.replace("%MaxMp%", getMaxMp());
+			html.replace("%pAtk%", getPAtk(null));
+			html.replace("%mAtk%", getMAtk(null, null));
+			html.replace("%pDef%", getPDef(null));
+			html.replace("%mDef%", getMDef(null, null));
+			html.replace("%Accuracy%", getAccuracy());
+			html.replace("%Evasion%", getEvasionRate(null));
+			html.replace("%Critical%", getCriticalHit(null, null));
+			html.replace("%runspeed%", getRunSpeed());
+			html.replace("%atkSpd%", getPAtkSpd());
+			html.replace("%cSpd%", getMAtkSpd());
+			html.replace("%Race%", getTemplate().getRace().toString());
+			html.replace("%STR%", getSTR());
+			html.replace("%DEX%", getDEX());
+			html.replace("%CON%", getCON());
+			html.replace("%INT%", getINT());
+			html.replace("%WIT%", getWIT());
+			html.replace("%MAN%", getMEN());
+			player.sendPacket(html);
+			html = null;
 		}
 		
 		if (player.getTarget() != this)

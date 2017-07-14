@@ -1,9 +1,11 @@
 package net.sf.l2j.gameserver.model.actor.appearance;
 
+import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.Sex;
 
 public final class PcAppearance
 {
+	private Player _owner;
 	private byte _face;
 	private byte _hairColor;
 	private byte _hairStyle;
@@ -11,6 +13,8 @@ public final class PcAppearance
 	private boolean _invisible = false;
 	private int _nameColor = 0xFFFFFF;
 	private int _titleColor = 0xFFFF77;
+	private String _visibleName;
+	private String _visibleTitle;
 	
 	public PcAppearance(byte face, byte hColor, byte hStyle, Sex sex)
 	{
@@ -103,5 +107,38 @@ public final class PcAppearance
 	public void setTitleColor(int red, int green, int blue)
 	{
 		_titleColor = (red & 0xFF) + ((green & 0xFF) << 8) + ((blue & 0xFF) << 16);
+	}
+	
+	public final void setVisibleName(String visibleName)
+	{
+		_visibleName = visibleName;
+	}
+	
+	public final String getVisibleName()
+	{
+		if (_visibleName == null)
+		{
+			_visibleName = getOwner().getName();
+		}
+		return _visibleName;
+	}
+	
+	public final void setVisibleTitle(String visibleTitle)
+	{
+		_visibleTitle = visibleTitle;
+	}
+	
+	public final String getVisibleTitle()
+	{
+		if (_visibleTitle == null)
+		{
+			_visibleTitle = getOwner().getTitle();
+		}
+		return _visibleTitle;
+	}
+	
+	public Player getOwner()
+	{
+		return _owner;
 	}
 }
