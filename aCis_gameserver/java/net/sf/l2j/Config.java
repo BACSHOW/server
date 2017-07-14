@@ -788,6 +788,17 @@ public final class Config
 	public static boolean ALLOW_CUSTOM_CANCEL;
 	public static int CUSTOM_CANCEL_SECONDS;
 	
+	/** Protection Settings */
+	public static boolean ENABLED;
+	public static int SERVER_KEY;
+	public static String LOG_OPTION;
+	public static int MAX_SESSIONS;
+	public static int MAX_PREMIUM_SESSIONS;
+	public static boolean ANNOUNCE_HACK;
+	public static String ON_HACK_ATTEMP;
+	public static boolean ALLOW_GM_FROM_BANNED_HWID;
+	public static boolean LOG_SESSIONS;
+	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
 	// You still can experiment changing values here. But don't say I didn't warn you.
@@ -1672,6 +1683,16 @@ public final class Config
 		
 		ANTIHEAVY_PROTECTION = security.getProperty("AntiHeavyProtection", false);
 		ANTIBOW_PROTECTION = security.getProperty("AntiBowProtection", false);
+		
+		ENABLED = security.getProperty("Enabled", true);
+		SERVER_KEY = security.getProperty("ServerKey", 7958915);
+		LOG_OPTION = security.getProperty("LogOption", "NOSPS HACK");
+		MAX_SESSIONS = security.getProperty("MaxSessionsFromHWID", -1);
+		MAX_PREMIUM_SESSIONS = security.getProperty("MaxSessionsForPremium", -1);
+		ANNOUNCE_HACK = security.getProperty("AnnounceHackAttempt", true);
+		ON_HACK_ATTEMP = security.getProperty("OnHackAttempt", "kick");
+		ALLOW_GM_FROM_BANNED_HWID = security.getProperty("AllowGMFromBannedHWID", false);
+		LOG_SESSIONS = security.getProperty("LogSessions", false);
 	}
 	
 	/**

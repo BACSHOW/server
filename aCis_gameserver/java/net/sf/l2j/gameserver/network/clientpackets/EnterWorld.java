@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 
-import net.sf.l2j.commons.util.SysUtil;
-
 import net.sf.l2j.Config;
 import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.communitybbs.Manager.MailBBSManager;
@@ -49,7 +47,6 @@ import net.sf.l2j.gameserver.network.serverpackets.FriendList;
 import net.sf.l2j.gameserver.network.serverpackets.HennaInfo;
 import net.sf.l2j.gameserver.network.serverpackets.ItemList;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.PledgeShowMemberListAll;
 import net.sf.l2j.gameserver.network.serverpackets.PledgeShowMemberListUpdate;
 import net.sf.l2j.gameserver.network.serverpackets.PledgeSkillList;
@@ -233,7 +230,7 @@ public class EnterWorld extends L2GameClientPacket
 		activeChar.sendPacket(SevenSigns.getInstance().getCurrentPeriod().getMessageId());
 		AnnouncementTable.getInstance().showAnnouncements(activeChar, false);
 		
-		if (Config.ALT_OLY_END_ANNOUNCE || activeChar.isNoble() && activeChar.isGM())
+		if (Config.ALT_OLY_END_ANNOUNCE && activeChar.isNoble() || activeChar.isGM())
 			Olympiad.olympiadEnd(activeChar);
 		
 		// if player is DE, check for shadow sense skill at night
@@ -375,4 +372,6 @@ public class EnterWorld extends L2GameClientPacket
 	{
 		return false;
 	}
+	
+	
 }

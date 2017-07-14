@@ -27,9 +27,11 @@ import net.sf.l2j.gameserver.model.CharSelectInfoPackage;
 import net.sf.l2j.gameserver.model.L2Clan;
 import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
+import net.sf.l2j.gameserver.network.L2GameClient.IExReader;
 import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.network.serverpackets.L2GameServerPacket;
 import net.sf.l2j.gameserver.network.serverpackets.ServerClose;
+import net.sf.l2j.protection.CatsGuard;
 
 import main.data.PlayerData;
 
@@ -55,6 +57,8 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 	private SessionKey _sessionId;
 	private Player _activeChar;
 	private final ReentrantLock _activeCharLock = new ReentrantLock();
+	private String _hwid = null;
+	public IExReader _reader;
 	
 	@SuppressWarnings("unused")
 	private boolean _isAuthedGG;
@@ -142,6 +146,11 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 	public void setActiveChar(Player pActiveChar)
 	{
 		_activeChar = pActiveChar;
+		
+		if ((_reader != null) && (_activeChar != null))
+		{
+			_reader.checkChar(_activeChar);
+		}
 	}
 	
 	public ReentrantLock getActiveCharLock()
@@ -162,6 +171,11 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 	public void setAccountName(String pAccountName)
 	{
 		_accountName = pAccountName;
+		
+		if (_reader == null)
+		{
+			CatsGuard.getInstance().initSession(this);
+		}
 	}
 	
 	public String getAccountName()
@@ -476,6 +490,11 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 		{
 			// server is closing
 		}
+		
+		if (_reader != null)
+		{
+			CatsGuard.getInstance().doneSession(this);
+		}
 	}
 	
 	/**
@@ -781,5 +800,22 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 			return task.cancel(true);
 		}
 		return false;
+	}
+	
+	public void setHWID(String hwid)
+	{
+		_hwid = hwid;
+	}
+	
+	public String getHWid()
+	{
+		return _hwid;
+	}
+	
+	public static abstract interface IExReader
+	{
+		public abstract int read(ByteBuffer paramByteBuffer);
+		
+		public abstract void checkChar(Player paramL2PcInstance);
 	}
 }

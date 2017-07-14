@@ -1,5 +1,7 @@
 package net.sf.l2j.gameserver;
 
+import com.lameguard.LameGuard;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -110,6 +112,7 @@ import net.sf.l2j.gameserver.taskmanager.RandomAnimationTaskManager;
 import net.sf.l2j.gameserver.taskmanager.ShadowItemTaskManager;
 import net.sf.l2j.gameserver.taskmanager.WaterTaskManager;
 import net.sf.l2j.gameserver.xmlfactory.XMLDocumentFactory;
+import net.sf.l2j.protection.CatsGuard;
 import net.sf.l2j.util.DeadLockDetector;
 import net.sf.l2j.util.IPv4Filter;
 
@@ -120,15 +123,14 @@ public class GameServer
 	private static final Logger _log = Logger.getLogger(GameServer.class.getName());
 	
 	private final SelectorThread<L2GameClient> _selectorThread;
-	
 	private static GameServer _gameServer;
 	
-	public static void main(String[] args) throws Exception
+	public static void main(String[] args) throws Throwable
 	{
 		_gameServer = new GameServer();
 	}
 	
-	public GameServer() throws Exception
+	public GameServer() throws Throwable
 	{
 		// Create log folder
 		new File("./log").mkdir();
@@ -295,6 +297,31 @@ public class GameServer
 		_log.config("SkillHandler: Loaded " + SkillHandler.getInstance().size() + " handlers.");
 		_log.config("UserCommandHandler: Loaded " + UserCommandHandler.getInstance().size() + " handlers.");
 		_log.config("VoicedCommandHandler: Loaded " + VoicedCommandHandler.getInstance().size() + " handlers.");
+		
+		StringUtil.printSection("Protection System [Cats Guard]");
+		CatsGuard.getInstance();
+		if (!CatsGuard.getInstance().isEnabled())
+		{
+			try
+			{
+				Class<?> clazz = Class.forName("com.lameguard.LameGuard");
+				if (clazz != null)
+				{
+					File f = new File("./protect/security.properties");
+					if (f.exists())
+					{
+						StringUtil.printSection("LameGuard");
+						LameGuard.main(new String[]
+						{
+							"net.sf.l2j.protection.LameStub"
+						});
+					}
+				}
+			}
+			catch (Exception ignored)
+			{
+			}
+		}
 		
 		StringUtil.printSection("Custom");
 		EngineModsManager.init();
