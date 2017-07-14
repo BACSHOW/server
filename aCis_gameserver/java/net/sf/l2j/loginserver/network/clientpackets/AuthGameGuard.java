@@ -1,5 +1,6 @@
 package net.sf.l2j.loginserver.network.clientpackets;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.loginserver.network.LoginClient.LoginClientState;
 import net.sf.l2j.loginserver.network.serverpackets.GGAuth;
 import net.sf.l2j.loginserver.network.serverpackets.LoginFail.LoginFailReason;
@@ -55,6 +56,11 @@ public class AuthGameGuard extends L2LoginClientPacket
 	@Override
 	public void run()
 	{
+		if (Config.CRYPT_TOKEN)
+		{
+			int key = _data1 ^ 0x797183;
+			_sessionId ^= key;
+		}
 		if (_sessionId == getClient().getSessionId())
 		{
 			getClient().setState(LoginClientState.AUTHED_GG);

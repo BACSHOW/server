@@ -268,6 +268,8 @@ public final class Config
 	
 	public static boolean LOG_LOGIN_CONTROLLER;
 	
+	public static boolean CRYPT_TOKEN;
+	
 	public static boolean FLOOD_PROTECTION;
 	public static int FAST_CONNECTION_LIMIT;
 	public static int NORMAL_CONNECTION_TIME;
@@ -841,6 +843,10 @@ public final class Config
 	
 	/** Online List */
 	public static boolean ENABLE_ONLINE;
+	
+	/** Grandboss Info */
+	public static String GRAND_BOSS;
+	public static List<Integer> GRAND_BOSS_LIST;
 	
 	/** Olympiad Custom Date */
 	public static int OLY_WEEKS_PERIOD;
@@ -1848,6 +1854,12 @@ public final class Config
 		BANKING_SYSTEM_GOLDBARS = voiced.getProperty("BankingGoldbarCount", 1);
 		BANKING_SYSTEM_ADENA = voiced.getProperty("BankingAdenaCount", 1000000000);
 		ENABLE_ONLINE = voiced.getProperty("OnlineCmd", true);
+		GRAND_BOSS = voiced.getProperty("GrandBossList");
+		GRAND_BOSS_LIST = new ArrayList<>();
+		for (String id : GRAND_BOSS.trim().split(","))
+		{
+			GRAND_BOSS_LIST.add(Integer.parseInt(id.trim()));
+		}
 		EVENTS_ALLOW_VOICED_COMMAND = voiced.getProperty("EventsAllowVoicedInfoCommand", false);
 	}
 	
@@ -2462,6 +2474,7 @@ public final class Config
 		
 		LOG_LOGIN_CONTROLLER = server.getProperty("LogLoginController", false);
 		
+		CRYPT_TOKEN = server.getProperty("CryptToken", true);
 		FLOOD_PROTECTION = server.getProperty("EnableFloodProtection", true);
 		FAST_CONNECTION_LIMIT = server.getProperty("FastConnectionLimit", 15);
 		NORMAL_CONNECTION_TIME = server.getProperty("NormalConnectionTime", 700);
