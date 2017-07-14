@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q404_PathToAHumanWizard extends Quest
 {
@@ -58,12 +59,12 @@ public class Q404_PathToAHumanWizard extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30410-03.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BROKEN_BRONZE_MIRROR, 1);
 			st.giveItems(WIND_FEATHER, 1);
 		}
@@ -109,7 +110,7 @@ public class Q404_PathToAHumanWizard extends Quest
 							st.giveItems(BEAD_OF_SEASON, 1);
 							st.rewardExpAndSp(3200, 2020);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -119,7 +120,7 @@ public class Q404_PathToAHumanWizard extends Quest
 						{
 							htmltext = "30411-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(MAP_OF_LUSTER, 1);
 						}
 						else if (cond == 2)
@@ -128,7 +129,7 @@ public class Q404_PathToAHumanWizard extends Quest
 						{
 							htmltext = "30411-03.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(KEY_OF_FLAME, 1);
 							st.takeItems(MAP_OF_LUSTER, 1);
 							st.giveItems(FLAME_EARING, 1);
@@ -142,7 +143,7 @@ public class Q404_PathToAHumanWizard extends Quest
 						{
 							htmltext = "30412-01.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(BROKEN_BRONZE_MIRROR, 1);
 						}
 						else if (cond == 5)
@@ -151,7 +152,7 @@ public class Q404_PathToAHumanWizard extends Quest
 						{
 							htmltext = "30412-03.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(WIND_FEATHER, 1);
 							st.giveItems(WIND_BANGEL, 1);
 						}
@@ -171,7 +172,7 @@ public class Q404_PathToAHumanWizard extends Quest
 						{
 							htmltext = "30413-01.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(RAMA_DIARY, 1);
 						}
 						else if (cond == 8)
@@ -180,7 +181,7 @@ public class Q404_PathToAHumanWizard extends Quest
 						{
 							htmltext = "30413-03.htm";
 							st.set("cond", "10");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(RAMA_DIARY, 1);
 							st.takeItems(SPARKLE_PEBBLE, -1);
 							st.giveItems(WATER_NECKLACE, 1);
@@ -194,7 +195,7 @@ public class Q404_PathToAHumanWizard extends Quest
 						{
 							htmltext = "30409-01.htm";
 							st.set("cond", "11");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(RUST_GOLD_COIN, 1);
 						}
 						else if (cond == 11)
@@ -203,7 +204,7 @@ public class Q404_PathToAHumanWizard extends Quest
 						{
 							htmltext = "30409-03.htm";
 							st.set("cond", "13");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(RED_SOIL, 1);
 							st.takeItems(RUST_GOLD_COIN, 1);
 							st.giveItems(EARTH_RING, 1);

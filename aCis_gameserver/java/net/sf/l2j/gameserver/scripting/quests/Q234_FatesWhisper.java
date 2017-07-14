@@ -10,6 +10,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q234_FatesWhisper extends Quest
 {
@@ -88,22 +89,22 @@ public class Q234_FatesWhisper extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30182-01c.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(INFERNIUM_VARNISH, 1);
 		}
 		else if (event.equalsIgnoreCase("30178-01a.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30833-01b.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(PIPETTE_KNIFE, 1);
 		}
 		else if (event.startsWith("selectBGrade_"))
@@ -134,7 +135,7 @@ public class Q234_FatesWhisper extends Quest
 					st.giveItems(aGradeItemId, 1);
 					st.giveItems(STAR_OF_DESTINY, 1);
 					player.broadcastPacket(new SocialAction(player, 3));
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(false);
 				}
 				else
@@ -174,7 +175,7 @@ public class Q234_FatesWhisper extends Quest
 							{
 								htmltext = "31002-05.htm";
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(REIRIA_SOUL_ORB, 1);
 							}
 						}
@@ -186,7 +187,7 @@ public class Q234_FatesWhisper extends Quest
 							{
 								htmltext = "31002-06.htm";
 								st.set("cond", "3");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(GOLKONDA_INFERNIUM_SCEPTER, 1);
 								st.takeItems(HALLATE_INFERNIUM_SCEPTER, 1);
 								st.takeItems(KERMON_INFERNIUM_SCEPTER, 1);
@@ -200,7 +201,7 @@ public class Q234_FatesWhisper extends Quest
 							{
 								htmltext = "31002-07.htm";
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(INFERNIUM_VARNISH, 1);
 							}
 						}
@@ -212,7 +213,7 @@ public class Q234_FatesWhisper extends Quest
 							{
 								htmltext = "31002-08.htm";
 								st.set("cond", "5");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(REORIN_HAMMER, 1);
 							}
 						}
@@ -222,7 +223,7 @@ public class Q234_FatesWhisper extends Quest
 						{
 							htmltext = "31002-09.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(REORIN_MOLD, 1);
 						}
 						else if (cond == 9)
@@ -233,7 +234,7 @@ public class Q234_FatesWhisper extends Quest
 							{
 								htmltext = "31002-BGradeList.htm";
 								st.set("cond", "10");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(CRYSTAL_B, 984);
 							}
 						}
@@ -261,7 +262,7 @@ public class Q234_FatesWhisper extends Quest
 						if (cond == 4 && !st.hasQuestItems(REORIN_HAMMER))
 						{
 							htmltext = "30847-01.htm";
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.giveItems(REORIN_HAMMER, 1);
 						}
 						else if (cond >= 4 && st.hasQuestItems(REORIN_HAMMER))
@@ -286,7 +287,7 @@ public class Q234_FatesWhisper extends Quest
 							{
 								htmltext = "30833-03.htm";
 								st.set("cond", "8");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(RED_PIPETTE_KNIFE, 1);
 								st.giveItems(REORIN_MOLD, 1);
 							}
@@ -299,7 +300,7 @@ public class Q234_FatesWhisper extends Quest
 						if (cond == 1 && !st.hasQuestItems(REIRIA_SOUL_ORB))
 						{
 							htmltext = "31027-01.htm";
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.giveItems(REIRIA_SOUL_ORB, 1);
 						}
 						else
@@ -313,7 +314,7 @@ public class Q234_FatesWhisper extends Quest
 						if (cond == 2 && !st.hasQuestItems(itemId))
 						{
 							htmltext = npc.getNpcId() + "-01.htm";
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.giveItems(itemId, 1);
 						}
 						else
@@ -339,7 +340,7 @@ public class Q234_FatesWhisper extends Quest
 		
 		if (attacker.getActiveWeaponItem() != null && attacker.getActiveWeaponItem().getItemId() == PIPETTE_KNIFE && !st.hasQuestItems(RED_PIPETTE_KNIFE))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(PIPETTE_KNIFE, 1);
 			st.giveItems(RED_PIPETTE_KNIFE, 1);
 		}

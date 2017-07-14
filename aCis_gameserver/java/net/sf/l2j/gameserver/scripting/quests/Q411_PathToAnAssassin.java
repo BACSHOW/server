@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q411_PathToAnAssassin extends Quest
 {
@@ -57,21 +58,21 @@ public class Q411_PathToAnAssassin extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.giveItems(SHILEN_CALL, 1);
 			}
 		}
 		else if (event.equalsIgnoreCase("30419-05.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SHILEN_CALL, 1);
 			st.giveItems(ARKENIA_LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("30382-03.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ARKENIA_LETTER, 1);
 			st.giveItems(LEIKAN_NOTE, 1);
 		}
@@ -115,7 +116,7 @@ public class Q411_PathToAnAssassin extends Quest
 							st.giveItems(IRON_HEART, 1);
 							st.rewardExpAndSp(3200, 3930);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -133,7 +134,7 @@ public class Q411_PathToAnAssassin extends Quest
 						{
 							htmltext = "30419-08.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SHILEN_TEARS, -1);
 							st.giveItems(ARKENIA_RECOMMENDATION, 1);
 						}
@@ -150,7 +151,7 @@ public class Q411_PathToAnAssassin extends Quest
 						{
 							htmltext = "30382-07.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(MOONSTONE_BEAST_MOLAR, -1);
 							st.takeItems(LEIKAN_NOTE, -1);
 						}
@@ -181,7 +182,7 @@ public class Q411_PathToAnAssassin extends Quest
 		else if (st.getInt("cond") == 5)
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(SHILEN_TEARS, 1);
 		}
 		

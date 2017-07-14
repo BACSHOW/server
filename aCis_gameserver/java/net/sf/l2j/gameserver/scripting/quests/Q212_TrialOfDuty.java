@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.itemcontainer.Inventory;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q212_TrialOfDuty extends Quest
 {
@@ -67,7 +68,7 @@ public class Q212_TrialOfDuty extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			
 			if (!player.getMemos().getBool("secondClassChange35", false))
 			{
@@ -79,7 +80,7 @@ public class Q212_TrialOfDuty extends Quest
 		else if (event.equalsIgnoreCase("30116-05.htm"))
 		{
 			st.set("cond", "14");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(TEAR_OF_LOYALTY, 1);
 		}
 		
@@ -117,7 +118,7 @@ public class Q212_TrialOfDuty extends Quest
 							st.giveItems(MARK_OF_DUTY, 1);
 							st.rewardExpAndSp(79832, 3750);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						else
@@ -129,7 +130,7 @@ public class Q212_TrialOfDuty extends Quest
 						{
 							htmltext = "30653-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(OLD_KNIGHT_SWORD, 1);
 						}
 						else if (cond == 2)
@@ -138,7 +139,7 @@ public class Q212_TrialOfDuty extends Quest
 						{
 							htmltext = "30653-03.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(KNIGHTS_TEAR, 1);
 							st.takeItems(OLD_KNIGHT_SWORD, 1);
 						}
@@ -151,7 +152,7 @@ public class Q212_TrialOfDuty extends Quest
 						{
 							htmltext = "30654-01.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 5)
 							htmltext = "30654-02.htm";
@@ -159,7 +160,7 @@ public class Q212_TrialOfDuty extends Quest
 						{
 							htmltext = "30654-03.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(MIRROR_OF_ORPIC, 1);
 						}
 						else if (cond == 7)
@@ -168,7 +169,7 @@ public class Q212_TrialOfDuty extends Quest
 						{
 							htmltext = "30654-05.htm";
 							st.set("cond", "10");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(TEAR_OF_CONFESSION, 1);
 						}
 						else if (cond > 9)
@@ -180,7 +181,7 @@ public class Q212_TrialOfDuty extends Quest
 						{
 							htmltext = "30656-01.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(MIRROR_OF_ORPIC, 1);
 							st.takeItems(REPORT_PIECE_2, 1);
 							st.giveItems(TEAR_OF_CONFESSION, 1);
@@ -199,7 +200,7 @@ public class Q212_TrialOfDuty extends Quest
 							{
 								htmltext = "30655-02.htm";
 								st.set("cond", "11");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 						}
 						else if (cond == 11)
@@ -208,7 +209,7 @@ public class Q212_TrialOfDuty extends Quest
 						{
 							htmltext = "30655-04.htm";
 							st.set("cond", "13");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(MILITAS_ARTICLE, -1);
 							st.giveItems(TEAR_OF_LOYALTY, 1);
 						}
@@ -225,7 +226,7 @@ public class Q212_TrialOfDuty extends Quest
 						{
 							htmltext = "30116-07.htm";
 							st.set("cond", "16");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ATHEBALDT_SKULL, 1);
 							st.takeItems(ATHEBALDT_RIBS, 1);
 							st.takeItems(ATHEBALDT_SHIN, 1);
@@ -237,7 +238,7 @@ public class Q212_TrialOfDuty extends Quest
 						{
 							htmltext = "30116-08.htm";
 							st.set("cond", "18");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LETTER_OF_WINDAWOOD, 1);
 							st.giveItems(LETTER_OF_DUSTIN, 1);
 						}
@@ -250,7 +251,7 @@ public class Q212_TrialOfDuty extends Quest
 						{
 							htmltext = "30311-01.htm";
 							st.set("cond", "17");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SAINTS_ASHES_URN, 1);
 							st.giveItems(LETTER_OF_WINDAWOOD, 1);
 						}
@@ -282,7 +283,7 @@ public class Q212_TrialOfDuty extends Quest
 			case 20191:
 				if (cond == 2 && Rnd.get(10) < 1)
 				{
-					st.playSound(QuestState.SOUND_BEFORE_BATTLE);
+					st.playSound(Sound.SOUND_BEFORE_BATTLE);
 					addSpawn(27119, npc, false, 120000, true);
 				}
 				break;
@@ -291,7 +292,7 @@ public class Q212_TrialOfDuty extends Quest
 				if (cond == 2 && st.getItemEquipped(Inventory.PAPERDOLL_RHAND) == OLD_KNIGHT_SWORD)
 				{
 					st.set("cond", "3");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(KNIGHTS_TEAR, 1);
 				}
 				break;
@@ -312,7 +313,7 @@ public class Q212_TrialOfDuty extends Quest
 					if (cond == 7)
 					{
 						st.set("cond", "8");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					addSpawn(30656, npc, false, 300000, true);
 				}
@@ -333,18 +334,18 @@ public class Q212_TrialOfDuty extends Quest
 				{
 					if (!st.hasQuestItems(ATHEBALDT_SKULL))
 					{
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 						st.giveItems(ATHEBALDT_SKULL, 1);
 					}
 					else if (!st.hasQuestItems(ATHEBALDT_RIBS))
 					{
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 						st.giveItems(ATHEBALDT_RIBS, 1);
 					}
 					else if (!st.hasQuestItems(ATHEBALDT_SHIN))
 					{
 						st.set("cond", "15");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 						st.giveItems(ATHEBALDT_SHIN, 1);
 					}
 				}

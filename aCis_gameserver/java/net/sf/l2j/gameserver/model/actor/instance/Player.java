@@ -180,7 +180,6 @@ import net.sf.l2j.gameserver.network.serverpackets.ObservationMode;
 import net.sf.l2j.gameserver.network.serverpackets.ObservationReturn;
 import net.sf.l2j.gameserver.network.serverpackets.PartySmallWindowUpdate;
 import net.sf.l2j.gameserver.network.serverpackets.PetInventoryUpdate;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.PledgeShowMemberListDelete;
 import net.sf.l2j.gameserver.network.serverpackets.PledgeShowMemberListUpdate;
 import net.sf.l2j.gameserver.network.serverpackets.PrivateStoreListBuy;
@@ -220,6 +219,8 @@ import net.sf.l2j.gameserver.scripting.EventType;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
 import net.sf.l2j.gameserver.scripting.ScriptManager;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 import net.sf.l2j.gameserver.skills.AbnormalEffect;
 import net.sf.l2j.gameserver.skills.Env;
 import net.sf.l2j.gameserver.skills.Formulas;
@@ -9194,7 +9195,7 @@ public final class Player extends Playable
 		sendPacket(SystemMessageId.CAST_LINE_AND_START_FISHING);
 		
 		broadcastPacket(new ExFishingStart(this, _fish.getType(_lure.isNightLure()), loc, _lure.isNightLure()));
-		sendPacket(new PlaySound(1, "SF_P_01", 0, 0, 0, 0, 0));
+		sendPacket(Music.SF_P_01.getPacket());
 		startLookingForFishTask();
 	}
 	
@@ -9679,7 +9680,7 @@ public final class Player extends Playable
 						stopPunishTask(true);
 						sendPacket(new EtcStatusUpdate(this));
 						sendMessage("Chatting is now available.");
-						sendPacket(new PlaySound("systemmsg_e.345"));
+						sendPacket(Sound.SYSTEM_MSG_345.getPacket());
 						break;
 					}
 					case JAIL:
@@ -9730,7 +9731,7 @@ public final class Player extends Playable
 					sendMessage("Chatting has been suspended.");
 				
 				// Send same sound packet in both "delay" cases.
-				sendPacket(new PlaySound("systemmsg_e.346"));
+				sendPacket(Sound.SYSTEM_MSG_346.getPacket());
 				break;
 				
 			}

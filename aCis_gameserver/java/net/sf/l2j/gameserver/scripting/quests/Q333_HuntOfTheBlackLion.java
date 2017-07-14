@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q333_HuntOfTheBlackLion extends Quest
 {
@@ -253,14 +254,14 @@ public class Q333_HuntOfTheBlackLion extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30735-10.htm"))
 		{
 			if (!st.hasQuestItems(SOPHYA_LETTER_1))
 			{
 				st.giveItems(SOPHYA_LETTER_1, 1);
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 			}
 		}
 		else if (event.equalsIgnoreCase("30735-11.htm"))
@@ -268,7 +269,7 @@ public class Q333_HuntOfTheBlackLion extends Quest
 			if (!st.hasQuestItems(SOPHYA_LETTER_2))
 			{
 				st.giveItems(SOPHYA_LETTER_2, 1);
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 			}
 		}
 		else if (event.equalsIgnoreCase("30735-12.htm"))
@@ -276,7 +277,7 @@ public class Q333_HuntOfTheBlackLion extends Quest
 			if (!st.hasQuestItems(SOPHYA_LETTER_3))
 			{
 				st.giveItems(SOPHYA_LETTER_3, 1);
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 			}
 		}
 		else if (event.equalsIgnoreCase("30735-13.htm"))
@@ -284,7 +285,7 @@ public class Q333_HuntOfTheBlackLion extends Quest
 			if (!st.hasQuestItems(SOPHYA_LETTER_4))
 			{
 				st.giveItems(SOPHYA_LETTER_4, 1);
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 			}
 		}
 		else if (event.equalsIgnoreCase("30735-16.htm"))
@@ -360,7 +361,7 @@ public class Q333_HuntOfTheBlackLion extends Quest
 			st.takeItems(SOPHYA_LETTER_3, -1);
 			st.takeItems(SOPHYA_LETTER_4, -1);
 			st.giveItems(ADENA, 12400);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30736-03.htm"))

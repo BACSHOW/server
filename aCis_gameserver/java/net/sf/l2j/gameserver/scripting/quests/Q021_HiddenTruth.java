@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q021_HiddenTruth extends Quest
 {
@@ -58,29 +59,29 @@ public class Q021_HiddenTruth extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31523-03.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			spawnTheDuke(player);
 		}
 		else if (event.equalsIgnoreCase("31524-06.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			spawnThePage(player);
 		}
 		else if (event.equalsIgnoreCase("31526-08.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("31526-14.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(CROSS_OF_EINHASAD, 1);
 		}
 		else if (event.equalsIgnoreCase("1"))
@@ -125,7 +126,7 @@ public class Q021_HiddenTruth extends Quest
 			{
 				st.takeItems(CROSS_OF_EINHASAD, 1);
 				st.giveItems(CROSS_OF_EINHASAD_NEXT_QUEST, 1);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(false);
 			}
 		}
@@ -200,7 +201,7 @@ public class Q021_HiddenTruth extends Quest
 							{
 								htmltext = "31525-02.htm";
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
 								htmltext = "31525-01.htm";
@@ -215,7 +216,7 @@ public class Q021_HiddenTruth extends Quest
 							htmltext = "31526-01.htm";
 							
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							
 							if (_page != null)
 							{
@@ -270,7 +271,7 @@ public class Q021_HiddenTruth extends Quest
 								if (st.getInt(String.valueOf(npcId1)) == 1 && st.getInt(String.valueOf(npcId2)) == 1)
 								{
 									st.set("cond", "7");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
 									st.set(String.valueOf(npcId), "1");

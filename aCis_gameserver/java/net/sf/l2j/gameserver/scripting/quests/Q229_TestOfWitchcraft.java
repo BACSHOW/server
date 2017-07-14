@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q229_TestOfWitchcraft extends Quest
 {
@@ -106,7 +107,7 @@ public class Q229_TestOfWitchcraft extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ORIM_DIAGRAM, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange39", false))
@@ -120,7 +121,7 @@ public class Q229_TestOfWitchcraft extends Quest
 		{
 			st.set("cond", "4");
 			st.unset("gem456");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(AKLANTOTH_GEM_1, 1);
 			st.takeItems(AKLANTOTH_GEM_2, 1);
 			st.takeItems(AKLANTOTH_GEM_3, 1);
@@ -134,7 +135,7 @@ public class Q229_TestOfWitchcraft extends Quest
 		else if (event.equalsIgnoreCase("30630-16.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BRIMSTONE_1, 1);
 			st.giveItems(ORIM_INSTRUCTIONS, 1);
 			st.giveItems(ORIM_LETTER_1, 1);
@@ -150,7 +151,7 @@ public class Q229_TestOfWitchcraft extends Quest
 			st.giveItems(MARK_OF_WITCHCRAFT, 1);
 			st.rewardExpAndSp(139796, 40000);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		// ALEXANDRIA
@@ -158,14 +159,14 @@ public class Q229_TestOfWitchcraft extends Quest
 		{
 			st.set("cond", "2");
 			st.set("gem456", "1");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ORIM_DIAGRAM, 1);
 			st.giveItems(ALEXANDRIA_BOOK, 1);
 		}
 		// IKER
 		else if (event.equalsIgnoreCase("30110-03.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(IKER_LIST, 1);
 		}
 		else if (event.equalsIgnoreCase("30110-08.htm"))
@@ -177,10 +178,10 @@ public class Q229_TestOfWitchcraft extends Quest
 			if (st.hasQuestItems(SWORD_OF_BINDING))
 			{
 				st.set("cond", "7");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 			else
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 		}
 		// KAIRA
 		else if (event.equalsIgnoreCase("30476-02.htm"))
@@ -190,36 +191,36 @@ public class Q229_TestOfWitchcraft extends Quest
 			if (st.hasQuestItems(AKLANTOTH_GEM_1, AKLANTOTH_GEM_3) && st.getInt("gem456") == 6)
 			{
 				st.set("cond", "3");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 			else
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 		}
 		// LARA
 		else if (event.equalsIgnoreCase("30063-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(LARA_MEMO, 1);
 		}
 		// NESTLE
 		else if (event.equalsIgnoreCase("30314-02.htm"))
 		{
 			st.set("gem456", "2");
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(NESTLE_MEMO, 1);
 		}
 		// LEOPOLD
 		else if (event.equalsIgnoreCase("30435-02.htm"))
 		{
 			st.set("gem456", "3");
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(NESTLE_MEMO, 1);
 			st.giveItems(LEOPOLD_JOURNAL, 1);
 		}
 		// SIR KLAUS VASPER
 		else if (event.equalsIgnoreCase("30417-03.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(ORIM_LETTER_1, 1);
 			st.giveItems(SIR_VASPER_LETTER, 1);
 		}
@@ -227,7 +228,7 @@ public class Q229_TestOfWitchcraft extends Quest
 		else if (event.equalsIgnoreCase("30633-02.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(BRIMSTONE_2, 1);
 			
 			if (!_drevanulPrinceZeruel)
@@ -298,7 +299,7 @@ public class Q229_TestOfWitchcraft extends Quest
 						{
 							htmltext = "30630-18.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 8 || cond == 9)
 							htmltext = "30630-18.htm";
@@ -343,10 +344,10 @@ public class Q229_TestOfWitchcraft extends Quest
 								if (st.hasQuestItems(AKLANTOTH_GEM_2, AKLANTOTH_GEM_3) && gem456 == 6)
 								{
 									st.set("cond", "3");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 							}
 						}
 						else if (cond == 2)
@@ -408,10 +409,10 @@ public class Q229_TestOfWitchcraft extends Quest
 							if (st.hasQuestItems(SOULTRAP_CRYSTAL))
 							{
 								st.set("cond", "7");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (cond == 6)
 							htmltext = "30417-01.htm";
@@ -423,7 +424,7 @@ public class Q229_TestOfWitchcraft extends Quest
 						if (st.hasQuestItems(SIR_VASPER_LETTER))
 						{
 							htmltext = "30188-01.htm";
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.takeItems(SIR_VASPER_LETTER, 1);
 							st.giveItems(VADIN_CRUCIFIX, 1);
 						}
@@ -434,7 +435,7 @@ public class Q229_TestOfWitchcraft extends Quest
 							else
 							{
 								htmltext = "30188-03.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(TAMLIN_ORC_AMULET, -1);
 								st.takeItems(VADIN_CRUCIFIX, -1);
 								st.giveItems(VADIN_SANCTIONS, 1);
@@ -507,7 +508,7 @@ public class Q229_TestOfWitchcraft extends Quest
 				if (cond == 4 && !npc.isScriptValue(1))
 				{
 					st.set("cond", "5");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					
 					npc.setScriptValue(1);
 					npc.broadcastNpcSay("I'll take your lives later!!");
@@ -581,10 +582,10 @@ public class Q229_TestOfWitchcraft extends Quest
 					if (st.hasQuestItems(AKLANTOTH_GEM_1, AKLANTOTH_GEM_2) && st.getInt("gem456") == 6)
 					{
 						st.set("cond", "3");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			
@@ -593,13 +594,13 @@ public class Q229_TestOfWitchcraft extends Quest
 				if (gem456 == 3)
 				{
 					st.set("gem456", "4");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(AKLANTOTH_GEM_4, 1);
 				}
 				else if (gem456 == 4)
 				{
 					st.set("gem456", "5");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(AKLANTOTH_GEM_5, 1);
 				}
 				else if (gem456 == 5)
@@ -611,10 +612,10 @@ public class Q229_TestOfWitchcraft extends Quest
 					if (st.hasQuestItems(AKLANTOTH_GEM_1, AKLANTOTH_GEM_2, AKLANTOTH_GEM_3))
 					{
 						st.set("cond", "3");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			
@@ -630,7 +631,7 @@ public class Q229_TestOfWitchcraft extends Quest
 					if (_swordOfBinding)
 					{
 						st.set("cond", "10");
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 						st.takeItems(BRIMSTONE_2, 1);
 						st.takeItems(SOULTRAP_CRYSTAL, 1);
 						st.giveItems(PURGATORY_KEY, 1);

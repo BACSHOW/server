@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q017_LightAndDarkness extends Quest
 {
@@ -41,7 +42,7 @@ public class Q017_LightAndDarkness extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(BLOOD_OF_SAINT, 4);
 		}
 		else if (event.equalsIgnoreCase("31508-02.htm"))
@@ -49,7 +50,7 @@ public class Q017_LightAndDarkness extends Quest
 			if (st.hasQuestItems(BLOOD_OF_SAINT))
 			{
 				st.set("cond", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(BLOOD_OF_SAINT, 1);
 			}
 			else
@@ -60,7 +61,7 @@ public class Q017_LightAndDarkness extends Quest
 			if (st.hasQuestItems(BLOOD_OF_SAINT))
 			{
 				st.set("cond", "3");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(BLOOD_OF_SAINT, 1);
 			}
 			else
@@ -71,7 +72,7 @@ public class Q017_LightAndDarkness extends Quest
 			if (st.hasQuestItems(BLOOD_OF_SAINT))
 			{
 				st.set("cond", "4");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(BLOOD_OF_SAINT, 1);
 			}
 			else
@@ -82,7 +83,7 @@ public class Q017_LightAndDarkness extends Quest
 			if (st.hasQuestItems(BLOOD_OF_SAINT))
 			{
 				st.set("cond", "5");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(BLOOD_OF_SAINT, 1);
 			}
 			else
@@ -115,7 +116,7 @@ public class Q017_LightAndDarkness extends Quest
 						{
 							htmltext = "31517-07.htm";
 							st.rewardExpAndSp(105527, 0);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						else

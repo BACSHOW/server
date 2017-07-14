@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q046_OnceMoreInTheArmsOfTheMotherTree extends Quest
 {
@@ -48,41 +49,41 @@ public class Q046_OnceMoreInTheArmsOfTheMotherTree extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ORDER_DOCUMENT_1, 1);
 		}
 		else if (event.equalsIgnoreCase("30094-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ORDER_DOCUMENT_1, 1);
 			st.giveItems(MAGIC_SWORD_HILT, 1);
 		}
 		else if (event.equalsIgnoreCase("30097-06.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(MAGIC_SWORD_HILT, 1);
 			st.giveItems(ORDER_DOCUMENT_2, 1);
 		}
 		else if (event.equalsIgnoreCase("30090-02.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ORDER_DOCUMENT_2, 1);
 			st.giveItems(GEMSTONE_POWDER, 1);
 		}
 		else if (event.equalsIgnoreCase("30097-09.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(GEMSTONE_POWDER, 1);
 			st.giveItems(ORDER_DOCUMENT_3, 1);
 		}
 		else if (event.equalsIgnoreCase("30116-02.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ORDER_DOCUMENT_3, 1);
 			st.giveItems(PURIFIED_MAGIC_NECKLACE, 1);
 		}
@@ -91,7 +92,7 @@ public class Q046_OnceMoreInTheArmsOfTheMotherTree extends Quest
 			st.takeItems(MARK_OF_TRAVELER, -1);
 			st.takeItems(PURIFIED_MAGIC_NECKLACE, 1);
 			st.rewardItems(SCROLL_OF_ESCAPE_SPECIAL, 1);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		

@@ -10,6 +10,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q419_GetAPet extends Quest
 {
@@ -140,12 +141,12 @@ public class Q419_GetAPet extends Quest
 			htmltext = "30731-0" + (race + 4) + ".htm";
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ANIMAL_SLAYER_LIST_1 + race, 1);
 		}
 		else if (event.equalsIgnoreCase("30731-12.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ANIMAL_SLAYER_LIST_1, 1);
 			st.takeItems(ANIMAL_SLAYER_LIST_2, 1);
 			st.takeItems(ANIMAL_SLAYER_LIST_3, 1);
@@ -162,19 +163,19 @@ public class Q419_GetAPet extends Quest
 		{
 			st.set("progress", String.valueOf(st.getInt("progress") | 1));
 			if (st.getInt("progress") == 7)
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30072-02.htm"))
 		{
 			st.set("progress", String.valueOf(st.getInt("progress") | 2));
 			if (st.getInt("progress") == 7)
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30091-02.htm"))
 		{
 			st.set("progress", String.valueOf(st.getInt("progress") | 4));
 			if (st.getInt("progress") == 7)
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("test"))
 		{
@@ -293,7 +294,7 @@ public class Q419_GetAPet extends Quest
 		
 		st.takeItems(ANIMAL_LOVER_LIST, 1);
 		st.giveItems(WOLF_COLLAR, 1);
-		st.playSound(QuestState.SOUND_FINISH);
+		st.playSound(Sound.SOUND_FINISH);
 		st.exitQuest(true);
 		
 		return "30731-15.htm";

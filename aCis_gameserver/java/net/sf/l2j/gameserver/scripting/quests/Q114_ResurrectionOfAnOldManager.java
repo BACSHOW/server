@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.ExShowScreenMessage;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q114_ResurrectionOfAnOldManager extends Quest
 {
@@ -55,7 +56,7 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 			st.set("cond", "1");
 			st.set("talk", "0");
 			st.set("golemSpawned", "0");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("32041-06.htm"))
 			st.set("talk", "1");
@@ -63,7 +64,7 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 		{
 			st.set("cond", "2");
 			st.set("talk", "0");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32041-10.htm"))
 		{
@@ -84,12 +85,12 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 		{
 			st.set("cond", "6");
 			st.set("talk", "0");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32041-25.htm"))
 		{
 			st.set("cond", "17");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(DETECTOR, 1);
 		}
 		else if (event.equalsIgnoreCase("32041-28.htm"))
@@ -105,22 +106,22 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 		else if (event.equalsIgnoreCase("32041-32.htm"))
 		{
 			st.set("cond", "21");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("32041-36.htm"))
 		{
 			st.set("cond", "20");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32046-02.htm"))
 		{
 			st.set("cond", "19");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32046-06.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		else if (event.equalsIgnoreCase("32047-01.htm"))
@@ -149,7 +150,7 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 			st.set("talk", "0");
 			st.set("choice", "1");
 			st.unset("talk1");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32047-06.htm"))
 		{
@@ -157,7 +158,7 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 			st.set("talk", "0");
 			st.set("choice", "2");
 			st.unset("talk1");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32047-07.htm"))
 		{
@@ -165,17 +166,17 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 			st.set("talk", "0");
 			st.set("choice", "3");
 			st.unset("talk1");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32047-13.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32047-13a.htm"))
 		{
 			st.set("cond", "10");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32047-15.htm"))
 		{
@@ -200,7 +201,7 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 		else if (event.equalsIgnoreCase("32047-17a.htm"))
 		{
 			st.set("cond", "12");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32047-20.htm"))
 			st.set("talk", "2");
@@ -208,12 +209,12 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 		{
 			st.set("cond", "13");
 			st.set("talk", "0");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32047-25.htm"))
 		{
 			st.set("cond", "15");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(STARSTONE, 1);
 		}
 		else if (event.equalsIgnoreCase("32047-30.htm"))
@@ -226,26 +227,26 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 			{
 				st.set("cond", "8");
 				st.set("talk", "0");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 			else if (cond == 8)
 			{
 				st.set("cond", "9");
 				htmltext = "32047-34.htm";
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 		}
 		else if (event.equalsIgnoreCase("32047-34.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32047-38.htm"))
 		{
 			if (st.getQuestItemsCount(57) >= 3000)
 			{
 				st.set("cond", "26");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(57, 3000);
 				st.giveItems(STARSTONE_2, 1);
 			}
@@ -255,19 +256,19 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 		else if (event.equalsIgnoreCase("32050-02.htm"))
 		{
 			st.set("talk", "1");
-			st.playSound("ItemSound.armor_wood_3");
+			st.playSound(Sound.ITEMSOUND_ARMOR_WOOD);
 		}
 		else if (event.equalsIgnoreCase("32050-04.htm"))
 		{
 			st.set("cond", "14");
 			st.set("talk", "0");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(STARSTONE, 1);
 		}
 		else if (event.equalsIgnoreCase("31961-02.htm"))
 		{
 			st.set("cond", "22");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LETTER, 1);
 			st.giveItems(STARSTONE_2, 1);
 		}
@@ -341,7 +342,7 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 						{
 							htmltext = "32041-34.htm";
 							st.set("cond", "27");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 27)
 							htmltext = "32041-35.htm";
@@ -409,7 +410,7 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 						{
 							htmltext = "32047-26.htm";
 							st.set("cond", "16");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 16)
 							htmltext = "32047-27.htm";
@@ -435,7 +436,7 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 						if (st.getInt("cond") == 17)
 						{
 							st.set("cond", "18");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(DETECTOR, 1);
 							st.giveItems(DETECTOR_2, 1);
 							player.sendPacket(new ExShowScreenMessage("The radio signal detector is responding. # A suspicious pile of stones catches your eye.", 4500));
@@ -476,7 +477,7 @@ public class Q114_ResurrectionOfAnOldManager extends Quest
 		
 		st.set("cond", "11");
 		st.unset("golemSpawned");
-		st.playSound(QuestState.SOUND_MIDDLE);
+		st.playSound(Sound.SOUND_MIDDLE);
 		
 		return null;
 	}

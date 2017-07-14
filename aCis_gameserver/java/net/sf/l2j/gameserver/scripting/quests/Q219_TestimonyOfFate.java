@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q219_TestimonyOfFate extends Quest
 {
@@ -117,7 +118,7 @@ public class Q219_TestimonyOfFate extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(KAIRA_LETTER, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange37", false))
@@ -130,13 +131,13 @@ public class Q219_TestimonyOfFate extends Quest
 		else if (event.equalsIgnoreCase("30114-04.htm"))
 		{
 			st.set("cond", "12");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ALDER_SKULL_2, 1);
 			st.giveItems(ALDER_RECEIPT, 1);
 		}
 		else if (event.equalsIgnoreCase("30476-12.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			
 			if (player.getLevel() < 38)
 			{
@@ -154,24 +155,24 @@ public class Q219_TestimonyOfFate extends Quest
 		else if (event.equalsIgnoreCase("30419-02.htm"))
 		{
 			st.set("cond", "17");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(THIFIELL_LETTER, 1);
 			st.giveItems(ARKENIA_NOTE, 1);
 		}
 		else if (event.equalsIgnoreCase("31845-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(PIXY_GARNET, 1);
 		}
 		else if (event.equalsIgnoreCase("31850-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(BLIGHT_TREANT_SEED, 1);
 		}
 		else if (event.equalsIgnoreCase("30419-05.htm"))
 		{
 			st.set("cond", "18");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ARKENIA_NOTE, 1);
 			st.takeItems(BLIGHT_TREANT_SAP, 1);
 			st.takeItems(RED_FAIRY_DUST, 1);
@@ -215,7 +216,7 @@ public class Q219_TestimonyOfFate extends Quest
 						{
 							htmltext = "30476-09.htm";
 							st.set("cond", "10");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ALDER_SKULL_1, 1);
 							addSpawn(ALDER_SPIRIT, player, false, 0, false);
 						}
@@ -231,7 +232,7 @@ public class Q219_TestimonyOfFate extends Quest
 							{
 								htmltext = "30476-12.htm";
 								st.set("cond", "15");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(KAIRA_INSTRUCTIONS, 1);
 								st.takeItems(REVELATIONS_MANUSCRIPT, 1);
 								st.giveItems(KAIRA_RECOMMENDATION, 1);
@@ -248,7 +249,7 @@ public class Q219_TestimonyOfFate extends Quest
 						{
 							htmltext = "30614-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(KAIRA_LETTER, 1);
 							st.giveItems(METHEUS_FUNERAL_JAR, 1);
 						}
@@ -259,7 +260,7 @@ public class Q219_TestimonyOfFate extends Quest
 							htmltext = "30614-03.htm";
 							st.set("cond", "4");
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(KASANDRA_REMAINS, 1);
 							st.giveItems(HERBALISM_TEXTBOOK, 1);
 						}
@@ -269,7 +270,7 @@ public class Q219_TestimonyOfFate extends Quest
 						{
 							htmltext = "30614-05.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BELLADONNA, 1);
 							st.giveItems(ALDER_SKULL_1, 1);
 						}
@@ -282,7 +283,7 @@ public class Q219_TestimonyOfFate extends Quest
 						{
 							htmltext = "30463-01.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(HERBALISM_TEXTBOOK, 1);
 							st.giveItems(IXIA_LIST, 1);
 						}
@@ -292,7 +293,7 @@ public class Q219_TestimonyOfFate extends Quest
 						{
 							htmltext = "30463-03.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(IXIA_LIST, 1);
 							st.takeItems(DEAD_SEEKER_DUNG, -1);
 							st.takeItems(MARSH_SPIDER_FLUIDS, -1);
@@ -312,7 +313,7 @@ public class Q219_TestimonyOfFate extends Quest
 						{
 							htmltext = "30613-01.htm";
 							st.set("cond", "11");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(ALDER_SKULL_2, 1);
 							npc.deleteMe();
 						}
@@ -332,7 +333,7 @@ public class Q219_TestimonyOfFate extends Quest
 						{
 							htmltext = "30210-01.htm";
 							st.set("cond", "13");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ALDER_RECEIPT, 1);
 							st.giveItems(REVELATIONS_MANUSCRIPT, 1);
 						}
@@ -345,7 +346,7 @@ public class Q219_TestimonyOfFate extends Quest
 						{
 							htmltext = "30358-01.htm";
 							st.set("cond", "16");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(KAIRA_RECOMMENDATION, 1);
 							st.giveItems(PALUS_CHARM, 1);
 							st.giveItems(THIFIELL_LETTER, 1);
@@ -362,7 +363,7 @@ public class Q219_TestimonyOfFate extends Quest
 							st.giveItems(MARK_OF_FATE, 1);
 							st.rewardExpAndSp(68183, 1750);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -384,7 +385,7 @@ public class Q219_TestimonyOfFate extends Quest
 								if (st.getQuestItemsCount(GRANDIS_SKULL) >= 10 && st.getQuestItemsCount(KARUL_BUGBEAR_SKULL) >= 10 && st.getQuestItemsCount(BREKA_OVERLORD_SKULL) >= 10 && st.getQuestItemsCount(LETO_OVERLORD_SKULL) >= 10)
 								{
 									htmltext = "31845-04.htm";
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 									st.takeItems(BREKA_OVERLORD_SKULL, -1);
 									st.takeItems(GRANDIS_SKULL, -1);
 									st.takeItems(KARUL_BUGBEAR_SKULL, -1);
@@ -412,7 +413,7 @@ public class Q219_TestimonyOfFate extends Quest
 								if (st.hasQuestItems(BLACK_WILLOW_LEAF))
 								{
 									htmltext = "31850-04.htm";
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 									st.takeItems(BLACK_WILLOW_LEAF, 1);
 									st.takeItems(BLIGHT_TREANT_SEED, 1);
 									st.giveItems(BLIGHT_TREANT_SAP, 1);
@@ -454,7 +455,7 @@ public class Q219_TestimonyOfFate extends Quest
 				if (st.getInt("cond") == 2)
 				{
 					st.set("cond", "3");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(METHEUS_FUNERAL_JAR, 1);
 					st.giveItems(KASANDRA_REMAINS, 1);
 				}

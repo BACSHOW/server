@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q639_GuardiansOfTheHolyGrail extends Quest
 {
@@ -66,7 +67,7 @@ public class Q639_GuardiansOfTheHolyGrail extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31350-08.htm"))
 		{
@@ -77,20 +78,20 @@ public class Q639_GuardiansOfTheHolyGrail extends Quest
 		}
 		else if (event.equalsIgnoreCase("31350-09.htm"))
 		{
-			st.playSound(QuestState.SOUND_GIVEUP);
+			st.playSound(Sound.SOUND_GIVEUP);
 			st.exitQuest(true);
 		}
 		// GREMORY
 		else if (event.equalsIgnoreCase("32008-05.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(WATER_BOTTLE, 1);
 		}
 		else if (event.equalsIgnoreCase("32008-09.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(HOLY_WATER_BOTTLE, 1);
 		}
 		else if (event.equalsIgnoreCase("32008-12.htm"))
@@ -115,7 +116,7 @@ public class Q639_GuardiansOfTheHolyGrail extends Quest
 		else if (event.equalsIgnoreCase("32028-02.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(WATER_BOTTLE, 1);
 			st.giveItems(HOLY_WATER_BOTTLE, 1);
 		}

@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q216_TrialOfTheGuildsman extends Quest
 {
@@ -90,7 +91,7 @@ public class Q216_TrialOfTheGuildsman extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.takeItems(57, 2000);
 				st.giveItems(VALKON_RECOMMENDATION, 1);
 				
@@ -109,7 +110,7 @@ public class Q216_TrialOfTheGuildsman extends Quest
 			if (st.getInt("cond") < 3)
 			{
 				st.set("cond", "3");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 		}
 		else if (event.equalsIgnoreCase("30103-09a.htm") || event.equalsIgnoreCase("30103-09b.htm"))
@@ -119,25 +120,25 @@ public class Q216_TrialOfTheGuildsman extends Quest
 			st.giveItems(MARK_OF_GUILDSMAN, 1);
 			st.rewardExpAndSp(80993, 12250);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		else if (event.equalsIgnoreCase("30210-04.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(ALTRAN_RECOMMENDATION_1, 1);
 			st.giveItems(NORMAN_INSTRUCTIONS, 1);
 			st.giveItems(NORMAN_RECEIPT, 1);
 		}
 		else if (event.equalsIgnoreCase("30210-10.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(NORMAN_LIST, 1);
 		}
 		else if (event.equalsIgnoreCase("30283-03.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(MANDRAGORA_BERRY, 1);
 			st.takeItems(VALKON_RECOMMENDATION, 1);
 			st.giveItems(ALTRAN_INSTRUCTIONS, 1);
@@ -147,7 +148,7 @@ public class Q216_TrialOfTheGuildsman extends Quest
 		}
 		else if (event.equalsIgnoreCase("30298-04.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(ALTRAN_RECOMMENDATION_2, 1);
 			st.giveItems(PINTER_INSTRUCTIONS, 1);
 			
@@ -160,7 +161,7 @@ public class Q216_TrialOfTheGuildsman extends Quest
 		}
 		else if (event.equalsIgnoreCase("30688-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(NORMAN_RECEIPT, 1);
 			st.giveItems(DUNING_INSTRUCTIONS, 1);
 		}
@@ -209,7 +210,7 @@ public class Q216_TrialOfTheGuildsman extends Quest
 							if (cond == 1)
 							{
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 						}
 						else if (cond == 4)
@@ -230,7 +231,7 @@ public class Q216_TrialOfTheGuildsman extends Quest
 							else if (st.getQuestItemsCount(DUNING_KEY) == 30)
 							{
 								htmltext = "30210-07.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(DUNING_KEY, -1);
 							}
 							else if (st.hasQuestItems(NORMAN_LIST))
@@ -249,10 +250,10 @@ public class Q216_TrialOfTheGuildsman extends Quest
 									if (st.getQuestItemsCount(JOURNEYMAN_DECO_BEADS) == 7)
 									{
 										st.set("cond", "6");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 									}
 									else
-										st.playSound(QuestState.SOUND_ITEMGET);
+										st.playSound(Sound.SOUND_ITEMGET);
 								}
 								else
 									htmltext = "30210-11.htm";
@@ -272,7 +273,7 @@ public class Q216_TrialOfTheGuildsman extends Quest
 								else
 								{
 									htmltext = "30688-04.htm";
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 									st.takeItems(DUNING_INSTRUCTIONS, 1);
 								}
 							}
@@ -300,10 +301,10 @@ public class Q216_TrialOfTheGuildsman extends Quest
 									if (st.getQuestItemsCount(JOURNEYMAN_GEM) == 7)
 									{
 										st.set("cond", "6");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 									}
 									else
-										st.playSound(QuestState.SOUND_ITEMGET);
+										st.playSound(Sound.SOUND_ITEMGET);
 								}
 							}
 						}

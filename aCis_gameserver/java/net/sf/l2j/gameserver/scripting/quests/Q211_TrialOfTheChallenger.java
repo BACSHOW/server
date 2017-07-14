@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q211_TrialOfTheChallenger extends Quest
 {
@@ -71,7 +72,7 @@ public class Q211_TrialOfTheChallenger extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			
 			if (!player.getMemos().getBool("secondClassChange35", false))
 			{
@@ -84,14 +85,14 @@ public class Q211_TrialOfTheChallenger extends Quest
 		else if (event.equalsIgnoreCase("30645-02.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LETTER_OF_KASH, 1);
 		}
 		// RALDO
 		else if (event.equalsIgnoreCase("30646-04.htm") || event.equalsIgnoreCase("30646-06.htm"))
 		{
 			st.set("cond", "8");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(WATCHER_EYE_2, 1);
 		}
 		// CHEST_OF_SHYSLASSYS
@@ -102,7 +103,7 @@ public class Q211_TrialOfTheChallenger extends Quest
 				if (Rnd.get(10) < 2)
 				{
 					htmltext = "30647-03.htm";
-					st.playSound(QuestState.SOUND_JACKPOT);
+					st.playSound(Sound.SOUND_JACKPOT);
 					st.takeItems(BROKEN_KEY, 1);
 					int chance = Rnd.get(100);
 					if (chance > 90)
@@ -165,7 +166,7 @@ public class Q211_TrialOfTheChallenger extends Quest
 						{
 							htmltext = "30644-07.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SCROLL_OF_SHYSLASSYS, 1);
 							st.giveItems(LETTER_OF_KASH, 1);
 						}
@@ -188,7 +189,7 @@ public class Q211_TrialOfTheChallenger extends Quest
 						{
 							htmltext = "30645-04.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(WATCHER_EYE_1, 1);
 						}
 						else if (cond == 6)
@@ -211,7 +212,7 @@ public class Q211_TrialOfTheChallenger extends Quest
 							st.giveItems(MARK_OF_CHALLENGER, 1);
 							st.rewardExpAndSp(72394, 11250);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -223,7 +224,7 @@ public class Q211_TrialOfTheChallenger extends Quest
 							{
 								htmltext = "30535-01.htm";
 								st.set("cond", "9");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
 								htmltext = "30535-03.htm";
@@ -260,7 +261,7 @@ public class Q211_TrialOfTheChallenger extends Quest
 				if (st.getInt("cond") == 1)
 				{
 					st.set("cond", "2");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(BROKEN_KEY, 1);
 					st.giveItems(SCROLL_OF_SHYSLASSYS, 1);
 					addSpawn(CHEST_OF_SHYSLASSYS, npc, false, 200000, true);
@@ -282,7 +283,7 @@ public class Q211_TrialOfTheChallenger extends Quest
 				if (st.getInt("cond") == 9)
 				{
 					st.set("cond", "10");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				addSpawn(RALDO, npc, false, 100000, true);
 				break;

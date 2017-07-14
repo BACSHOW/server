@@ -20,6 +20,7 @@ import net.sf.l2j.gameserver.model.group.Party;
 import net.sf.l2j.gameserver.network.serverpackets.MagicSkillUse;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class SagasSuperClass extends Quest
 {
@@ -195,7 +196,7 @@ public class SagasSuperClass extends Quest
 			else
 			{
 				st2.giveItems(Items[3], 1);
-				st2.playSound(QuestState.SOUND_ITEMGET);
+				st2.playSound(Sound.SOUND_ITEMGET);
 			}
 		}
 	}
@@ -232,7 +233,7 @@ public class SagasSuperClass extends Quest
 			{
 				st.set("cond", "1");
 				st.setState(STATE_STARTED);
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.giveItems(Items[10], 1);
 				htmltext = "0-03.htm";
 			}
@@ -270,7 +271,7 @@ public class SagasSuperClass extends Quest
 				else
 				{
 					st.takeItems(Items[10], -1);
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.set("cond", "20");
 					htmltext = "0-08.htm";
 				}
@@ -330,7 +331,7 @@ public class SagasSuperClass extends Quest
 			{
 				st.giveItems(Items[9], 1);
 				st.set("cond", "18");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				htmltext = "4-011.htm";
 			}
 			else if (event.equalsIgnoreCase("4-3"))
@@ -340,7 +341,7 @@ public class SagasSuperClass extends Quest
 				npc.broadcastNpcSay(Text[13]);
 				st.set("Quest0", "0");
 				cancelQuestTimer("Mob_2 has despawned", npc, player);
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				DeleteSpawn(st, npc);
 				return null;
 			}
@@ -349,7 +350,7 @@ public class SagasSuperClass extends Quest
 				st.set("cond", "6");
 				st.takeItems(Items[4], 1);
 				cast(npc, player, 4546, 1);
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				htmltext = "5-02.htm";
 			}
 			else if (event.equalsIgnoreCase("6-1"))
@@ -357,7 +358,7 @@ public class SagasSuperClass extends Quest
 				st.set("cond", "8");
 				st.takeItems(Items[5], 1);
 				cast(npc, player, 4546, 1);
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				htmltext = "6-03.htm";
 			}
 			else if (event.equalsIgnoreCase("7-1"))
@@ -381,7 +382,7 @@ public class SagasSuperClass extends Quest
 				st.set("cond", "10");
 				st.takeItems(Items[6], 1);
 				cast(npc, player, 4546, 1);
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				htmltext = "7-06.htm";
 			}
 			else if (event.equalsIgnoreCase("8-1"))
@@ -389,7 +390,7 @@ public class SagasSuperClass extends Quest
 				st.set("cond", "14");
 				st.takeItems(Items[7], 1);
 				cast(npc, player, 4546, 1);
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				htmltext = "8-02.htm";
 			}
 			else if (event.equalsIgnoreCase("9-1"))
@@ -397,7 +398,7 @@ public class SagasSuperClass extends Quest
 				st.set("cond", "17");
 				st.takeItems(Items[8], 1);
 				cast(npc, player, 4546, 1);
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				htmltext = "9-03.htm";
 			}
 			else if (event.equalsIgnoreCase("10-1"))
@@ -433,7 +434,7 @@ public class SagasSuperClass extends Quest
 				st.set("cond", "19");
 				st.takeItems(Items[9], 1);
 				cast(npc, player, 4546, 1);
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				htmltext = "10-06.htm";
 			}
 			else if (event.equalsIgnoreCase("11-9"))
@@ -882,7 +883,7 @@ public class SagasSuperClass extends Quest
 						st1.giveItems(Items[8], 1);
 						st1.takeItems(Items[3], -1);
 						st1.set("cond", "16");
-						st1.playSound(QuestState.SOUND_MIDDLE);
+						st1.playSound(Sound.SOUND_MIDDLE);
 					}
 				}
 				return super.onKill(npc, player, isPet);
@@ -902,7 +903,7 @@ public class SagasSuperClass extends Quest
 							st1.set("kills", String.valueOf(st1.getInt("kills") + 1));
 						else
 						{
-							st1.playSound(QuestState.SOUND_MIDDLE);
+							st1.playSound(Sound.SOUND_MIDDLE);
 							st1.giveItems(Items[5], 1);
 							st1.set("cond", "7");
 						}
@@ -929,7 +930,7 @@ public class SagasSuperClass extends Quest
 						npc.broadcastNpcSay(Text[12]);
 						st.giveItems(Items[6], 1);
 						st.set("cond", "9");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 				}
 				cancelQuestTimer("Mob_1 has despawned", npc, st2.getPlayer());
@@ -946,7 +947,7 @@ public class SagasSuperClass extends Quest
 						st.giveItems(Items[8], 1);
 						st.takeItems(Items[3], -1);
 						st.set("cond", "16");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
 						npc.broadcastNpcSay(Text[5]);

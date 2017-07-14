@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q038_DragonFangs extends Quest
 {
@@ -105,12 +106,12 @@ public class Q038_DragonFangs extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30386-04.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(FEATHER_ORNAMENT, 100);
 			st.giveItems(TOOTH_OF_TOTEM, 1);
 		}
@@ -120,7 +121,7 @@ public class Q038_DragonFangs extends Quest
 			{
 				htmltext = "30034-02.htm";
 				st.set("cond", "4");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(TOOTH_OF_TOTEM, 1);
 				st.giveItems(LETTER_OF_IRIS, 1);
 			}
@@ -131,7 +132,7 @@ public class Q038_DragonFangs extends Quest
 			{
 				htmltext = "30344-02.htm";
 				st.set("cond", "5");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(LETTER_OF_IRIS, 1);
 				st.giveItems(LETTER_OF_ROHMER, 1);
 			}
@@ -142,7 +143,7 @@ public class Q038_DragonFangs extends Quest
 			{
 				htmltext = "30034-04.htm";
 				st.set("cond", "6");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(LETTER_OF_ROHMER, 1);
 			}
 		}
@@ -156,7 +157,7 @@ public class Q038_DragonFangs extends Quest
 				st.takeItems(TOOTH_OF_DRAGON, 50);
 				st.giveItems(REWARD[position][0], 1);
 				st.rewardItems(57, REWARD[position][1]);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(false);
 			}
 		}

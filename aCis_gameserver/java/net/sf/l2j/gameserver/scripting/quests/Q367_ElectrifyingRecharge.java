@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q367_ElectrifyingRecharge extends Quest
 {
@@ -67,23 +68,23 @@ public class Q367_ElectrifyingRecharge extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(LORAIN_LAMP, 1);
 		}
 		else if (event.equalsIgnoreCase("30673-09.htm"))
 		{
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(LORAIN_LAMP, 1);
 		}
 		else if (event.equalsIgnoreCase("30673-08.htm"))
 		{
-			st.playSound(QuestState.SOUND_GIVEUP);
+			st.playSound(Sound.SOUND_GIVEUP);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30673-07.htm"))
 		{
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(LORAIN_LAMP, 1);
 		}
 		return htmltext;
@@ -110,7 +111,7 @@ public class Q367_ElectrifyingRecharge extends Quest
 					if (st.hasQuestItems(5880))
 					{
 						htmltext = "30673-05.htm";
-						st.playSound(QuestState.SOUND_ACCEPT);
+						st.playSound(Sound.SOUND_ACCEPT);
 						st.takeItems(5880, 1);
 						st.giveItems(LORAIN_LAMP, 1);
 					}
@@ -137,7 +138,7 @@ public class Q367_ElectrifyingRecharge extends Quest
 					htmltext = "30673-06.htm";
 					st.takeItems(5879, 1);
 					st.rewardItems(REWARD[Rnd.get(REWARD.length)], 1);
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 				}
 				break;
 		}
@@ -163,10 +164,10 @@ public class Q367_ElectrifyingRecharge extends Quest
 				if (randomItem == 5879)
 				{
 					st.set("cond", "2");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				else
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 			}
 		}
 		

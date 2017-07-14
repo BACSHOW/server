@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q378_MagnificentFeast extends Quest
 {
@@ -104,7 +105,7 @@ public class Q378_MagnificentFeast extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30594-4a.htm"))
 		{
@@ -112,7 +113,7 @@ public class Q378_MagnificentFeast extends Quest
 			{
 				st.set("cond", "2");
 				st.set("score", "1");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(WINE_15, 1);
 			}
 			else
@@ -124,7 +125,7 @@ public class Q378_MagnificentFeast extends Quest
 			{
 				st.set("cond", "2");
 				st.set("score", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(WINE_30, 1);
 			}
 			else
@@ -136,7 +137,7 @@ public class Q378_MagnificentFeast extends Quest
 			{
 				st.set("cond", "2");
 				st.set("score", "4");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(WINE_60, 1);
 			}
 			else
@@ -147,7 +148,7 @@ public class Q378_MagnificentFeast extends Quest
 			if (st.hasQuestItems(MUSICAL_SCORE))
 			{
 				st.set("cond", "3");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(MUSICAL_SCORE, 1);
 			}
 			else
@@ -162,7 +163,7 @@ public class Q378_MagnificentFeast extends Quest
 				{
 					st.set("cond", "4");
 					st.set("score", String.valueOf(score + 8));
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(SALAD_RECIPE, 1);
 				}
 				else
@@ -174,7 +175,7 @@ public class Q378_MagnificentFeast extends Quest
 				{
 					st.set("cond", "4");
 					st.set("score", String.valueOf(score + 16));
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(SAUCE_RECIPE, 1);
 				}
 				else
@@ -186,7 +187,7 @@ public class Q378_MagnificentFeast extends Quest
 				{
 					st.set("cond", "4");
 					st.set("score", String.valueOf(score + 32));
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(STEAK_RECIPE, 1);
 				}
 				else
@@ -233,7 +234,7 @@ public class Q378_MagnificentFeast extends Quest
 						if (adena > 0)
 							st.rewardItems(57, adena);
 						
-						st.playSound(QuestState.SOUND_FINISH);
+						st.playSound(Sound.SOUND_FINISH);
 						st.exitQuest(true);
 					}
 					else

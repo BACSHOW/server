@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q002_WhatWomenWant extends Quest
 {
@@ -48,13 +49,13 @@ public class Q002_WhatWomenWant extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ARUJIEN_LETTER_1, 1);
 		}
 		else if (event.equalsIgnoreCase("30223-08.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ARUJIEN_LETTER_3, 1);
 			st.giveItems(POETRY_BOOK, 1);
 		}
@@ -62,7 +63,7 @@ public class Q002_WhatWomenWant extends Quest
 		{
 			st.takeItems(ARUJIEN_LETTER_3, 1);
 			st.rewardItems(57, 450);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		
@@ -106,7 +107,7 @@ public class Q002_WhatWomenWant extends Quest
 							htmltext = "30223-10.htm";
 							st.takeItems(GREENIS_LETTER, 1);
 							st.giveItems(MYSTICS_EARRING, 1);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -116,7 +117,7 @@ public class Q002_WhatWomenWant extends Quest
 						{
 							htmltext = "30146-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ARUJIEN_LETTER_1, 1);
 							st.giveItems(ARUJIEN_LETTER_2, 1);
 						}
@@ -129,7 +130,7 @@ public class Q002_WhatWomenWant extends Quest
 						{
 							htmltext = "30150-01.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ARUJIEN_LETTER_2, 1);
 							st.giveItems(ARUJIEN_LETTER_3, 1);
 						}
@@ -144,7 +145,7 @@ public class Q002_WhatWomenWant extends Quest
 						{
 							htmltext = "30157-02.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(POETRY_BOOK, 1);
 							st.giveItems(GREENIS_LETTER, 1);
 						}

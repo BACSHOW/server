@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.itemcontainer.PcInventory;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class OracleTeleport extends Quest
 {
@@ -331,7 +332,7 @@ public class OracleTeleport extends Quest
 			
 			st.set("id", Integer.toString(i));
 			st.setState(STATE_STARTED);
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			htmltext = "ziggurat_rift.htm";
 			player.teleToLocation(-114755, -179466, -6752, 0);
 		}
@@ -360,7 +361,7 @@ public class OracleTeleport extends Quest
 			}
 			
 			st.set("id", Integer.toString(i));
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			player.teleToLocation(-80157, 111344, -4901, 0);
 			player.setIsIn7sDungeon(true);
 		}
@@ -378,7 +379,7 @@ public class OracleTeleport extends Quest
 			}
 			
 			st.set("id", Integer.toString(i));
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			player.teleToLocation(-81261, 86531, -5157, 0);
 			player.setIsIn7sDungeon(true);
 		}

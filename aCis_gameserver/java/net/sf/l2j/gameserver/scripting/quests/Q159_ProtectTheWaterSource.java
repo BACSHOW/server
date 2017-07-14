@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q159_ProtectTheWaterSource extends Quest
 {
@@ -39,7 +40,7 @@ public class Q159_ProtectTheWaterSource extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(HYACINTH_CHARM_1, 1);
 		}
 		
@@ -73,7 +74,7 @@ public class Q159_ProtectTheWaterSource extends Quest
 				{
 					htmltext = "30154-06.htm";
 					st.set("cond", "3");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(PLAGUE_DUST, -1);
 					st.takeItems(HYACINTH_CHARM_1, 1);
 					st.giveItems(HYACINTH_CHARM_2, 1);
@@ -86,7 +87,7 @@ public class Q159_ProtectTheWaterSource extends Quest
 					st.takeItems(HYACINTH_CHARM_2, 1);
 					st.takeItems(PLAGUE_DUST, -1);
 					st.rewardItems(57, 18250);
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(false);
 				}
 				break;

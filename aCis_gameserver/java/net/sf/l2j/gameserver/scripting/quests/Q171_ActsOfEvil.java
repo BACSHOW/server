@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q171_ActsOfEvil extends Quest
 {
@@ -68,35 +69,35 @@ public class Q171_ActsOfEvil extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30207-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30381-04.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30381-07.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(WEAPON_TRADE_CONTRACT, 1);
 		}
 		else if (event.equalsIgnoreCase("30437-03.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(CARGO_BOX, 1);
 			st.giveItems(CERTIFICATE, 1);
 		}
 		else if (event.equalsIgnoreCase("30617-04.htm"))
 		{
 			st.set("cond", "10");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ATTACK_DIRECTIVES, 1);
 			st.takeItems(CARGO_BOX, 1);
 			st.takeItems(CERTIFICATE, 1);
@@ -134,7 +135,7 @@ public class Q171_ActsOfEvil extends Quest
 							{
 								htmltext = "30381-05.htm";
 								st.set("cond", "6");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(RANGER_REPORT_1, 1);
 								st.takeItems(RANGER_REPORT_2, 1);
 								st.takeItems(RANGER_REPORT_3, 1);
@@ -156,7 +157,7 @@ public class Q171_ActsOfEvil extends Quest
 						{
 							htmltext = "30381-08.htm";
 							st.rewardItems(57, 90000);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -172,7 +173,7 @@ public class Q171_ActsOfEvil extends Quest
 							{
 								htmltext = "30207-03.htm";
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(TYRA_BILL, 1);
 							}
 							else
@@ -189,7 +190,7 @@ public class Q171_ActsOfEvil extends Quest
 							{
 								htmltext = "30420-01.htm";
 								st.set("cond", "3");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(BLADE_MOLD, -1);
 								st.giveItems(TYRA_BILL, 1);
 							}
@@ -207,7 +208,7 @@ public class Q171_ActsOfEvil extends Quest
 						{
 							htmltext = "30425-01.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond > 7)
 							htmltext = "30425-02.htm";
@@ -229,7 +230,7 @@ public class Q171_ActsOfEvil extends Quest
 							{
 								htmltext = "30617-05.htm";
 								st.set("cond", "11");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(OL_MAHUM_HEAD, -1);
 								st.rewardItems(57, 8000);
 							}
@@ -278,24 +279,24 @@ public class Q171_ActsOfEvil extends Quest
 					if (!st.hasQuestItems(RANGER_REPORT_1))
 					{
 						st.giveItems(RANGER_REPORT_1, 1);
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 					}
 					else if (Rnd.get(100) < 20)
 					{
 						if (!st.hasQuestItems(RANGER_REPORT_2))
 						{
 							st.giveItems(RANGER_REPORT_2, 1);
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (!st.hasQuestItems(RANGER_REPORT_3))
 						{
 							st.giveItems(RANGER_REPORT_3, 1);
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (!st.hasQuestItems(RANGER_REPORT_4))
 						{
 							st.giveItems(RANGER_REPORT_4, 1);
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 						}
 					}
 				}
@@ -304,7 +305,7 @@ public class Q171_ActsOfEvil extends Quest
 			case 20438:
 				if (st.getInt("cond") == 6 && Rnd.get(100) < 10 && !st.hasQuestItems(WEAPON_TRADE_CONTRACT, ATTACK_DIRECTIVES))
 				{
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(WEAPON_TRADE_CONTRACT, 1);
 					st.giveItems(ATTACK_DIRECTIVES, 1);
 				}

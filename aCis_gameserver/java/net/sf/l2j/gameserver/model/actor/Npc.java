@@ -106,6 +106,10 @@ public class Npc extends Creature
 	
 	private Castle _castle;
 	
+	private boolean _isBusy = false;
+	
+	private String _busyMessage = "";
+	
 	/**
 	 * Broadcast a SocialAction packet.
 	 * @param id the animation id.
@@ -475,6 +479,46 @@ public class Npc extends Creature
 	public void setCastle(Castle castle)
 	{
 		_castle = castle;
+	}
+	
+	/**
+	 * Return the busy status of this L2NpcInstance.<BR>
+	 * <BR>
+	 * @return
+	 */
+	public final boolean isBusy()
+	{
+		return _isBusy;
+	}
+	
+	/**
+	 * Set the busy status of this L2NpcInstance.<BR>
+	 * <BR>
+	 * @param isBusy
+	 */
+	public void setBusy(boolean isBusy)
+	{
+		_isBusy = isBusy;
+	}
+	
+	/**
+	 * Return the busy message of this L2NpcInstance.<BR>
+	 * <BR>
+	 * @return
+	 */
+	public final String getBusyMessage()
+	{
+		return _busyMessage;
+	}
+	
+	/**
+	 * Set the busy message of this L2NpcInstance.<BR>
+	 * <BR>
+	 * @param message
+	 */
+	public void setBusyMessage(String message)
+	{
+		_busyMessage = message;
 	}
 	
 	/**

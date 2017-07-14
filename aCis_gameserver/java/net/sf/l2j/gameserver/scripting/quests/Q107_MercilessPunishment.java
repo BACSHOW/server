@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q107_MercilessPunishment extends Quest
 {
@@ -58,25 +59,25 @@ public class Q107_MercilessPunishment extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(HATOS_ORDER_1, 1);
 		}
 		else if (event.equalsIgnoreCase("30568-06.htm"))
 		{
-			st.playSound(QuestState.SOUND_GIVEUP);
+			st.playSound(Sound.SOUND_GIVEUP);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30568-07.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(HATOS_ORDER_1, 1);
 			st.giveItems(HATOS_ORDER_2, 1);
 		}
 		else if (event.equalsIgnoreCase("30568-09.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(HATOS_ORDER_2, 1);
 			st.giveItems(HATOS_ORDER_3, 1);
 		}
@@ -148,7 +149,7 @@ public class Q107_MercilessPunishment extends Quest
 							st.giveItems(ECHO_FEAST, 10);
 							st.giveItems(ECHO_CELEBRATION, 10);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -158,7 +159,7 @@ public class Q107_MercilessPunishment extends Quest
 						if (cond == 1)
 						{
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						break;
 				}
@@ -184,19 +185,19 @@ public class Q107_MercilessPunishment extends Quest
 		if (cond == 2)
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(LETTER_TO_HUMAN, 1);
 		}
 		else if (cond == 4)
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(LETTER_TO_DARKELF, 1);
 		}
 		else if (cond == 6)
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(LETTER_TO_ELF, 1);
 		}
 		

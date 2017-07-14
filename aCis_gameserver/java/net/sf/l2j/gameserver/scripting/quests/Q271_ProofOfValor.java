@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q271_ProofOfValor extends Quest
 {
@@ -43,7 +44,7 @@ public class Q271_ProofOfValor extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			
 			if (st.hasAtLeastOneQuestItem(NECKLACE_OF_COURAGE, NECKLACE_OF_VALOR))
 				htmltext = "30577-07.htm";
@@ -79,7 +80,7 @@ public class Q271_ProofOfValor extends Quest
 					htmltext = "30577-05.htm";
 					st.takeItems(KASHA_WOLF_FANG, -1);
 					st.giveItems((Rnd.get(100) < 10) ? NECKLACE_OF_VALOR : NECKLACE_OF_COURAGE, 1);
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(true);
 				}
 				break;

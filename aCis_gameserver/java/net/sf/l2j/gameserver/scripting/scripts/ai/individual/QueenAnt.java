@@ -20,9 +20,9 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.holder.IntIntHolder;
 import net.sf.l2j.gameserver.model.zone.type.L2BossZone;
 import net.sf.l2j.gameserver.network.serverpackets.MagicSkillUse;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.EventType;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
 import net.sf.l2j.gameserver.scripting.scripts.ai.L2AttackableAIScript;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
@@ -122,7 +122,7 @@ public class QueenAnt extends L2AttackableAIScript
 		GrandBossManager.getInstance().addBoss(npc);
 		startQuestTimer("action", 10000, npc, null, true);
 		startQuestTimer("heal", 1000, null, null, true);
-		npc.broadcastPacket(new PlaySound(1, "BS02_D", 1, npc.getObjectId(), npc.getX(), npc.getY(), npc.getZ()));
+		npc.broadcastPacket(Music.BS02_D_10000.getPacket());
 		
 		_queen = npc;
 		_larva = (Monster) addSpawn(LARVA, -21600, 179482, -5846, Rnd.get(360), false, 0, false);
@@ -287,7 +287,7 @@ public class QueenAnt extends L2AttackableAIScript
 			int npcId = npc.getNpcId();
 			if (npcId == QUEEN)
 			{
-				npc.broadcastPacket(new PlaySound(1, "BS02_D", 1, npc.getObjectId(), npc.getX(), npc.getY(), npc.getZ()));
+				npc.broadcastPacket(Music.BS02_D_10000.getPacket());
 				GrandBossManager.getInstance().setBossStatus(QUEEN, DEAD);
 				
 				long respawnTime = (long) Config.SPAWN_INTERVAL_AQ + Rnd.get(-Config.RANDOM_SPAWN_TIME_AQ, Config.RANDOM_SPAWN_TIME_AQ);

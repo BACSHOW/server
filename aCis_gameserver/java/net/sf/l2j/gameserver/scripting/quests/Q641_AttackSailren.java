@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.MagicSkillUse;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public final class Q641_AttackSailren extends Quest
 {
@@ -41,7 +42,7 @@ public final class Q641_AttackSailren extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("32109-8.htm"))
 		{
@@ -50,7 +51,7 @@ public final class Q641_AttackSailren extends Quest
 				npc.broadcastPacket(new MagicSkillUse(npc, player, 5089, 1, 3000, 0));
 				st.takeItems(GAZKH_FRAGMENT, -1);
 				st.giveItems(GAZKH, 1);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 			else

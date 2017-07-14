@@ -22,8 +22,8 @@ import net.sf.l2j.gameserver.model.World;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.ExMailArrived;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 /**
  * @author JIV, Johan, Vital
@@ -569,7 +569,7 @@ public class MailBBSManager extends BaseBBSManager
 				if (recipientPlayer != null)
 				{
 					recipientPlayer.sendPacket(SystemMessageId.NEW_MAIL);
-					recipientPlayer.sendPacket(new PlaySound("systemmsg_e.1233"));
+					recipientPlayer.sendPacket(Sound.SYSTEM_MSG_1233.getPacket());
 					recipientPlayer.sendPacket(ExMailArrived.STATIC_PACKET);
 				}
 			}

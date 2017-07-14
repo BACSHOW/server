@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.item.type.WeaponType;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q415_PathToAMonk extends Quest
 {
@@ -80,31 +81,31 @@ public class Q415_PathToAMonk extends Quest
 		{
 			st.setState(Quest.STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(POMEGRANATE, 1);
 		}
 		else if (event.equalsIgnoreCase("30587-09a.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ROSHEEK_LETTER, 1);
 			st.giveItems(GANTAKI_LETTER_OF_RECOMMENDATION, 1);
 		}
 		else if (event.equalsIgnoreCase("30587-09b.htm"))
 		{
 			st.set("cond", "14");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ROSHEEK_LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("32056-03.htm"))
 		{
 			st.set("cond", "15");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32056-08.htm"))
 		{
 			st.set("cond", "20");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("31979-03.htm"))
 		{
@@ -112,7 +113,7 @@ public class Q415_PathToAMonk extends Quest
 			st.giveItems(KHAVATARI_TOTEM, 1);
 			st.rewardExpAndSp(3200, 4230);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -155,7 +156,7 @@ public class Q415_PathToAMonk extends Quest
 						{
 							htmltext = "30590-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(POMEGRANATE, 1);
 							st.giveItems(LEATHER_POUCH_1, 1);
 						}
@@ -165,7 +166,7 @@ public class Q415_PathToAMonk extends Quest
 						{
 							htmltext = "30590-03.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LEATHER_POUCH_FULL_1, 1);
 							st.giveItems(LEATHER_POUCH_2, 1);
 						}
@@ -175,7 +176,7 @@ public class Q415_PathToAMonk extends Quest
 						{
 							htmltext = "30590-05.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LEATHER_POUCH_FULL_2, 1);
 							st.giveItems(LEATHER_POUCH_3, 1);
 						}
@@ -185,7 +186,7 @@ public class Q415_PathToAMonk extends Quest
 						{
 							htmltext = "30590-07.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LEATHER_POUCH_FULL_3, 1);
 							st.giveItems(FIERY_SPIRIT_SCROLL, 1);
 							st.giveItems(ROSHEEK_LETTER, 1);
@@ -201,7 +202,7 @@ public class Q415_PathToAMonk extends Quest
 						{
 							htmltext = "30501-01.htm";
 							st.set("cond", "10");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(GANTAKI_LETTER_OF_RECOMMENDATION, 1);
 							st.giveItems(FIG, 1);
 						}
@@ -218,7 +219,7 @@ public class Q415_PathToAMonk extends Quest
 							st.giveItems(KHAVATARI_TOTEM, 1);
 							st.rewardExpAndSp(3200, 1500);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -228,7 +229,7 @@ public class Q415_PathToAMonk extends Quest
 						{
 							htmltext = "30591-01.htm";
 							st.set("cond", "11");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(FIG, 1);
 							st.giveItems(LEATHER_POUCH_4, 1);
 						}
@@ -238,7 +239,7 @@ public class Q415_PathToAMonk extends Quest
 						{
 							htmltext = "30591-03.htm";
 							st.set("cond", "13");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LEATHER_POUCH_FULL_4, 1);
 							st.giveItems(IRON_WILL_SCROLL, 1);
 							st.giveItems(TORUKU_LETTER, 1);
@@ -256,7 +257,7 @@ public class Q415_PathToAMonk extends Quest
 						{
 							htmltext = "32056-05.htm";
 							st.set("cond", "17");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(KASHA_SPIDER_TOOTH, -1);
 						}
 						else if (cond == 17)
@@ -265,7 +266,7 @@ public class Q415_PathToAMonk extends Quest
 						{
 							htmltext = "32056-07.htm";
 							st.set("cond", "19");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(HORN_OF_BAAR_DRE_VANUL, -1);
 						}
 						else if (cond == 20)
@@ -294,7 +295,7 @@ public class Q415_PathToAMonk extends Quest
 		final WeaponType weapon = player.getActiveWeaponItem().getItemType();
 		if (!weapon.equals(WeaponType.DUALFIST) && !weapon.equals(WeaponType.FIST))
 		{
-			st.playSound(QuestState.SOUND_GIVEUP);
+			st.playSound(Sound.SOUND_GIVEUP);
 			st.exitQuest(true);
 			return null;
 		}
@@ -406,7 +407,7 @@ public class Q415_PathToAMonk extends Quest
 				if (st.getInt("cond") == 17)
 				{
 					st.set("cond", "18");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(HORN_OF_BAAR_DRE_VANUL, 1);
 				}
 				break;

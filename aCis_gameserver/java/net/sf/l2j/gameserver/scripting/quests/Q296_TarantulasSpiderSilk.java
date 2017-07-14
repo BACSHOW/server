@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q296_TarantulasSpiderSilk extends Quest
 {
@@ -49,7 +50,7 @@ public class Q296_TarantulasSpiderSilk extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 			}
 			else
 				htmltext = "30519-03a.htm";
@@ -58,7 +59,7 @@ public class Q296_TarantulasSpiderSilk extends Quest
 		{
 			st.takeItems(TARANTULA_SPIDER_SILK, -1);
 			st.takeItems(TARANTULA_SPINNERETTE, -1);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30548-02.htm"))

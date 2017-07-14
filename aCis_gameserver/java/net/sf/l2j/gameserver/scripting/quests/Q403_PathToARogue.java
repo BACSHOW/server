@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.itemcontainer.Inventory;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q403_PathToARogue extends Quest
 {
@@ -64,13 +65,13 @@ public class Q403_PathToARogue extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(BEZIQUE_LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("30425-05.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(NETI_BOW, 1);
 			st.giveItems(NETI_DAGGER, 1);
 		}
@@ -105,7 +106,7 @@ public class Q403_PathToARogue extends Quest
 						{
 							htmltext = "30379-08.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(HORSESHOE_OF_LIGHT, 1);
 							st.giveItems(MOST_WANTED_LIST, 1);
 						}
@@ -123,7 +124,7 @@ public class Q403_PathToARogue extends Quest
 							st.giveItems(BEZIQUE_RECOMMENDATION, 1);
 							st.rewardExpAndSp(3200, 1500);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -137,7 +138,7 @@ public class Q403_PathToARogue extends Quest
 						{
 							htmltext = "30425-07.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SPARTOI_BONES, 10);
 							st.giveItems(HORSESHOE_OF_LIGHT, 1);
 						}
@@ -194,10 +195,10 @@ public class Q403_PathToARogue extends Quest
 						if (st.hasQuestItems(STOLEN_JEWELRY, STOLEN_TOMES, STOLEN_RING, STOLEN_NECKLACE))
 						{
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 					}
 				}
 				break;

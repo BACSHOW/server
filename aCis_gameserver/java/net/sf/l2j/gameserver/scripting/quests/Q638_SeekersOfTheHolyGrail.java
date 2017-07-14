@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q638_SeekersOfTheHolyGrail extends Quest
 {
@@ -42,11 +43,11 @@ public class Q638_SeekersOfTheHolyGrail extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31328-06.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -71,7 +72,7 @@ public class Q638_SeekersOfTheHolyGrail extends Quest
 				if (st.getQuestItemsCount(PAGAN_TOTEM) >= 2000)
 				{
 					htmltext = "31328-03.htm";
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(PAGAN_TOTEM, 2000);
 					
 					int chance = Rnd.get(3);

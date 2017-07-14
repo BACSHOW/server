@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q266_PleasOfPixies extends Quest
 {
@@ -45,7 +46,7 @@ public class Q266_PleasOfPixies extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -81,7 +82,7 @@ public class Q266_PleasOfPixies extends Quest
 					final int n = Rnd.get(100);
 					if (n < 10)
 					{
-						st.playSound(QuestState.SOUND_JACKPOT);
+						st.playSound(Sound.SOUND_JACKPOT);
 						st.rewardItems(EMERALD, 1);
 					}
 					else if (n < 30)
@@ -91,7 +92,7 @@ public class Q266_PleasOfPixies extends Quest
 					else
 						st.rewardItems(GLASS_SHARD, 1);
 					
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(true);
 				}
 				break;

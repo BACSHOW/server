@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q420_LittleWing extends Quest
 {
@@ -94,33 +95,33 @@ public class Q420_LittleWing extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		// CRONOS
 		else if (event.equalsIgnoreCase("30610-05.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(FAIRY_STONE_LIST, 1);
 		}
 		else if (event.equalsIgnoreCase("30610-06.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(DELUXE_FAIRY_STONE_LIST, 1);
 		}
 		else if (event.equalsIgnoreCase("30610-12.htm"))
 		{
 			st.set("cond", "2");
 			st.set("deluxestone", "1");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(FAIRY_STONE_LIST, 1);
 		}
 		else if (event.equalsIgnoreCase("30610-13.htm"))
 		{
 			st.set("cond", "2");
 			st.set("deluxestone", "1");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(DELUXE_FAIRY_STONE_LIST, 1);
 		}
 		// MARIA
@@ -159,7 +160,7 @@ public class Q420_LittleWing extends Quest
 		else if (event.equalsIgnoreCase("30711-03.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			if (st.hasQuestItems(DELUXE_FAIRY_STONE))
 				htmltext = "30711-04.htm";
 		}
@@ -178,20 +179,20 @@ public class Q420_LittleWing extends Quest
 		else if (event.equalsIgnoreCase("30747-07.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(JUICE_OF_MONKSHOOD, 1);
 		}
 		else if (event.equalsIgnoreCase("30747-12.htm") && !st.hasQuestItems(FAIRY_DUST))
 		{
 			htmltext = "30747-15.htm";
 			giveRandomPet(st, false);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30747-13.htm"))
 		{
 			giveRandomPet(st, st.hasQuestItems(FAIRY_DUST));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30747-14.htm"))
@@ -207,7 +208,7 @@ public class Q420_LittleWing extends Quest
 					htmltext = "30747-14t.htm";
 					st.giveItems(FOOD_FOR_HATCHLING, 20);
 				}
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 			else
@@ -217,7 +218,7 @@ public class Q420_LittleWing extends Quest
 		else if (event.equalsIgnoreCase("30748-02.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(JUICE_OF_MONKSHOOD, 1);
 			st.giveItems(SCALE_OF_DRAKE_EXARION, 1);
 		}
@@ -225,7 +226,7 @@ public class Q420_LittleWing extends Quest
 		else if (event.equalsIgnoreCase("30749-02.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(JUICE_OF_MONKSHOOD, 1);
 			st.giveItems(SCALE_OF_DRAKE_ZWOV, 1);
 		}
@@ -233,14 +234,14 @@ public class Q420_LittleWing extends Quest
 		else if (event.equalsIgnoreCase("30750-02.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(JUICE_OF_MONKSHOOD, 1);
 			st.giveItems(SCALE_OF_DRAKE_KALIBRAN, 1);
 		}
 		else if (event.equalsIgnoreCase("30750-05.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(EGG_OF_DRAKE_KALIBRAN, 19);
 			st.takeItems(SCALE_OF_DRAKE_KALIBRAN, 1);
 		}
@@ -248,7 +249,7 @@ public class Q420_LittleWing extends Quest
 		else if (event.equalsIgnoreCase("30751-03.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(JUICE_OF_MONKSHOOD, 1);
 			st.giveItems(SCALE_OF_WYVERN_SUZET, 1);
 		}
@@ -256,7 +257,7 @@ public class Q420_LittleWing extends Quest
 		else if (event.equalsIgnoreCase("30752-02.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(JUICE_OF_MONKSHOOD, 1);
 			st.giveItems(SCALE_OF_WYVERN_SHAMHAI, 1);
 		}
@@ -311,7 +312,7 @@ public class Q420_LittleWing extends Quest
 								{
 									htmltext = "30610-08.htm";
 									st.set("cond", "3");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 							}
 							else
@@ -344,14 +345,14 @@ public class Q420_LittleWing extends Quest
 								htmltext = "30711-05.htm";
 								st.set("cond", "4");
 								st.unset("deluxestone");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else if (st.hasQuestItems(DELUXE_FAIRY_STONE))
 							{
 								htmltext = "30711-06.htm";
 								st.set("cond", "4");
 								st.unset("deluxestone");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
 								htmltext = "30711-10.htm";
@@ -410,7 +411,7 @@ public class Q420_LittleWing extends Quest
 							{
 								htmltext = "30748-04.htm";
 								st.set("cond", "7");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(EGG_OF_DRAKE_EXARION, 19);
 								st.takeItems(SCALE_OF_DRAKE_EXARION, 1);
 							}
@@ -430,7 +431,7 @@ public class Q420_LittleWing extends Quest
 							{
 								htmltext = "30749-04.htm";
 								st.set("cond", "7");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(EGG_OF_DRAKE_ZWOV, 19);
 								st.takeItems(SCALE_OF_DRAKE_ZWOV, 1);
 							}
@@ -459,7 +460,7 @@ public class Q420_LittleWing extends Quest
 							{
 								htmltext = "30751-05.htm";
 								st.set("cond", "7");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(EGG_OF_WYVERN_SUZET, 19);
 								st.takeItems(SCALE_OF_WYVERN_SUZET, 1);
 							}
@@ -479,7 +480,7 @@ public class Q420_LittleWing extends Quest
 							{
 								htmltext = "30752-04.htm";
 								st.set("cond", "7");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(EGG_OF_WYVERN_SHAMHAI, 19);
 								st.takeItems(SCALE_OF_WYVERN_SHAMHAI, 1);
 							}
@@ -549,7 +550,7 @@ public class Q420_LittleWing extends Quest
 				if (st.hasQuestItems(DELUXE_FAIRY_STONE) && Rnd.get(100) < 30)
 				{
 					st.set("deluxestone", "2");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(DELUXE_FAIRY_STONE, 1);
 					npc.broadcastNpcSay("The stone... the Elven stone... broke...");
 				}

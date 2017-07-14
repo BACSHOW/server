@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q402_PathToAHumanKnight extends Quest
 {
@@ -77,37 +78,37 @@ public class Q402_PathToAHumanKnight extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(MARK_OF_ESQUIRE, 1);
 		}
 		else if (event.equalsIgnoreCase("30332-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(GLUDIO_GUARD_MARK_1, 1);
 		}
 		else if (event.equalsIgnoreCase("30289-03.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(EINHASAD_CHURCH_MARK_1, 1);
 		}
 		else if (event.equalsIgnoreCase("30379-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(GLUDIO_GUARD_MARK_2, 1);
 		}
 		else if (event.equalsIgnoreCase("30037-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(EINHASAD_CHURCH_MARK_2, 1);
 		}
 		else if (event.equalsIgnoreCase("30039-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(GLUDIO_GUARD_MARK_3, 1);
 		}
 		else if (event.equalsIgnoreCase("30031-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(EINHASAD_CHURCH_MARK_3, 1);
 		}
 		else if (event.equalsIgnoreCase("30417-13.htm") || event.equalsIgnoreCase("30417-14.htm"))
@@ -124,7 +125,7 @@ public class Q402_PathToAHumanKnight extends Quest
 			st.giveItems(SWORD_OF_RITUAL, 1);
 			st.rewardExpAndSp(3200, 1500 + (1920 * (coinCount - 3)));
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -169,7 +170,7 @@ public class Q402_PathToAHumanKnight extends Quest
 							st.giveItems(SWORD_OF_RITUAL, 1);
 							st.rewardExpAndSp(3200, 7260);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -184,7 +185,7 @@ public class Q402_PathToAHumanKnight extends Quest
 							else
 							{
 								htmltext = "30332-04.htm";
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(BUGBEAR_NECKLACE, -1);
 								st.takeItems(GLUDIO_GUARD_MARK_1, 1);
 								st.giveItems(COIN_OF_LORDS_1, 1);
@@ -204,7 +205,7 @@ public class Q402_PathToAHumanKnight extends Quest
 							else
 							{
 								htmltext = "30289-05.htm";
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(EINHASAD_CRUCIFIX, -1);
 								st.takeItems(EINHASAD_CHURCH_MARK_1, 1);
 								st.giveItems(COIN_OF_LORDS_2, 1);
@@ -224,7 +225,7 @@ public class Q402_PathToAHumanKnight extends Quest
 							else
 							{
 								htmltext = "30379-04.htm";
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(SPIDER_LEG, -1);
 								st.takeItems(GLUDIO_GUARD_MARK_2, 1);
 								st.giveItems(COIN_OF_LORDS_3, 1);
@@ -244,7 +245,7 @@ public class Q402_PathToAHumanKnight extends Quest
 							else
 							{
 								htmltext = "30037-04.htm";
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(LIZARDMAN_TOTEM, -1);
 								st.takeItems(EINHASAD_CHURCH_MARK_2, 1);
 								st.giveItems(COIN_OF_LORDS_4, 1);
@@ -264,7 +265,7 @@ public class Q402_PathToAHumanKnight extends Quest
 							else
 							{
 								htmltext = "30039-04.htm";
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(GIANT_SPIDER_HUSK, -1);
 								st.takeItems(GLUDIO_GUARD_MARK_3, 1);
 								st.giveItems(COIN_OF_LORDS_5, 1);
@@ -284,7 +285,7 @@ public class Q402_PathToAHumanKnight extends Quest
 							else
 							{
 								htmltext = "30031-04.htm";
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(HORRIBLE_SKULL, -1);
 								st.takeItems(EINHASAD_CHURCH_MARK_3, 1);
 								st.giveItems(COIN_OF_LORDS_6, 1);

@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.MagicSkillUse;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q651_RunawayYouth extends Quest
 {
@@ -56,7 +57,7 @@ public class Q651_RunawayYouth extends Quest
 				htmltext = "32014-03.htm";
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.takeItems(SCROLL_OF_ESCAPE, 1);
 				
 				npc.broadcastPacket(new MagicSkillUse(npc, npc, 2013, 1, 3500, 0));
@@ -104,7 +105,7 @@ public class Q651_RunawayYouth extends Quest
 					case BATIDAE:
 						htmltext = "31989-01.htm";
 						st.rewardItems(57, 2883);
-						st.playSound(QuestState.SOUND_FINISH);
+						st.playSound(Sound.SOUND_FINISH);
 						st.exitQuest(true);
 						break;
 					

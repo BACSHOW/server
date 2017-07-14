@@ -14,6 +14,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 /**
  * iCond is an internal variable, used because cond isn't developped on that quest (only 3 states) :
@@ -70,7 +71,7 @@ public class Q421_LittleWingsBigAdventure extends Quest
 						st.set("cond", "1");
 						st.set("iCond", "1");
 						st.set("summonOid", String.valueOf(item.getObjectId()));
-						st.playSound(QuestState.SOUND_ACCEPT);
+						st.playSound(Sound.SOUND_ACCEPT);
 						return "30610-05.htm";
 					}
 				}
@@ -94,7 +95,7 @@ public class Q421_LittleWingsBigAdventure extends Quest
 			{
 				st.set("cond", "2");
 				st.set("iCond", "3");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.giveItems(FAIRY_LEAF, 4);
 			}
 		}
@@ -185,7 +186,7 @@ public class Q421_LittleWingsBigAdventure extends Quest
 								{
 									st.takeItems(i, 1);
 									st.giveItems(i + 922, 1, item.getEnchantLevel()); // TODO rebuild entirely pet system in order enchant is given a fuck. Supposed to give an item lvl XX for a flute level XX.
-									st.playSound(QuestState.SOUND_FINISH);
+									st.playSound(Sound.SOUND_FINISH);
 									st.exitQuest(true);
 									return "30747-16.htm";
 								}
@@ -245,10 +246,10 @@ public class Q421_LittleWingsBigAdventure extends Quest
 					if (st.getInt("iCond") == 63)
 					{
 						st.set("cond", "3");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 			}
 		}

@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q327_RecoverTheFarmland extends Quest
 {
@@ -127,11 +128,11 @@ public class Q327_RecoverTheFarmland extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30597-06.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		// Leikan
@@ -139,7 +140,7 @@ public class Q327_RecoverTheFarmland extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(LEIKAN_LETTER, 1);
 		}
 		// Asha
@@ -207,7 +208,7 @@ public class Q327_RecoverTheFarmland extends Quest
 				htmltext = "30034-02.htm";
 			else
 			{
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.takeItems(CLAY_URN_FRAGMENT, n);
 				st.rewardExpAndSp(n * 307, 0);
 			}
@@ -219,7 +220,7 @@ public class Q327_RecoverTheFarmland extends Quest
 				htmltext = "30034-02.htm";
 			else
 			{
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.takeItems(BRASS_TRINKET_PIECE, n);
 				st.rewardExpAndSp(n * 368, 0);
 			}
@@ -231,7 +232,7 @@ public class Q327_RecoverTheFarmland extends Quest
 				htmltext = "30034-02.htm";
 			else
 			{
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.takeItems(BRONZE_MIRROR_PIECE, n);
 				st.rewardExpAndSp(n * 368, 0);
 			}
@@ -243,7 +244,7 @@ public class Q327_RecoverTheFarmland extends Quest
 				htmltext = "30034-02.htm";
 			else
 			{
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.takeItems(JADE_NECKLACE_BEAD, n);
 				st.rewardExpAndSp(n * 430, 0);
 			}
@@ -265,7 +266,7 @@ public class Q327_RecoverTheFarmland extends Quest
 			if (!isRewarded)
 				htmltext = "30034-02.htm";
 			else
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 		}
 		// Nestle
 		else if (event.equalsIgnoreCase("30314-03.htm"))
@@ -346,7 +347,7 @@ public class Q327_RecoverTheFarmland extends Quest
 								if (cond < 4)
 								{
 									st.set("cond", "4");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								
 								final int dogtag = st.getQuestItemsCount(TUREK_DOGTAG);
@@ -363,7 +364,7 @@ public class Q327_RecoverTheFarmland extends Quest
 						{
 							htmltext = "30597-03a.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LEIKAN_LETTER, 1);
 						}
 						break;
@@ -375,7 +376,7 @@ public class Q327_RecoverTheFarmland extends Quest
 						{
 							htmltext = "30382-05.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 5)
 							htmltext = "30382-05.htm";

@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q232_TestOfTheLord extends Quest
 {
@@ -85,7 +86,7 @@ public class Q232_TestOfTheLord extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ORDEAL_NECKLACE, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange39", false))
@@ -98,7 +99,7 @@ public class Q232_TestOfTheLord extends Quest
 		else if (event.equalsIgnoreCase("30565-08.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SWORD_INTO_SKULL, 1);
 			st.takeItems(AXE_OF_CEREMONY, 1);
 			st.takeItems(MONSTEREYE_WOODCARVING, 1);
@@ -110,44 +111,44 @@ public class Q232_TestOfTheLord extends Quest
 		else if (event.equalsIgnoreCase("30566-02.htm"))
 		{
 			st.giveItems(VARKEES_CHARM, 1);
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 		}
 		else if (event.equalsIgnoreCase("30567-02.htm"))
 		{
 			st.giveItems(TANTUS_CHARM, 1);
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 		}
 		else if (event.equalsIgnoreCase("30558-02.htm"))
 		{
 			st.takeItems(57, 1000);
 			st.giveItems(NERUGA_AXE_BLADE, 1);
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 		}
 		else if (event.equalsIgnoreCase("30568-02.htm"))
 		{
 			st.giveItems(HATOS_CHARM, 1);
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 		}
 		else if (event.equalsIgnoreCase("30641-02.htm"))
 		{
 			st.giveItems(TAKUNA_CHARM, 1);
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 		}
 		else if (event.equalsIgnoreCase("30642-02.htm"))
 		{
 			st.giveItems(CHIANTA_CHARM, 1);
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 		}
 		else if (event.equalsIgnoreCase("30643-02.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			startQuestTimer("f_orc_despawn", 10000, null, player, false);
 		}
 		else if (event.equalsIgnoreCase("30649-04.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BEAR_FANG_NECKLACE, 1);
 			st.giveItems(MARTANKUS_CHARM, 1);
 		}
@@ -208,10 +209,10 @@ public class Q232_TestOfTheLord extends Quest
 								if (st.hasQuestItems(SWORD_INTO_SKULL, AXE_OF_CEREMONY, MONSTEREYE_WOODCARVING, HANDIWORK_SPIDER_BROOCH, ORDEAL_NECKLACE))
 								{
 									st.set("cond", "2");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 								htmltext = "30566-03.htm";
@@ -233,7 +234,7 @@ public class Q232_TestOfTheLord extends Quest
 								st.takeItems(MANAKIAS_ORDERS, -1);
 								st.takeItems(BREKA_ORC_FANG, -1);
 								st.giveItems(MANAKIAS_AMULET, 1);
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 								htmltext = "30515-02.htm";
@@ -242,7 +243,7 @@ public class Q232_TestOfTheLord extends Quest
 						{
 							htmltext = "30515-01.htm";
 							st.giveItems(MANAKIAS_ORDERS, 1);
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 						}
 						break;
 					
@@ -262,10 +263,10 @@ public class Q232_TestOfTheLord extends Quest
 								if (st.hasQuestItems(SWORD_INTO_SKULL, MONSTEREYE_WOODCARVING, HANDIWORK_SPIDER_BROOCH, ORDEAL_NECKLACE, HUGE_ORC_FANG))
 								{
 									st.set("cond", "2");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 								htmltext = "30567-03.htm";
@@ -304,10 +305,10 @@ public class Q232_TestOfTheLord extends Quest
 								if (st.hasQuestItems(AXE_OF_CEREMONY, MONSTEREYE_WOODCARVING, HANDIWORK_SPIDER_BROOCH, ORDEAL_NECKLACE, HUGE_ORC_FANG))
 								{
 									st.set("cond", "2");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 								htmltext = "30568-03.htm";
@@ -325,7 +326,7 @@ public class Q232_TestOfTheLord extends Quest
 						{
 							htmltext = "30564-01.htm";
 							st.giveItems(SUMARIS_LETTER, 1);
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 						}
 						break;
 					
@@ -339,7 +340,7 @@ public class Q232_TestOfTheLord extends Quest
 							htmltext = "30510-01.htm";
 							st.takeItems(SUMARIS_LETTER, 1);
 							st.giveItems(URUTU_BLADE, 1);
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 						}
 						break;
 					
@@ -359,10 +360,10 @@ public class Q232_TestOfTheLord extends Quest
 								if (st.hasQuestItems(SWORD_INTO_SKULL, AXE_OF_CEREMONY, MONSTEREYE_WOODCARVING, ORDEAL_NECKLACE, HUGE_ORC_FANG))
 								{
 									st.set("cond", "2");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 								htmltext = "30641-03.htm";
@@ -386,10 +387,10 @@ public class Q232_TestOfTheLord extends Quest
 								if (st.hasQuestItems(SWORD_INTO_SKULL, AXE_OF_CEREMONY, HANDIWORK_SPIDER_BROOCH, ORDEAL_NECKLACE, HUGE_ORC_FANG))
 								{
 									st.set("cond", "2");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 								htmltext = "30642-03.htm";
@@ -415,7 +416,7 @@ public class Q232_TestOfTheLord extends Quest
 							st.giveItems(MARK_LORD, 1);
 							st.rewardExpAndSp(92955, 16250);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -429,7 +430,7 @@ public class Q232_TestOfTheLord extends Quest
 						{
 							htmltext = "30649-06.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							
 							st.takeItems(MARTANKUS_CHARM, 1);
 							st.takeItems(RAGNA_ORC_HEAD, 1);
@@ -512,13 +513,13 @@ public class Q232_TestOfTheLord extends Quest
 				{
 					if (!st.hasQuestItems(RAGNA_CHIEF_NOTICE))
 					{
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 						st.giveItems(RAGNA_CHIEF_NOTICE, 1);
 					}
 					else if (!st.hasQuestItems(RAGNA_ORC_HEAD))
 					{
 						st.set("cond", "5");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 						st.giveItems(RAGNA_ORC_HEAD, 1);
 					}
 				}

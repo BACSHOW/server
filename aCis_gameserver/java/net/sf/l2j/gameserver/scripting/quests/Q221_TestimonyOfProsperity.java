@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q221_TestimonyOfProsperity extends Quest
 {
@@ -120,7 +121,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(RING_OF_TESTIMONY_1, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange37", false))
@@ -137,7 +138,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 			st.takeItems(LILITH_ELVEN_WAFER, 1);
 			st.takeItems(OLD_ACCOUNT_BOOK, 1);
 			st.takeItems(RING_OF_TESTIMONY_1, 1);
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			
 			if (player.getLevel() < 38)
 			{
@@ -157,7 +158,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 			htmltext = "30531-04.htm";
 		else if (event.equalsIgnoreCase("30531-03.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(COLLECTION_LICENSE, 1);
 			st.giveItems(LOCKIRIN_NOTICE_1, 1);
 			st.giveItems(LOCKIRIN_NOTICE_2, 1);
@@ -169,7 +170,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 		else if (event.equalsIgnoreCase("30534-03a.htm") && st.getQuestItemsCount(ADENA) >= 5000)
 		{
 			htmltext = "30534-03b.htm";
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(ADENA, 5000);
 			st.takeItems(PROCURATION_OF_TOROCCO, 1);
 			st.giveItems(RECEIPT_OF_CONTRIBUTION_3, 1);
@@ -177,19 +178,19 @@ public class Q221_TestimonyOfProsperity extends Quest
 		// WILFORD
 		else if (event.equalsIgnoreCase("30005-04.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(CRYSTAL_BROOCH, 1);
 		}
 		// BRIGHT
 		else if (event.equalsIgnoreCase("30466-03.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(BRIGHT_LIST, 1);
 		}
 		// TOROCCO
 		else if (event.equalsIgnoreCase("30555-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(PROCURATION_OF_TOROCCO, 1);
 		}
 		// LILITH
@@ -201,10 +202,10 @@ public class Q221_TestimonyOfProsperity extends Quest
 			if (st.hasQuestItems(BLESSED_SEED, OLD_ACCOUNT_BOOK, EMILY_RECIPE))
 			{
 				st.set("cond", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 			else
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 		}
 		// PIOTUR
 		else if (event.equalsIgnoreCase("30597-02.htm"))
@@ -214,10 +215,10 @@ public class Q221_TestimonyOfProsperity extends Quest
 			if (st.hasQuestItems(OLD_ACCOUNT_BOOK, EMILY_RECIPE, LILITH_ELVEN_WAFER))
 			{
 				st.set("cond", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 			else
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 		}
 		// EMILY
 		else if (event.equalsIgnoreCase("30620-03.htm"))
@@ -228,30 +229,30 @@ public class Q221_TestimonyOfProsperity extends Quest
 			if (st.hasQuestItems(BLESSED_SEED, OLD_ACCOUNT_BOOK, LILITH_ELVEN_WAFER))
 			{
 				st.set("cond", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 			else
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 		}
 		// NIKOLA
 		else if (event.equalsIgnoreCase("30621-04.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(CLAY_DOUGH, 1);
 		}
 		// BOX OF TITAN
 		else if (event.equalsIgnoreCase("30622-02.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(CLAY_DOUGH, 1);
 			st.giveItems(PATTERN_OF_KEYHOLE, 1);
 		}
 		else if (event.equalsIgnoreCase("30622-04.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(KEY_OF_TITAN, 1);
 			st.takeItems(NIKOLAS_LIST, 1);
 			st.takeItems(RECIPE_TITAN_KEY, 1);
@@ -302,7 +303,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 							{
 								htmltext = "30104-10.htm";
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(PARMAN_INSTRUCTIONS, 1);
 								st.giveItems(PARMAN_LETTER, 1);
 								st.giveItems(RING_OF_TESTIMONY_2, 1);
@@ -320,7 +321,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 							st.giveItems(MARK_OF_PROSPERITY, 1);
 							st.rewardExpAndSp(12969, 1000);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -344,10 +345,10 @@ public class Q221_TestimonyOfProsperity extends Quest
 									if (st.hasQuestItems(BLESSED_SEED, EMILY_RECIPE, LILITH_ELVEN_WAFER))
 									{
 										st.set("cond", "2");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 									}
 									else
-										st.playSound(QuestState.SOUND_ITEMGET);
+										st.playSound(Sound.SOUND_ITEMGET);
 								}
 								else
 									htmltext = "30531-04.htm";
@@ -365,13 +366,13 @@ public class Q221_TestimonyOfProsperity extends Quest
 							if (st.hasQuestItems(LOCKIRIN_NOTICE_1))
 							{
 								htmltext = "30532-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(LOCKIRIN_NOTICE_1, 1);
 							}
 							else if (st.hasQuestItems(CONTRIBUTION_OF_SHARI))
 							{
 								htmltext = "30532-03.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(CONTRIBUTION_OF_SHARI, 1);
 								st.giveItems(RECEIPT_OF_CONTRIBUTION_1, 1);
 							}
@@ -386,13 +387,13 @@ public class Q221_TestimonyOfProsperity extends Quest
 							if (st.hasQuestItems(LOCKIRIN_NOTICE_2))
 							{
 								htmltext = "30533-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(LOCKIRIN_NOTICE_2, 1);
 							}
 							else if (st.hasQuestItems(CONTRIBUTION_OF_MARYSE, CONTRIBUTION_OF_MION))
 							{
 								htmltext = "30533-03.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(CONTRIBUTION_OF_MARYSE, 1);
 								st.takeItems(CONTRIBUTION_OF_MION, 1);
 								st.giveItems(RECEIPT_OF_CONTRIBUTION_2, 1);
@@ -408,7 +409,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 							if (st.hasQuestItems(LOCKIRIN_NOTICE_3))
 							{
 								htmltext = "30534-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(LOCKIRIN_NOTICE_3, 1);
 							}
 							else if (st.hasQuestItems(PROCURATION_OF_TOROCCO))
@@ -424,13 +425,13 @@ public class Q221_TestimonyOfProsperity extends Quest
 							if (st.hasQuestItems(LOCKIRIN_NOTICE_4))
 							{
 								htmltext = "30535-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(LOCKIRIN_NOTICE_4, 1);
 							}
 							else if (st.hasQuestItems(RECEIPT_OF_BOLTER))
 							{
 								htmltext = "30535-03.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(RECEIPT_OF_BOLTER, 1);
 								st.giveItems(RECEIPT_OF_CONTRIBUTION_4, 1);
 							}
@@ -445,13 +446,13 @@ public class Q221_TestimonyOfProsperity extends Quest
 							if (st.hasQuestItems(LOCKIRIN_NOTICE_5))
 							{
 								htmltext = "30536-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(LOCKIRIN_NOTICE_5, 1);
 							}
 							else if (st.hasQuestItems(CONTRIBUTION_OF_TOMA))
 							{
 								htmltext = "30536-03.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(CONTRIBUTION_OF_TOMA, 1);
 								st.giveItems(RECEIPT_OF_CONTRIBUTION_5, 1);
 							}
@@ -468,7 +469,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 							else if (!st.hasAtLeastOneQuestItem(LOCKIRIN_NOTICE_1, RECEIPT_OF_CONTRIBUTION_1))
 							{
 								htmltext = "30517-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.giveItems(CONTRIBUTION_OF_SHARI, 1);
 							}
 						}
@@ -482,7 +483,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 							else if (!st.hasAtLeastOneQuestItem(LOCKIRIN_NOTICE_2, RECEIPT_OF_CONTRIBUTION_2))
 							{
 								htmltext = "30519-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.giveItems(CONTRIBUTION_OF_MION, 1);
 							}
 						}
@@ -498,7 +499,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 								else
 								{
 									htmltext = "30553-03.htm";
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 									st.takeItems(ANIMAL_SKIN, 100);
 									st.takeItems(MARYSE_REQUEST, 1);
 									st.giveItems(CONTRIBUTION_OF_MARYSE, 1);
@@ -509,7 +510,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 							else if (!st.hasAtLeastOneQuestItem(LOCKIRIN_NOTICE_2, RECEIPT_OF_CONTRIBUTION_2))
 							{
 								htmltext = "30553-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.giveItems(MARYSE_REQUEST, 1);
 							}
 						}
@@ -533,7 +534,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 							else if (!st.hasAtLeastOneQuestItem(LOCKIRIN_NOTICE_4, RECEIPT_OF_CONTRIBUTION_4))
 							{
 								htmltext = "30554-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.giveItems(RECEIPT_OF_BOLTER, 1);
 							}
 						}
@@ -547,7 +548,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 							else if (!st.hasAtLeastOneQuestItem(LOCKIRIN_NOTICE_5, RECEIPT_OF_CONTRIBUTION_5))
 							{
 								htmltext = "30556-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.giveItems(CONTRIBUTION_OF_TOMA, 1);
 							}
 						}
@@ -598,7 +599,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 								else
 								{
 									htmltext = "30466-05.htm";
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 									st.takeItems(BRIGHT_LIST, 1);
 									st.takeItems(CRIMSON_MOSS, 10);
 									st.takeItems(MANDRAGORA_PETAL, 20);
@@ -628,7 +629,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 						if (cond == 4)
 						{
 							htmltext = "30621-01.htm";
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.takeItems(PARMAN_LETTER, 1);
 						}
 						else if (cond == 5)
@@ -637,7 +638,7 @@ public class Q221_TestimonyOfProsperity extends Quest
 						{
 							htmltext = "30621-06.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(PATTERN_OF_KEYHOLE, 1);
 							st.giveItems(NIKOLAS_LIST, 1);
 							st.giveItems(RECIPE_TITAN_KEY, 1);

@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q408_PathToAnElvenWizard extends Quest
 {
@@ -65,7 +66,7 @@ public class Q408_PathToAnElvenWizard extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.giveItems(FERTILITY_PERIDOT, 1);
 			}
 		}
@@ -73,7 +74,7 @@ public class Q408_PathToAnElvenWizard extends Quest
 		{
 			if (!st.hasQuestItems(MAGICAL_POWERS_RUBY))
 			{
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.giveItems(ROSELLA_LETTER, 1);
 			}
 			else
@@ -83,7 +84,7 @@ public class Q408_PathToAnElvenWizard extends Quest
 		{
 			if (!st.hasQuestItems(PURE_AQUAMARINE))
 			{
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.giveItems(APPETIZING_APPLE, 1);
 			}
 			else
@@ -93,7 +94,7 @@ public class Q408_PathToAnElvenWizard extends Quest
 		{
 			if (!st.hasQuestItems(NOBILITY_AMETHYST))
 			{
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.giveItems(IMMORTAL_LOVE, 1);
 			}
 			else
@@ -101,13 +102,13 @@ public class Q408_PathToAnElvenWizard extends Quest
 		}
 		else if (event.equalsIgnoreCase("30157-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ROSELLA_LETTER, 1);
 			st.giveItems(CHARM_OF_GRAIN, 1);
 		}
 		else if (event.equalsIgnoreCase("30371-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(APPETIZING_APPLE, 1);
 			st.giveItems(SAP_OF_THE_MOTHER_TREE, 1);
 		}
@@ -143,7 +144,7 @@ public class Q408_PathToAnElvenWizard extends Quest
 							st.giveItems(ETERNITY_DIAMOND, 1);
 							st.rewardExpAndSp(3200, 1890);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						else if (st.hasQuestItems(ROSELLA_LETTER))
@@ -183,7 +184,7 @@ public class Q408_PathToAnElvenWizard extends Quest
 						else if (st.getQuestItemsCount(RED_DOWN) == 5)
 						{
 							htmltext = "30157-04.htm";
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(CHARM_OF_GRAIN, 1);
 							st.takeItems(RED_DOWN, -1);
 							st.giveItems(MAGICAL_POWERS_RUBY, 1);
@@ -198,7 +199,7 @@ public class Q408_PathToAnElvenWizard extends Quest
 						else if (st.getQuestItemsCount(GOLD_LEAVES) == 5)
 						{
 							htmltext = "30371-04.htm";
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(GOLD_LEAVES, -1);
 							st.takeItems(SAP_OF_THE_MOTHER_TREE, 1);
 							st.giveItems(PURE_AQUAMARINE, 1);
@@ -211,14 +212,14 @@ public class Q408_PathToAnElvenWizard extends Quest
 						if (st.hasQuestItems(IMMORTAL_LOVE))
 						{
 							htmltext = "30423-01.htm";
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(IMMORTAL_LOVE, 1);
 							st.giveItems(LUCKY_POTPOURRI, 1);
 						}
 						else if (st.getQuestItemsCount(AMETHYST) == 2)
 						{
 							htmltext = "30423-03.htm";
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(AMETHYST, -1);
 							st.takeItems(LUCKY_POTPOURRI, 1);
 							st.giveItems(NOBILITY_AMETHYST, 1);

@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q319_ScentOfDeath extends Quest
 {
@@ -36,7 +37,7 @@ public class Q319_ScentOfDeath extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -65,7 +66,7 @@ public class Q319_ScentOfDeath extends Quest
 					st.takeItems(ZOMBIE_SKIN, -1);
 					st.rewardItems(57, 3350);
 					st.rewardItems(1060, 1);
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(true);
 				}
 				break;

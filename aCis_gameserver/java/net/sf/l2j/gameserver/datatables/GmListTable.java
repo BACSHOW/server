@@ -8,8 +8,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.L2GameServerPacket;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 /**
  * This class stores references to all online game masters. (access level > 100)
@@ -111,7 +111,7 @@ public class GmListTable
 		else
 		{
 			player.sendPacket(SystemMessageId.NO_GM_PROVIDING_SERVICE_NOW);
-			player.sendPacket(new PlaySound("systemmsg_e.702"));
+			player.sendPacket(Sound.SYSTEM_MSG_702.getPacket());
 		}
 	}
 	

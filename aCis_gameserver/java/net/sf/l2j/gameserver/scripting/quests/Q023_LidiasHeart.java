@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q023_LidiasHeart extends Quest
 {
@@ -49,14 +50,14 @@ public class Q023_LidiasHeart extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(FOREST_OF_DEADMAN_MAP, 1);
 			st.giveItems(SILVER_KEY, 1);
 		}
 		else if (event.equalsIgnoreCase("31328-06.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("31526-05.htm"))
 		{
@@ -66,10 +67,10 @@ public class Q023_LidiasHeart extends Quest
 				if (st.hasQuestItems(LIDIA_DIARY))
 				{
 					st.set("cond", "4");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				else
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 			}
 		}
 		else if (event.equalsIgnoreCase("31526-11.htm"))
@@ -80,10 +81,10 @@ public class Q023_LidiasHeart extends Quest
 				if (st.hasQuestItems(LIDIA_HAIRPIN))
 				{
 					st.set("cond", "4");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				else
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 			}
 		}
 		else if (event.equalsIgnoreCase("31328-11.htm"))
@@ -91,18 +92,18 @@ public class Q023_LidiasHeart extends Quest
 			if (st.getInt("cond") < 5)
 			{
 				st.set("cond", "5");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 		}
 		else if (event.equalsIgnoreCase("31328-19.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("31524-04.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LIDIA_DIARY, 1);
 		}
 		else if (event.equalsIgnoreCase("31523-02.htm"))
@@ -124,13 +125,13 @@ public class Q023_LidiasHeart extends Quest
 		{
 			htmltext = "31523-06.htm";
 			st.set("cond", "8");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(SILVER_KEY, 1);
 		}
 		else if (event.equalsIgnoreCase("31530-02.htm"))
 		{
 			st.set("cond", "10");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SILVER_KEY, 1);
 			st.giveItems(SILVER_SPEAR, 1);
 		}
@@ -185,7 +186,7 @@ public class Q023_LidiasHeart extends Quest
 						{
 							htmltext = "31526-00.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 3)
 						{
@@ -219,7 +220,7 @@ public class Q023_LidiasHeart extends Quest
 						{
 							htmltext = "31386-01.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 9)
 							htmltext = "31386-02.htm";
@@ -230,7 +231,7 @@ public class Q023_LidiasHeart extends Quest
 								htmltext = "31386-03.htm";
 								st.takeItems(SILVER_SPEAR, 1);
 								st.rewardItems(57, 100000);
-								st.playSound(QuestState.SOUND_FINISH);
+								st.playSound(Sound.SOUND_FINISH);
 								st.exitQuest(false);
 							}
 							else

@@ -8,7 +8,6 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.GrandBoss;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.network.serverpackets.SpecialCamera;
 import net.sf.l2j.gameserver.scripting.scripts.ai.L2AttackableAIScript;
@@ -150,7 +149,6 @@ public class DrChaos extends L2AttackableAIScript
 			npc = golem;
 			npc.broadcastPacket(new SpecialCamera(npc.getObjectId(), 30, 200, 20, 6000, 8000, 0, 0, 1, 0));
 			npc.broadcastPacket(new SocialAction(npc, 1));
-			npc.broadcastPacket(new PlaySound(1, "Rm03_A", 0, 0, 0, 0, 0));
 			
 			// start monitoring Dr. Chaos's inactivity
 			_lastAttackTime = System.currentTimeMillis();

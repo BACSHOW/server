@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q347_GoGetTheCalculator extends Quest
 {
@@ -44,7 +45,7 @@ public class Q347_GoGetTheCalculator extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30533-03.htm"))
 		{
@@ -58,7 +59,7 @@ public class Q347_GoGetTheCalculator extends Quest
 				else
 					st.set("cond", "2");
 				
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 		}
 		else if (event.equalsIgnoreCase("30532-02.htm"))
@@ -68,20 +69,20 @@ public class Q347_GoGetTheCalculator extends Quest
 			else
 				st.set("cond", "3");
 			
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30526-08.htm"))
 		{
 			st.takeItems(CALCULATOR_QUEST, -1);
 			st.giveItems(CALCULATOR_REAL, 1);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30526-09.htm"))
 		{
 			st.takeItems(CALCULATOR_QUEST, -1);
 			st.rewardItems(57, 1000);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -125,7 +126,7 @@ public class Q347_GoGetTheCalculator extends Quest
 						{
 							htmltext = "30527-01.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 5)
 						{
@@ -137,7 +138,7 @@ public class Q347_GoGetTheCalculator extends Quest
 								st.set("cond", "6");
 								st.takeItems(GEMSTONE_BEAST_CRYSTAL, -1);
 								st.giveItems(CALCULATOR_QUEST, 1);
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 						}
 						else if (cond == 6)

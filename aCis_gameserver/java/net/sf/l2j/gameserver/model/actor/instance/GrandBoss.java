@@ -8,8 +8,8 @@ import net.sf.l2j.gameserver.model.actor.template.NpcTemplate;
 import net.sf.l2j.gameserver.model.entity.Hero;
 import net.sf.l2j.gameserver.model.group.Party;
 import net.sf.l2j.gameserver.network.SystemMessageId;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 /**
  * This class manages all Grand Bosses.
@@ -44,7 +44,7 @@ public final class GrandBoss extends Monster
 		if (player != null)
 		{
 			broadcastPacket(SystemMessage.getSystemMessage(SystemMessageId.RAID_WAS_SUCCESSFUL));
-			broadcastPacket(new PlaySound("systemmsg_e.1209"));
+			broadcastPacket(Sound.SYSTEM_MSG_1209.getPacket());
 			
 			final Party party = player.getParty();
 			if (party != null)

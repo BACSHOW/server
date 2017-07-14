@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q033_MakeAPairOfDressShoes extends Quest
 {
@@ -42,24 +43,24 @@ public class Q033_MakeAPairOfDressShoes extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31520-1.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30838-3.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30838-5.htm"))
 		{
 			if (st.getQuestItemsCount(LEATHER) >= 200 && st.getQuestItemsCount(THREAD) >= 600 && st.getQuestItemsCount(ADENA) >= 200000)
 			{
 				st.set("cond", "4");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(ADENA, 200000);
 				st.takeItems(LEATHER, 200);
 				st.takeItems(THREAD, 600);
@@ -72,7 +73,7 @@ public class Q033_MakeAPairOfDressShoes extends Quest
 			if (st.getQuestItemsCount(ADENA) >= 300000)
 			{
 				st.set("cond", "5");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(ADENA, 300000);
 			}
 			else
@@ -81,7 +82,7 @@ public class Q033_MakeAPairOfDressShoes extends Quest
 		else if (event.equalsIgnoreCase("30838-7.htm"))
 		{
 			st.giveItems(DRESS_SHOES_BOX, 1);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		

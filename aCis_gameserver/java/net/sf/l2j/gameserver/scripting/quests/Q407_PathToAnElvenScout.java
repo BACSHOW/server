@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q407_PathToAnElvenScout extends Quest
 {
@@ -62,14 +63,14 @@ public class Q407_PathToAnElvenScout extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.giveItems(REISA_LETTER, 1);
 			}
 		}
 		else if (event.equalsIgnoreCase("30337-03.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(REISA_LETTER, -1);
 		}
 		
@@ -106,7 +107,7 @@ public class Q407_PathToAnElvenScout extends Quest
 							st.giveItems(REISA_RECOMMENDATION, 1);
 							st.rewardExpAndSp(3200, 1000);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -120,7 +121,7 @@ public class Q407_PathToAnElvenScout extends Quest
 						{
 							htmltext = "30337-06.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(PRIAS_TORN_LETTER_1, -1);
 							st.takeItems(PRIAS_TORN_LETTER_2, -1);
 							st.takeItems(PRIAS_TORN_LETTER_3, -1);
@@ -134,7 +135,7 @@ public class Q407_PathToAnElvenScout extends Quest
 						{
 							htmltext = "30337-07.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(PRIAS_LETTER, -1);
 							st.giveItems(HONORARY_GUARD, 1);
 						}
@@ -152,7 +153,7 @@ public class Q407_PathToAnElvenScout extends Quest
 						{
 							htmltext = "30426-01.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 5)
 							htmltext = "30426-01.htm";
@@ -160,7 +161,7 @@ public class Q407_PathToAnElvenScout extends Quest
 						{
 							htmltext = "30426-02.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(RUSTED_KEY, -1);
 							st.takeItems(MORETTI_HERB, -1);
 							st.takeItems(MORETTI_LETTER, -1);
@@ -190,23 +191,23 @@ public class Q407_PathToAnElvenScout extends Quest
 			{
 				if (!st.hasQuestItems(PRIAS_TORN_LETTER_1))
 				{
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(PRIAS_TORN_LETTER_1, 1);
 				}
 				else if (!st.hasQuestItems(PRIAS_TORN_LETTER_2))
 				{
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(PRIAS_TORN_LETTER_2, 1);
 				}
 				else if (!st.hasQuestItems(PRIAS_TORN_LETTER_3))
 				{
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(PRIAS_TORN_LETTER_3, 1);
 				}
 				else if (!st.hasQuestItems(PRIAS_TORN_LETTER_4))
 				{
 					st.set("cond", "3");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(PRIAS_TORN_LETTER_4, 1);
 				}
 			}

@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q228_TestOfMagus extends Quest
 {
@@ -91,7 +92,7 @@ public class Q228_TestOfMagus extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(RUKAL_LETTER, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange39", false))
@@ -104,7 +105,7 @@ public class Q228_TestOfMagus extends Quest
 		else if (event.equalsIgnoreCase("30629-10.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(GOLDEN_SEED_1, 1);
 			st.takeItems(GOLDEN_SEED_2, 1);
 			st.takeItems(GOLDEN_SEED_3, 1);
@@ -115,7 +116,7 @@ public class Q228_TestOfMagus extends Quest
 		else if (event.equalsIgnoreCase("30391-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(RUKAL_LETTER, 1);
 			st.giveItems(PARINA_LETTER, 1);
 		}
@@ -123,20 +124,20 @@ public class Q228_TestOfMagus extends Quest
 		else if (event.equalsIgnoreCase("30612-02.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(PARINA_LETTER, 1);
 			st.giveItems(LILAC_CHARM, 1);
 		}
 		// WIND SYLPH
 		else if (event.equalsIgnoreCase("30412-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(SYLPH_CHARM, 1);
 		}
 		// EARTH SNAKE
 		else if (event.equalsIgnoreCase("30409-03.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(SERPENT_CHARM, 1);
 		}
 		
@@ -188,7 +189,7 @@ public class Q228_TestOfMagus extends Quest
 							st.giveItems(MARK_OF_MAGUS, 1);
 							st.rewardExpAndSp(139039, 40000);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -232,16 +233,16 @@ public class Q228_TestOfMagus extends Quest
 									if (st.hasQuestItems(TONE_OF_FIRE, TONE_OF_WIND, TONE_OF_EARTH))
 									{
 										st.set("cond", "6");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 									}
 									else
-										st.playSound(QuestState.SOUND_ITEMGET);
+										st.playSound(Sound.SOUND_ITEMGET);
 								}
 							}
 							else if (!st.hasQuestItems(TONE_OF_WATER))
 							{
 								htmltext = "30413-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.giveItems(UNDINE_CHARM, 1);
 							}
 							else
@@ -268,10 +269,10 @@ public class Q228_TestOfMagus extends Quest
 									if (st.hasQuestItems(TONE_OF_WATER, TONE_OF_WIND, TONE_OF_EARTH))
 									{
 										st.set("cond", "6");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 									}
 									else
-										st.playSound(QuestState.SOUND_ITEMGET);
+										st.playSound(Sound.SOUND_ITEMGET);
 								}
 							}
 							else if (!st.hasQuestItems(TONE_OF_FIRE))
@@ -305,10 +306,10 @@ public class Q228_TestOfMagus extends Quest
 									if (st.hasQuestItems(TONE_OF_WATER, TONE_OF_FIRE, TONE_OF_EARTH))
 									{
 										st.set("cond", "6");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 									}
 									else
-										st.playSound(QuestState.SOUND_ITEMGET);
+										st.playSound(Sound.SOUND_ITEMGET);
 								}
 							}
 							else if (!st.hasQuestItems(TONE_OF_WIND))
@@ -339,10 +340,10 @@ public class Q228_TestOfMagus extends Quest
 									if (st.hasQuestItems(TONE_OF_WATER, TONE_OF_FIRE, TONE_OF_WIND))
 									{
 										st.set("cond", "6");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 									}
 									else
-										st.playSound(QuestState.SOUND_ITEMGET);
+										st.playSound(Sound.SOUND_ITEMGET);
 								}
 							}
 							else if (!st.hasQuestItems(TONE_OF_EARTH))

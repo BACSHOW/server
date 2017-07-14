@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q213_TrialOfTheSeeker extends Quest
 {
@@ -87,7 +88,7 @@ public class Q213_TrialOfTheSeeker extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(DUFNER_LETTER, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange35", false))
@@ -101,14 +102,14 @@ public class Q213_TrialOfTheSeeker extends Quest
 		else if (event.equalsIgnoreCase("30064-03.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(DUFNER_LETTER, 1);
 			st.giveItems(TERRY_ORDER_1, 1);
 		}
 		else if (event.equalsIgnoreCase("30064-06.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(MYSTERIOUS_RUNESTONE, 1);
 			st.takeItems(TERRY_ORDER_1, 1);
 			st.giveItems(TERRY_ORDER_2, 1);
@@ -116,7 +117,7 @@ public class Q213_TrialOfTheSeeker extends Quest
 		else if (event.equalsIgnoreCase("30064-10.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ANT_RUNESTONE, 1);
 			st.takeItems(OL_MAHUM_RUNESTONE, 1);
 			st.takeItems(TURAK_BUGBEAR_RUNESTONE, 1);
@@ -130,14 +131,14 @@ public class Q213_TrialOfTheSeeker extends Quest
 			if (player.getLevel() < 36)
 			{
 				htmltext = "30064-17.htm";
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.takeItems(ANALYSIS_RESULT, 1);
 				st.giveItems(TERRY_ORDER_3, 1);
 			}
 			else
 			{
 				st.set("cond", "16");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(ANALYSIS_RESULT, 1);
 				st.giveItems(LIST_OF_HOST, 1);
 			}
@@ -146,14 +147,14 @@ public class Q213_TrialOfTheSeeker extends Quest
 		else if (event.equalsIgnoreCase("30684-05.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(TERRY_LETTER, 1);
 			st.giveItems(VIKTOR_LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("30684-11.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(TERRY_LETTER, 1);
 			st.takeItems(TERRY_BOX, 1);
 			st.takeItems(HAWKEYE_LETTER, 1);
@@ -163,7 +164,7 @@ public class Q213_TrialOfTheSeeker extends Quest
 		else if (event.equalsIgnoreCase("30684-15.htm"))
 		{
 			st.set("cond", "11");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(VIKTOR_REQUEST, 1);
 			st.takeItems(MEDUSA_SCALES, 10);
 			st.giveItems(ANALYSIS_REQUEST, 1);
@@ -173,7 +174,7 @@ public class Q213_TrialOfTheSeeker extends Quest
 		else if (event.equalsIgnoreCase("30715-02.htm"))
 		{
 			st.set("cond", "12");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SHILEN_RUNESTONE, 1);
 			st.takeItems(ANALYSIS_REQUEST, 1);
 			st.giveItems(MARINA_LETTER, 1);
@@ -181,7 +182,7 @@ public class Q213_TrialOfTheSeeker extends Quest
 		else if (event.equalsIgnoreCase("30715-05.htm"))
 		{
 			st.set("cond", "14");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(EXPERIMENT_TOOLS, 1);
 			st.giveItems(ANALYSIS_RESULT, 1);
 		}
@@ -224,7 +225,7 @@ public class Q213_TrialOfTheSeeker extends Quest
 								st.giveItems(MARK_OF_SEEKER, 1);
 								st.rewardExpAndSp(72126, 11000);
 								player.broadcastPacket(new SocialAction(player, 3));
-								st.playSound(QuestState.SOUND_FINISH);
+								st.playSound(Sound.SOUND_FINISH);
 								st.exitQuest(false);
 							}
 						}
@@ -247,7 +248,7 @@ public class Q213_TrialOfTheSeeker extends Quest
 						{
 							htmltext = "30064-12.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(VIKTOR_LETTER, 1);
 							st.giveItems(HAWKEYE_LETTER, 1);
 						}
@@ -265,7 +266,7 @@ public class Q213_TrialOfTheSeeker extends Quest
 							{
 								htmltext = "30064-21.htm";
 								st.set("cond", "15");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(TERRY_ORDER_3, 1);
 								st.giveItems(LIST_OF_HOST, 1);
 							}
@@ -277,7 +278,7 @@ public class Q213_TrialOfTheSeeker extends Quest
 							if (!st.hasQuestItems(TERRY_REPORT))
 							{
 								htmltext = "30064-23.htm";
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(LIST_OF_HOST, 1);
 								st.takeItems(ABYSS_RUNESTONE_1, 1);
 								st.takeItems(ABYSS_RUNESTONE_2, 1);
@@ -323,7 +324,7 @@ public class Q213_TrialOfTheSeeker extends Quest
 						{
 							htmltext = "30526-01.htm";
 							st.set("cond", "13");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(MARINA_LETTER, 1);
 							st.giveItems(EXPERIMENT_TOOLS, 1);
 						}

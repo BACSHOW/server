@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q105_SkirmishWithTheOrcs extends Quest
 {
@@ -70,7 +71,7 @@ public class Q105_SkirmishWithTheOrcs extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(Rnd.get(1836, 1839), 1); // Kendell's orders 1 to 4.
 		}
 		return htmltext;
@@ -103,7 +104,7 @@ public class Q105_SkirmishWithTheOrcs extends Quest
 				{
 					htmltext = "30218-06.htm";
 					st.set("cond", "3");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(KABOO_CHIEF_TORC_1, 1);
 					st.takeItems(KENDELL_ORDER_1, 1);
 					st.takeItems(KENDELL_ORDER_2, 1);
@@ -148,7 +149,7 @@ public class Q105_SkirmishWithTheOrcs extends Quest
 					st.giveItems(ECHO_FEAST, 10);
 					st.giveItems(ECHO_CELEBRATION, 10);
 					player.broadcastPacket(new SocialAction(player, 3));
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(false);
 				}
 				break;
@@ -176,7 +177,7 @@ public class Q105_SkirmishWithTheOrcs extends Quest
 				if (st.getInt("cond") == 1 && st.hasQuestItems(npc.getNpcId() - 25223)) // npcId - 25223 = itemId to verify.
 				{
 					st.set("cond", "2");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(KABOO_CHIEF_TORC_1, 1);
 				}
 				break;
@@ -186,7 +187,7 @@ public class Q105_SkirmishWithTheOrcs extends Quest
 				if (st.getInt("cond") == 3 && st.hasQuestItems(npc.getNpcId() - 25224)) // npcId - 25224 = itemId to verify.
 				{
 					st.set("cond", "4");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(KABOO_CHIEF_TORC_2, 1);
 				}
 				break;
@@ -196,7 +197,7 @@ public class Q105_SkirmishWithTheOrcs extends Quest
 				if (st.getInt("cond") == 3 && st.hasQuestItems(npc.getNpcId() - 25225)) // npcId - 25225 = itemId to verify.
 				{
 					st.set("cond", "4");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(KABOO_CHIEF_TORC_2, 1);
 				}
 				break;

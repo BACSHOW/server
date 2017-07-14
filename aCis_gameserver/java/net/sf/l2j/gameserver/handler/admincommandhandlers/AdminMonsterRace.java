@@ -10,6 +10,8 @@ import net.sf.l2j.gameserver.network.serverpackets.DeleteObject;
 import net.sf.l2j.gameserver.network.serverpackets.MonRaceInfo;
 import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class AdminMonsterRace implements IAdminCommandHandler
 {
@@ -59,10 +61,17 @@ public class AdminMonsterRace implements IAdminCommandHandler
 			else if (state == 0)
 			{
 				state++;
-				activeChar.broadcastPacket(SystemMessage.getSystemMessage(SystemMessageId.MONSRACE_RACE_START));
-				activeChar.broadcastPacket(new PlaySound(1, "S_Race", 0, 0, 0, 0, 0));
-				activeChar.broadcastPacket(new PlaySound(0, "ItemSound2.race_start", 1, 121209259, 12125, 182487, -3559));
-				activeChar.broadcastPacket(new MonRaceInfo(codes[state][0], codes[state][1], race.getMonsters(), race.getSpeeds()));
+				SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.MONSRACE_RACE_START);
+				activeChar.sendPacket(sm);
+				PlaySound SRace = Music.S_RACE.getPacket();
+				activeChar.sendPacket(SRace);
+				activeChar.broadcastPacket(SRace);
+				PlaySound SRace2 = Sound.SOUND_RACE_START.getPacket();
+				activeChar.sendPacket(SRace2);
+				activeChar.broadcastPacket(SRace2);
+				MonRaceInfo spk = new MonRaceInfo(codes[state][0], codes[state][1], race.getMonsters(), race.getSpeeds());
+				activeChar.sendPacket(spk);
+				activeChar.broadcastPacket(spk);
 				
 				ThreadPool.schedule(new RunRace(codes, activeChar), 5000);
 			}

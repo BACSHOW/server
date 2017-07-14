@@ -62,7 +62,7 @@ public class FenceTable
 	
 	/**
 	 * Returns list of all fences spawned in the world.
-	 * @return List<L2FenceInstance> : List of all fences.
+	 * @return List<Fence> : List of all fences.
 	 */
 	public final List<Fence> getFences()
 	{
@@ -78,7 +78,7 @@ public class FenceTable
 	 * @param sizeX : Size of the {@link Fence} in X direction.
 	 * @param sizeY : Size of the {@link Fence} in Y direction.
 	 * @param height : The height of {@link Fence}.
-	 * @return The newly created L2FenceInstance object.
+	 * @return The newly created Fence object.
 	 */
 	public final Fence addFence(int x, int y, int z, int type, int sizeX, int sizeY, int height)
 	{
@@ -113,13 +113,13 @@ public class FenceTable
 		final byte[][] geoData = GeoEngine.calculateGeoObject(inside);
 		
 		// create new fence
-		Fence fence = new Fence(type, sizeX, sizeY, height, geoX, geoY);
+		Fence fence = new Fence(type, sizeX, sizeY, height, geoX, geoY, geoZ, geoData);
 		
 		// spawn fence to world
 		fence.spawnMe(x, y, z);
 		
 		// add fence to geoengine and list
-		//GeoEngine.getInstance().addGeoObject(fence);
+		GeoEngine.getInstance().addGeoObject(fence);
 		_fences.add(fence);
 		
 		return fence;
@@ -135,7 +135,7 @@ public class FenceTable
 		fence.decayMe();
 		
 		// remove fence from geoengine and list
-		//GeoEngine.getInstance().removeGeoObject(fence);
+		GeoEngine.getInstance().removeGeoObject(fence);
 		_fences.remove(fence);
 	}
 	

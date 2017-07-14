@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q417_PathToBecomeAScavenger extends Quest
 {
@@ -82,7 +83,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.giveItems(PIPPI_LETTER, 1);
 			}
 		}
@@ -93,7 +94,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 			
 			htmltext = "30519-0" + (random + 2) + ".htm";
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(PIPPI_LETTER, -1);
 			st.giveItems(ZIMENF_POTION - random, 1);
 		}
@@ -123,7 +124,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 			{
 				htmltext = "30519-10.htm";
 				st.set("cond", "4");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(SHARI_AXE, -1);
 				st.takeItems(ZIMENF_POTION, -1);
 				st.takeItems(BRONK_INGOT, -1);
@@ -136,7 +137,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 		else if (event.equalsIgnoreCase("30556-05b.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BEAD, -1);
 			st.takeItems(TARANTULA_PICTURE, 1);
 			st.giveItems(BEAD_PARCEL_1, 1);
@@ -144,7 +145,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 		else if (event.equalsIgnoreCase("30556-06b.htm"))
 		{
 			st.set("cond", "12");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BEAD, -1);
 			st.takeItems(TARANTULA_PICTURE, 1);
 			st.giveItems(BEAD_PARCEL_2, 1);
@@ -153,7 +154,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 		else if (event.equalsIgnoreCase("30316-02.htm") || event.equalsIgnoreCase("30316-03.htm"))
 		{
 			st.set("cond", "10");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BEAD_PARCEL_1, 1);
 			st.giveItems(RAUT_TELEPORT_SCROLL, 1);
 		}
@@ -161,7 +162,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 		else if (event.equalsIgnoreCase("30557-03.htm"))
 		{
 			st.set("cond", "11");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(RAUT_TELEPORT_SCROLL, 1);
 			st.giveItems(SUCCUBUS_UNDIES, 1);
 		}
@@ -172,7 +173,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 			st.giveItems(RING_OF_RAVEN, 1);
 			st.rewardExpAndSp(3200, 7080);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -224,7 +225,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 							{
 								htmltext = "30519-15.htm";
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(BRONK_PAY, -1);
 								st.takeItems(SHARI_PAY, -1);
 								st.takeItems(ZIMENF_PAY, -1);
@@ -247,7 +248,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 							{
 								htmltext = "30517-02.htm";
 								st.set("cond", "3");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							st.set("id", String.valueOf(id + 10));
 							st.takeItems(SHARI_AXE, 1);
@@ -267,7 +268,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 							{
 								htmltext = "30525-02.htm";
 								st.set("cond", "3");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							st.set("id", String.valueOf(id + 10));
 							st.takeItems(BRONK_INGOT, 1);
@@ -287,7 +288,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 							{
 								htmltext = "30538-02.htm";
 								st.set("cond", "3");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							st.set("id", String.valueOf(id + 10));
 							st.takeItems(ZIMENF_POTION, 1);
@@ -302,7 +303,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 						{
 							htmltext = "30556-01.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(MION_LETTER, 1);
 							st.giveItems(BEAR_PICTURE, 1);
 						}
@@ -312,7 +313,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 						{
 							htmltext = "30556-03.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(HONEY_JAR, -1);
 							st.takeItems(BEAR_PICTURE, 1);
 							st.giveItems(TARANTULA_PICTURE, 1);
@@ -341,7 +342,7 @@ public class Q417_PathToBecomeAScavenger extends Quest
 							st.giveItems(RING_OF_RAVEN, 1);
 							st.rewardExpAndSp(3200, 7080);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;

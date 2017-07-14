@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q362_BardsMandolin extends Quest
 {
@@ -41,13 +42,13 @@ public class Q362_BardsMandolin extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30957-7.htm") || event.equalsIgnoreCase("30957-8.htm"))
 		{
 			st.rewardItems(57, 10000);
 			st.giveItems(4410, 1);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -79,7 +80,7 @@ public class Q362_BardsMandolin extends Quest
 						{
 							htmltext = "30957-5.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(SWAN_LETTER, 1);
 						}
 						else if (cond == 4)
@@ -93,7 +94,7 @@ public class Q362_BardsMandolin extends Quest
 						{
 							htmltext = "30837-1.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 2)
 							htmltext = "30837-2.htm";
@@ -106,7 +107,7 @@ public class Q362_BardsMandolin extends Quest
 						{
 							htmltext = "30958-1.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.giveItems(SWAN_FLUTE, 1);
 						}
 						else if (cond > 2)
@@ -118,7 +119,7 @@ public class Q362_BardsMandolin extends Quest
 						{
 							htmltext = "30956-1.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SWAN_FLUTE, 1);
 							st.takeItems(SWAN_LETTER, 1);
 						}

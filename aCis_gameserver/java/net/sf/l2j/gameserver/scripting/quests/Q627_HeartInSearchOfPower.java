@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q627_HeartInSearchOfPower extends Quest
 {
@@ -100,14 +101,14 @@ public class Q627_HeartInSearchOfPower extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31518-03.htm"))
 		{
 			if (st.getQuestItemsCount(BEAD_OF_OBEDIENCE) == 300)
 			{
 				st.set("cond", "3");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(BEAD_OF_OBEDIENCE, -1);
 				st.giveItems(SEAL_OF_LIGHT, 1);
 			}
@@ -123,7 +124,7 @@ public class Q627_HeartInSearchOfPower extends Quest
 			if (st.getQuestItemsCount(SEAL_OF_LIGHT) == 1)
 			{
 				st.set("cond", "4");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(SEAL_OF_LIGHT, 1);
 				st.giveItems(GEM_OF_SAINTS, 1);
 			}
@@ -139,7 +140,7 @@ public class Q627_HeartInSearchOfPower extends Quest
 					st.giveItems(REWARDS.get(event)[0], REWARDS.get(event)[1]);
 				st.rewardItems(57, REWARDS.get(event)[2]);
 				
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 			else

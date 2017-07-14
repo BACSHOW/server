@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q106_ForgottenTruth extends Quest
 {
@@ -59,7 +60,7 @@ public class Q106_ForgottenTruth extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ONYX_TALISMAN_1, 1);
 		}
 		return htmltext;
@@ -128,7 +129,7 @@ public class Q106_ForgottenTruth extends Quest
 							st.giveItems(ECHO_FEAST, 10);
 							st.giveItems(ECHO_CELEBRATION, 10);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -138,7 +139,7 @@ public class Q106_ForgottenTruth extends Quest
 						{
 							htmltext = "30133-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ONYX_TALISMAN_1, 1);
 							st.giveItems(ONYX_TALISMAN_2, 1);
 						}
@@ -148,7 +149,7 @@ public class Q106_ForgottenTruth extends Quest
 						{
 							htmltext = "30133-03.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ONYX_TALISMAN_2, 1);
 							st.takeItems(ANCIENT_SCROLL, 1);
 							st.takeItems(ANCIENT_CLAY_TABLET, 1);

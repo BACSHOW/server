@@ -12,6 +12,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q223_TestOfTheChampion extends Quest
 {
@@ -85,7 +86,7 @@ public class Q223_TestOfTheChampion extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ASCALON_LETTER_1, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange39", false))
@@ -98,42 +99,42 @@ public class Q223_TestOfTheChampion extends Quest
 		else if (event.equals("30624-10.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(MASON_LETTER, 1);
 			st.giveItems(ASCALON_LETTER_2, 1);
 		}
 		else if (event.equals("30624-14.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(GROOT_LETTER, 1);
 			st.giveItems(ASCALON_LETTER_3, 1);
 		}
 		else if (event.equals("30625-03.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ASCALON_LETTER_1, 1);
 			st.giveItems(IRON_ROSE_RING, 1);
 		}
 		else if (event.equals("30093-02.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ASCALON_LETTER_2, 1);
 			st.giveItems(WHITE_ROSE_INSIGNIA, 1);
 		}
 		else if (event.equals("30196-03.htm"))
 		{
 			st.set("cond", "10");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ASCALON_LETTER_3, 1);
 			st.giveItems(MOUEN_ORDER_1, 1);
 		}
 		else if (event.equals("30196-06.htm"))
 		{
 			st.set("cond", "12");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(MOUEN_ORDER_1, 1);
 			st.takeItems(ROAD_RATMAN_HEAD, 1);
 			st.giveItems(MOUEN_ORDER_2, 1);
@@ -190,7 +191,7 @@ public class Q223_TestOfTheChampion extends Quest
 							st.giveItems(MARK_OF_CHAMPION, 1);
 							st.rewardExpAndSp(117454, 25000);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -204,7 +205,7 @@ public class Q223_TestOfTheChampion extends Quest
 						{
 							htmltext = "30625-05.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BLOODY_AXE_HEAD, -1);
 							st.takeItems(IRON_ROSE_RING, 1);
 							st.giveItems(MASON_LETTER, 1);
@@ -224,7 +225,7 @@ public class Q223_TestOfTheChampion extends Quest
 						{
 							htmltext = "30093-04.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(WHITE_ROSE_INSIGNIA, 1);
 							st.takeItems(HARPY_EGG, -1);
 							st.takeItems(MEDUSA_VENOM, -1);
@@ -250,7 +251,7 @@ public class Q223_TestOfTheChampion extends Quest
 						{
 							htmltext = "30196-08.htm";
 							st.set("cond", "14");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LETO_LIZARDMAN_FANG, -1);
 							st.takeItems(MOUEN_ORDER_2, 1);
 							st.giveItems(MOUEN_LETTER, 1);

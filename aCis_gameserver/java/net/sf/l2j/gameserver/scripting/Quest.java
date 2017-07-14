@@ -922,6 +922,35 @@ public class Quest
 		showResult((killer instanceof Npc) ? (Npc) killer : null, player, res);
 	}
 	
+	public final void notifyDeath(Creature killer, Creature victim, Player player)
+	{
+		String res = null;
+		try
+		{
+			res = onDeath(killer, victim, player);
+		}
+		catch (Exception e)
+		{
+			showError(player, e);
+		}
+		if (killer instanceof Npc)
+		{
+			showResult((Npc) killer, player, res);
+		}
+		
+		showResult(null, player, res);
+	}
+	
+	public String onDeath(Creature killer, Creature victim, Player player)
+	{
+		if (killer instanceof Npc)
+		{
+			return onAdvEvent("", (Npc) killer, player);
+		}
+		
+		return onAdvEvent("", null, player);
+	}
+	
 	public String onDeath(Creature killer, Player player)
 	{
 		return onAdvEvent("", (killer instanceof Npc) ? (Npc) killer : null, player);

@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 /**
  * <p>
@@ -40,7 +41,7 @@ public final class RequestPetition extends L2GameClientPacket
 		if (!GmListTable.getInstance().isGmOnline(false))
 		{
 			activeChar.sendPacket(SystemMessageId.NO_GM_PROVIDING_SERVICE_NOW);
-			activeChar.sendPacket(new PlaySound("systemmsg_e.702"));
+			activeChar.sendPacket(Sound.SYSTEM_MSG_702.getPacket());
 			return;
 		}
 		

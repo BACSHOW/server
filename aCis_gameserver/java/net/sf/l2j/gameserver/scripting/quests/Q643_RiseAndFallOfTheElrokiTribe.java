@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q643_RiseAndFallOfTheElrokiTribe extends Quest
 {
@@ -42,7 +43,7 @@ public class Q643_RiseAndFallOfTheElrokiTribe extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("32106-07.htm"))
 		{
@@ -53,7 +54,7 @@ public class Q643_RiseAndFallOfTheElrokiTribe extends Quest
 		}
 		else if (event.equalsIgnoreCase("32106-09.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("32117-03.htm"))

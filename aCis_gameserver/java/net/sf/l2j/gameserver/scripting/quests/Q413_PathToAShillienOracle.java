@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q413_PathToAShillienOracle extends Quest
 {
@@ -60,20 +61,20 @@ public class Q413_PathToAShillienOracle extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(SIDRA_LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("30377-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SIDRA_LETTER, 1);
 			st.giveItems(BLANK_SHEET, 5);
 		}
 		else if (event.equalsIgnoreCase("30375-04.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(PRAYER_OF_ADONIUS, 1);
 			st.giveItems(PENITENT_MARK, 1);
 		}
@@ -114,7 +115,7 @@ public class Q413_PathToAShillienOracle extends Quest
 							st.giveItems(ORB_OF_ABYSS, 1);
 							st.rewardExpAndSp(3200, 3120);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -128,7 +129,7 @@ public class Q413_PathToAShillienOracle extends Quest
 						{
 							htmltext = "30377-05.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BLOODY_RUNE, -1);
 							st.giveItems(GARMIEL_BOOK, 1);
 							st.giveItems(PRAYER_OF_ADONIUS, 1);
@@ -148,7 +149,7 @@ public class Q413_PathToAShillienOracle extends Quest
 						{
 							htmltext = "30375-07.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ASHEN_BONES, -1);
 							st.takeItems(PENITENT_MARK, -1);
 							st.giveItems(ANDARIEL_BOOK, 1);

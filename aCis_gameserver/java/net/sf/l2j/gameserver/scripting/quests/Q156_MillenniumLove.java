@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q156_MillenniumLove extends Quest
 {
@@ -39,13 +40,13 @@ public class Q156_MillenniumLove extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(LILITH_LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("30369-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LILITH_LETTER, 1);
 			st.giveItems(THEON_DIARY, 1);
 		}
@@ -53,7 +54,7 @@ public class Q156_MillenniumLove extends Quest
 		{
 			st.takeItems(LILITH_LETTER, 1);
 			st.rewardExpAndSp(3000, 0);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		
@@ -86,7 +87,7 @@ public class Q156_MillenniumLove extends Quest
 							st.takeItems(THEON_DIARY, 1);
 							st.giveItems(5250, 1);
 							st.rewardExpAndSp(3000, 0);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;

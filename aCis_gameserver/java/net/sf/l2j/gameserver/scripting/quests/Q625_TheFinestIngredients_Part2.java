@@ -12,6 +12,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.actor.instance.RaidBoss;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q625_TheFinestIngredients_Part2 extends Quest
 {
@@ -101,7 +102,7 @@ public class Q625_TheFinestIngredients_Part2 extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.takeItems(SOY_SAUCE_JAR, 1);
 				st.giveItems(FOOD_FOR_BUMBALUMP, 1);
 			}
@@ -114,7 +115,7 @@ public class Q625_TheFinestIngredients_Part2 extends Quest
 			{
 				st.takeItems(SPECIAL_YETI_MEAT, 1);
 				st.rewardItems(REWARD_DYE[Rnd.get(REWARD_DYE.length)], 5);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 			else
@@ -130,7 +131,7 @@ public class Q625_TheFinestIngredients_Part2 extends Quest
 					if (spawnRaid())
 					{
 						st.set("cond", "2");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 						st.takeItems(FOOD_FOR_BUMBALUMP, 1);
 					}
 				}
@@ -199,7 +200,7 @@ public class Q625_TheFinestIngredients_Part2 extends Quest
 			QuestState st = partyMember.getQuestState(qn);
 			
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(SPECIAL_YETI_MEAT, 1);
 		}
 		

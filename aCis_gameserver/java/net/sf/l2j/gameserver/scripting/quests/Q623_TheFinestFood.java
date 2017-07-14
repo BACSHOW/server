@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q623_TheFinestFood extends Quest
 {
@@ -50,7 +51,7 @@ public class Q623_TheFinestFood extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 			}
 			else
 				htmltext = "31521-03.htm";
@@ -83,7 +84,7 @@ public class Q623_TheFinestFood extends Quest
 				st.rewardExpAndSp(230000, 18250);
 			}
 			
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		

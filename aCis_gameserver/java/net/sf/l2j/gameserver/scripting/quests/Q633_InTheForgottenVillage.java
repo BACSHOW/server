@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q633_InTheForgottenVillage extends Quest
 {
@@ -82,12 +83,12 @@ public class Q633_InTheForgottenVillage extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31388-10.htm"))
 		{
 			st.takeItems(RIB_BONE, -1);
-			st.playSound(QuestState.SOUND_GIVEUP);
+			st.playSound(Sound.SOUND_GIVEUP);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("31388-09.htm"))
@@ -98,7 +99,7 @@ public class Q633_InTheForgottenVillage extends Quest
 				st.takeItems(RIB_BONE, 200);
 				st.rewardItems(57, 25000);
 				st.rewardExpAndSp(305235, 0);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 			}
 			st.set("cond", "1");
 		}

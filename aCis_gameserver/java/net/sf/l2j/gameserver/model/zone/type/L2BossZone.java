@@ -14,6 +14,7 @@ import net.sf.l2j.L2DatabaseFactory;
 import net.sf.l2j.gameserver.datatables.MapRegionTable.TeleportType;
 import net.sf.l2j.gameserver.model.actor.Attackable;
 import net.sf.l2j.gameserver.model.actor.Creature;
+import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.Playable;
 import net.sf.l2j.gameserver.model.actor.Summon;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
@@ -289,6 +290,22 @@ public class L2BossZone extends L2ZoneType
 		}
 		_playerAllowEntry.clear();
 		_playerAllowed.clear();
+	}
+	
+	public void updateKnownList(Npc npc)
+	{
+		if (_characterList == null || _characterList.isEmpty())
+		{
+			return;
+		}
+		
+		for (Creature character : _characterList.values())
+		{
+			if (character instanceof Player)
+			{
+				npc.addKnownObject(character);
+			}
+		}
 	}
 	
 	@Override

@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q380_BringOutTheFlavorOfIngredients extends Quest
 {
@@ -50,12 +51,12 @@ public class Q380_BringOutTheFlavorOfIngredients extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30069-12.htm"))
 		{
 			st.giveItems(JELLY_RECIPE, 1);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -86,7 +87,7 @@ public class Q380_BringOutTheFlavorOfIngredients extends Quest
 					{
 						htmltext = "30069-07.htm";
 						st.set("cond", "3");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 						st.takeItems(RITRON_FRUIT, -1);
 						st.takeItems(MOON_FACE_FLOWER, -1);
 						st.takeItems(LEECH_FLUIDS, -1);
@@ -99,19 +100,19 @@ public class Q380_BringOutTheFlavorOfIngredients extends Quest
 				{
 					htmltext = "30069-08.htm";
 					st.set("cond", "4");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				else if (cond == 4)
 				{
 					htmltext = "30069-09.htm";
 					st.set("cond", "5");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				else if (cond == 5)
 				{
 					htmltext = "30069-10.htm";
 					st.set("cond", "6");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				else if (cond == 6)
 				{
@@ -121,7 +122,7 @@ public class Q380_BringOutTheFlavorOfIngredients extends Quest
 					else
 					{
 						htmltext = "30069-13.htm";
-						st.playSound(QuestState.SOUND_FINISH);
+						st.playSound(Sound.SOUND_FINISH);
 						st.exitQuest(true);
 					}
 				}

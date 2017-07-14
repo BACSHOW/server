@@ -12,6 +12,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.holder.IntIntHolder;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q325_GrimCollector extends Quest
 {
@@ -104,18 +105,18 @@ public class Q325_GrimCollector extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30434-03.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(ANATOMY_DIAGRAM, 1);
 		}
 		else if (event.equalsIgnoreCase("30434-06.htm"))
 		{
 			st.takeItems(ANATOMY_DIAGRAM, -1);
 			payback(st);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30434-07.htm"))
@@ -127,7 +128,7 @@ public class Q325_GrimCollector extends Quest
 			final int skeletons = st.getQuestItemsCount(COMPLETE_SKELETON);
 			if (skeletons > 0)
 			{
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(COMPLETE_SKELETON, -1);
 				st.rewardItems(57, 543 + 341 * skeletons);
 			}

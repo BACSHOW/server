@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q414_PathToAnOrcRaider extends Quest
 {
@@ -67,14 +68,14 @@ public class Q414_PathToAnOrcRaider extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.giveItems(GOBLIN_DWELLING_MAP, 1);
 			}
 		}
 		else if (event.equalsIgnoreCase("30570-07a.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(GOBLIN_DWELLING_MAP, 1);
 			st.takeItems(KURUKA_RATMAN_TOOTH, -1);
 			st.giveItems(BETRAYER_REPORT_1, 1);
@@ -83,7 +84,7 @@ public class Q414_PathToAnOrcRaider extends Quest
 		else if (event.equalsIgnoreCase("30570-07b.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(GOBLIN_DWELLING_MAP, 1);
 			st.takeItems(KURUKA_RATMAN_TOOTH, -1);
 		}
@@ -91,7 +92,7 @@ public class Q414_PathToAnOrcRaider extends Quest
 		else if (event.equalsIgnoreCase("31978-03.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		
 		return htmltext;
@@ -142,7 +143,7 @@ public class Q414_PathToAnOrcRaider extends Quest
 								st.giveItems(MARK_OF_RAIDER, 1);
 								st.rewardExpAndSp(3200, 2360);
 								player.broadcastPacket(new SocialAction(player, 3));
-								st.playSound(QuestState.SOUND_FINISH);
+								st.playSound(Sound.SOUND_FINISH);
 								st.exitQuest(true);
 							}
 						}
@@ -160,7 +161,7 @@ public class Q414_PathToAnOrcRaider extends Quest
 							st.giveItems(MARK_OF_RAIDER, 1);
 							st.rewardExpAndSp(3200, 2360);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -187,7 +188,7 @@ public class Q414_PathToAnOrcRaider extends Quest
 				{
 					if (st.getQuestItemsCount(GREEN_BLOOD) <= Rnd.get(20))
 					{
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 						st.giveItems(GREEN_BLOOD, 1);
 					}
 					else
@@ -209,7 +210,7 @@ public class Q414_PathToAnOrcRaider extends Quest
 					if (cond == 3)
 						st.set("cond", "4");
 					
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(HEAD_OF_BETRAYER, 1);
 				}
 				break;

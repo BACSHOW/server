@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q217_TestimonyOfTrust extends Quest
 {
@@ -103,7 +104,7 @@ public class Q217_TestimonyOfTrust extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(LETTER_TO_ELF, 1);
 			st.giveItems(LETTER_TO_DARK_ELF, 1);
 			
@@ -117,41 +118,41 @@ public class Q217_TestimonyOfTrust extends Quest
 		else if (event.equalsIgnoreCase("30154-03.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LETTER_TO_ELF, 1);
 			st.giveItems(ORDER_OF_ASTERIOS, 1);
 		}
 		else if (event.equalsIgnoreCase("30358-02.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LETTER_TO_DARK_ELF, 1);
 			st.giveItems(LETTER_FROM_THIFIELL, 1);
 		}
 		else if (event.equalsIgnoreCase("30515-02.htm"))
 		{
 			st.set("cond", "14");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LETTER_TO_MANAKIA, 1);
 		}
 		else if (event.equalsIgnoreCase("30531-02.htm"))
 		{
 			st.set("cond", "18");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LETTER_TO_DWARF, 1);
 			st.giveItems(LETTER_TO_NIKOLA, 1);
 		}
 		else if (event.equalsIgnoreCase("30565-02.htm"))
 		{
 			st.set("cond", "13");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LETTER_TO_ORC, 1);
 			st.giveItems(LETTER_TO_MANAKIA, 1);
 		}
 		else if (event.equalsIgnoreCase("30621-02.htm"))
 		{
 			st.set("cond", "19");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LETTER_TO_NIKOLA, 1);
 			st.giveItems(ORDER_OF_NIKOLA, 1);
 		}
@@ -163,13 +164,13 @@ public class Q217_TestimonyOfTrust extends Quest
 				if (st.getInt("cond") == 10)
 				{
 					st.set("cond", "11");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 			}
 			else
 			{
 				st.set("cond", "12");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(LETTER_TO_SERESIN, 1);
 				st.giveItems(LETTER_TO_DWARF, 1);
 				st.giveItems(LETTER_TO_ORC, 1);
@@ -211,7 +212,7 @@ public class Q217_TestimonyOfTrust extends Quest
 						{
 							htmltext = "30191-05.htm";
 							st.set("cond", "10");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SCROLL_OF_DARK_ELF_TRUST, 1);
 							st.takeItems(SCROLL_OF_ELF_TRUST, 1);
 							st.giveItems(LETTER_TO_SERESIN, 1);
@@ -222,7 +223,7 @@ public class Q217_TestimonyOfTrust extends Quest
 						{
 							htmltext = "30191-06.htm";
 							st.set("cond", "23");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SCROLL_OF_DWARF_TRUST, 1);
 							st.takeItems(SCROLL_OF_ORC_TRUST, 1);
 							st.giveItems(RECOMMENDATION_OF_HOLLINT, 1);
@@ -240,7 +241,7 @@ public class Q217_TestimonyOfTrust extends Quest
 						{
 							htmltext = "30154-05.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BREATH_OF_WINDS, 1);
 							st.takeItems(SEED_OF_VERDURE, 1);
 							st.takeItems(ORDER_OF_ASTERIOS, 1);
@@ -259,7 +260,7 @@ public class Q217_TestimonyOfTrust extends Quest
 						{
 							htmltext = "30358-03.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BASILIK_PLASMA, 1);
 							st.takeItems(HONEY_DEW, 1);
 							st.takeItems(STAKATO_ICHOR, 1);
@@ -274,7 +275,7 @@ public class Q217_TestimonyOfTrust extends Quest
 						{
 							htmltext = "30464-01.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LETTER_FROM_THIFIELL, 1);
 							st.giveItems(ORDER_OF_CLAYTON, 1);
 						}
@@ -286,7 +287,7 @@ public class Q217_TestimonyOfTrust extends Quest
 							if (cond == 7)
 							{
 								st.set("cond", "8");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(ORDER_OF_CLAYTON, 1);
 							}
 						}
@@ -310,7 +311,7 @@ public class Q217_TestimonyOfTrust extends Quest
 						{
 							htmltext = "30565-04.htm";
 							st.set("cond", "17");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LETTER_OF_MANAKIA, 1);
 							st.giveItems(SCROLL_OF_ORC_TRUST, 1);
 						}
@@ -327,7 +328,7 @@ public class Q217_TestimonyOfTrust extends Quest
 						{
 							htmltext = "30515-04.htm";
 							st.set("cond", "16");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(PARASITE_OF_LOTA, -1);
 							st.giveItems(LETTER_OF_MANAKIA, 1);
 						}
@@ -344,7 +345,7 @@ public class Q217_TestimonyOfTrust extends Quest
 						{
 							htmltext = "30531-04.htm";
 							st.set("cond", "22");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(SCROLL_OF_DWARF_TRUST, 1);
 						}
 						else if (cond == 22)
@@ -360,7 +361,7 @@ public class Q217_TestimonyOfTrust extends Quest
 						{
 							htmltext = "30621-04.htm";
 							st.set("cond", "21");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(HEARTSTONE_OF_PORTA, -1);
 							st.takeItems(ORDER_OF_NIKOLA, 1);
 						}
@@ -376,7 +377,7 @@ public class Q217_TestimonyOfTrust extends Quest
 							st.giveItems(MARK_OF_TRUST, 1);
 							st.rewardExpAndSp(39571, 2500);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -406,7 +407,7 @@ public class Q217_TestimonyOfTrust extends Quest
 				if (st.getInt("cond") == 2 && !st.hasQuestItems(SEED_OF_VERDURE) && Rnd.get(100) < 33)
 				{
 					addSpawn(ACTEA_OF_VERDANT_WILDS, npc, true, 200000, true);
-					st.playSound(QuestState.SOUND_BEFORE_BATTLE);
+					st.playSound(Sound.SOUND_BEFORE_BATTLE);
 				}
 				break;
 			
@@ -415,7 +416,7 @@ public class Q217_TestimonyOfTrust extends Quest
 				if (st.getInt("cond") == 2 && !st.hasQuestItems(BREATH_OF_WINDS) && Rnd.get(100) < 33)
 				{
 					addSpawn(LUELL_OF_ZEPHYR_WINDS, npc, true, 200000, true);
-					st.playSound(QuestState.SOUND_BEFORE_BATTLE);
+					st.playSound(Sound.SOUND_BEFORE_BATTLE);
 				}
 				break;
 			
@@ -426,10 +427,10 @@ public class Q217_TestimonyOfTrust extends Quest
 					if (st.hasQuestItems(BREATH_OF_WINDS))
 					{
 						st.set("cond", "3");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			
@@ -440,10 +441,10 @@ public class Q217_TestimonyOfTrust extends Quest
 					if (st.hasQuestItems(SEED_OF_VERDURE))
 					{
 						st.set("cond", "3");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			

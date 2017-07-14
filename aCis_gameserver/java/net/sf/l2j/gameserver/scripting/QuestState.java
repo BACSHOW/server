@@ -27,22 +27,12 @@ import net.sf.l2j.gameserver.network.serverpackets.TutorialCloseHtml;
 import net.sf.l2j.gameserver.network.serverpackets.TutorialEnableClientEvent;
 import net.sf.l2j.gameserver.network.serverpackets.TutorialShowHtml;
 import net.sf.l2j.gameserver.network.serverpackets.TutorialShowQuestionMark;
+import net.sf.l2j.gameserver.scripting.quests.audio.IAudio;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
-/**
- * @author Luis Arias
- */
 public final class QuestState
 {
 	protected static final Logger _log = Logger.getLogger(Quest.class.getName());
-	
-	public static final String SOUND_ACCEPT = "ItemSound.quest_accept";
-	public static final String SOUND_ITEMGET = "ItemSound.quest_itemget";
-	public static final String SOUND_MIDDLE = "ItemSound.quest_middle";
-	public static final String SOUND_FINISH = "ItemSound.quest_finish";
-	public static final String SOUND_GIVEUP = "ItemSound.quest_giveup";
-	public static final String SOUND_JACKPOT = "ItemSound.quest_jackpot";
-	public static final String SOUND_FANFARE = "ItemSound.quest_fanfare_2";
-	public static final String SOUND_BEFORE_BATTLE = "Itemsound.quest_before_battle";
 	
 	private static final String QUEST_SET_VAR = "REPLACE INTO character_quests (charId,name,var,value) VALUES (?,?,?,?)";
 	private static final String QUEST_DEL_VAR = "DELETE FROM character_quests WHERE charId=? AND name=? AND var=?";
@@ -706,7 +696,7 @@ public final class QuestState
 			giveItems(itemId, amount, 0);
 			
 			// Play the sound.
-			playSound(reached ? SOUND_MIDDLE : SOUND_ITEMGET);
+			playSound(reached ? Sound.SOUND_MIDDLE : Sound.SOUND_ITEMGET);
 		}
 		
 		return neededCount > 0 && reached;
@@ -801,7 +791,7 @@ public final class QuestState
 		
 		// Play the sound.
 		if (sendSound)
-			playSound((reached) ? SOUND_MIDDLE : SOUND_ITEMGET);
+			playSound(reached ? Sound.SOUND_MIDDLE : Sound.SOUND_ITEMGET);
 		
 		return reached;
 	}
@@ -848,14 +838,23 @@ public final class QuestState
 	}
 	
 	// END STUFF THAT WILL PROBABLY BE CHANGED
+	/**
+	 * Send a packet in order to play a sound to the player.
+	 * @param audio the {@link IAudio} object of the sound to play
+	 */
+	public void playSound(IAudio audio)
+	{
+		playSound(_player, audio);
+	}
 	
 	/**
-	 * Send a packet in order to play sound at client terminal
-	 * @param sound
+	 * Send a packet in order to play a sound to the player.
+	 * @param player the player whom to send the packet
+	 * @param sound the {@link IAudio} object of the sound to play
 	 */
-	public void playSound(String sound)
+	public static void playSound(Player player, IAudio sound)
 	{
-		_player.sendPacket(new PlaySound(sound));
+		player.sendPacket(sound.getPacket());
 	}
 	
 	public void showQuestionMark(int number)
@@ -865,7 +864,7 @@ public final class QuestState
 	
 	public void playTutorialVoice(String voice)
 	{
-		_player.sendPacket(new PlaySound(2, voice, 0, 0, _player.getX(), _player.getY(), _player.getZ()));
+		_player.sendPacket(PlaySound.createVoice(voice));
 	}
 	
 	public void showTutorialHTML(String html)
@@ -882,4 +881,136 @@ public final class QuestState
 	{
 		_player.sendPacket(new TutorialEnableClientEvent(number));
 	}
+	
+	public boolean rollAndGive(int itemId, int count, double calcChance)
+	{
+		if ((calcChance <= 0) || (count <= 0) || (itemId <= 0))
+		{
+			return false;
+		}
+		return rollAndGive(itemId, count, calcChance, false);
+	}
+	
+	public boolean rollAndGive(int itemId, int count, double calcChance, boolean prof)
+	{
+		if ((calcChance <= 0) || (count <= 0) || (itemId <= 0))
+		{
+			return false;
+		}
+		int countToDrop = rollDrop(count, calcChance, prof);
+		if (countToDrop > 0)
+		{
+			giveItems(itemId, countToDrop);
+			playSound(Sound.SOUND_ITEMGET);
+			return true;
+		}
+		return false;
+	}
+	
+	public void rollAndGive(int itemId, int min, int max, double calcChance)
+	{
+		if ((calcChance <= 0) || (min <= 0) || (max <= 0) || (itemId <= 0))
+		{
+			return;
+		}
+		rollAndGive(itemId, min, max, calcChance, false);
+	}
+	
+	public void rollAndGive(int itemId, int min, int max, double calcChance, boolean prof)
+	{
+		if ((calcChance <= 0) || (min <= 0) || (max <= 0) || (itemId <= 0))
+		{
+			return;
+		}
+		int count = rollDrop(min, max, calcChance, prof);
+		if (count > 0)
+		{
+			giveItems(itemId, count);
+			playSound(Sound.SOUND_ITEMGET);
+		}
+	}
+	
+	public boolean rollAndGive(int itemId, int min, int max, int limit, double calcChance)
+	{
+		if ((calcChance <= 0) || (min <= 0) || (max <= 0) || (limit <= 0) || (itemId <= 0))
+		{
+			return false;
+		}
+		return rollAndGive(itemId, min, max, limit, calcChance, false);
+	}
+	
+	public boolean rollAndGive(int itemId, int min, int max, int limit, double calcChance, boolean prof)
+	{
+		if ((calcChance <= 0) || (min <= 0) || (max <= 0) || (limit <= 0) || (itemId <= 0))
+		{
+			return false;
+		}
+		int count = rollDrop(min, max, calcChance, prof);
+		if (count > 0)
+		{
+			ItemInstance already = _player.getInventory().getItemByItemId(itemId);
+			int alreadyCount = 0;
+			if (already != null)
+			{
+				alreadyCount = already.getCount();
+			}
+			if ((alreadyCount + count) > limit)
+			{
+				count = limit - alreadyCount;
+			}
+			if (count > 0)
+			{
+				giveItems(itemId, count);
+				if ((count + alreadyCount) < limit)
+				{
+					playSound(Sound.SOUND_ITEMGET);
+				}
+				else
+				{
+					playSound(Sound.SOUND_MIDDLE);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static int rollDrop(int count, double calcChance, boolean prof)
+	{
+		if ((calcChance <= 0) || (count <= 0))
+		{
+			return 0;
+		}
+		return rollDrop(count, count, calcChance, prof);
+	}
+	
+	public static int rollDrop(int min, int max, double calcChance, boolean prof)
+	{
+		if ((calcChance <= 0) || (min <= 0) || (max <= 0))
+		{
+			return 0;
+		}
+		int dropmult = 1;
+		calcChance *= getRateQuestsDrop(prof);
+		if (calcChance > 100)
+		{
+			if ((int) Math.ceil(calcChance / 100) <= (calcChance / 100))
+			{
+				calcChance = Math.nextUp(calcChance);
+			}
+			dropmult = (int) Math.ceil(calcChance / 100);
+			calcChance = calcChance / dropmult;
+		}
+		return Rnd.chance(calcChance) ? Rnd.get(min * dropmult, max * dropmult) : 0;
+	}
+	
+	public static double getRateQuestsDrop(boolean prof)
+	{
+		if (prof)
+		{
+			return Config.RATE_QUEST_DROP_PROF;// * (float)_player.getBonus().getQuestDropRate();
+		}
+		return Config.RATE_QUEST_DROP;// * (float)_player.getBonus().getQuestDropRate();
+	}
+	
 }

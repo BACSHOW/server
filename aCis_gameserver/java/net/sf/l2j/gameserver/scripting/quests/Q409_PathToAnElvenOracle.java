@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q409_PathToAnElvenOracle extends Quest
 {
@@ -49,13 +50,13 @@ public class Q409_PathToAnElvenOracle extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(CRYSTAL_MEDALLION, 1);
 		}
 		else if (event.equalsIgnoreCase("spawn_lizards"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			addSpawn(27032, -92319, 154235, -3284, 2000, false, 0, false);
 			addSpawn(27033, -92361, 154190, -3284, 2000, false, 0, false);
 			addSpawn(27034, -92375, 154278, -3278, 2000, false, 0, false);
@@ -109,7 +110,7 @@ public class Q409_PathToAnElvenOracle extends Quest
 							st.giveItems(LEAF_OF_ORACLE, 1);
 							st.rewardExpAndSp(3200, 1130);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -121,7 +122,7 @@ public class Q409_PathToAnElvenOracle extends Quest
 						{
 							htmltext = "30424-02.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(HALF_OF_DIARY, 1);
 						}
 						else if (cond == 4)
@@ -132,7 +133,7 @@ public class Q409_PathToAnElvenOracle extends Quest
 						{
 							htmltext = "30424-04.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(HALF_OF_DIARY, -1);
 							st.giveItems(ALLANA_DIARY, 1);
 						}
@@ -147,7 +148,7 @@ public class Q409_PathToAnElvenOracle extends Quest
 						{
 							htmltext = "30428-04.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(TAMIL_NECKLACE, -1);
 							st.giveItems(SWINDLER_MONEY, 1);
 						}
@@ -173,14 +174,14 @@ public class Q409_PathToAnElvenOracle extends Quest
 			if (st.getInt("cond") == 4)
 			{
 				st.set("cond", "5");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.giveItems(TAMIL_NECKLACE, 1);
 			}
 		}
 		else if (st.getInt("cond") == 2)
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(LIZARD_CAPTAIN_ORDER, 1);
 		}
 		

@@ -1,93 +1,51 @@
 package net.sf.l2j.gameserver.model.actor.instance;
 
+import net.sf.l2j.gameserver.geoengine.geodata.IGeoObject;
+import net.sf.l2j.gameserver.idfactory.IdFactory;
 import net.sf.l2j.gameserver.model.WorldObject;
 import net.sf.l2j.gameserver.model.actor.Creature;
-import net.sf.l2j.gameserver.network.L2GameClient;
-import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
-import net.sf.l2j.gameserver.network.serverpackets.ExColosseumFenceInfoPacket;
-import net.sf.l2j.gameserver.network.serverpackets.MyTargetSelected;
+import net.sf.l2j.gameserver.network.serverpackets.ExColosseumFenceInfo;
 
-public final class Fence extends WorldObject
+/**
+ * @author Hasha
+ */
+public class Fence extends WorldObject implements IGeoObject
 {
-	private int _type;
-	private int _width;
-	private int _length;
-	private int xMin;
-	private int xMax;
-	private int yMin;
-	private int yMax;
+	private static final int FENCE_HEIGHT = 24;
 	
-	public Fence(int objectId, int type, int width, int length, int x, int y) 
+	// fence description from world point of view
+	private final int _type;
+	private final int _sizeX;
+	private final int _sizeY;
+	private final int _height;
+	
+	// 2 dummy object to spawn fences with 2 and 3 layers easily
+	// TODO: I know it is shitcoded, but didn't figure out any better solution
+	private final L2DummyFence _object2;
+	private final L2DummyFence _object3;
+	
+	// fence description from geodata point of view
+	private final int _geoX;
+	private final int _geoY;
+	private final int _geoZ;
+	private final byte[][] _geoData;
+	
+	public Fence(int type, int sizeZ, int sizeY, int height, int geoX, int geoY, int geoZ, byte[][] geoData)
 	{
-		super(objectId);
+		super(IdFactory.getInstance().getNextId());
+		
 		_type = type;
-		_width = width;
-		_length = length;
+		_sizeX = sizeZ;
+		_sizeY = sizeY;
+		_height = height * FENCE_HEIGHT;
 		
-		xMin = x - width / 2;
-		xMax = x + width / 2;
-		yMin = y - length / 2;
-		yMax = y + length / 2;
-	}
-	
-	public boolean isBetween(int x, int y, int tx, int ty)
-	{
-		if (x < xMin && tx < xMin)
-			return false;
+		_object2 = height > 1 ? new L2DummyFence(this) : null;
+		_object3 = height > 2 ? new L2DummyFence(this) : null;
 		
-		if (x > xMax && tx > xMax)
-			return false;
-		
-		if (y < yMin && ty < yMin)
-			return false;
-		
-		if (y > yMax && ty > yMax)
-			return false;
-		
-		if (x > xMin && tx > xMin && x < xMax && tx < xMax && y > yMin && ty > yMin && y < yMax && ty < yMax)
-			return false;
-		
-		if (crossLinePart(xMin, yMin, xMax, yMin, x, y, tx, ty) || crossLinePart(xMax, yMin, xMax, yMax, x, y, tx, ty) || crossLinePart(xMax, yMax, xMin, yMax, x, y, tx, ty) || crossLinePart(xMin, yMax, xMin, yMin, x, y, tx, ty))
-			return true;
-		
-		return false;
-	}
-	
-	private boolean crossLinePart(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
-	{
-		float[] result = intersection(x1, y1, x2, y2, x3, y3, x4, y4);
-		
-		if (result == null)
-			return false;
-		
-		float xCross = result[0];
-		float yCross = result[1];
-		
-		if (xCross <= xMax && xCross >= xMin || yCross <= yMax && yCross >= yMin)
-			return true;
-		
-		return false;
-	}
-	
-	private static float[] intersection(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) 
-	{
-		float d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-		if (d == 0)
-			return null;
-		
-		float xi = ((x3 - x4) * (x1 * y2 - y1 * x2) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
-		float yi = ((y3 - y4) * (x1 * y2 - y1 * x2) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
-		
-		float[] result = new float[2];
-		result[0] = xi;
-		result[1] = yi;
-		return result;
-	}
-	
-	@Override
-	public void sendInfo(Player activeChar)
-	{
-		activeChar.sendPacket(new ExColosseumFenceInfoPacket(this));
+		_geoX = geoX;
+		_geoY = geoY;
+		_geoZ = geoZ;
+		_geoData = geoData;
 	}
 	
 	public int getType()
@@ -95,14 +53,40 @@ public final class Fence extends WorldObject
 		return _type;
 	}
 	
-	public int getWidth()
+	public int getSizeX()
 	{
-		return _width;
+		return _sizeX;
 	}
 	
-	public int getLength()
+	public int getSizeY()
 	{
-		return _length;
+		return _sizeY;
+	}
+	
+	@Override
+	public void onSpawn()
+	{
+		// spawn me
+		super.onSpawn();
+		
+		// spawn dummy fences
+		if (_object2 != null)
+			_object2.spawnMe(getX(), getY(), getZ());
+		if (_object3 != null)
+			_object3.spawnMe(getX(), getY(), getZ());
+	}
+	
+	@Override
+	public void decayMe()
+	{
+		// despawn dummy fences
+		if (_object2 != null)
+			_object2.decayMe();
+		if (_object3 != null)
+			_object3.decayMe();
+		
+		// despawn me
+		super.decayMe();
 	}
 	
 	@Override
@@ -111,19 +95,67 @@ public final class Fence extends WorldObject
 		return false;
 	}
 	
-	public void onActionShift(L2GameClient client)
+	@Override
+	public void sendInfo(Player activeChar)
 	{
-		Player player = client.getActiveChar();
-		if (player == null)
-			return;
+		activeChar.sendPacket(new ExColosseumFenceInfo(getObjectId(), this));
+	}
+	
+	@Override
+	public int getGeoX()
+	{
+		return _geoX;
+	}
+	
+	@Override
+	public int getGeoY()
+	{
+		return _geoY;
+	}
+	
+	@Override
+	public int getGeoZ()
+	{
+		return _geoZ;
+	}
+	
+	@Override
+	public int getHeight()
+	{
+		return _height;
+	}
+	
+	@Override
+	public byte[][] getObjectGeoData()
+	{
+		return _geoData;
+	}
+	
+	/**
+	 * Dummy fence class in order to spawn/delete multi-layer fences correctly.
+	 * @author Hasha
+	 */
+	protected class L2DummyFence extends WorldObject
+	{
+		private final Fence _fence;
 		
-		if (player.isGM())
+		public L2DummyFence(Fence fence)
 		{
-			player.setTarget(this);
-			MyTargetSelected my = new MyTargetSelected(getObjectId(), 0);
-			player.sendPacket(my);
+			super(IdFactory.getInstance().getNextId());
+			
+			_fence = fence;
 		}
-		else
-			player.sendPacket(ActionFailed.STATIC_PACKET);
+		
+		@Override
+		public boolean isAutoAttackable(Creature attacker)
+		{
+			return false;
+		}
+		
+		@Override
+		public void sendInfo(Player activeChar)
+		{
+			activeChar.sendPacket(new ExColosseumFenceInfo(getObjectId(), _fence));
+		}
 	}
 }

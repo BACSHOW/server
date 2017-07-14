@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q364_JovialAccordion extends Quest
 {
@@ -49,12 +50,12 @@ public class Q364_JovialAccordion extends Quest
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
 			st.set("items", "0");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30957-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(KEY_1, 1);
 			st.giveItems(KEY_2, 1);
 		}
@@ -67,7 +68,7 @@ public class Q364_JovialAccordion extends Quest
 				{
 					htmltext = "30960-02.htm";
 					st.giveItems(STOLEN_BEER, 1);
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 				}
 			}
 		}
@@ -80,7 +81,7 @@ public class Q364_JovialAccordion extends Quest
 				{
 					htmltext = "30961-02.htm";
 					st.giveItems(STOLEN_CLOTHES, 1);
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 				}
 			}
 		}
@@ -115,7 +116,7 @@ public class Q364_JovialAccordion extends Quest
 						{
 							htmltext = "30959-04.htm";
 							st.giveItems(ECHO, 1);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -128,7 +129,7 @@ public class Q364_JovialAccordion extends Quest
 							if (stolenItems > 0)
 							{
 								st.set("cond", "3");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								
 								if (stolenItems == 2)
 								{
@@ -143,7 +144,7 @@ public class Q364_JovialAccordion extends Quest
 								if (!st.hasQuestItems(KEY_1) && !st.hasQuestItems(KEY_2))
 								{
 									htmltext = "30957-06.htm";
-									st.playSound(QuestState.SOUND_FINISH);
+									st.playSound(Sound.SOUND_FINISH);
 									st.exitQuest(true);
 								}
 								else
@@ -171,7 +172,7 @@ public class Q364_JovialAccordion extends Quest
 						{
 							htmltext = "30060-01.htm";
 							st.set("items", String.valueOf(stolenItems + 1));
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.takeItems(STOLEN_BEER, 1);
 						}
 						else
@@ -183,7 +184,7 @@ public class Q364_JovialAccordion extends Quest
 						{
 							htmltext = "30075-01.htm";
 							st.set("items", String.valueOf(stolenItems + 1));
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.takeItems(STOLEN_CLOTHES, 1);
 						}
 						else

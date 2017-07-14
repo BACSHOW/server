@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q622_SpecialtyLiquorDelivery extends Quest
 {
@@ -56,48 +57,48 @@ public class Q622_SpecialtyLiquorDelivery extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(SPECIAL_DRINK, 5);
 		}
 		else if (event.equalsIgnoreCase("31547-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SPECIAL_DRINK, 1);
 			st.giveItems(FEE_OF_SPECIAL_DRINK, 1);
 		}
 		else if (event.equalsIgnoreCase("31546-02.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SPECIAL_DRINK, 1);
 			st.giveItems(FEE_OF_SPECIAL_DRINK, 1);
 		}
 		else if (event.equalsIgnoreCase("31545-02.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SPECIAL_DRINK, 1);
 			st.giveItems(FEE_OF_SPECIAL_DRINK, 1);
 		}
 		else if (event.equalsIgnoreCase("31544-02.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SPECIAL_DRINK, 1);
 			st.giveItems(FEE_OF_SPECIAL_DRINK, 1);
 		}
 		else if (event.equalsIgnoreCase("31543-02.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SPECIAL_DRINK, 1);
 			st.giveItems(FEE_OF_SPECIAL_DRINK, 1);
 		}
 		else if (event.equalsIgnoreCase("31521-06.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(FEE_OF_SPECIAL_DRINK, 5);
 		}
 		else if (event.equalsIgnoreCase("31267-02.htm"))
@@ -109,7 +110,7 @@ public class Q622_SpecialtyLiquorDelivery extends Quest
 				st.rewardItems(ADENA, 18800);
 				st.rewardItems(HASTE_POTION, 1);
 			}
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		

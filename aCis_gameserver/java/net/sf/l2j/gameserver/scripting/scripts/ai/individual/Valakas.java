@@ -16,10 +16,10 @@ import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.GrandBoss;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.type.L2BossZone;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.network.serverpackets.SpecialCamera;
 import net.sf.l2j.gameserver.scripting.EventType;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
 import net.sf.l2j.gameserver.scripting.scripts.ai.L2AttackableAIScript;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
@@ -141,7 +141,7 @@ public class Valakas extends L2AttackableAIScript
 			// Sound + socialAction.
 			for (Player plyr : VALAKAS_LAIR.getKnownTypeInside(Player.class))
 			{
-				plyr.sendPacket(new PlaySound(1, "B03_A", 0, 0, 0, 0, 0));
+				plyr.sendPacket(Music.BS03_A_10000.getPacket());
 				plyr.sendPacket(new SocialAction(npc, 3));
 			}
 			
@@ -300,7 +300,7 @@ public class Valakas extends L2AttackableAIScript
 		cancelQuestTimer("skill_task", npc, null);
 		
 		// Launch death animation.
-		VALAKAS_LAIR.broadcastPacket(new PlaySound(1, "B03_D", 0, 0, 0, 0, 0));
+		VALAKAS_LAIR.broadcastPacket(Music.B03_D_10000.getPacket());
 		
 		startQuestTimer("die_1", 300, npc, null, false); // 300
 		startQuestTimer("die_2", 600, npc, null, false); // 300

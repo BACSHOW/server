@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q005_MinersFavor extends Quest
 {
@@ -49,7 +50,7 @@ public class Q005_MinersFavor extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(BOLTERS_LIST, 1);
 			st.giveItems(BOLTERS_SMELLY_SOCKS, 1);
 		}
@@ -61,10 +62,10 @@ public class Q005_MinersFavor extends Quest
 			if (st.hasQuestItems(MINING_BOOTS, BOOMBOOM_POWDER, REDSTONE_BEER))
 			{
 				st.set("cond", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 			else
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 		}
 		
 		return htmltext;
@@ -100,7 +101,7 @@ public class Q005_MinersFavor extends Quest
 							st.takeItems(MINING_BOOTS, 1);
 							st.takeItems(REDSTONE_BEER, 1);
 							st.giveItems(NECKLACE, 1);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -114,10 +115,10 @@ public class Q005_MinersFavor extends Quest
 							if (st.hasQuestItems(MINING_BOOTS, MINERS_PICK, REDSTONE_BEER))
 							{
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else
 							htmltext = "30517-02.htm";
@@ -132,10 +133,10 @@ public class Q005_MinersFavor extends Quest
 							if (st.hasQuestItems(MINERS_PICK, BOOMBOOM_POWDER, REDSTONE_BEER))
 							{
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else
 							htmltext = "30518-02.htm";
@@ -150,10 +151,10 @@ public class Q005_MinersFavor extends Quest
 							if (st.hasQuestItems(MINING_BOOTS, MINERS_PICK, BOOMBOOM_POWDER))
 							{
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else
 							htmltext = "30520-02.htm";

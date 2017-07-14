@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q298_LizardmensConspiracy extends Quest
 {
@@ -42,13 +43,13 @@ public class Q298_LizardmensConspiracy extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(PATROL_REPORT, 1);
 		}
 		else if (event.equalsIgnoreCase("30344-1.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(PATROL_REPORT, 1);
 		}
 		else if (event.equalsIgnoreCase("30344-4.htm"))
@@ -59,7 +60,7 @@ public class Q298_LizardmensConspiracy extends Quest
 				st.takeItems(WHITE_GEM, -1);
 				st.takeItems(RED_GEM, -1);
 				st.rewardExpAndSp(0, 42000);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 		}

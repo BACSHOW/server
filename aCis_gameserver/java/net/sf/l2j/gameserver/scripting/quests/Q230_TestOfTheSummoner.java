@@ -16,6 +16,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q230_TestOfTheSummoner extends Quest
 {
@@ -184,7 +185,7 @@ public class Q230_TestOfTheSummoner extends Quest
 			st.set("Camoniell", "1");
 			st.set("Basilla", "1");
 			st.set("Almors", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(GALATEA_LETTER, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange39", false))
@@ -198,7 +199,7 @@ public class Q230_TestOfTheSummoner extends Quest
 		else if (event.equals("30063-02.htm")) // Lara first time to give a list out
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(GALATEA_LETTER, 1);
 			
 			final int random = Rnd.get(5);
@@ -210,7 +211,7 @@ public class Q230_TestOfTheSummoner extends Quest
 		{
 			final int random = Rnd.get(5);
 			
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(LARA_LISTS[random][0], 1);
 			st.set("Lara", String.valueOf(random + 1));
 		}
@@ -223,7 +224,7 @@ public class Q230_TestOfTheSummoner extends Quest
 		else if (event.equals("30635-04.htm"))
 		{
 			st.set("Almors", "2"); // set state ready to fight
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(CRYSTAL_OF_FOUL_1, -1); // just in case he cheated or lost
 			st.takeItems(CRYSTAL_OF_DEFEAT_1, -1);
 			st.takeItems(BEGINNER_ARCANA, 1);
@@ -241,7 +242,7 @@ public class Q230_TestOfTheSummoner extends Quest
 		else if (event.equals("30636-04.htm"))
 		{
 			st.set("Camoniell", "2");
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(CRYSTAL_OF_FOUL_2, -1);
 			st.takeItems(CRYSTAL_OF_DEFEAT_2, -1);
 			st.takeItems(BEGINNER_ARCANA, 1);
@@ -259,7 +260,7 @@ public class Q230_TestOfTheSummoner extends Quest
 		else if (event.equals("30637-04.htm"))
 		{
 			st.set("Belthus", "2");
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(CRYSTAL_OF_FOUL_3, -1);
 			st.takeItems(CRYSTAL_OF_DEFEAT_3, -1);
 			st.takeItems(BEGINNER_ARCANA, 1);
@@ -277,7 +278,7 @@ public class Q230_TestOfTheSummoner extends Quest
 		else if (event.equals("30638-04.htm"))
 		{
 			st.set("Basilla", "2");
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(CRYSTAL_OF_FOUL_4, -1);
 			st.takeItems(CRYSTAL_OF_DEFEAT_4, -1);
 			st.takeItems(BEGINNER_ARCANA, 1);
@@ -295,7 +296,7 @@ public class Q230_TestOfTheSummoner extends Quest
 		else if (event.equals("30639-04.htm"))
 		{
 			st.set("Celestiel", "2");
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(CRYSTAL_OF_FOUL_5, -1);
 			st.takeItems(CRYSTAL_OF_DEFEAT_5, -1);
 			st.takeItems(BEGINNER_ARCANA, 1);
@@ -313,7 +314,7 @@ public class Q230_TestOfTheSummoner extends Quest
 		else if (event.equals("30640-04.htm"))
 		{
 			st.set("Brynthea", "2");
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(CRYSTAL_OF_FOUL_6, -1);
 			st.takeItems(CRYSTAL_OF_DEFEAT_6, -1);
 			st.takeItems(BEGINNER_ARCANA, 1);
@@ -368,7 +369,7 @@ public class Q230_TestOfTheSummoner extends Quest
 									htmltext = "30063-06.htm";
 									st.set("cond", "3");
 									st.unset("Lara");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									st.takeItems(laraPart[0], 1);
 									st.takeItems(laraPart[1], -1);
 									st.takeItems(laraPart[2], -1);
@@ -401,7 +402,7 @@ public class Q230_TestOfTheSummoner extends Quest
 							st.giveItems(MARK_OF_SUMMONER, 1);
 							st.rewardExpAndSp(148409, 30000);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -428,10 +429,10 @@ public class Q230_TestOfTheSummoner extends Quest
 							if (st.hasQuestItems(CAMONIELL_ARCANA, BELTHUS_ARCANA, BASILLIA_ARCANA, CELESTIEL_ARCANA, BRYNTHEA_ARCANA))
 							{
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (almorsStat == 7)
 							htmltext = "30635-10.htm";
@@ -459,10 +460,10 @@ public class Q230_TestOfTheSummoner extends Quest
 							if (st.hasQuestItems(ALMORS_ARCANA, BELTHUS_ARCANA, BASILLIA_ARCANA, CELESTIEL_ARCANA, BRYNTHEA_ARCANA))
 							{
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (camoniellStat == 7)
 							htmltext = "30636-10.htm";
@@ -490,10 +491,10 @@ public class Q230_TestOfTheSummoner extends Quest
 							if (st.hasQuestItems(ALMORS_ARCANA, CAMONIELL_ARCANA, BASILLIA_ARCANA, CELESTIEL_ARCANA, BRYNTHEA_ARCANA))
 							{
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (belthusStat == 7)
 							htmltext = "30637-10.htm";
@@ -521,10 +522,10 @@ public class Q230_TestOfTheSummoner extends Quest
 							if (st.hasQuestItems(ALMORS_ARCANA, CAMONIELL_ARCANA, BELTHUS_ARCANA, CELESTIEL_ARCANA, BRYNTHEA_ARCANA))
 							{
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (basillaStat == 7)
 							htmltext = "30638-10.htm";
@@ -552,10 +553,10 @@ public class Q230_TestOfTheSummoner extends Quest
 							if (st.hasQuestItems(ALMORS_ARCANA, CAMONIELL_ARCANA, BELTHUS_ARCANA, BASILLIA_ARCANA, BRYNTHEA_ARCANA))
 							{
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (celestielStat == 7)
 							htmltext = "30639-10.htm";
@@ -583,10 +584,10 @@ public class Q230_TestOfTheSummoner extends Quest
 							if (st.hasQuestItems(ALMORS_ARCANA, CAMONIELL_ARCANA, BELTHUS_ARCANA, BASILLIA_ARCANA, CELESTIEL_ARCANA))
 							{
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (bryntheaStat == 7)
 							htmltext = "30640-10.htm";
@@ -618,7 +619,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Almors") == 3)
 				{
 					st.set("Almors", "4");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(CRYSTAL_OF_DEFEAT_1, 1);
 				}
 				break;
@@ -627,7 +628,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Camoniell") == 3)
 				{
 					st.set("Camoniell", "4");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(CRYSTAL_OF_DEFEAT_2, 1);
 				}
 				break;
@@ -636,7 +637,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Belthus") == 3)
 				{
 					st.set("Belthus", "4");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(CRYSTAL_OF_DEFEAT_3, 1);
 				}
 				break;
@@ -645,7 +646,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Basilla") == 3)
 				{
 					st.set("Basilla", "4");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(CRYSTAL_OF_DEFEAT_4, 1);
 				}
 				break;
@@ -654,7 +655,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Celestiel") == 3)
 				{
 					st.set("Celestiel", "4");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(CRYSTAL_OF_DEFEAT_5, 1);
 				}
 				break;
@@ -663,7 +664,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Brynthea") == 3)
 				{
 					st.set("Brynthea", "4");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.giveItems(CRYSTAL_OF_DEFEAT_6, 1);
 				}
 				break;
@@ -760,7 +761,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Almors") == 3 && _duelsInProgress.containsKey(npcId))
 				{
 					st.set("Almors", "6");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(CRYSTAL_OF_INPROGRESS_1, -1);
 					st.giveItems(CRYSTAL_OF_VICTORY_1, 1);
 					npc.broadcastNpcSay("I'm sorry, Lord!");
@@ -773,7 +774,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Camoniell") == 3 && _duelsInProgress.containsKey(npcId))
 				{
 					st.set("Camoniell", "6");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(CRYSTAL_OF_INPROGRESS_2, -1);
 					st.giveItems(CRYSTAL_OF_VICTORY_2, 1);
 					npc.broadcastNpcSay("I LOSE");
@@ -786,7 +787,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Belthus") == 3 && _duelsInProgress.containsKey(npcId))
 				{
 					st.set("Belthus", "6");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(CRYSTAL_OF_INPROGRESS_3, -1);
 					st.giveItems(CRYSTAL_OF_VICTORY_3, 1);
 					npc.broadcastNpcSay("Ugh! I lost...!");
@@ -799,7 +800,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Basilla") == 3 && _duelsInProgress.containsKey(npcId))
 				{
 					st.set("Basilla", "6");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(CRYSTAL_OF_INPROGRESS_4, -1);
 					st.giveItems(CRYSTAL_OF_VICTORY_4, 1);
 					npc.broadcastNpcSay("Lost! Sorry, Lord!");
@@ -812,7 +813,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Celestiel") == 3 && _duelsInProgress.containsKey(npcId))
 				{
 					st.set("Celestiel", "6");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(CRYSTAL_OF_INPROGRESS_5, -1);
 					st.giveItems(CRYSTAL_OF_VICTORY_5, 1);
 					npc.broadcastNpcSay("I LOSE");
@@ -825,7 +826,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Brynthea") == 3 && _duelsInProgress.containsKey(npcId))
 				{
 					st.set("Brynthea", "6");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(CRYSTAL_OF_INPROGRESS_6, -1);
 					st.giveItems(CRYSTAL_OF_VICTORY_6, 1);
 					npc.broadcastNpcSay("Ugh! Can this be happening?!");
@@ -855,7 +856,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Almors") == 2 && isPet && npc.getCurrentHp() == npc.getMaxHp())
 				{
 					st.set("Almors", "3");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.takeItems(CRYSTAL_OF_PROGRESS_1, -1);
 					st.giveItems(CRYSTAL_OF_INPROGRESS_1, 1);
 					npc.broadcastNpcSay("Whhiisshh!");
@@ -890,7 +891,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Camoniell") == 2 && isPet && npc.getCurrentHp() == npc.getMaxHp())
 				{
 					st.set("Camoniell", "3");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.takeItems(CRYSTAL_OF_PROGRESS_2, -1);
 					st.giveItems(CRYSTAL_OF_INPROGRESS_2, 1);
 					npc.broadcastNpcSay("START DUEL");
@@ -924,7 +925,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Belthus") == 2 && isPet && npc.getCurrentHp() == npc.getMaxHp())
 				{
 					st.set("Belthus", "3");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.takeItems(CRYSTAL_OF_PROGRESS_3, -1);
 					st.giveItems(CRYSTAL_OF_INPROGRESS_3, 1);
 					npc.broadcastNpcSay("So shall we start?!");
@@ -958,7 +959,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Basilla") == 2 && isPet && npc.getCurrentHp() == npc.getMaxHp())
 				{
 					st.set("Basilla", "3");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.takeItems(CRYSTAL_OF_PROGRESS_4, -1);
 					st.giveItems(CRYSTAL_OF_INPROGRESS_4, 1);
 					npc.broadcastNpcSay("Whish! Fight!");
@@ -992,7 +993,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Celestiel") == 2 && isPet && npc.getCurrentHp() == npc.getMaxHp())
 				{
 					st.set("Celestiel", "3");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.takeItems(CRYSTAL_OF_PROGRESS_5, -1);
 					st.giveItems(CRYSTAL_OF_INPROGRESS_5, 1);
 					npc.broadcastNpcSay("START DUEL");
@@ -1026,7 +1027,7 @@ public class Q230_TestOfTheSummoner extends Quest
 				if (st.getInt("Brynthea") == 2 && isPet && npc.getCurrentHp() == npc.getMaxHp())
 				{
 					st.set("Brynthea", "3");
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.takeItems(CRYSTAL_OF_PROGRESS_6, -1);
 					st.giveItems(CRYSTAL_OF_INPROGRESS_6, 1);
 					npc.broadcastNpcSay("I'll walk all over you!");

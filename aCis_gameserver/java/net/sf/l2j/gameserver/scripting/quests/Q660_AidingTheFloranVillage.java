@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q660_AidingTheFloranVillage extends Quest
 {
@@ -58,7 +59,7 @@ public class Q660_AidingTheFloranVillage extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30291-02.htm"))
 		{
@@ -68,7 +69,7 @@ public class Q660_AidingTheFloranVillage extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "2");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 			}
 		}
 		else if (event.equalsIgnoreCase("30291-05.htm"))
@@ -86,7 +87,7 @@ public class Q660_AidingTheFloranVillage extends Quest
 		}
 		else if (event.equalsIgnoreCase("30291-06.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30291-11.htm"))
@@ -148,7 +149,7 @@ public class Q660_AidingTheFloranVillage extends Quest
 				st.takeItems(GOLEM_SHARD, -1);
 				st.rewardItems(ADENA, count * 100 + ((count >= 45) ? 9000 : 0));
 			}
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -191,7 +192,7 @@ public class Q660_AidingTheFloranVillage extends Quest
 						{
 							htmltext = "30291-03.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 2)
 							htmltext = (st.hasAtLeastOneQuestItem(WATCHING_EYES, LIZARDMEN_SCALE, GOLEM_SHARD)) ? "30291-04.htm" : "30291-05a.htm";

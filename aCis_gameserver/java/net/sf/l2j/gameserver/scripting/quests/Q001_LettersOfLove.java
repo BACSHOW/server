@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q001_LettersOfLove extends Quest
 {
@@ -45,7 +46,7 @@ public class Q001_LettersOfLove extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(DARIN_LETTER, 1);
 		}
 		
@@ -77,7 +78,7 @@ public class Q001_LettersOfLove extends Quest
 						{
 							htmltext = "30048-08.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ROXXY_KERCHIEF, 1);
 							st.giveItems(DARIN_RECEIPT, 1);
 						}
@@ -88,7 +89,7 @@ public class Q001_LettersOfLove extends Quest
 							htmltext = "30048-10.htm";
 							st.takeItems(BAULRO_POTION, 1);
 							st.giveItems(NECKLACE, 1);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -98,7 +99,7 @@ public class Q001_LettersOfLove extends Quest
 						{
 							htmltext = "30006-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(DARIN_LETTER, 1);
 							st.giveItems(ROXXY_KERCHIEF, 1);
 						}
@@ -113,7 +114,7 @@ public class Q001_LettersOfLove extends Quest
 						{
 							htmltext = "30033-01.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(DARIN_RECEIPT, 1);
 							st.giveItems(BAULRO_POTION, 1);
 						}

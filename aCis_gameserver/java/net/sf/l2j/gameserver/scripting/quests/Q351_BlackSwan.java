@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q351_BlackSwan extends Quest
 {
@@ -46,7 +47,7 @@ public class Q351_BlackSwan extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ORDER_OF_GOSTA, 1);
 		}
 		else if (event.equalsIgnoreCase("30969-02a.htm"))
@@ -74,7 +75,7 @@ public class Q351_BlackSwan extends Quest
 				if (st.getInt("cond") == 1)
 				{
 					st.set("cond", "2");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 			}
 		}
@@ -84,7 +85,7 @@ public class Q351_BlackSwan extends Quest
 			if (!st.hasQuestItems(BARREL_OF_LEAGUE, LIZARD_FANG))
 			{
 				htmltext = "30969-07.htm";
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 		}

@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q359_ForSleeplessDeadmen extends Quest
 {
@@ -67,12 +68,12 @@ public class Q359_ForSleeplessDeadmen extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30857-10.htm"))
 		{
 			st.giveItems(REWARD[Rnd.get(REWARD.length)], 4);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -101,7 +102,7 @@ public class Q359_ForSleeplessDeadmen extends Quest
 				{
 					htmltext = "30857-08.htm";
 					st.set("cond", "3");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(REMAINS, -1);
 				}
 				else if (cond == 3)

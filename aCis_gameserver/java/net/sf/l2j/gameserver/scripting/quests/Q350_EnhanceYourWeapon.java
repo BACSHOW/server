@@ -14,6 +14,7 @@ import net.sf.l2j.gameserver.model.soulcrystal.SoulCrystalData;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q350_EnhanceYourWeapon extends Quest
 {
@@ -46,24 +47,24 @@ public class Q350_EnhanceYourWeapon extends Quest
 		{
 			st.setState(Quest.STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		// Give Red Soul Crystal.
 		else if (event.endsWith("-09.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(4629, 1);
 		}
 		// Give Green Soul Crystal.
 		else if (event.endsWith("-10.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(4640, 1);
 		}
 		// Give Blue Soul Crystal.
 		else if (event.endsWith("-11.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(4651, 1);
 		}
 		// Terminate the quest.
@@ -263,7 +264,7 @@ public class Q350_EnhanceYourWeapon extends Quest
 		{
 			player.sendPacket(SystemMessageId.SOUL_CRYSTAL_ABSORBING_SUCCEEDED);
 			st.giveItems(scd.getStagedItemId(), 1);
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 		}
 		else
 		{

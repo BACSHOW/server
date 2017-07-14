@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q116_BeyondTheHillsOfWinter extends Quest
 {
@@ -45,12 +46,12 @@ public class Q116_BeyondTheHillsOfWinter extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30535-05.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(GOODS, 1);
 		}
 		else if (event.equalsIgnoreCase("materials"))
@@ -58,7 +59,7 @@ public class Q116_BeyondTheHillsOfWinter extends Quest
 			htmltext = "32052-02.htm";
 			st.takeItems(GOODS, -1);
 			st.rewardItems(SSD, 1650);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		else if (event.equalsIgnoreCase("adena"))
@@ -66,7 +67,7 @@ public class Q116_BeyondTheHillsOfWinter extends Quest
 			htmltext = "32052-02.htm";
 			st.takeItems(GOODS, -1);
 			st.giveItems(57, 16500);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		

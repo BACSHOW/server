@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q164_BloodFiend extends Quest
 {
@@ -37,7 +38,7 @@ public class Q164_BloodFiend extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -68,7 +69,7 @@ public class Q164_BloodFiend extends Quest
 					htmltext = "30149-06.htm";
 					st.takeItems(KIRUNAK_SKULL, 1);
 					st.rewardItems(57, 42130);
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(false);
 				}
 				else
@@ -91,7 +92,7 @@ public class Q164_BloodFiend extends Quest
 			return null;
 		
 		st.set("cond", "2");
-		st.playSound(QuestState.SOUND_MIDDLE);
+		st.playSound(Sound.SOUND_MIDDLE);
 		st.giveItems(KIRUNAK_SKULL, 1);
 		
 		return null;

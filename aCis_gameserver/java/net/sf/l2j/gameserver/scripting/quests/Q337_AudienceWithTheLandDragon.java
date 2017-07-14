@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q337_AudienceWithTheLandDragon extends Quest
 {
@@ -184,7 +185,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 			st.set("drop2", "1");
 			st.set("drop3", "1");
 			st.set("drop4", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(FEATHER_OF_GABRIELLE, 1);
 		}
 		else if (event.equalsIgnoreCase("30753-09.htm"))
@@ -194,7 +195,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 				st.set("cond", "2");
 				st.set("drop5", "2");
 				st.set("drop6", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(MARK_OF_WATCHMAN, 4);
 			}
 			else
@@ -208,7 +209,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 				st.takeItems(THIRD_FRAGMENT_OF_ABYSS_JEWEL, 1);
 				st.takeItems(HERALD_OF_SLAYER, 1);
 				st.giveItems(PORTAL_STONE, 1);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 			else
@@ -247,7 +248,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 							{
 								htmltext = "30753-11.htm";
 								st.set("cond", "3");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(FEATHER_OF_GABRIELLE, 1);
 								st.takeItems(MARK_OF_WATCHMAN, 1);
 								st.giveItems(HERALD_OF_SLAYER, 1);
@@ -268,7 +269,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 								{
 									htmltext = "30857-02.htm";
 									st.unset("drop1");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									st.takeItems(REMAINS_OF_SACRIFIED, 1);
 									st.giveItems(MARK_OF_WATCHMAN, 1);
 								}
@@ -291,7 +292,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 								{
 									htmltext = "30851-02.htm";
 									st.unset("drop2");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									st.takeItems(TOTEM_OF_LAND_DRAGON, 1);
 									st.giveItems(MARK_OF_WATCHMAN, 1);
 								}
@@ -314,7 +315,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 								{
 									htmltext = "30705-02.htm";
 									st.unset("drop3");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									st.takeItems(KRANROT_SKIN, 1);
 									st.takeItems(HAMRUT_LEG, 1);
 									st.giveItems(MARK_OF_WATCHMAN, 1);
@@ -338,7 +339,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 								{
 									htmltext = "30720-02.htm";
 									st.unset("drop4");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									st.takeItems(MARSH_DRAKE_TALONS, 1);
 									st.takeItems(MARSH_STALKER_HORN, 1);
 									st.giveItems(MARK_OF_WATCHMAN, 1);
@@ -368,7 +369,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 									{
 										htmltext = "30498-03.htm";
 										st.unset("drop5");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 										st.takeItems(FIRST_FRAGMENT_OF_ABYSS_JEWEL, 1);
 										st.takeItems(MARA_FANG, 1);
 										st.giveItems(MARK_OF_WATCHMAN, 1);
@@ -402,7 +403,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 									{
 										htmltext = "30678-03.htm";
 										st.unset("drop6");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 										st.takeItems(SECOND_FRAGMENT_OF_ABYSS_JEWEL, 1);
 										st.takeItems(MUSFEL_FANG, 1);
 										st.giveItems(MARK_OF_WATCHMAN, 1);
@@ -429,7 +430,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 							htmltext = "30754-02.htm";
 							st.set("cond", "4");
 							st.set("drop7", "1");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 4)
 							htmltext = (!st.hasQuestItems(THIRD_FRAGMENT_OF_ABYSS_JEWEL)) ? "30754-04.htm" : "30754-05.htm";
@@ -478,7 +479,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 					if (!st.hasQuestItems(itemId))
 					{
 						st.giveItems(itemId, 1);
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 					}
 				}
 			}
@@ -562,7 +563,7 @@ public class Q337_AudienceWithTheLandDragon extends Quest
 						if (!st.hasQuestItems(itemId))
 						{
 							st.giveItems(itemId, 1);
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 						}
 					}
 					break;

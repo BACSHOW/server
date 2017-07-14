@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q412_PathToADarkWizard extends Quest
 {
@@ -63,7 +64,7 @@ public class Q412_PathToADarkWizard extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.giveItems(SEED_OF_DESPAIR, 1);
 			}
 		}
@@ -90,12 +91,12 @@ public class Q412_PathToADarkWizard extends Quest
 		}
 		else if (event.equalsIgnoreCase("30415-03.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(LUCKY_KEY, 1);
 		}
 		else if (event.equalsIgnoreCase("30418-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(CANDLE, 1);
 		}
 		
@@ -130,7 +131,7 @@ public class Q412_PathToADarkWizard extends Quest
 							st.giveItems(JEWEL_OF_DARKNESS, 1);
 							st.rewardExpAndSp(3200, 1650);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						else
@@ -145,7 +146,7 @@ public class Q412_PathToADarkWizard extends Quest
 						else if (st.getQuestItemsCount(FAMILY_REMAINS) == 3)
 						{
 							htmltext = "30415-05.htm";
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(FAMILY_REMAINS, -1);
 							st.takeItems(LUCKY_KEY, 1);
 							st.giveItems(SEED_OF_ANGER, 1);
@@ -162,7 +163,7 @@ public class Q412_PathToADarkWizard extends Quest
 						else if (st.getQuestItemsCount(KNEE_BONE) == 2)
 						{
 							htmltext = "30418-04.htm";
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(CANDLE, 1);
 							st.takeItems(KNEE_BONE, -1);
 							st.giveItems(SEED_OF_HORROR, 1);
@@ -177,13 +178,13 @@ public class Q412_PathToADarkWizard extends Quest
 						else if (!st.hasQuestItems(HUB_SCENT))
 						{
 							htmltext = "30419-01.htm";
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(HUB_SCENT, 1);
 						}
 						else if (st.getQuestItemsCount(HEART_OF_LUNACY) == 3)
 						{
 							htmltext = "30419-03.htm";
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(HEART_OF_LUNACY, -1);
 							st.takeItems(HUB_SCENT, 1);
 							st.giveItems(SEED_OF_LUNACY, 1);

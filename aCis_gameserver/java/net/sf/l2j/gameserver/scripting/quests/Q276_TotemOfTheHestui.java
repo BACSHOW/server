@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q276_TotemOfTheHestui extends Quest
 {
@@ -44,7 +45,7 @@ public class Q276_TotemOfTheHestui extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -79,7 +80,7 @@ public class Q276_TotemOfTheHestui extends Quest
 					st.takeItems(KASHA_PARASITE, -1);
 					st.giveItems(HESTUI_TOTEM, 1);
 					st.giveItems(LEATHER_PANTS, 1);
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(true);
 				}
 				break;
@@ -114,7 +115,7 @@ public class Q276_TotemOfTheHestui extends Quest
 				
 				case 27044:
 					st.set("cond", "2");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(KASHA_CRYSTAL, 1);
 					break;
 			}

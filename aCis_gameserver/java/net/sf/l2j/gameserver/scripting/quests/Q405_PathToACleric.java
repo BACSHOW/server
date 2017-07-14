@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q405_PathToACleric extends Quest
 {
@@ -58,7 +59,7 @@ public class Q405_PathToACleric extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(LETTER_OF_ORDER_1, 1);
 		}
 		
@@ -97,7 +98,7 @@ public class Q405_PathToACleric extends Quest
 						{
 							htmltext = "30022-08.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BOOK_OF_PRAGA, 1);
 							st.takeItems(BOOK_OF_VIVYAN, 1);
 							st.takeItems(BOOK_OF_SIMPLON, 3);
@@ -114,7 +115,7 @@ public class Q405_PathToACleric extends Quest
 							st.giveItems(MARK_OF_FATE, 1);
 							st.rewardExpAndSp(3200, 5610);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -123,7 +124,7 @@ public class Q405_PathToACleric extends Quest
 						if (cond == 1 && !st.hasQuestItems(BOOK_OF_SIMPLON))
 						{
 							htmltext = "30253-01.htm";
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.giveItems(BOOK_OF_SIMPLON, 3);
 						}
 						else if (cond > 1 || st.hasQuestItems(BOOK_OF_SIMPLON))
@@ -136,7 +137,7 @@ public class Q405_PathToACleric extends Quest
 							if (!st.hasQuestItems(BOOK_OF_PRAGA) && !st.hasQuestItems(NECKLACE_OF_MOTHER) && st.hasQuestItems(BOOK_OF_SIMPLON))
 							{
 								htmltext = "30333-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.giveItems(NECKLACE_OF_MOTHER, 1);
 							}
 							else if (!st.hasQuestItems(PENDANT_OF_MOTHER))
@@ -151,10 +152,10 @@ public class Q405_PathToACleric extends Quest
 								if (st.hasQuestItems(BOOK_OF_VIVYAN))
 								{
 									st.set("cond", "2");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 							}
 						}
 						else if (cond > 1 || (st.hasQuestItems(BOOK_OF_PRAGA)))
@@ -170,10 +171,10 @@ public class Q405_PathToACleric extends Quest
 							if (st.hasQuestItems(BOOK_OF_PRAGA))
 							{
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (cond > 1 || st.hasQuestItems(BOOK_OF_VIVYAN))
 							htmltext = "30030-02.htm";
@@ -186,7 +187,7 @@ public class Q405_PathToACleric extends Quest
 						{
 							htmltext = "30408-01.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(LIONEL_BOOK, 1);
 						}
 						else if (cond == 4)
@@ -195,7 +196,7 @@ public class Q405_PathToACleric extends Quest
 						{
 							htmltext = "30408-04.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(CERTIFICATE_OF_GALLINT, 1);
 							st.giveItems(LIONEL_COVENANT, 1);
 						}
@@ -208,7 +209,7 @@ public class Q405_PathToACleric extends Quest
 						{
 							htmltext = "30017-01.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LIONEL_BOOK, 1);
 							st.giveItems(CERTIFICATE_OF_GALLINT, 1);
 						}
@@ -231,7 +232,7 @@ public class Q405_PathToACleric extends Quest
 		
 		if (st.hasQuestItems(NECKLACE_OF_MOTHER) && !st.hasQuestItems(PENDANT_OF_MOTHER))
 		{
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(PENDANT_OF_MOTHER, 1);
 		}
 		

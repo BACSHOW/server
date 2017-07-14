@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q152_ShardsOfGolem extends Quest
 {
@@ -49,13 +50,13 @@ public class Q152_ShardsOfGolem extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(HARRIS_RECEIPT_1, 1);
 		}
 		else if (event.equalsIgnoreCase("30283-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(HARRIS_RECEIPT_1, 1);
 			st.giveItems(HARRIS_RECEIPT_2, 1);
 		}
@@ -91,7 +92,7 @@ public class Q152_ShardsOfGolem extends Quest
 							st.takeItems(TOOL_BOX, 1);
 							st.giveItems(WOODEN_BREASTPLATE, 1);
 							st.rewardExpAndSp(5000, 0);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -105,7 +106,7 @@ public class Q152_ShardsOfGolem extends Quest
 						{
 							htmltext = "30283-04.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(GOLEM_SHARD, -1);
 							st.giveItems(TOOL_BOX, 1);
 						}

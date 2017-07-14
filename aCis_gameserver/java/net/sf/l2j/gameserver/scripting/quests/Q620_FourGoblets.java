@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q620_FourGoblets extends Quest
 {
@@ -88,14 +89,14 @@ public class Q620_FourGoblets extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31453-16.htm"))
 		{
 			if (st.hasQuestItems(GOBLET_OF_ALECTIA, GOBLET_OF_TISHAS, GOBLET_OF_MEKARA, GOBLET_OF_MORIGUL))
 			{
 				st.set("cond", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(GOBLET_OF_ALECTIA, -1);
 				st.takeItems(GOBLET_OF_TISHAS, -1);
 				st.takeItems(GOBLET_OF_MEKARA, -1);
@@ -112,7 +113,7 @@ public class Q620_FourGoblets extends Quest
 		}
 		else if (event.equalsIgnoreCase("31453-18.htm"))
 		{
-			st.playSound(QuestState.SOUND_GIVEUP);
+			st.playSound(Sound.SOUND_GIVEUP);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("boxes"))

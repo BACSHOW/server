@@ -26,8 +26,9 @@ import net.sf.l2j.gameserver.model.zone.type.L2DerbyTrackZone;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.DeleteObject;
 import net.sf.l2j.gameserver.network.serverpackets.MonRaceInfo;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 import net.sf.l2j.gameserver.util.Broadcast;
 
 public class MonsterRace
@@ -41,9 +42,6 @@ public class MonsterRace
 		STARTING_RACE,
 		RACE_END
 	}
-	
-	protected static final PlaySound SOUND_1 = new PlaySound(1, "S_Race", 0, 0, 0, 0, 0);
-	protected static final PlaySound SOUND_2 = new PlaySound(0, "ItemSound2.race_start", 1, 121209259, 12125, 182487, -3559);
 	
 	protected static final int[][] CODES =
 	{
@@ -253,7 +251,7 @@ public class MonsterRace
 					_state = RaceState.STARTING_RACE;
 					_packet = new MonRaceInfo(CODES[1][0], CODES[1][1], getMonsters(), getSpeeds());
 					
-					Broadcast.toAllPlayersInZoneType(L2DerbyTrackZone.class, SystemMessage.getSystemMessage(SystemMessageId.MONSRACE_RACE_START), SOUND_1, SOUND_2, _packet);
+					Broadcast.toAllPlayersInZoneType(L2DerbyTrackZone.class, SystemMessage.getSystemMessage(SystemMessageId.MONSRACE_RACE_START), Music.S_RACE.getPacket(), Sound.SOUND_RACE_START.getPacket(), _packet);
 					break;
 				
 				case 1085: // 18 min 5 sec

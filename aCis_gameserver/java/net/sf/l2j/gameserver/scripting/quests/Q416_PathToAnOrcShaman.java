@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q416_PathToAnOrcShaman extends Quest
 {
@@ -84,27 +85,27 @@ public class Q416_PathToAnOrcShaman extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(FIRE_CHARM, 1);
 		}
 		else if (event.equalsIgnoreCase("30585-11b.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(TOTEM_SPIRIT_CLAW, 1);
 			st.giveItems(TATARU_LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("30585-11c.htm"))
 		{
 			st.set("cond", "12");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(TOTEM_SPIRIT_CLAW, 1);
 		}
 		// HESTUI TOTEM SPIRIT
 		else if (event.equalsIgnoreCase("30592-03.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(HESTUI_MASK, 1);
 			st.takeItems(FIERY_EGG_2, 1);
 			st.giveItems(TOTEM_SPIRIT_CLAW, 1);
@@ -113,7 +114,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 		else if (event.equalsIgnoreCase("30593-03.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BLOOD_CAULDRON, 1);
 			st.giveItems(SPIRIT_NET, 1);
 		}
@@ -121,18 +122,18 @@ public class Q416_PathToAnOrcShaman extends Quest
 		else if (event.equalsIgnoreCase("32057-02.htm"))
 		{
 			st.set("cond", "14");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32057-05.htm"))
 		{
 			st.set("cond", "21");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		// DEAD LEOPARD CARCASS
 		else if (event.equalsIgnoreCase("32090-04.htm"))
 		{
 			st.set("cond", "18");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		// UMOS
 		else if (event.equalsIgnoreCase("30502-07.htm"))
@@ -141,7 +142,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 			st.giveItems(MASK_OF_MEDIUM, 1);
 			st.rewardExpAndSp(3200, 2600);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -173,7 +174,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 						{
 							htmltext = "30585-08.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(FIERY_EGG_1, 1);
 							st.takeItems(FIRE_CHARM, 1);
 							st.takeItems(KASHA_BEAR_PELT, 1);
@@ -207,7 +208,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 						{
 							htmltext = "30502-01.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(TATARU_LETTER, 1);
 							st.giveItems(FLAME_CHARM, 1);
 						}
@@ -217,7 +218,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 						{
 							htmltext = "30502-03.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(FLAME_CHARM, 1);
 							st.takeItems(GRIZZLY_BLOOD, 3);
 							st.giveItems(BLOOD_CAULDRON, 1);
@@ -235,7 +236,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 						{
 							htmltext = "31979-01.htm";
 							st.set("cond", "13");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond > 12 && cond < 21)
 							htmltext = "31979-02.htm";
@@ -245,7 +246,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 							st.giveItems(MASK_OF_MEDIUM, 1);
 							st.rewardExpAndSp(3200, 3250);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -268,7 +269,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 						{
 							htmltext = "30593-05.htm";
 							st.set("cond", "11");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BOUND_DURKA_SPIRIT, 1);
 							st.giveItems(TOTEM_SPIRIT_BLOOD, 1);
 						}
@@ -283,7 +284,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 						{
 							htmltext = "32090-01.htm";
 							st.set("cond", "16");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 16)
 							htmltext = "32090-01b.htm";
@@ -295,7 +296,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 						{
 							htmltext = "32090-06.htm";
 							st.set("cond", "20");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						break;
 				}
@@ -323,10 +324,10 @@ public class Q416_PathToAnOrcShaman extends Quest
 					if (st.hasQuestItems(FIERY_EGG_1, KASHA_BLADE_SPIDER_HUSK))
 					{
 						st.set("cond", "2");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			
@@ -337,10 +338,10 @@ public class Q416_PathToAnOrcShaman extends Quest
 					if (st.hasQuestItems(KASHA_BEAR_PELT, FIERY_EGG_1))
 					{
 						st.set("cond", "2");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			
@@ -351,10 +352,10 @@ public class Q416_PathToAnOrcShaman extends Quest
 					if (st.hasQuestItems(KASHA_BEAR_PELT, KASHA_BLADE_SPIDER_HUSK))
 					{
 						st.set("cond", "2");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			
@@ -371,7 +372,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 					final int rnd = Rnd.get(10);
 					if ((count == 5 && rnd < 1) || ((count == 6 || count == 7) && rnd < 2) || count >= 8)
 					{
-						st.playSound(QuestState.SOUND_BEFORE_BATTLE);
+						st.playSound(Sound.SOUND_BEFORE_BATTLE);
 						st.takeItems(DURKA_PARASITE, -1);
 						addSpawn(DURKA_SPIRIT, npc, false, 120000, true);
 					}
@@ -384,7 +385,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 				if (cond == 9)
 				{
 					st.set("cond", "10");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(DURKA_PARASITE, -1);
 					st.takeItems(SPIRIT_NET, 1);
 					st.giveItems(BOUND_DURKA_SPIRIT, 1);
@@ -397,7 +398,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 					if (st.getInt("leopard") > 0)
 					{
 						st.set("cond", "15");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 						
 						if (Rnd.get(3) < 2)
 							npc.broadcastNpcSay("My dear friend of " + player.getName() + ", who has gone on ahead of me!");
@@ -408,7 +409,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 				else if (cond == 16)
 				{
 					st.set("cond", "17");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					
 					if (Rnd.get(3) < 2)
 						npc.broadcastNpcSay("Listen to Tejakar Gandi, young Oroka! The spirit of the slain leopard is calling you, " + player.getName() + "!");
@@ -416,7 +417,7 @@ public class Q416_PathToAnOrcShaman extends Quest
 				else if (cond == 18)
 				{
 					st.set("cond", "19");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				break;
 		}

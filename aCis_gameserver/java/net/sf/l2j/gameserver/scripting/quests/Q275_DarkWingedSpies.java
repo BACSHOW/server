@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q275_DarkWingedSpies extends Quest
 {
@@ -44,7 +45,7 @@ public class Q275_DarkWingedSpies extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -78,7 +79,7 @@ public class Q275_DarkWingedSpies extends Quest
 					st.takeItems(DARKWING_BAT_FANG, -1);
 					st.takeItems(VARANGKA_PARASITE, -1);
 					st.rewardItems(57, 4200);
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(true);
 				}
 				break;

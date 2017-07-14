@@ -18,7 +18,7 @@ import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.GrandBoss;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.type.L2BossZone;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
 import net.sf.l2j.gameserver.scripting.scripts.ai.L2AttackableAIScript;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
@@ -223,7 +223,7 @@ public class Orfen extends L2AttackableAIScript
 	@Override
 	public String onKill(Npc npc, Player killer, boolean isPet)
 	{
-		npc.broadcastPacket(new PlaySound(1, "BS02_D", 1, npc.getObjectId(), npc.getX(), npc.getY(), npc.getZ()));
+		npc.broadcastPacket(Music.BS02_D_7000.getPacket());
 		GrandBossManager.getInstance().setBossStatus(ORFEN, DEAD);
 		
 		long respawnTime = (long) Config.SPAWN_INTERVAL_ORFEN + Rnd.get(-Config.RANDOM_SPAWN_TIME_ORFEN, Config.RANDOM_SPAWN_TIME_ORFEN);
@@ -264,7 +264,7 @@ public class Orfen extends L2AttackableAIScript
 	private void spawnBoss(GrandBoss npc)
 	{
 		GrandBossManager.getInstance().addBoss(npc);
-		npc.broadcastPacket(new PlaySound(1, "BS01_A", 1, npc.getObjectId(), npc.getX(), npc.getY(), npc.getZ()));
+		npc.broadcastPacket(Music.BS01_A_7000.getPacket());
 		startQuestTimer("check_orfen_pos", 60000, npc, null, true);
 		
 		// start monitoring Orfen's inactivity

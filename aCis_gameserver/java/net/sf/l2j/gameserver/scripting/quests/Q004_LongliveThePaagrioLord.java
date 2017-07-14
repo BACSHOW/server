@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q004_LongliveThePaagrioLord extends Quest
 {
@@ -45,7 +46,7 @@ public class Q004_LongliveThePaagrioLord extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -85,7 +86,7 @@ public class Q004_LongliveThePaagrioLord extends Quest
 						for (int item : NPC_GIFTS.values())
 							st.takeItems(item, -1);
 						
-						st.playSound(QuestState.SOUND_FINISH);
+						st.playSound(Sound.SOUND_FINISH);
 						st.exitQuest(false);
 					}
 				}
@@ -106,10 +107,10 @@ public class Q004_LongliveThePaagrioLord extends Quest
 						if (count == 6)
 						{
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 					}
 				}
 				break;

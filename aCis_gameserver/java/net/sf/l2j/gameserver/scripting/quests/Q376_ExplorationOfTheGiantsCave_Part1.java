@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q376_ExplorationOfTheGiantsCave_Part1 extends Quest
 {
@@ -107,7 +108,7 @@ public class Q376_ExplorationOfTheGiantsCave_Part1 extends Quest
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
 			st.set("condBook", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(DICTIONARY_BASIC, 1);
 		}
 		else if (event.equalsIgnoreCase("31147-04.htm"))
@@ -116,14 +117,14 @@ public class Q376_ExplorationOfTheGiantsCave_Part1 extends Quest
 		}
 		else if (event.equalsIgnoreCase("31147-09.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		// Cliff
 		else if (event.equalsIgnoreCase("30182-02.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(MYSTERIOUS_BOOK, -1);
 			st.giveItems(DICTIONARY_INTERMEDIATE, 1);
 		}
@@ -199,7 +200,7 @@ public class Q376_ExplorationOfTheGiantsCave_Part1 extends Quest
 			if (cond == 1)
 			{
 				st.set("cond", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				return "31147-07.htm";
 			}
 			return "31147-08.htm";

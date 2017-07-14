@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q170_DangerousSeduction extends Quest
 {
@@ -37,7 +38,7 @@ public class Q170_DangerousSeduction extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -68,7 +69,7 @@ public class Q170_DangerousSeduction extends Quest
 					htmltext = "30305-06.htm";
 					st.takeItems(NIGHTMARE_CRYSTAL, -1);
 					st.rewardItems(57, 102680);
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(false);
 				}
 				else
@@ -91,7 +92,7 @@ public class Q170_DangerousSeduction extends Quest
 			return null;
 		
 		st.set("cond", "2");
-		st.playSound(QuestState.SOUND_MIDDLE);
+		st.playSound(Sound.SOUND_MIDDLE);
 		st.giveItems(NIGHTMARE_CRYSTAL, 1);
 		
 		return null;

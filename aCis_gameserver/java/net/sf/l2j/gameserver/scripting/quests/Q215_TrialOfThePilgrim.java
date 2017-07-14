@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q215_TrialOfThePilgrim extends Quest
 {
@@ -74,7 +75,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(VOUCHER_OF_TRIAL, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange35", false))
@@ -87,7 +88,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 		else if (event.equalsIgnoreCase("30649-04.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ESSENCE_OF_FLAME, 1);
 			st.giveItems(SPIRIT_OF_FLAME, 1);
 		}
@@ -95,7 +96,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 		{
 			if (st.getQuestItemsCount(57) >= 100000)
 			{
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.takeItems(57, 100000);
 				st.giveItems(BOOK_OF_GERALD, 1);
 			}
@@ -105,19 +106,19 @@ public class Q215_TrialOfThePilgrim extends Quest
 		else if (event.equalsIgnoreCase("30652-02.htm"))
 		{
 			st.set("cond", "15");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(DEBRIS_OF_WILLOW, 1);
 			st.giveItems(BOOK_OF_DARKNESS, 1);
 		}
 		else if (event.equalsIgnoreCase("30362-04.htm"))
 		{
 			st.set("cond", "16");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30362-05.htm"))
 		{
 			st.set("cond", "16");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BOOK_OF_DARKNESS, 1);
 		}
 		
@@ -157,7 +158,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 							st.giveItems(MARK_OF_PILGRIM, 1);
 							st.rewardExpAndSp(77382, 16000);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -167,7 +168,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 						{
 							htmltext = "30571-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(VOUCHER_OF_TRIAL, 1);
 						}
 						else if (cond < 5)
@@ -179,7 +180,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 							if (cond == 5)
 							{
 								st.set("cond", "6");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 						}
 						break;
@@ -189,7 +190,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 						{
 							htmltext = "30649-01.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 3)
 							htmltext = "30649-02.htm";
@@ -202,7 +203,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 						{
 							htmltext = "30550-01.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(TAG_OF_RUMOR, 1);
 						}
 						else if (cond > 6)
@@ -214,7 +215,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 						{
 							htmltext = (!st.hasQuestItems(BOOK_OF_GERALD)) ? "30651-01.htm" : "30651-02.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(TAG_OF_RUMOR, 1);
 							st.giveItems(GRAY_BADGE, 1);
 						}
@@ -228,7 +229,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 						else if (cond == 8 && st.hasQuestItems(BOOK_OF_GERALD))
 						{
 							htmltext = "30650-04.htm";
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.takeItems(BOOK_OF_GERALD, 1);
 							st.giveItems(57, 100000);
 						}
@@ -239,7 +240,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 						{
 							htmltext = "30117-01.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond > 8)
 							htmltext = "30117-02.htm";
@@ -250,7 +251,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 						{
 							htmltext = "30036-01.htm";
 							st.set("cond", "10");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(PICTURE_OF_NAHIR, 1);
 						}
 						else if (cond == 10)
@@ -259,7 +260,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 						{
 							htmltext = "30036-03.htm";
 							st.set("cond", "12");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(HAIR_OF_NAHIR, 1);
 							st.takeItems(PICTURE_OF_NAHIR, 1);
 							st.giveItems(STATUE_OF_EINHASAD, 1);
@@ -277,7 +278,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 							{
 								htmltext = "30362-01.htm";
 								st.set("cond", "13");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 						}
 						else if (cond == 13)
@@ -302,7 +303,7 @@ public class Q215_TrialOfThePilgrim extends Quest
 						{
 							htmltext = "30612-01.htm";
 							st.set("cond", "17");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BOOK_OF_DARKNESS, 1);
 							st.takeItems(GRAY_BADGE, 1);
 							st.takeItems(SPIRIT_OF_FLAME, 1);

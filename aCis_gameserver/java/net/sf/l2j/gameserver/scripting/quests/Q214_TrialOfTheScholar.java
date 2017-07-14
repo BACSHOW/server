@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q214_TrialOfTheScholar extends Quest
 {
@@ -115,7 +116,7 @@ public class Q214_TrialOfTheScholar extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(MIRIEN_SIGIL_1, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange35", false))
@@ -129,14 +130,14 @@ public class Q214_TrialOfTheScholar extends Quest
 		{
 			if (player.getLevel() < 36)
 			{
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.giveItems(MIRIEN_INSTRUCTION, 1);
 			}
 			else
 			{
 				htmltext = "30461-10.htm";
 				st.set("cond", "19");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(MIRIEN_SIGIL_2, 1);
 				st.takeItems(SYMBOL_OF_JUREK, 1);
 				st.giveItems(MIRIEN_SIGIL_3, 1);
@@ -146,7 +147,7 @@ public class Q214_TrialOfTheScholar extends Quest
 		else if (event.equalsIgnoreCase("30070-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(HIGH_PRIEST_SIGIL, 1);
 			st.giveItems(SYLVAIN_LETTER, 1);
 		}
@@ -154,21 +155,21 @@ public class Q214_TrialOfTheScholar extends Quest
 		else if (event.equalsIgnoreCase("30608-02.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SYLVAIN_LETTER, 1);
 			st.giveItems(MARIA_LETTER_1, 1);
 		}
 		else if (event.equalsIgnoreCase("30608-08.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(CRETA_LETTER_1, 1);
 			st.giveItems(LUCILLA_HANDBAG, 1);
 		}
 		else if (event.equalsIgnoreCase("30608-14.htm"))
 		{
 			st.set("cond", "13");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BROWN_SCROLL_SCRAP, -1);
 			st.takeItems(CRETA_PAINTING_3, 1);
 			st.giveItems(CRYSTAL_OF_PURITY_1, 1);
@@ -177,7 +178,7 @@ public class Q214_TrialOfTheScholar extends Quest
 		else if (event.equalsIgnoreCase("30115-03.htm"))
 		{
 			st.set("cond", "16");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(GRAND_MAGISTER_SIGIL, 1);
 			st.giveItems(JUREK_LIST, 1);
 		}
@@ -185,7 +186,7 @@ public class Q214_TrialOfTheScholar extends Quest
 		else if (event.equalsIgnoreCase("30071-04.htm"))
 		{
 			st.set("cond", "10");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(CRETA_PAINTING_2, 1);
 			st.giveItems(CRETA_PAINTING_3, 1);
 		}
@@ -193,21 +194,21 @@ public class Q214_TrialOfTheScholar extends Quest
 		else if (event.equalsIgnoreCase("30609-05.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(MARIA_LETTER_2, 1);
 			st.giveItems(CRETA_LETTER_1, 1);
 		}
 		else if (event.equalsIgnoreCase("30609-09.htm"))
 		{
 			st.set("cond", "8");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LUCILLA_HANDBAG, 1);
 			st.giveItems(CRETA_PAINTING_1, 1);
 		}
 		else if (event.equalsIgnoreCase("30609-14.htm"))
 		{
 			st.set("cond", "22");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(DIETER_KEY, 1);
 			st.giveItems(CRETA_LETTER_2, 1);
 		}
@@ -215,14 +216,14 @@ public class Q214_TrialOfTheScholar extends Quest
 		else if (event.equalsIgnoreCase("30610-10.htm"))
 		{
 			st.set("cond", "20");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(CRONOS_LETTER, 1);
 			st.giveItems(CRONOS_SIGIL, 1);
 		}
 		else if (event.equalsIgnoreCase("30610-14.htm"))
 		{
 			st.set("cond", "31");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(CRONOS_SIGIL, 1);
 			st.takeItems(DIETER_DIARY, 1);
 			st.takeItems(SCRIPTURE_CHAPTER_1, 1);
@@ -236,14 +237,14 @@ public class Q214_TrialOfTheScholar extends Quest
 		else if (event.equalsIgnoreCase("30111-05.htm"))
 		{
 			st.set("cond", "21");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(CRONOS_LETTER, 1);
 			st.giveItems(DIETER_KEY, 1);
 		}
 		else if (event.equalsIgnoreCase("30111-09.htm"))
 		{
 			st.set("cond", "23");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(CRETA_LETTER_2, 1);
 			st.giveItems(DIETER_DIARY, 1);
 			st.giveItems(DIETER_LETTER, 1);
@@ -252,7 +253,7 @@ public class Q214_TrialOfTheScholar extends Quest
 		else if (event.equalsIgnoreCase("30230-02.htm"))
 		{
 			st.set("cond", "24");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(DIETER_LETTER, 1);
 			st.giveItems(RAUT_LETTER_ENVELOPE, 1);
 		}
@@ -260,7 +261,7 @@ public class Q214_TrialOfTheScholar extends Quest
 		else if (event.equalsIgnoreCase("30316-02.htm"))
 		{
 			st.set("cond", "25");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(RAUT_LETTER_ENVELOPE, 1);
 			st.giveItems(SCRIPTURE_CHAPTER_1, 1);
 			st.giveItems(STRONG_LIQUOR, 1);
@@ -269,27 +270,27 @@ public class Q214_TrialOfTheScholar extends Quest
 		else if (event.equalsIgnoreCase("30611-04.htm"))
 		{
 			st.set("cond", "26");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(STRONG_LIQUOR, 1);
 			st.giveItems(TRIFF_RING, 1);
 		}
 		// VALKON
 		else if (event.equalsIgnoreCase("30103-04.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(VALKON_REQUEST, 1);
 		}
 		// CASIAN
 		else if (event.equalsIgnoreCase("30612-04.htm"))
 		{
 			st.set("cond", "28");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(CASIAN_LIST, 1);
 		}
 		else if (event.equalsIgnoreCase("30612-07.htm"))
 		{
 			st.set("cond", "30");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(CASIAN_LIST, 1);
 			st.takeItems(ENCHANTED_GARGOYLE_NAIL, -1);
 			st.takeItems(FETTERED_SOUL_ICHOR, -1);
@@ -332,7 +333,7 @@ public class Q214_TrialOfTheScholar extends Quest
 						{
 							htmltext = "30461-06.htm";
 							st.set("cond", "15");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(MIRIEN_SIGIL_1, 1);
 							st.takeItems(SYMBOL_OF_SYLVAIN, 1);
 							st.giveItems(MIRIEN_SIGIL_2, 1);
@@ -351,7 +352,7 @@ public class Q214_TrialOfTheScholar extends Quest
 								{
 									htmltext = "30461-12.htm";
 									st.set("cond", "19");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									st.takeItems(MIRIEN_INSTRUCTION, 1);
 									st.takeItems(MIRIEN_SIGIL_2, 1);
 									st.takeItems(SYMBOL_OF_JUREK, 1);
@@ -369,7 +370,7 @@ public class Q214_TrialOfTheScholar extends Quest
 							st.giveItems(MARK_OF_SCHOLAR, 1);
 							st.rewardExpAndSp(80265, 30000);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -383,7 +384,7 @@ public class Q214_TrialOfTheScholar extends Quest
 						{
 							htmltext = "30070-04.htm";
 							st.set("cond", "14");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(CRYSTAL_OF_PURITY_1, 1);
 							st.takeItems(HIGH_PRIEST_SIGIL, 1);
 							st.giveItems(SYMBOL_OF_SYLVAIN, 1);
@@ -403,7 +404,7 @@ public class Q214_TrialOfTheScholar extends Quest
 						{
 							htmltext = "30608-04.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LUCAS_LETTER, 1);
 							st.giveItems(MARIA_LETTER_2, 1);
 						}
@@ -417,7 +418,7 @@ public class Q214_TrialOfTheScholar extends Quest
 						{
 							htmltext = "30608-10.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(CRETA_PAINTING_1, 1);
 							st.giveItems(CRETA_PAINTING_2, 1);
 						}
@@ -427,7 +428,7 @@ public class Q214_TrialOfTheScholar extends Quest
 						{
 							htmltext = "30608-12.htm";
 							st.set("cond", "11");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 11)
 							htmltext = "30608-12.htm";
@@ -444,7 +445,7 @@ public class Q214_TrialOfTheScholar extends Quest
 							else
 							{
 								htmltext = "30608-18.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(VALKON_REQUEST, 1);
 								st.giveItems(CRYSTAL_OF_PURITY_2, 1);
 							}
@@ -460,7 +461,7 @@ public class Q214_TrialOfTheScholar extends Quest
 						{
 							htmltext = "30115-05.htm";
 							st.set("cond", "18");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(GRAND_MAGISTER_SIGIL, 1);
 							st.takeItems(JUREK_LIST, 1);
 							st.takeItems(MONSTER_EYE_DESTROYER_SKIN, -1);
@@ -479,7 +480,7 @@ public class Q214_TrialOfTheScholar extends Quest
 						{
 							htmltext = "30071-01.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(MARIA_LETTER_1, 1);
 							st.giveItems(LUCAS_LETTER, 1);
 						}
@@ -577,7 +578,7 @@ public class Q214_TrialOfTheScholar extends Quest
 									else
 									{
 										htmltext = "30103-06.htm";
-										st.playSound(QuestState.SOUND_ITEMGET);
+										st.playSound(Sound.SOUND_ITEMGET);
 										st.takeItems(CRYSTAL_OF_PURITY_2, 1);
 										st.giveItems(SCRIPTURE_CHAPTER_2, 1);
 									}
@@ -596,7 +597,7 @@ public class Q214_TrialOfTheScholar extends Quest
 							if (!st.hasQuestItems(POITAN_NOTES))
 							{
 								htmltext = "30458-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.giveItems(POITAN_NOTES, 1);
 							}
 							else
@@ -619,7 +620,7 @@ public class Q214_TrialOfTheScholar extends Quest
 								if (cond == 26)
 								{
 									st.set("cond", "27");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 							}
 						}

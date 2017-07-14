@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q169_OffspringOfNightmares extends Quest
 {
@@ -39,7 +40,7 @@ public class Q169_OffspringOfNightmares extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30145-08.htm"))
 		{
@@ -48,7 +49,7 @@ public class Q169_OffspringOfNightmares extends Quest
 			st.takeItems(CRACKED_SKULL, -1);
 			st.giveItems(BONE_GAITERS, 1);
 			st.rewardItems(57, reward);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		

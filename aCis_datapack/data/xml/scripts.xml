@@ -26,8 +26,8 @@
 	<script path="quests.Q021_HiddenTruth"/>
 	<script path="quests.Q022_TragedyInVonHellmannForest"/>
 	<script path="quests.Q023_LidiasHeart"/>
-<!-- 	<script path="quests.Q024_InhabitantsOfTheForestOfTheDead"/> -->
-<!-- 	<script path="quests.Q025_HidingBehindTheTruth"/> -->
+	<script path="quests.Q024_InhabitantsOfTheForestOfTheDead"/>
+	<script path="quests.Q025_HidingBehindTheTruth"/>
 	<script path="quests.Q027_ChestCaughtWithABaitOfWind"/>
 	<script path="quests.Q028_ChestCaughtWithABaitOfIcyAir"/>
 	<script path="quests.Q029_ChestCaughtWithABaitOfEarth"/>
@@ -98,12 +98,12 @@
 	<script path="quests.Q112_WalkOfFate"/>
 	<script path="quests.Q113_StatusOfTheBeaconTower"/>
 	<script path="quests.Q114_ResurrectionOfAnOldManager"/>
-<!-- 	<script path="quests.Q115_TheOtherSideOfTruth"/> -->
+	<script path="quests.Q115_TheOtherSideOfTruth"/>
 	<script path="quests.Q116_BeyondTheHillsOfWinter"/>
 	<script path="quests.Q117_TheOceanOfDistantStars"/>
  	<script path="quests.Q118_ToLeadAndBeLed"/>
 	<script path="quests.Q119_LastImperialPrince"/>
-<!-- 	<script path="quests.Q120_PavelsResearch"/> -->
+	<script path="quests.Q120_PavelsResearch"/>
 	<script path="quests.Q121_PavelTheGiant"/>
 	<script path="quests.Q122_OminousNews"/>
 	<script path="quests.Q123_TheLeaderAndTheFollower"/>
@@ -205,14 +205,14 @@
 	<script path="quests.Q330_AdeptOfTaste"/>
 	<script path="quests.Q331_ArrowOfVengeance"/>
 	<script path="quests.Q333_HuntOfTheBlackLion"/>
-<!-- 	<script path="quests.Q334_TheWishingPotion"/> -->
-<!-- 	<script path="quests.Q335_SongOfTheHunter"/> -->
-<!-- 	<script path="quests.Q336_CoinsOfMagic"/> -->
+	<script path="quests.Q334_TheWishingPotion"/>
+	<script path="quests.Q335_SongOfTheHunter"/>
+	<script path="quests.Q336_CoinsOfMagic"/>
 	<script path="quests.Q337_AudienceWithTheLandDragon"/>
 	<script path="quests.Q338_AlligatorHunter"/>
 	<script path="quests.Q340_SubjugationOfLizardmen"/>
 	<script path="quests.Q341_HuntingForWildBeasts"/>
-<!-- 	<script path="quests.Q343_UnderTheShadowOfTheIvoryTower"/> -->
+	<script path="quests.Q343_UnderTheShadowOfTheIvoryTower"/>
 	<script path="quests.Q344_1000YearsTheEndOfLamentation"/>
 	<script path="quests.Q345_MethodToRaiseTheDead"/>
 	<script path="quests.Q347_GoGetTheCalculator"/>
@@ -252,7 +252,7 @@
 	<script path="quests.Q383_SearchingForTreasure"/>
 	<script path="quests.Q384_WarehouseKeepersPastime"/>
 	<script path="quests.Q385_YokeOfThePast"/>
-<!-- 	<script path="quests.Q386_StolenDignity"/> -->
+	<script path="quests.Q386_StolenDignity"/>
 	<script path="quests.Q401_PathToAWarrior"/>
 	<script path="quests.Q402_PathToAHumanKnight"/>
 	<script path="quests.Q403_PathToARogue"/>
@@ -278,9 +278,9 @@
 	<script path="quests.Q426_QuestForFishingShot"/>
 	<script path="quests.Q431_WeddingMarch"/>
 	<script path="quests.Q432_BirthdayPartySong"/>
-<!-- 	<script path="quests.Q501_ProofOfClanAlliance"/> -->
+	<script path="quests.Q501_ProofOfClanAlliance"/>
 <!-- 	<script path="quests.Q503_PursuitOfClanAmbition"/> -->
-<!-- 	<script path="quests.Q504_CompetitionForTheBanditStronghold"/> -->
+	<script path="quests.Q504_CompetitionForTheBanditStronghold"/>
 <!-- 	<script path="quests.Q505_BloodOffering"/> -->
 	<script path="quests.Q508_AClansReputation"/>
 	<script path="quests.Q509_TheClansPrestige"/>
@@ -337,14 +337,14 @@
 	<script path="quests.Q652_AnAgedExAdventurer"/>
 	<script path="quests.Q653_WildMaiden"/>
 	<script path="quests.Q654_JourneyToASettlement"/>
-<!-- 	<script path="quests.Q655_AGrandPlanForTamingWildBeasts"/> -->
+	<script path="quests.Q655_AGrandPlanForTamingWildBeasts"/>
 	<script path="quests.Q659_IdRatherBeCollectingFairyBreath"/>
 	<script path="quests.Q660_AidingTheFloranVillage"/>
 	<script path="quests.Q661_MakingTheHarvestGroundsSafe"/>
 	<script path="quests.Q662_AGameOfCards"/>
 	<script path="quests.Q663_SeductiveWhispers"/>
 	<script path="quests.Q688_DefeatTheElrokianRaiders"/>
-<!-- 	<script path="quests.Tutorial"/> -->
+	<script path="quests.Tutorial"/>
 
 	<!-- AI Section -->
 
@@ -390,20 +390,20 @@
 	<script path="scripts.ai.group.TurekOrcSupplier"/>
 	<script path="scripts.ai.group.TurekOrcWarlord"/>
 	<script path="scripts.ai.group.ZombieGatekeepers"/>
-
+						
 	<script path="scripts.ai.individual.Antharas"/>
 	<script path="scripts.ai.individual.Baium"/>
 	<script path="scripts.ai.individual.Benom"/>
 	<script path="scripts.ai.individual.Core"/>
 	<script path="scripts.ai.individual.DrChaos"/>
-<!-- 	<script path="scripts.ai.individual.Frintezza"/> -->
+	<script path="scripts.ai.individual.Frintezza"/>
 	<script path="scripts.ai.individual.Gordon"/>
-<!-- 	<script path="scripts.ai.individual.IceFairySirra"/> -->
+	<script path="scripts.ai.individual.IceFairySirra"/>
 	<script path="scripts.ai.individual.Orfen"/>
 	<script path="scripts.ai.individual.QueenAnt"/>
 	<script path="scripts.ai.individual.Sailren"/>
 	<script path="scripts.ai.individual.Valakas"/>
-<!-- 	<script path="scripts.ai.individual.Zaken"/> -->
+	<script path="scripts.ai.individual.Zaken"/>
 
 	<!-- Custom -->
 

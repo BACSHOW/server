@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q293_TheHiddenVeins extends Quest
 {
@@ -53,11 +54,11 @@ public class Q293_TheHiddenVeins extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30535-06.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30539-02.htm"))
@@ -65,7 +66,7 @@ public class Q293_TheHiddenVeins extends Quest
 			if (st.getQuestItemsCount(TORN_MAP_FRAGMENT) >= 4)
 			{
 				htmltext = "30539-03.htm";
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.takeItems(TORN_MAP_FRAGMENT, 4);
 				st.giveItems(HIDDEN_VEIN_MAP, 1);
 			}

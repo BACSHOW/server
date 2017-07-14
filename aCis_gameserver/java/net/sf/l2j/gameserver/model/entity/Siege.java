@@ -32,10 +32,10 @@ import net.sf.l2j.gameserver.model.actor.instance.ControlTower;
 import net.sf.l2j.gameserver.model.actor.instance.FlameTower;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.SystemMessageId;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.network.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.scripting.Quest;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 import net.sf.l2j.gameserver.util.Broadcast;
 
 public class Siege implements Siegable
@@ -146,7 +146,7 @@ public class Siege implements Siegable
 		ThreadPool.schedule(new EndSiegeTask(getCastle()), 1000);
 		
 		Broadcast.toAllOnlinePlayers(SystemMessage.getSystemMessage(SystemMessageId.SIEGE_OF_S1_HAS_STARTED).addString(getCastle().getName()));
-		Broadcast.toAllOnlinePlayers(new PlaySound("systemmsg_e.17"));
+		Broadcast.toAllOnlinePlayers(Sound.SYSTEM_MSG_017.getPacket());
 	}
 	
 	@Override
@@ -156,7 +156,7 @@ public class Siege implements Siegable
 			return;
 		
 		Broadcast.toAllOnlinePlayers(SystemMessage.getSystemMessage(SystemMessageId.SIEGE_OF_S1_HAS_ENDED).addString(getCastle().getName()));
-		Broadcast.toAllOnlinePlayers(new PlaySound("systemmsg_e.18"));
+		Broadcast.toAllOnlinePlayers(Sound.SYSTEM_MSG_018.getPacket());
 		
 		if (getCastle().getOwnerId() > 0)
 		{

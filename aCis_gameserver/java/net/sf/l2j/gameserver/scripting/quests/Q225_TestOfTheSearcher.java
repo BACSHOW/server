@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q225_TestOfTheSearcher extends Quest
 {
@@ -89,7 +90,7 @@ public class Q225_TestOfTheSearcher extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(LUTHER_LETTER, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange39", false))
@@ -103,7 +104,7 @@ public class Q225_TestOfTheSearcher extends Quest
 		else if (event.equalsIgnoreCase("30291-07.htm"))
 		{
 			st.set("cond", "8");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LEIRYNN_REPORT, 1);
 			st.takeItems(STRANGE_MAP, 1);
 			st.giveItems(ALEX_LETTER, 1);
@@ -114,7 +115,7 @@ public class Q225_TestOfTheSearcher extends Quest
 		else if (event.equalsIgnoreCase("30420-01a.htm"))
 		{
 			st.set("cond", "10");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(WINE_CATALOG, 1);
 			st.giveItems(TYRA_CONTRACT, 1);
 		}
@@ -122,7 +123,7 @@ public class Q225_TestOfTheSearcher extends Quest
 		else if (event.equalsIgnoreCase("30730-01d.htm"))
 		{
 			st.set("cond", "14");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(OLD_ORDER, 1);
 			st.giveItems(JAX_DIARY, 1);
 		}
@@ -134,7 +135,7 @@ public class Q225_TestOfTheSearcher extends Quest
 				if (st.getInt("cond") == 16)
 				{
 					st.set("cond", "17");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(RUSTED_KEY, 1);
 				}
 				
@@ -150,7 +151,7 @@ public class Q225_TestOfTheSearcher extends Quest
 			else
 			{
 				st.set("cond", "18");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(RUSTED_KEY, -1);
 				st.giveItems(GOLD_BAR, 20);
 				
@@ -205,7 +206,7 @@ public class Q225_TestOfTheSearcher extends Quest
 							st.giveItems(MARK_OF_SEARCHER, 1);
 							st.rewardExpAndSp(37831, 18750);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -215,7 +216,7 @@ public class Q225_TestOfTheSearcher extends Quest
 						{
 							htmltext = "30291-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LUTHER_LETTER, 1);
 							st.giveItems(ALEX_WARRANT, 1);
 						}
@@ -235,7 +236,7 @@ public class Q225_TestOfTheSearcher extends Quest
 						{
 							htmltext = "30291-11.htm";
 							st.set("cond", "19");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ALEX_ORDER, 1);
 							st.takeItems(COMBINED_MAP, 1);
 							st.takeItems(GOLD_BAR, -1);
@@ -250,7 +251,7 @@ public class Q225_TestOfTheSearcher extends Quest
 						{
 							htmltext = "30728-01.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ALEX_WARRANT, 1);
 							st.giveItems(LEIRYNN_ORDER_1, 1);
 						}
@@ -260,7 +261,7 @@ public class Q225_TestOfTheSearcher extends Quest
 						{
 							htmltext = "30728-03.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(DELU_TOTEM, -1);
 							st.takeItems(LEIRYNN_ORDER_1, 1);
 							st.giveItems(LEIRYNN_ORDER_2, 1);
@@ -271,7 +272,7 @@ public class Q225_TestOfTheSearcher extends Quest
 						{
 							htmltext = "30728-05.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(CHIEF_KALKI_FANG, 1);
 							st.takeItems(LEIRYNN_ORDER_2, 1);
 							st.giveItems(LEIRYNN_REPORT, 1);
@@ -287,7 +288,7 @@ public class Q225_TestOfTheSearcher extends Quest
 						{
 							htmltext = "30729-01.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ALEX_LETTER, 1);
 							st.giveItems(WINE_CATALOG, 1);
 						}
@@ -297,7 +298,7 @@ public class Q225_TestOfTheSearcher extends Quest
 						{
 							htmltext = "30729-03.htm";
 							st.set("cond", "13");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(MALRUKIAN_WINE, 1);
 							st.takeItems(WINE_CATALOG, 1);
 							st.giveItems(OLD_ORDER, 1);
@@ -317,7 +318,7 @@ public class Q225_TestOfTheSearcher extends Quest
 						{
 							htmltext = "30420-03.htm";
 							st.set("cond", "12");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(RED_SPORE_DUST, -1);
 							st.takeItems(TYRA_CONTRACT, 1);
 							st.giveItems(MALRUKIAN_WINE, 1);
@@ -335,7 +336,7 @@ public class Q225_TestOfTheSearcher extends Quest
 						{
 							htmltext = "30730-03.htm";
 							st.set("cond", "16");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LAMBERT_MAP, 1);
 							st.takeItems(MAKEL_MAP, 1);
 							st.takeItems(JAX_DIARY, 1);
@@ -404,7 +405,7 @@ public class Q225_TestOfTheSearcher extends Quest
 					return null;
 				
 				st.set("cond", "6");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.giveItems(CHIEF_KALKI_FANG, 1);
 				st.giveItems(STRANGE_MAP, 1);
 				break;

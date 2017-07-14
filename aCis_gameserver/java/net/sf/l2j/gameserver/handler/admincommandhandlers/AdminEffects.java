@@ -153,14 +153,11 @@ public class AdminEffects implements IAdminCommandHandler
 		{
 			try
 			{
-				final String sound = command.substring(17);
-				final PlaySound snd = (sound.contains(".")) ? new PlaySound(sound) : new PlaySound(1, sound, 0, 0, 0, 0, 0);
-				
-				activeChar.broadcastPacket(snd);
-				activeChar.sendMessage("Playing " + sound + ".");
+				playAdminSound(activeChar, command.substring(17));
 			}
 			catch (StringIndexOutOfBoundsException e)
 			{
+				activeChar.sendMessage("Usage: //play_sound <soundname>");
 			}
 		}
 		else if (command.startsWith("admin_para_all"))
@@ -381,6 +378,14 @@ public class AdminEffects implements IAdminCommandHandler
 			return true;
 		}
 		return false;
+	}
+	
+	private static void playAdminSound(Player activeChar, String sound)
+	{
+		PlaySound _snd = PlaySound.createSound(sound);
+		activeChar.sendPacket(_snd);
+		activeChar.broadcastPacket(_snd);
+		activeChar.sendMessage("Playing " + sound + ".");
 	}
 	
 	private static boolean performSocial(int action, WorldObject target)

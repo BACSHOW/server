@@ -11,6 +11,7 @@ import net.sf.l2j.gameserver.network.serverpackets.PledgeShowInfoUpdate;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q509_TheClansPrestige extends Quest
 {
@@ -124,7 +125,7 @@ public class Q509_TheClansPrestige extends Quest
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
 			st.set("raid", event);
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			
 			int evt = Integer.parseInt(event);
 			
@@ -137,7 +138,7 @@ public class Q509_TheClansPrestige extends Quest
 		}
 		else if (event.equalsIgnoreCase("31331-6.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		

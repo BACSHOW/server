@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q161_FruitOfTheMotherTree extends Quest
 {
@@ -40,7 +41,7 @@ public class Q161_FruitOfTheMotherTree extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ANDELLIA_LETTER, 1);
 		}
 		
@@ -79,7 +80,7 @@ public class Q161_FruitOfTheMotherTree extends Quest
 							st.takeItems(MOTHERTREE_FRUIT, 1);
 							st.rewardItems(57, 1000);
 							st.rewardExpAndSp(1000, 0);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -89,7 +90,7 @@ public class Q161_FruitOfTheMotherTree extends Quest
 						{
 							htmltext = "30371-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ANDELLIA_LETTER, 1);
 							st.giveItems(MOTHERTREE_FRUIT, 1);
 						}

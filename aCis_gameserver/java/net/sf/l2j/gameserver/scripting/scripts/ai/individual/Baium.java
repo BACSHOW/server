@@ -22,9 +22,9 @@ import net.sf.l2j.gameserver.model.actor.instance.Monster;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.type.L2BossZone;
 import net.sf.l2j.gameserver.network.serverpackets.Earthquake;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.EventType;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
 import net.sf.l2j.gameserver.scripting.scripts.ai.L2AttackableAIScript;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
@@ -336,7 +336,7 @@ public class Baium extends L2AttackableAIScript
 	public String onKill(Npc npc, Player killer, boolean isPet)
 	{
 		cancelQuestTimer("baium_despawn", npc, null);
-		npc.broadcastPacket(new PlaySound(1, "BS01_D", 1, npc.getObjectId(), npc.getX(), npc.getY(), npc.getZ()));
+		npc.broadcastPacket(Music.BS01_D_10000.getPacket());
 		
 		// spawn the "Teleportation Cubic" for 15 minutes (to allow players to exit the lair)
 		addSpawn(29055, 115203, 16620, 10078, 0, false, 900000, false);

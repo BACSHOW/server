@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.skills.basefuncs;
 
+import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
 import net.sf.l2j.gameserver.model.item.type.WeaponType;
 import net.sf.l2j.gameserver.skills.Env;
@@ -23,6 +24,11 @@ public class FuncEnchant extends Func
 		int enchant = item.getEnchantLevel();
 		if (enchant <= 0)
 			return;
+		
+		if (Config.ALT_OLY_ENCHANT_LIMIT >= 0 && env.getPlayer() != null && env.getPlayer().isOlympiadStart())
+		{
+			enchant = Math.min(Config.ALT_OLY_ENCHANT_LIMIT, enchant);
+		}
 		
 		int overenchant = 0;
 		

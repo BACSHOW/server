@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q628_HuntOfTheGoldenRamMercenaryForce extends Quest
 {
@@ -61,7 +62,7 @@ public class Q628_HuntOfTheGoldenRamMercenaryForce extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31554-03a.htm"))
 		{
@@ -69,14 +70,14 @@ public class Q628_HuntOfTheGoldenRamMercenaryForce extends Quest
 			{
 				htmltext = "31554-04.htm";
 				st.set("cond", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(SPLINTER_STAKATO_CHITIN, -1);
 				st.giveItems(GOLDEN_RAM_BADGE_RECRUIT, 1);
 			}
 		}
 		else if (event.equalsIgnoreCase("31554-07.htm")) // Cancel Quest
 		{
-			st.playSound(QuestState.SOUND_GIVEUP);
+			st.playSound(Sound.SOUND_GIVEUP);
 			st.exitQuest(true);
 		}
 		
@@ -112,7 +113,7 @@ public class Q628_HuntOfTheGoldenRamMercenaryForce extends Quest
 					{
 						htmltext = "31554-05.htm";
 						st.set("cond", "3");
-						st.playSound(QuestState.SOUND_FINISH);
+						st.playSound(Sound.SOUND_FINISH);
 						st.takeItems(SPLINTER_STAKATO_CHITIN, -1);
 						st.takeItems(NEEDLE_STAKATO_CHITIN, -1);
 						st.takeItems(GOLDEN_RAM_BADGE_RECRUIT, 1);

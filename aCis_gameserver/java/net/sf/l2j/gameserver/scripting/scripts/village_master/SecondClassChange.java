@@ -10,6 +10,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.HennaInfo;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 /**
  * @author fernandopm
@@ -586,7 +587,7 @@ public class SecondClassChange extends Quest
 				{
 					if (st.hasQuestItems(array[7], array[8], array[9]))
 					{
-						st.playSound(QuestState.SOUND_FANFARE);
+						st.playSound(Sound.SOUND_FANFARE);
 						st.takeItems(array[7], -1);
 						st.takeItems(array[8], -1);
 						st.takeItems(array[9], -1);

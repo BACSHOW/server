@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q160_NerupasRequest extends Quest
 {
@@ -47,7 +48,7 @@ public class Q160_NerupasRequest extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(SILVERY_SPIDERSILK, 1);
 		}
 		
@@ -86,7 +87,7 @@ public class Q160_NerupasRequest extends Quest
 							st.takeItems(NIGHTSHADE_LEAF, 1);
 							st.rewardItems(LESSER_HEALING_POTION, 5);
 							st.rewardExpAndSp(1000, 0);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -96,7 +97,7 @@ public class Q160_NerupasRequest extends Quest
 						{
 							htmltext = "30147-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SILVERY_SPIDERSILK, 1);
 							st.giveItems(UNOREN_RECEIPT, 1);
 						}
@@ -111,7 +112,7 @@ public class Q160_NerupasRequest extends Quest
 						{
 							htmltext = "30149-01.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(UNOREN_RECEIPT, 1);
 							st.giveItems(CREAMEES_TICKET, 1);
 						}
@@ -126,7 +127,7 @@ public class Q160_NerupasRequest extends Quest
 						{
 							htmltext = "30152-01.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(CREAMEES_TICKET, 1);
 							st.giveItems(NIGHTSHADE_LEAF, 1);
 						}

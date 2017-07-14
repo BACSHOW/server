@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q374_WhisperOfDreams_Part1 extends Quest
 {
@@ -80,14 +81,14 @@ public class Q374_WhisperOfDreams_Part1 extends Quest
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
 			st.set("condStone", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.startsWith("30515-06-"))
 		{
 			if (st.getQuestItemsCount(CAVE_BEAST_TOOTH) >= 65 && st.getQuestItemsCount(DEATH_WAVE_LIGHT) >= 65)
 			{
 				htmltext = "30515-06.htm";
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				
 				int[] reward = REWARDS[Integer.parseInt(event.substring(9, 10))];
 				
@@ -102,7 +103,7 @@ public class Q374_WhisperOfDreams_Part1 extends Quest
 		}
 		else if (event.equalsIgnoreCase("30515-08.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		// Torai
@@ -113,7 +114,7 @@ public class Q374_WhisperOfDreams_Part1 extends Quest
 				st.set("cond", "3");
 				st.takeItems(SEALED_MYSTERIOUS_STONE, -1);
 				st.giveItems(MYSTERIOUS_STONE, 1);
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 			else
 				htmltext = "30557-03.htm";
@@ -153,7 +154,7 @@ public class Q374_WhisperOfDreams_Part1 extends Quest
 							{
 								htmltext = "30515-09.htm";
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
 								htmltext = "30515-10.htm";

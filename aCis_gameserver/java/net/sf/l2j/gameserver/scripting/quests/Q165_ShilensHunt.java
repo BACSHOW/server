@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q165_ShilensHunt extends Quest
 {
@@ -56,7 +57,7 @@ public class Q165_ShilensHunt extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -88,7 +89,7 @@ public class Q165_ShilensHunt extends Quest
 					st.takeItems(DARK_BEZOAR, -1);
 					st.rewardItems(LESSER_HEALING_POTION, 5);
 					st.rewardExpAndSp(1000, 0);
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(false);
 				}
 				else

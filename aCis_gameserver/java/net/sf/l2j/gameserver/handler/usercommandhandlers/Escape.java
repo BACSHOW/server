@@ -6,7 +6,7 @@ import net.sf.l2j.gameserver.instancemanager.ZoneManager;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.type.L2BossZone;
 import net.sf.l2j.gameserver.network.SystemMessageId;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Escape implements IUserCommandHandler
 {
@@ -31,7 +31,7 @@ public class Escape implements IUserCommandHandler
 			activeChar.doCast(SkillTable.getInstance().getInfo(2100, 1));
 		else
 		{
-			activeChar.sendPacket(new PlaySound("systemmsg_e.809"));
+			activeChar.sendPacket(Sound.SYSTEM_MSG_809.getPacket());
 			activeChar.sendPacket(SystemMessageId.STUCK_TRANSPORT_IN_FIVE_MINUTES);
 			
 			activeChar.doCast(SkillTable.getInstance().getInfo(2099, 1));

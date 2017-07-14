@@ -23,6 +23,7 @@ import net.sf.l2j.gameserver.network.serverpackets.L2GameServerPacket;
 import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
 
 public class Duel
 {
@@ -36,7 +37,7 @@ public class Duel
 		INTERRUPTED
 	}
 	
-	private static final PlaySound B04_S01 = new PlaySound(1, "B04_S01", 0, 0, 0, 0, 0);
+	private static final PlaySound B04_S01 = Music.B04_S01.getPacket();
 	
 	private static enum DuelResult
 	{

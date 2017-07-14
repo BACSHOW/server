@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q032_AnObviousLie extends Quest
 {
@@ -50,24 +51,24 @@ public class Q032_AnObviousLie extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30094-1.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(MAP, 1);
 		}
 		else if (event.equalsIgnoreCase("31706-1.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(MAP, 1);
 		}
 		else if (event.equalsIgnoreCase("30094-4.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(MEDICINAL_HERB, 20);
 		}
 		else if (event.equalsIgnoreCase("30094-7.htm"))
@@ -77,22 +78,22 @@ public class Q032_AnObviousLie extends Quest
 			else
 			{
 				st.set("cond", "6");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(SPIRIT_ORE, 500);
 			}
 		}
 		else if (event.equalsIgnoreCase("31706-4.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30094-10.htm"))
 		{
 			st.set("cond", "8");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30094-13.htm"))
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		else if (event.equalsIgnoreCase("cat"))
 		{
 			if (st.getQuestItemsCount(THREAD) < 1000 || st.getQuestItemsCount(SUEDE) < 500)
@@ -103,7 +104,7 @@ public class Q032_AnObviousLie extends Quest
 				st.takeItems(SUEDE, 500);
 				st.takeItems(THREAD, 1000);
 				st.giveItems(CAT_EARS, 1);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(false);
 			}
 		}
@@ -117,7 +118,7 @@ public class Q032_AnObviousLie extends Quest
 				st.takeItems(SUEDE, 500);
 				st.takeItems(THREAD, 1000);
 				st.giveItems(RACOON_EARS, 1);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(false);
 			}
 		}
@@ -131,7 +132,7 @@ public class Q032_AnObviousLie extends Quest
 				st.takeItems(SUEDE, 500);
 				st.takeItems(THREAD, 1000);
 				st.giveItems(RABBIT_EARS, 1);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(false);
 			}
 		}

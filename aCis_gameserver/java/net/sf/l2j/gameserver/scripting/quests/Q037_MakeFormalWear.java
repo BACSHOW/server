@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q037_MakeFormalWear extends Quest
 {
@@ -49,43 +50,43 @@ public class Q037_MakeFormalWear extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31520-1.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(SIGNET_RING, 1);
 		}
 		else if (event.equalsIgnoreCase("31521-1.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SIGNET_RING, 1);
 			st.giveItems(ICE_WINE, 1);
 		}
 		else if (event.equalsIgnoreCase("31627-1.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ICE_WINE, 1);
 		}
 		else if (event.equalsIgnoreCase("31521-3.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(BOX_OF_COOKIES, 1);
 		}
 		else if (event.equalsIgnoreCase("31520-3.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BOX_OF_COOKIES, 1);
 		}
 		else if (event.equalsIgnoreCase("31520-5.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(JEWEL_BOX, 1);
 			st.takeItems(MYSTERIOUS_CLOTH, 1);
 			st.takeItems(SEWING_KIT, 1);
@@ -94,7 +95,7 @@ public class Q037_MakeFormalWear extends Quest
 		{
 			st.takeItems(DRESS_SHOES_BOX, 1);
 			st.giveItems(FORMAL_WEAR, 1);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		

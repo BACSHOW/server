@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q406_PathToAnElvenKnight extends Quest
 {
@@ -56,12 +57,12 @@ public class Q406_PathToAnElvenKnight extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30317-02.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SORIUS_LETTER, 1);
 			st.giveItems(KLUTO_MEMO, 1);
 		}
@@ -94,7 +95,7 @@ public class Q406_PathToAnElvenKnight extends Quest
 						{
 							htmltext = "30327-09.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(SORIUS_LETTER, 1);
 						}
 						else if (cond > 2 && cond < 6)
@@ -107,7 +108,7 @@ public class Q406_PathToAnElvenKnight extends Quest
 							st.giveItems(ELVEN_KNIGHT_BROOCH, 1);
 							st.rewardExpAndSp(3200, 2280);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -121,7 +122,7 @@ public class Q406_PathToAnElvenKnight extends Quest
 						{
 							htmltext = "30317-05.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(EMERALD_PIECE, -1);
 							st.takeItems(TOPAZ_PIECE, -1);
 							st.giveItems(KLUTO_BOX, 1);

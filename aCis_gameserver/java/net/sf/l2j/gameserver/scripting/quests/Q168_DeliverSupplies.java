@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q168_DeliverSupplies extends Quest
 {
@@ -45,7 +46,7 @@ public class Q168_DeliverSupplies extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(JENNA_LETTER, 1);
 		}
 		
@@ -82,7 +83,7 @@ public class Q168_DeliverSupplies extends Quest
 						{
 							htmltext = "30349-05.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SENTRY_BLADE_1, 1);
 						}
 						else if (cond == 3)
@@ -92,7 +93,7 @@ public class Q168_DeliverSupplies extends Quest
 							htmltext = "30349-06.htm";
 							st.takeItems(OLD_BRONZE_SWORD, 2);
 							st.rewardItems(57, 820);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -102,7 +103,7 @@ public class Q168_DeliverSupplies extends Quest
 						{
 							htmltext = "30360-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(JENNA_LETTER, 1);
 							st.giveItems(SENTRY_BLADE_1, 1);
 							st.giveItems(SENTRY_BLADE_2, 1);
@@ -123,7 +124,7 @@ public class Q168_DeliverSupplies extends Quest
 								if (st.getQuestItemsCount(OLD_BRONZE_SWORD) == 2)
 								{
 									st.set("cond", "4");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 							}
 							else
@@ -144,7 +145,7 @@ public class Q168_DeliverSupplies extends Quest
 								if (st.getQuestItemsCount(OLD_BRONZE_SWORD) == 2)
 								{
 									st.set("cond", "4");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 							}
 							else

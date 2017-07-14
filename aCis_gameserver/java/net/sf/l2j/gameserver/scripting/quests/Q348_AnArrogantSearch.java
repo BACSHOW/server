@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q348_AnArrogantSearch extends Quest
 {
@@ -89,18 +90,18 @@ public class Q348_AnArrogantSearch extends Quest
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30864-09.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(TITAN_POWERSTONE, 1);
 		}
 		else if (event.equalsIgnoreCase("30864-17.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(HANELLIN_FIRST_LETTER, 1);
 			st.giveItems(HANELLIN_SECOND_LETTER, 1);
 			st.giveItems(HANELLIN_THIRD_LETTER, 1);
@@ -108,28 +109,28 @@ public class Q348_AnArrogantSearch extends Quest
 		else if (event.equalsIgnoreCase("30864-36.htm"))
 		{
 			st.set("cond", "24");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.rewardItems(57, Rnd.get(1, 2) * 12000);
 		}
 		else if (event.equalsIgnoreCase("30864-37.htm"))
 		{
 			st.set("cond", "25");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30864-51.htm"))
 		{
 			st.set("cond", "26");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(WHITE_FABRIC_ANGELS, (st.hasQuestItems(BLOODED_FABRIC)) ? 9 : 10);
 		}
 		else if (event.equalsIgnoreCase("30864-58.htm"))
 		{
 			st.set("cond", "27");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30864-57.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30864-56.htm"))
@@ -138,7 +139,7 @@ public class Q348_AnArrogantSearch extends Quest
 			st.set("gustav", "0"); // st.unset doesn't work.
 			st.set("hardin", "0");
 			st.set("iason", "0");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(WHITE_FABRIC_ANGELS, 10);
 		}
 		
@@ -184,7 +185,7 @@ public class Q348_AnArrogantSearch extends Quest
 							st.takeItems(BOOK_OF_SAINT, 1);
 							st.takeItems(BLOOD_OF_SAINT, 1);
 							st.takeItems(BOUGH_OF_SAINT, 1);
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 22)
 						{
@@ -198,7 +199,7 @@ public class Q348_AnArrogantSearch extends Quest
 								st.takeItems(ANTIDOTE, 5);
 								st.takeItems(HEALING_POTION, 1);
 								st.giveItems(WHITE_FABRIC_TRIBE, 1);
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 							}
 						}
 						else if (cond == 24)
@@ -212,7 +213,7 @@ public class Q348_AnArrogantSearch extends Quest
 							// Use the only fabric on Baium, drop the quest.
 							else
 							{
-								st.playSound(QuestState.SOUND_FINISH);
+								st.playSound(Sound.SOUND_FINISH);
 								st.exitQuest(true);
 							}
 						}
@@ -239,14 +240,14 @@ public class Q348_AnArrogantSearch extends Quest
 								htmltext = "30864-60.htm";
 								st.set("cond", "28");
 								st.rewardItems(57, 49000);
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else if (st.hasQuestItems(BLOODED_FABRIC) && st.getInt("usedonbaium") != 1)
 								htmltext = "30864-59.htm";
 							else
 							{
 								htmltext = "30864-61.htm";
-								st.playSound(QuestState.SOUND_FINISH);
+								st.playSound(Sound.SOUND_FINISH);
 								st.exitQuest(true);
 							}
 						}
@@ -261,7 +262,7 @@ public class Q348_AnArrogantSearch extends Quest
 								htmltext = "30864-54.htm";
 								st.takeItems(BLOODED_FABRIC, -1);
 								st.rewardItems(57, 5000 * count);
-								st.playSound(QuestState.SOUND_FINISH);
+								st.playSound(Sound.SOUND_FINISH);
 								st.exitQuest(true);
 							}
 							else if (count < 10)
@@ -337,7 +338,7 @@ public class Q348_AnArrogantSearch extends Quest
 								{
 									htmltext = "30144-01.htm";
 									st.set("cond", "17");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									st.takeItems(HANELLIN_FIRST_LETTER, 1);
 									st.addRadar(-418, 44174, -3568);
 								}
@@ -363,7 +364,7 @@ public class Q348_AnArrogantSearch extends Quest
 								{
 									htmltext = "31001-01.htm";
 									st.set("cond", "9");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									st.takeItems(HANELLIN_SECOND_LETTER, 1);
 									st.addRadar(181472, 7158, -2725);
 								}
@@ -389,7 +390,7 @@ public class Q348_AnArrogantSearch extends Quest
 								{
 									htmltext = "30645-01.htm";
 									st.set("cond", "13");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									st.takeItems(HANELLIN_THIRD_LETTER, 1);
 									st.addRadar(50693, 158674, 376);
 								}
@@ -420,14 +421,14 @@ public class Q348_AnArrogantSearch extends Quest
 									if (st.getInt("cond") != 18)
 									{
 										st.set("cond", "18");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 									}
 								}
 								else
 								{
 									htmltext = "30980-02.htm";
 									st.giveItems(FIRST_KEY_OF_ARK, 1);
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 									
 									st.unset("angelkiller");
 								}
@@ -446,7 +447,7 @@ public class Q348_AnArrogantSearch extends Quest
 								{
 									htmltext = "30977-02.htm";
 									st.set("cond", "20");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									
 									st.takeItems(FIRST_KEY_OF_ARK, 1);
 									st.giveItems(BLOOD_OF_SAINT, 1);
@@ -477,7 +478,7 @@ public class Q348_AnArrogantSearch extends Quest
 								{
 									htmltext = "30978-02.htm";
 									st.set("cond", "12");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									
 									st.takeItems(SECOND_KEY_OF_ARK, 1);
 									st.giveItems(BOOK_OF_SAINT, 1);
@@ -506,7 +507,7 @@ public class Q348_AnArrogantSearch extends Quest
 								{
 									htmltext = "30979-02.htm";
 									st.set("cond", "16");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 									
 									st.takeItems(THIRD_KEY_OF_ARK, 1);
 									st.giveItems(BOUGH_OF_SAINT, 1);
@@ -587,7 +588,7 @@ public class Q348_AnArrogantSearch extends Quest
 					
 					st.set("cond", "19");
 					st.set("angelkiller", "1");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					
 					_angelKiller = null;
 				}
@@ -602,10 +603,10 @@ public class Q348_AnArrogantSearch extends Quest
 					st.giveItems(BLOODED_FABRIC, 1);
 					
 					if (cond != 24)
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 					else
 					{
-						st.playSound(QuestState.SOUND_FINISH);
+						st.playSound(Sound.SOUND_FINISH);
 						st.exitQuest(true);
 					}
 				}
@@ -636,7 +637,7 @@ public class Q348_AnArrogantSearch extends Quest
 				if (cond >= 5 && cond <= 22 && !st.hasQuestItems(SECOND_KEY_OF_ARK))
 				{
 					st.set("cond", "11");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(SECOND_KEY_OF_ARK, 1);
 					npc.broadcastNpcSay("Oh, dull-witted.. God, they...");
 				}
@@ -647,7 +648,7 @@ public class Q348_AnArrogantSearch extends Quest
 				if (cond >= 5 && cond <= 22 && !st.hasQuestItems(THIRD_KEY_OF_ARK))
 				{
 					st.set("cond", "15");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(THIRD_KEY_OF_ARK, 1);
 					npc.broadcastNpcSay("You do not know.. Seven seals are.. coughs");
 				}
@@ -658,7 +659,7 @@ public class Q348_AnArrogantSearch extends Quest
 			case GUARDIAN_ANGEL:
 				if ((cond == 26 || cond == 29) && Rnd.get(4) < 1 && st.hasQuestItems(WHITE_FABRIC_ANGELS))
 				{
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.takeItems(WHITE_FABRIC_ANGELS, 1);
 					st.giveItems(BLOODED_FABRIC, 1);
 				}

@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q272_WrathOfAncestors extends Quest
 {
@@ -37,7 +38,7 @@ public class Q272_WrathOfAncestors extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -70,7 +71,7 @@ public class Q272_WrathOfAncestors extends Quest
 					htmltext = "30572-05.htm";
 					st.takeItems(GRAVE_ROBBERS_HEAD, -1);
 					st.rewardItems(57, 1500);
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(true);
 				}
 				break;

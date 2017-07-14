@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q626_ADarkTwilight extends Quest
 {
@@ -62,7 +63,7 @@ public class Q626_ADarkTwilight extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("reward1"))
 		{
@@ -71,7 +72,7 @@ public class Q626_ADarkTwilight extends Quest
 				htmltext = "31517-07.htm";
 				st.takeItems(BLOOD_OF_SAINT, 300);
 				st.rewardExpAndSp(162773, 12500);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(false);
 			}
 			else
@@ -84,7 +85,7 @@ public class Q626_ADarkTwilight extends Quest
 				htmltext = "31517-07.htm";
 				st.takeItems(BLOOD_OF_SAINT, 300);
 				st.rewardItems(57, 100000);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(false);
 			}
 			else

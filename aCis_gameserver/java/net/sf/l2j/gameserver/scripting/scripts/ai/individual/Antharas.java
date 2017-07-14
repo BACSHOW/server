@@ -20,10 +20,10 @@ import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.GrandBoss;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.zone.type.L2BossZone;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.network.serverpackets.SpecialCamera;
 import net.sf.l2j.gameserver.scripting.EventType;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
 import net.sf.l2j.gameserver.scripting.scripts.ai.L2AttackableAIScript;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
@@ -279,7 +279,7 @@ public class Antharas extends L2AttackableAIScript
 			
 			// Launch death animation.
 			ANTHARAS_LAIR.broadcastPacket(new SpecialCamera(npc.getObjectId(), 1200, 20, -10, 10000, 13000, 0, 0, 0, 0));
-			ANTHARAS_LAIR.broadcastPacket(new PlaySound(1, "BS01_D", 0, 0, 0, 0, 0));
+			ANTHARAS_LAIR.broadcastPacket(Music.BS01_D_10000.getPacket());
 			startQuestTimer("die_1", 8000, null, null, false);
 			
 			GrandBossManager.getInstance().setBossStatus(ANTHARAS, DEAD);

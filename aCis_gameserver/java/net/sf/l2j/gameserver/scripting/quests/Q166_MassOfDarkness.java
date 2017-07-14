@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q166_MassOfDarkness extends Quest
 {
@@ -44,7 +45,7 @@ public class Q166_MassOfDarkness extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(UNDRIAS_LETTER, 1);
 		}
 		
@@ -86,7 +87,7 @@ public class Q166_MassOfDarkness extends Quest
 							st.takeItems(UNDRIAS_LETTER, 1);
 							st.rewardItems(57, 500);
 							st.rewardExpAndSp(500, 0);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -100,10 +101,10 @@ public class Q166_MassOfDarkness extends Quest
 							if (st.hasQuestItems(DREVIANT_WINE, GARMIEL_SCRIPTURE))
 							{
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (cond == 2)
 							htmltext = "30135-02.htm";
@@ -118,10 +119,10 @@ public class Q166_MassOfDarkness extends Quest
 							if (st.hasQuestItems(CEREMONIAL_DAGGER, GARMIEL_SCRIPTURE))
 							{
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (cond == 2)
 							htmltext = "30139-02.htm";
@@ -136,10 +137,10 @@ public class Q166_MassOfDarkness extends Quest
 							if (st.hasQuestItems(CEREMONIAL_DAGGER, DREVIANT_WINE))
 							{
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 						}
 						else if (cond == 2)
 							htmltext = "30143-02.htm";

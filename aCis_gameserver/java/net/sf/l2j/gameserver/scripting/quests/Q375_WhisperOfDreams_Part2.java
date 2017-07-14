@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q375_WhisperOfDreams_Part2 extends Quest
 {
@@ -56,12 +57,12 @@ public class Q375_WhisperOfDreams_Part2 extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.takeItems(MYSTERIOUS_STONE, 1);
 		}
 		else if (event.equalsIgnoreCase("30515-07.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -86,7 +87,7 @@ public class Q375_WhisperOfDreams_Part2 extends Quest
 				if (st.getQuestItemsCount(KARIK_HORN) >= 100 && st.getQuestItemsCount(CAVE_HOWLER_SKULL) >= 100)
 				{
 					htmltext = "30515-05.htm";
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.takeItems(KARIK_HORN, 100);
 					st.takeItems(CAVE_HOWLER_SKULL, 100);
 					st.giveItems(REWARDS[Rnd.get(REWARDS.length)], 1);

@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.HennaInfo;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 /**
  * @author fernandopm
@@ -347,7 +348,7 @@ public class FirstClassChange extends Quest
 						
 						st.takeItems(array[7], 1);
 						st.giveItems(SHADOW_WEAPON_COUPON_DGRADE, 15);
-						st.playSound(QuestState.SOUND_FANFARE);
+						st.playSound(Sound.SOUND_FANFARE);
 						
 						player.setClassId(array[0]);
 						player.setBaseClass(array[0]);

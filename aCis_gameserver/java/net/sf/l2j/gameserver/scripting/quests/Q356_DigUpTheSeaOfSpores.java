@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q356_DigUpTheSeaOfSpores extends Quest
 {
@@ -41,14 +42,14 @@ public class Q356_DigUpTheSeaOfSpores extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30717-17.htm"))
 		{
 			st.takeItems(HERB_SPORE, -1);
 			st.takeItems(CARN_SPORE, -1);
 			st.rewardItems(57, 20950);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30717-14.htm"))
@@ -56,7 +57,7 @@ public class Q356_DigUpTheSeaOfSpores extends Quest
 			st.takeItems(HERB_SPORE, -1);
 			st.takeItems(CARN_SPORE, -1);
 			st.rewardExpAndSp(35000, 2600);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30717-12.htm"))

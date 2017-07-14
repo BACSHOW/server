@@ -12,7 +12,7 @@ import net.sf.l2j.gameserver.model.actor.Attackable;
 import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.GrandBoss;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
 import net.sf.l2j.gameserver.scripting.scripts.ai.L2AttackableAIScript;
 import net.sf.l2j.gameserver.templates.StatsSet;
 
@@ -76,7 +76,7 @@ public class Core extends L2AttackableAIScript
 	public void spawnBoss(GrandBoss npc)
 	{
 		GrandBossManager.getInstance().addBoss(npc);
-		npc.broadcastPacket(new PlaySound(1, "BS01_A", 1, npc.getObjectId(), npc.getX(), npc.getY(), npc.getZ()));
+		npc.broadcastPacket(Music.BS01_A_10000.getPacket());
 		
 		// Spawn minions
 		Attackable mob;
@@ -154,7 +154,7 @@ public class Core extends L2AttackableAIScript
 	{
 		if (npc.getNpcId() == CORE)
 		{
-			npc.broadcastPacket(new PlaySound(1, "BS02_D", 1, npc.getObjectId(), npc.getX(), npc.getY(), npc.getZ()));
+			npc.broadcastPacket(Music.BS02_D_10000.getPacket());
 			npc.broadcastNpcSay("A fatal error has occurred.");
 			npc.broadcastNpcSay("System is being shut down...");
 			npc.broadcastNpcSay("......");

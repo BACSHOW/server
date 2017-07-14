@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q151_CureForFeverDisease extends Quest
 {
@@ -41,7 +42,7 @@ public class Q151_CureForFeverDisease extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -75,7 +76,7 @@ public class Q151_CureForFeverDisease extends Quest
 							htmltext = "30050-06.htm";
 							st.takeItems(FEVER_MEDICINE, 1);
 							st.giveItems(102, 1);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -85,7 +86,7 @@ public class Q151_CureForFeverDisease extends Quest
 						{
 							htmltext = "30032-01.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(POISON_SAC, 1);
 							st.giveItems(FEVER_MEDICINE, 1);
 						}

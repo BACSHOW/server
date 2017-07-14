@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.network.serverpackets.MagicSkillUse;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q235_MimirsElixir extends Quest
 {
@@ -52,12 +53,12 @@ public class Q235_MimirsElixir extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30721-12.htm") && st.hasQuestItems(TRUE_GOLD))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(MAGISTER_MIXING_STONE, 1);
 		}
 		else if (event.equalsIgnoreCase("30721-16.htm") && st.hasQuestItems(MIMIR_ELIXIR))
@@ -69,13 +70,13 @@ public class Q235_MimirsElixir extends Quest
 			st.takeItems(STAR_OF_DESTINY, -1);
 			st.giveItems(SCROLL_ENCHANT_WEAPON_A, 1);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		else if (event.equalsIgnoreCase("30718-03.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("31149-02.htm"))
 		{
@@ -102,7 +103,7 @@ public class Q235_MimirsElixir extends Quest
 			if (st.hasQuestItems(MAGISTER_MIXING_STONE, PURE_SILVER, TRUE_GOLD, BLOOD_FIRE))
 			{
 				st.set("cond", "8");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(PURE_SILVER, -1);
 				st.takeItems(TRUE_GOLD, -1);
 				st.takeItems(BLOOD_FIRE, -1);
@@ -145,7 +146,7 @@ public class Q235_MimirsElixir extends Quest
 							{
 								htmltext = "30721-08.htm";
 								st.set("cond", "2");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
 								htmltext = "30721-07.htm";
@@ -169,7 +170,7 @@ public class Q235_MimirsElixir extends Quest
 						{
 							htmltext = "30718-05.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SAGE_STONE, -1);
 							st.giveItems(TRUE_GOLD, 1);
 						}

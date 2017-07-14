@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q222_TestOfTheDuelist extends Quest
 {
@@ -87,7 +88,7 @@ public class Q222_TestOfTheDuelist extends Quest
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ORDER_GLUDIO, 1);
 			st.giveItems(ORDER_DION, 1);
 			st.giveItems(ORDER_GIRAN, 1);
@@ -106,7 +107,7 @@ public class Q222_TestOfTheDuelist extends Quest
 			if (st.getInt("cond") == 3)
 			{
 				st.set("cond", "4");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				
 				st.takeItems(ORDER_GLUDIO, 1);
 				st.takeItems(ORDER_DION, 1);
@@ -172,7 +173,7 @@ public class Q222_TestOfTheDuelist extends Quest
 					st.giveItems(MARK_OF_DUELIST, 1);
 					st.rewardExpAndSp(47015, 20000);
 					player.broadcastPacket(new SocialAction(player, 3));
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(false);
 				}
 				break;

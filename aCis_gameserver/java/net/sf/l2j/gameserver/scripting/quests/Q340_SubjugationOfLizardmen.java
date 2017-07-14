@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q340_SubjugationOfLizardmen extends Quest
 {
@@ -45,12 +46,12 @@ public class Q340_SubjugationOfLizardmen extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30385-07.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(CARGO, -1);
 		}
 		else if (event.equalsIgnoreCase("30385-09.htm"))
@@ -67,17 +68,17 @@ public class Q340_SubjugationOfLizardmen extends Quest
 		else if (event.equalsIgnoreCase("30375-02.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30037-02.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30989-02.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(TOTEM, 1);
 		}
 		
@@ -111,7 +112,7 @@ public class Q340_SubjugationOfLizardmen extends Quest
 						{
 							htmltext = "30385-13.htm";
 							st.rewardItems(57, 14700);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -125,7 +126,7 @@ public class Q340_SubjugationOfLizardmen extends Quest
 							{
 								htmltext = "30375-04.htm";
 								st.set("cond", "4");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(HOLY, -1);
 								st.takeItems(ROSARY, -1);
 							}
@@ -145,7 +146,7 @@ public class Q340_SubjugationOfLizardmen extends Quest
 						{
 							htmltext = "30037-04.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(TOTEM, -1);
 						}
 						else if (cond == 7)

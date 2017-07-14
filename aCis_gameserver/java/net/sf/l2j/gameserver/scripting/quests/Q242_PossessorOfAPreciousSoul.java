@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q242_PossessorOfAPreciousSoul extends Quest
 {
@@ -58,26 +59,26 @@ public class Q242_PossessorOfAPreciousSoul extends Quest
 		if (event.equalsIgnoreCase("31743-05.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		// Ogmar
 		else if (event.equalsIgnoreCase("31744-02.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		// Mysterious Knight
 		else if (event.equalsIgnoreCase("31751-02.htm"))
 		{
 			st.set("cond", "4");
 			st.set("angel", "0");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		// Kalis
 		else if (event.equalsIgnoreCase("30759-02.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30759-05.htm"))
 		{
@@ -86,7 +87,7 @@ public class Q242_PossessorOfAPreciousSoul extends Quest
 				st.set("orb", "0");
 				st.set("cornerstone", "0");
 				st.set("cond", "9");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(GOLDEN_HAIR, 1);
 				st.takeItems(SORCERY_INGREDIENT, 1);
 			}
@@ -100,7 +101,7 @@ public class Q242_PossessorOfAPreciousSoul extends Quest
 		else if (event.equalsIgnoreCase("30738-02.htm"))
 		{
 			st.set("cond", "8");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(SORCERY_INGREDIENT, 1);
 		}
 		// Cornerstone
@@ -118,7 +119,7 @@ public class Q242_PossessorOfAPreciousSoul extends Quest
 					st.unset("orb");
 					st.unset("cornerstone");
 					st.set("cond", "10");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				else
 					st.set("cornerstone", Integer.toString(cornerstones));
@@ -171,7 +172,7 @@ public class Q242_PossessorOfAPreciousSoul extends Quest
 						htmltext = "31742-03.htm";
 						st.setState(STATE_STARTED);
 						st.set("cond", "1");
-						st.playSound(QuestState.SOUND_ACCEPT);
+						st.playSound(Sound.SOUND_ACCEPT);
 						st.takeItems(VIRGIL_LETTER, 1);
 					}
 				}
@@ -202,7 +203,7 @@ public class Q242_PossessorOfAPreciousSoul extends Quest
 							st.giveItems(CARADINE_LETTER, 1);
 							st.rewardExpAndSp(455764, 0);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -225,7 +226,7 @@ public class Q242_PossessorOfAPreciousSoul extends Quest
 							{
 								htmltext = "31751-04.htm";
 								st.set("cond", "6");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 							else
 							{
@@ -249,7 +250,7 @@ public class Q242_PossessorOfAPreciousSoul extends Quest
 								htmltext = "31752-02.htm";
 								st.unset("angel");
 								st.set("cond", "5");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.giveItems(GOLDEN_HAIR, 1);
 							}
 							else
@@ -318,7 +319,7 @@ public class Q242_PossessorOfAPreciousSoul extends Quest
 						if (cond == 10)
 						{
 							st.set("cond", "11");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							if (_unicorn) // Global variable check to prevent multiple spawns
 							{
 								_unicorn = false;
@@ -351,7 +352,7 @@ public class Q242_PossessorOfAPreciousSoul extends Quest
 		{
 			orbs++;
 			st.set("orb", Integer.toString(orbs));
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(ORB_OF_BINDING, 1);
 		}
 		

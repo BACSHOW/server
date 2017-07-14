@@ -11,6 +11,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.item.kind.Item;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q662_AGameOfCards extends Quest
 {
@@ -123,7 +124,7 @@ public class Q662_AGameOfCards extends Quest
 			st.set("cond", "1");
 			st.set("state", "0");
 			st.set("stateEx", "0");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30845-04.htm"))
 		{
@@ -135,7 +136,7 @@ public class Q662_AGameOfCards extends Quest
 		}
 		else if (event.equalsIgnoreCase("30845-07.htm"))
 		{
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30845-11.htm"))

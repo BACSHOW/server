@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q233_TestOfTheWarSpirit extends Quest
 {
@@ -102,7 +103,7 @@ public class Q233_TestOfTheWarSpirit extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			
 			if (!player.getMemos().getBool("secondClassChange39", false))
 			{
@@ -114,31 +115,31 @@ public class Q233_TestOfTheWarSpirit extends Quest
 		// ORIM
 		else if (event.equalsIgnoreCase("30630-04.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(ORIM_CONTRACT, 1);
 		}
 		// RACOY
 		else if (event.equalsIgnoreCase("30507-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(RACOY_TOTEM, 1);
 		}
 		// VIVYAN
 		else if (event.equalsIgnoreCase("30030-04.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(VIVYAN_LETTER, 1);
 		}
 		// PEKIRON
 		else if (event.equalsIgnoreCase("30682-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(PEKIRON_TOTEM, 1);
 		}
 		// MANAKIA
 		else if (event.equalsIgnoreCase("30515-02.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.giveItems(MANAKIA_TOTEM, 1);
 		}
 		// ANCESTOR MARTANKUS
@@ -153,7 +154,7 @@ public class Q233_TestOfTheWarSpirit extends Quest
 			st.giveItems(MARK_OF_WARSPIRIT, 1);
 			st.rewardExpAndSp(63483, 17500);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		
@@ -188,7 +189,7 @@ public class Q233_TestOfTheWarSpirit extends Quest
 						{
 							htmltext = "30510-07.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BRAKI_REMAINS_1, 1);
 							st.takeItems(HERMODT_REMAINS_1, 1);
 							st.takeItems(KIRUNA_REMAINS_1, 1);
@@ -201,7 +202,7 @@ public class Q233_TestOfTheWarSpirit extends Quest
 						{
 							htmltext = "30510-09.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(VENDETTA_TOTEM, 1);
 							st.giveItems(BRAKI_REMAINS_2, 1);
 							st.giveItems(HERMODT_REMAINS_2, 1);
@@ -230,10 +231,10 @@ public class Q233_TestOfTheWarSpirit extends Quest
 								if (st.hasQuestItems(HERMODT_REMAINS_1, KIRUNA_REMAINS_1, TONAR_REMAINS_1))
 								{
 									st.set("cond", "2");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 								htmltext = "30630-05.htm";
@@ -266,10 +267,10 @@ public class Q233_TestOfTheWarSpirit extends Quest
 									if (st.hasQuestItems(BRAKI_REMAINS_1, HERMODT_REMAINS_1, TONAR_REMAINS_1))
 									{
 										st.set("cond", "2");
-										st.playSound(QuestState.SOUND_MIDDLE);
+										st.playSound(Sound.SOUND_MIDDLE);
 									}
 									else
-										st.playSound(QuestState.SOUND_ITEMGET);
+										st.playSound(Sound.SOUND_ITEMGET);
 								}
 								else
 									htmltext = "30507-05.htm";
@@ -301,7 +302,7 @@ public class Q233_TestOfTheWarSpirit extends Quest
 							if (st.hasQuestItems(VIVYAN_LETTER))
 							{
 								htmltext = "30436-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 								st.takeItems(VIVYAN_LETTER, 1);
 								st.giveItems(INSECT_DIAGRAM_BOOK, 1);
 							}
@@ -331,10 +332,10 @@ public class Q233_TestOfTheWarSpirit extends Quest
 								if (st.hasQuestItems(BRAKI_REMAINS_1, HERMODT_REMAINS_1, KIRUNA_REMAINS_1))
 								{
 									st.set("cond", "2");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 								htmltext = "30682-03.htm";
@@ -362,10 +363,10 @@ public class Q233_TestOfTheWarSpirit extends Quest
 								if (st.hasQuestItems(BRAKI_REMAINS_1, KIRUNA_REMAINS_1, TONAR_REMAINS_1))
 								{
 									st.set("cond", "2");
-									st.playSound(QuestState.SOUND_MIDDLE);
+									st.playSound(Sound.SOUND_MIDDLE);
 								}
 								else
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 								htmltext = "30515-03.htm";

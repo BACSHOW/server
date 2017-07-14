@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 /**
  * This quest supports both Q611 && Q612 onKill sections.
@@ -106,7 +107,7 @@ public class Q611_AllianceWithVarkaSilenos extends Quest
 			else
 			{
 				st.setState(STATE_STARTED);
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				for (int i = VARKA_ALLIANCE_1; i <= VARKA_ALLIANCE_5; i++)
 				{
 					if (st.hasQuestItems(i))
@@ -125,7 +126,7 @@ public class Q611_AllianceWithVarkaSilenos extends Quest
 			if (st.getQuestItemsCount(KETRA_BADGE_SOLDIER) >= 100)
 			{
 				st.set("cond", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(KETRA_BADGE_SOLDIER, -1);
 				st.giveItems(VARKA_ALLIANCE_1, 1);
 				player.setAllianceWithVarkaKetra(-1);
@@ -139,7 +140,7 @@ public class Q611_AllianceWithVarkaSilenos extends Quest
 			if (st.getQuestItemsCount(KETRA_BADGE_SOLDIER) >= 200 && st.getQuestItemsCount(KETRA_BADGE_OFFICER) >= 100)
 			{
 				st.set("cond", "3");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(KETRA_BADGE_SOLDIER, -1);
 				st.takeItems(KETRA_BADGE_OFFICER, -1);
 				st.takeItems(VARKA_ALLIANCE_1, -1);
@@ -155,7 +156,7 @@ public class Q611_AllianceWithVarkaSilenos extends Quest
 			if (st.getQuestItemsCount(KETRA_BADGE_SOLDIER) >= 300 && st.getQuestItemsCount(KETRA_BADGE_OFFICER) >= 200 && st.getQuestItemsCount(KETRA_BADGE_CAPTAIN) >= 100)
 			{
 				st.set("cond", "4");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(KETRA_BADGE_SOLDIER, -1);
 				st.takeItems(KETRA_BADGE_OFFICER, -1);
 				st.takeItems(KETRA_BADGE_CAPTAIN, -1);
@@ -172,7 +173,7 @@ public class Q611_AllianceWithVarkaSilenos extends Quest
 			if (st.getQuestItemsCount(KETRA_BADGE_SOLDIER) >= 300 && st.getQuestItemsCount(KETRA_BADGE_OFFICER) >= 300 && st.getQuestItemsCount(KETRA_BADGE_CAPTAIN) >= 200 && st.getQuestItemsCount(VALOR_FEATHER) >= 1)
 			{
 				st.set("cond", "5");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(KETRA_BADGE_SOLDIER, -1);
 				st.takeItems(KETRA_BADGE_OFFICER, -1);
 				st.takeItems(KETRA_BADGE_CAPTAIN, -1);
@@ -260,7 +261,7 @@ public class Q611_AllianceWithVarkaSilenos extends Quest
 					{
 						htmltext = "31378-10-5.htm";
 						st.set("cond", "6");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 						st.takeItems(KETRA_BADGE_SOLDIER, 400);
 						st.takeItems(KETRA_BADGE_OFFICER, 400);
 						st.takeItems(KETRA_BADGE_CAPTAIN, 200);

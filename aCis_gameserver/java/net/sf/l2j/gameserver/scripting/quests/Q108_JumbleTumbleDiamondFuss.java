@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q108_JumbleTumbleDiamondFuss extends Quest
 {
@@ -109,20 +110,20 @@ public class Q108_JumbleTumbleDiamondFuss extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(GOUPH_CONTRACT, 1);
 		}
 		else if (event.equalsIgnoreCase("30555-02.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(REEP_CONTRACT, 1);
 			st.giveItems(ELVEN_WINE, 1);
 		}
 		else if (event.equalsIgnoreCase("30526-02.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BRUNON_DICE, 1);
 			st.giveItems(BRUNON_CONTRACT, 1);
 		}
@@ -162,7 +163,7 @@ public class Q108_JumbleTumbleDiamondFuss extends Quest
 						{
 							htmltext = "30523-06.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(GEM_BOX, 1);
 							st.giveItems(COAL_PIECE, 1);
 						}
@@ -196,7 +197,7 @@ public class Q108_JumbleTumbleDiamondFuss extends Quest
 							st.giveItems(ECHO_FEAST, 10);
 							st.giveItems(ECHO_CELEBRATION, 10);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -206,7 +207,7 @@ public class Q108_JumbleTumbleDiamondFuss extends Quest
 						{
 							htmltext = "30516-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(GOUPH_CONTRACT, 1);
 							st.giveItems(REEP_CONTRACT, 1);
 						}
@@ -230,7 +231,7 @@ public class Q108_JumbleTumbleDiamondFuss extends Quest
 						{
 							htmltext = "30529-01.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ELVEN_WINE, 1);
 							st.giveItems(BRUNON_DICE, 1);
 						}
@@ -249,7 +250,7 @@ public class Q108_JumbleTumbleDiamondFuss extends Quest
 						{
 							htmltext = "30526-04.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BRUNON_CONTRACT, 1);
 							st.takeItems(AQUAMARINE, -1);
 							st.takeItems(CHRYSOBERYL, -1);
@@ -261,7 +262,7 @@ public class Q108_JumbleTumbleDiamondFuss extends Quest
 						{
 							htmltext = "30526-06.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(COAL_PIECE, 1);
 							st.giveItems(BRUNON_LETTER, 1);
 						}
@@ -276,7 +277,7 @@ public class Q108_JumbleTumbleDiamondFuss extends Quest
 						{
 							htmltext = "30521-01.htm";
 							st.set("cond", "10");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BRUNON_LETTER, 1);
 							st.giveItems(BERRY_TART, 1);
 						}
@@ -291,7 +292,7 @@ public class Q108_JumbleTumbleDiamondFuss extends Quest
 						{
 							htmltext = "30522-01.htm";
 							st.set("cond", "11");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BERRY_TART, 1);
 							st.giveItems(BAT_DIAGRAM, 1);
 						}

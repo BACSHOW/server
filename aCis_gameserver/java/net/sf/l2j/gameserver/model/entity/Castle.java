@@ -38,9 +38,9 @@ import net.sf.l2j.gameserver.model.zone.type.L2CastleTeleportZone;
 import net.sf.l2j.gameserver.model.zone.type.L2CastleZone;
 import net.sf.l2j.gameserver.model.zone.type.L2SiegeZone;
 import net.sf.l2j.gameserver.network.SystemMessageId;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
 import net.sf.l2j.gameserver.network.serverpackets.PledgeShowInfoUpdate;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
+import net.sf.l2j.gameserver.scripting.quests.audio.Music;
 
 public class Castle
 {
@@ -556,7 +556,8 @@ public class Castle
 			if (clan != null)
 			{
 				clan.setCastle(_castleId); // Set castle flag for new owner
-				clan.broadcastToOnlineMembers(new PledgeShowInfoUpdate(clan), new PlaySound(1, "Siege_Victory", 0, 0, 0, 0, 0));
+				clan.broadcastToOnlineMembers(new PledgeShowInfoUpdate(clan));
+				clan.broadcastToOnlineMembers(Music.SIEGE_VICTORY.getPacket());
 			}
 		}
 		catch (Exception e)

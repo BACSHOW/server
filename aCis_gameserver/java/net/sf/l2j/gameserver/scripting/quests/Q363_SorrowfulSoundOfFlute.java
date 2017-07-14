@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q363_SorrowfulSoundOfFlute extends Quest
 {
@@ -48,24 +49,24 @@ public class Q363_SorrowfulSoundOfFlute extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30956-05.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(CLOTHES, 1);
 		}
 		else if (event.equalsIgnoreCase("30956-06.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(NANARIN_FLUTE, 1);
 		}
 		else if (event.equalsIgnoreCase("30956-07.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(BLACK_BEER, 1);
 		}
 		
@@ -103,12 +104,12 @@ public class Q363_SorrowfulSoundOfFlute extends Quest
 							{
 								htmltext = "30956-09.htm";
 								st.giveItems(THEME_OF_SOLITUDE, 1);
-								st.playSound(QuestState.SOUND_FINISH);
+								st.playSound(Sound.SOUND_FINISH);
 							}
 							else
 							{
 								htmltext = "30956-10.htm";
-								st.playSound(QuestState.SOUND_GIVEUP);
+								st.playSound(Sound.SOUND_GIVEUP);
 							}
 							st.exitQuest(true);
 						}
@@ -123,7 +124,7 @@ public class Q363_SorrowfulSoundOfFlute extends Quest
 						if (cond == 1)
 						{
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						break;
 					
@@ -131,7 +132,7 @@ public class Q363_SorrowfulSoundOfFlute extends Quest
 						if (cond == 3)
 						{
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							
 							if (st.hasQuestItems(NANARIN_FLUTE))
 							{

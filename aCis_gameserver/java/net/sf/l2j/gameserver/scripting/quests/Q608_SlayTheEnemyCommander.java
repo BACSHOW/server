@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q608_SlayTheEnemyCommander extends Quest
 {
@@ -38,7 +39,7 @@ public class Q608_SlayTheEnemyCommander extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31370-07.htm"))
 		{
@@ -47,14 +48,14 @@ public class Q608_SlayTheEnemyCommander extends Quest
 				st.takeItems(HEAD_OF_MOS, -1);
 				st.giveItems(TOTEM_OF_WISDOM, 1);
 				st.rewardExpAndSp(10000, 0);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 			else
 			{
 				htmltext = "31370-06.htm";
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 			}
 		}
 		
@@ -102,7 +103,7 @@ public class Q608_SlayTheEnemyCommander extends Quest
 				if (st.hasQuestItems(KETRA_ALLIANCE_4))
 				{
 					st.set("cond", "2");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(HEAD_OF_MOS, 1);
 				}
 			}

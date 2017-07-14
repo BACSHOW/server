@@ -159,6 +159,7 @@ public final class Config
 	public static int ALT_OLY_DIVIDER_NON_CLASSED;
 	public static boolean ALT_OLY_ANNOUNCE_GAMES;
 	public static boolean ALT_OLY_END_ANNOUNCE;
+	public static int ALT_OLY_ENCHANT_LIMIT;
 	
 	/** SevenSigns Festival */
 	public static boolean ALT_GAME_CASTLE_DAWN;
@@ -335,6 +336,8 @@ public final class Config
 	public static int SPAWN_INTERVAL_FRINTEZZA;
 	public static int RANDOM_SPAWN_TIME_FRINTEZZA;
 	public static int WAIT_TIME_FRINTEZZA;
+	public static int FRINTEZZA_MIN_PARTIES;
+	public static int FRINTEZZA_MAX_PARTIES;
 	
 	public static int SPAWN_INTERVAL_ORFEN;
 	public static int RANDOM_SPAWN_TIME_ORFEN;
@@ -553,6 +556,7 @@ public final class Config
 	public static double RATE_QUEST_REWARD_XP;
 	public static double RATE_QUEST_REWARD_SP;
 	public static double RATE_QUEST_REWARD_ADENA;
+	public static double RATE_QUEST_DROP_PROF;
 	
 	public static double RATE_KARMA_EXP_LOST;
 	public static double RATE_SIEGE_GUARDS_PRICE;
@@ -996,6 +1000,11 @@ public final class Config
 		ALT_OLY_DIVIDER_NON_CLASSED = events.getProperty("AltOlyDividerNonClassed", 3);
 		ALT_OLY_ANNOUNCE_GAMES = events.getProperty("AltOlyAnnounceGames", true);
 		ALT_OLY_END_ANNOUNCE = events.getProperty("AltOlyEndAnnounce", false);
+		ALT_OLY_ENCHANT_LIMIT = events.getProperty("AltOlyEnchantLimit", -1);
+		if (ALT_OLY_ENCHANT_LIMIT > 65535)
+		{
+			ALT_OLY_ENCHANT_LIMIT = 65535;
+		}
 		
 		ALT_GAME_CASTLE_DAWN = events.getProperty("AltCastleForDawn", true);
 		ALT_GAME_CASTLE_DUSK = events.getProperty("AltCastleForDusk", true);
@@ -1182,7 +1191,9 @@ public final class Config
 		
 		SPAWN_INTERVAL_FRINTEZZA = npcs.getProperty("FrintezzaSpawnInterval", 48);
 		RANDOM_SPAWN_TIME_FRINTEZZA = npcs.getProperty("FrintezzaRandomSpawn", 8);
-		WAIT_TIME_FRINTEZZA = npcs.getProperty("FrintezzaWaitTime", 1) * 60000;
+		WAIT_TIME_FRINTEZZA = npcs.getProperty("FrintezzaWaitTime", 10) * 60000;
+		FRINTEZZA_MIN_PARTIES = npcs.getProperty("FrintezzaMinParties", 4);
+		FRINTEZZA_MAX_PARTIES = npcs.getProperty("FrintezzaMaxParties", 5);
 		
 		SPAWN_INTERVAL_ORFEN = npcs.getProperty("OrfenSpawnInterval", 48);
 		RANDOM_SPAWN_TIME_ORFEN = npcs.getProperty("OrfenRandomSpawn", 20);
@@ -1453,6 +1464,7 @@ public final class Config
 		RATE_DROP_SPOIL = server.getProperty("RateDropSpoil", 1.);
 		RATE_DROP_MANOR = server.getProperty("RateDropManor", 1);
 		RATE_QUEST_DROP = server.getProperty("RateQuestDrop", 1.);
+		RATE_QUEST_DROP_PROF = server.getProperty("RateQuestDropProf", 1.);
 		RATE_QUEST_REWARD = server.getProperty("RateQuestReward", 1.);
 		RATE_QUEST_REWARD_XP = server.getProperty("RateQuestRewardXP", 1.);
 		RATE_QUEST_REWARD_SP = server.getProperty("RateQuestRewardSP", 1.);

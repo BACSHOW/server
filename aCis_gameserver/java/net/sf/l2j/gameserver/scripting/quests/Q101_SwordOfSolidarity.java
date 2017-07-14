@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q101_SwordOfSolidarity extends Quest
 {
@@ -57,13 +58,13 @@ public class Q101_SwordOfSolidarity extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ROIENS_LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("30283-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ROIENS_LETTER, 1);
 			st.giveItems(DIR_TO_RUINS, 1);
 		}
@@ -94,7 +95,7 @@ public class Q101_SwordOfSolidarity extends Quest
 			st.giveItems(ECHO_FEAST, 10);
 			st.giveItems(ECHO_CELEBRATION, 10);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		
@@ -135,7 +136,7 @@ public class Q101_SwordOfSolidarity extends Quest
 						{
 							htmltext = "30008-05.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ALTRANS_NOTE, 1);
 							st.giveItems(BROKEN_SWORD_HANDLE, 1);
 						}
@@ -152,7 +153,7 @@ public class Q101_SwordOfSolidarity extends Quest
 						{
 							htmltext = "30283-04.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(DIR_TO_RUINS, 1);
 							st.takeItems(BROKEN_BLADE_TOP, 1);
 							st.takeItems(BROKEN_BLADE_BOTTOM, 1);

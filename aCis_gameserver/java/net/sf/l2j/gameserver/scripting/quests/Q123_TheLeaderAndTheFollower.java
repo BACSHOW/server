@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q123_TheLeaderAndTheFollower extends Quest
 {
@@ -59,7 +60,7 @@ public class Q123_TheLeaderAndTheFollower extends Quest
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
 			st.set("state", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31961-05d.htm"))
 		{
@@ -68,7 +69,7 @@ public class Q123_TheLeaderAndTheFollower extends Quest
 				st.set("cond", "3");
 				st.set("state", "2");
 				st.set("stateEx", "1");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(BRUIN_LIZARDMAN_BLOOD, -1);
 			}
 		}
@@ -79,7 +80,7 @@ public class Q123_TheLeaderAndTheFollower extends Quest
 				st.set("cond", "4");
 				st.set("state", "2");
 				st.set("stateEx", "2");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(BRUIN_LIZARDMAN_BLOOD, -1);
 			}
 		}
@@ -90,7 +91,7 @@ public class Q123_TheLeaderAndTheFollower extends Quest
 				st.set("cond", "5");
 				st.set("state", "2");
 				st.set("stateEx", "3");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(BRUIN_LIZARDMAN_BLOOD, -1);
 			}
 		}
@@ -110,7 +111,7 @@ public class Q123_TheLeaderAndTheFollower extends Quest
 							st.takeItems(CRYSTAL_D, 922);
 							st2.set("cond", "6");
 							st2.set("state", "3");
-							st2.playSound(QuestState.SOUND_MIDDLE);
+							st2.playSound(Sound.SOUND_MIDDLE);
 						}
 						else
 							htmltext = "31961-11.htm";
@@ -122,7 +123,7 @@ public class Q123_TheLeaderAndTheFollower extends Quest
 							st.takeItems(CRYSTAL_D, 771);
 							st2.set("cond", "6");
 							st2.set("state", "3");
-							st2.playSound(QuestState.SOUND_MIDDLE);
+							st2.playSound(Sound.SOUND_MIDDLE);
 						}
 						else
 							htmltext = "31961-11a.htm";
@@ -210,7 +211,7 @@ public class Q123_TheLeaderAndTheFollower extends Quest
 				{
 					st.set("cond", "7");
 					st.set("state", "4");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					htmltext = "31961-15.htm";
 				}
 				else if (state == 4)
@@ -243,7 +244,7 @@ public class Q123_TheLeaderAndTheFollower extends Quest
 								break;
 						}
 						
-						st.playSound(QuestState.SOUND_FINISH);
+						st.playSound(Sound.SOUND_FINISH);
 						st.exitQuest(false);
 					}
 					else

@@ -7,6 +7,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q603_DaimonTheWhiteEyed_Part1 extends Quest
 {
@@ -63,14 +64,14 @@ public class Q603_DaimonTheWhiteEyed_Part1 extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31683-06.htm"))
 		{
 			if (st.getQuestItemsCount(BROKEN_CRYSTAL) > 4)
 			{
 				st.set("cond", "7");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(BROKEN_CRYSTAL, -1);
 			}
 			else
@@ -82,7 +83,7 @@ public class Q603_DaimonTheWhiteEyed_Part1 extends Quest
 			{
 				st.takeItems(EVIL_SPIRIT_BEADS, -1);
 				st.giveItems(UNFINISHED_SUMMON_CRYSTAL, 1);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 			else
@@ -95,31 +96,31 @@ public class Q603_DaimonTheWhiteEyed_Part1 extends Quest
 		else if (event.equalsIgnoreCase("31548-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(BROKEN_CRYSTAL, 1);
 		}
 		else if (event.equalsIgnoreCase("31549-02.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(BROKEN_CRYSTAL, 1);
 		}
 		else if (event.equalsIgnoreCase("31550-02.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(BROKEN_CRYSTAL, 1);
 		}
 		else if (event.equalsIgnoreCase("31551-02.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(BROKEN_CRYSTAL, 1);
 		}
 		else if (event.equalsIgnoreCase("31552-02.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(BROKEN_CRYSTAL, 1);
 		}
 		

@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q226_TestOfTheHealer extends Quest
 {
@@ -80,7 +81,7 @@ public class Q226_TestOfTheHealer extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(REPORT_OF_PERRIN, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange39", false))
@@ -96,14 +97,14 @@ public class Q226_TestOfTheHealer extends Quest
 			st.giveItems(MARK_OF_HEALER, 1);
 			st.rewardExpAndSp(134839, 50000);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		// PERRIN
 		else if (event.equalsIgnoreCase("30428-02.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			
 			if (_tatoma == null)
 			{
@@ -117,7 +118,7 @@ public class Q226_TestOfTheHealer extends Quest
 			if (st.getQuestItemsCount(57) >= 100000)
 			{
 				st.set("cond", "7");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(57, 100000);
 				st.giveItems(PICTURE_OF_WINDY, 1);
 			}
@@ -129,13 +130,13 @@ public class Q226_TestOfTheHealer extends Quest
 		else if (event.equalsIgnoreCase("30658-07.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		// WINDY SHAORING
 		else if (event.equalsIgnoreCase("30660-03.htm"))
 		{
 			st.set("cond", "8");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(PICTURE_OF_WINDY, 1);
 			st.giveItems(WINDY_PEBBLES, 1);
 		}
@@ -143,7 +144,7 @@ public class Q226_TestOfTheHealer extends Quest
 		else if (event.equalsIgnoreCase("30674-02.htm"))
 		{
 			st.set("cond", "11");
-			st.playSound(QuestState.SOUND_BEFORE_BATTLE);
+			st.playSound(Sound.SOUND_BEFORE_BATTLE);
 			st.takeItems(ORDER_OF_SORIUS, 1);
 			
 			if (_letoLeader == null)
@@ -156,7 +157,7 @@ public class Q226_TestOfTheHealer extends Quest
 		else if (event.equalsIgnoreCase("30665-02.htm"))
 		{
 			st.set("cond", "22");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(SECRET_LETTER_1, 1);
 			st.takeItems(SECRET_LETTER_2, 1);
 			st.takeItems(SECRET_LETTER_3, 1);
@@ -214,7 +215,7 @@ public class Q226_TestOfTheHealer extends Quest
 								st.giveItems(MARK_OF_HEALER, 1);
 								st.rewardExpAndSp(118304, 26250);
 								player.broadcastPacket(new SocialAction(player, 3));
-								st.playSound(QuestState.SOUND_FINISH);
+								st.playSound(Sound.SOUND_FINISH);
 								st.exitQuest(false);
 							}
 							else
@@ -229,7 +230,7 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = "30428-03.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(REPORT_OF_PERRIN, 1);
 						}
 						else
@@ -245,7 +246,7 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = "30424-01.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond > 4)
 							htmltext = "30424-02.htm";
@@ -256,13 +257,13 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = "30658-07.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 5)
 						{
 							htmltext = "30658-01.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 6)
 							htmltext = "30658-01.htm";
@@ -271,7 +272,7 @@ public class Q226_TestOfTheHealer extends Quest
 						else if (cond == 8)
 						{
 							htmltext = "30658-06.htm";
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							st.takeItems(WINDY_PEBBLES, 1);
 							st.giveItems(GOLDEN_STATUE, 1);
 						}
@@ -291,7 +292,7 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = "30327-01.htm";
 							st.set("cond", "10");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(ORDER_OF_SORIUS, 1);
 						}
 						else if (cond > 9 && cond < 22)
@@ -300,7 +301,7 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = "30327-03.htm";
 							st.set("cond", "23");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(KRISTINA_LETTER, 1);
 						}
 						else if (cond == 23)
@@ -323,7 +324,7 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = "30674-03.htm";
 							st.set("cond", "13");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond > 12)
 							htmltext = "30674-04.htm";
@@ -340,7 +341,7 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = npc.getNpcId() + "-03.htm";
 							st.set("cond", "21");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						break;
 					
@@ -349,7 +350,7 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = "30661-01.htm";
 							st.set("cond", "14");
-							st.playSound(QuestState.SOUND_BEFORE_BATTLE);
+							st.playSound(Sound.SOUND_BEFORE_BATTLE);
 							addSpawn(LETO_LIZARDMAN_ASSASSIN, player, true, 0, false);
 							addSpawn(LETO_LIZARDMAN_ASSASSIN, player, true, 0, false);
 							addSpawn(LETO_LIZARDMAN_ASSASSIN, player, true, 0, false);
@@ -360,7 +361,7 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = "30661-02.htm";
 							st.set("cond", "16");
-							st.playSound(QuestState.SOUND_BEFORE_BATTLE);
+							st.playSound(Sound.SOUND_BEFORE_BATTLE);
 							addSpawn(LETO_LIZARDMAN_SNIPER, player, true, 0, false);
 							addSpawn(LETO_LIZARDMAN_SNIPER, player, true, 0, false);
 							addSpawn(LETO_LIZARDMAN_SNIPER, player, true, 0, false);
@@ -371,7 +372,7 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = "30661-03.htm";
 							st.set("cond", "18");
-							st.playSound(QuestState.SOUND_BEFORE_BATTLE);
+							st.playSound(Sound.SOUND_BEFORE_BATTLE);
 							addSpawn(LETO_LIZARDMAN_WIZARD, player, true, 0, false);
 							addSpawn(LETO_LIZARDMAN_WIZARD, player, true, 0, false);
 							addSpawn(LETO_LIZARDMAN_LORD, player, true, 0, false);
@@ -382,7 +383,7 @@ public class Q226_TestOfTheHealer extends Quest
 						{
 							htmltext = "30661-04.htm";
 							st.set("cond", "20");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 20 || cond == 21)
 							htmltext = "30661-04.htm";
@@ -421,7 +422,7 @@ public class Q226_TestOfTheHealer extends Quest
 				if (cond == 1 || cond == 2)
 				{
 					st.set("cond", "3");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				_tatoma = null;
 				cancelQuestTimer("tatoma_despawn", null, player);
@@ -431,7 +432,7 @@ public class Q226_TestOfTheHealer extends Quest
 				if (cond == 10 || cond == 11)
 				{
 					st.set("cond", "12");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(SECRET_LETTER_1, 1);
 				}
 				_letoLeader = null;
@@ -442,7 +443,7 @@ public class Q226_TestOfTheHealer extends Quest
 				if (cond == 13 || cond == 14)
 				{
 					st.set("cond", "15");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(SECRET_LETTER_2, 1);
 				}
 				break;
@@ -451,7 +452,7 @@ public class Q226_TestOfTheHealer extends Quest
 				if (cond == 15 || cond == 16)
 				{
 					st.set("cond", "17");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(SECRET_LETTER_3, 1);
 				}
 				break;
@@ -460,7 +461,7 @@ public class Q226_TestOfTheHealer extends Quest
 				if (cond == 17 || cond == 18)
 				{
 					st.set("cond", "19");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(SECRET_LETTER_4, 1);
 				}
 				break;

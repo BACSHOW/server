@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q102_SeaOfSporesFever extends Quest
 {
@@ -66,7 +67,7 @@ public class Q102_SeaOfSporesFever extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(ALBERIUS_LETTER, 1);
 		}
 		
@@ -106,7 +107,7 @@ public class Q102_SeaOfSporesFever extends Quest
 							htmltext = "30284-04.htm";
 							st.set("cond", "5");
 							st.set("medicines", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(COBENDELL_MEDICINE_1, 1);
 							st.giveItems(ALBERIUS_LIST, 1);
 						}
@@ -135,7 +136,7 @@ public class Q102_SeaOfSporesFever extends Quest
 							st.giveItems(ECHO_FEAST, 10);
 							st.giveItems(ECHO_CELEBRATION, 10);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -145,7 +146,7 @@ public class Q102_SeaOfSporesFever extends Quest
 						{
 							htmltext = "30156-03.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ALBERIUS_LETTER, 1);
 							st.giveItems(EVERGREEN_AMULET, 1);
 						}
@@ -157,7 +158,7 @@ public class Q102_SeaOfSporesFever extends Quest
 						{
 							htmltext = "30156-05.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(DRYAD_TEARS, -1);
 							st.takeItems(EVERGREEN_AMULET, 1);
 							st.giveItems(COBENDELL_MEDICINE_1, 1);
@@ -235,7 +236,7 @@ public class Q102_SeaOfSporesFever extends Quest
 			if (medicinesLeft == 0)
 			{
 				st.set("cond", "6");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 			else
 				st.set("medicines", String.valueOf(medicinesLeft));

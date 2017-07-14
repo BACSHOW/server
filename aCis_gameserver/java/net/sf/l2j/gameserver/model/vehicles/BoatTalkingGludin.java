@@ -12,7 +12,7 @@ import net.sf.l2j.gameserver.model.actor.Vehicle;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.clientpackets.Say2;
 import net.sf.l2j.gameserver.network.serverpackets.CreatureSay;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class BoatTalkingGludin implements Runnable
 {
@@ -87,15 +87,6 @@ public class BoatTalkingGludin implements Runnable
 	private final CreatureSay ARRIVAL_TALKING5;
 	private final CreatureSay ARRIVAL_TALKING1;
 	
-	private final PlaySound TALKING_SOUND;
-	private final PlaySound GLUDIN_SOUND;
-	
-	private final PlaySound TALKING_SOUND_LEAVE_5MIN;
-	private final PlaySound TALKING_SOUND_LEAVE_1MIN;
-	
-	private final PlaySound GLUDIN_SOUND_LEAVE_5MIN;
-	private final PlaySound GLUDIN_SOUND_LEAVE_1MIN;
-	
 	public BoatTalkingGludin(Vehicle boat)
 	{
 		_boat = boat;
@@ -123,15 +114,6 @@ public class BoatTalkingGludin implements Runnable
 		ARRIVAL_TALKING10 = new CreatureSay(0, Say2.BOAT, 801, SystemMessageId.FERRY_FROM_GLUDIN_ARRIVE_AT_TALKING_10_MINUTES);
 		ARRIVAL_TALKING5 = new CreatureSay(0, Say2.BOAT, 801, SystemMessageId.FERRY_FROM_GLUDIN_ARRIVE_AT_TALKING_5_MINUTES);
 		ARRIVAL_TALKING1 = new CreatureSay(0, Say2.BOAT, 801, SystemMessageId.FERRY_FROM_GLUDIN_ARRIVE_AT_TALKING_1_MINUTE);
-		
-		TALKING_SOUND = new PlaySound(0, "itemsound.ship_arrival_departure", 1, _boat.getObjectId(), TALKING_DOCK[0].x, TALKING_DOCK[0].y, TALKING_DOCK[0].z);
-		GLUDIN_SOUND = new PlaySound(0, "itemsound.ship_arrival_departure", 1, _boat.getObjectId(), GLUDIN_DOCK[0].x, GLUDIN_DOCK[0].y, GLUDIN_DOCK[0].z);
-		
-		TALKING_SOUND_LEAVE_5MIN = new PlaySound(0, "itemsound.ship_5min", 1, _boat.getObjectId(), TALKING_DOCK[0].x, TALKING_DOCK[0].y, TALKING_DOCK[0].z);
-		TALKING_SOUND_LEAVE_1MIN = new PlaySound(0, "itemsound.ship_1min", 1, _boat.getObjectId(), TALKING_DOCK[0].x, TALKING_DOCK[0].y, TALKING_DOCK[0].z);
-		
-		GLUDIN_SOUND_LEAVE_5MIN = new PlaySound(0, "itemsound.ship_5min", 1, _boat.getObjectId(), GLUDIN_DOCK[0].x, GLUDIN_DOCK[0].y, GLUDIN_DOCK[0].z);
-		GLUDIN_SOUND_LEAVE_1MIN = new PlaySound(0, "itemsound.ship_1min", 1, _boat.getObjectId(), GLUDIN_DOCK[0].x, GLUDIN_DOCK[0].y, GLUDIN_DOCK[0].z);
 	}
 	
 	@Override
@@ -143,23 +125,20 @@ public class BoatTalkingGludin implements Runnable
 			{
 				case 0:
 					BoatManager.getInstance().broadcastPacket(TALKING_DOCK[0], GLUDIN_DOCK[0], LEAVE_TALKING5);
-					_boat.broadcastPacket(TALKING_SOUND_LEAVE_5MIN);
 					ThreadPool.schedule(this, 240000);
 					break;
 				case 1:
 					BoatManager.getInstance().broadcastPackets(TALKING_DOCK[0], GLUDIN_DOCK[0], LEAVE_TALKING1, LEAVE_TALKING1_2);
-					_boat.broadcastPacket(TALKING_SOUND_LEAVE_1MIN);
 					ThreadPool.schedule(this, 40000);
 					break;
 				case 2:
 					BoatManager.getInstance().broadcastPacket(TALKING_DOCK[0], GLUDIN_DOCK[0], LEAVE_TALKING0);
-					_boat.broadcastPacket(TALKING_SOUND_LEAVE_1MIN);
 					ThreadPool.schedule(this, 20000);
 					break;
 				case 3:
 					BoatManager.getInstance().dockShip(BoatManager.TALKING_ISLAND, false);
 					BoatManager.getInstance().broadcastPackets(TALKING_DOCK[0], GLUDIN_DOCK[0], LEAVING_TALKING);
-					_boat.broadcastPacket(TALKING_SOUND);
+					_boat.broadcastPacket(Sound.ITEMSOUND_SHIP_ARRIVAL_DEPARTURE.withObject(_boat));
 					_boat.payForRide(1074, 1, OUST_LOC_1);
 					_boat.executePath(TALKING_TO_GLUDIN);
 					ThreadPool.schedule(this, 300000);
@@ -193,28 +172,25 @@ public class BoatTalkingGludin implements Runnable
 					break;
 				case 8:
 					BoatManager.getInstance().broadcastPackets(GLUDIN_DOCK[0], TALKING_DOCK[0], ARRIVED_AT_GLUDIN, ARRIVED_AT_GLUDIN_2);
-					_boat.broadcastPacket(GLUDIN_SOUND);
+					_boat.broadcastPacket(Sound.ITEMSOUND_SHIP_ARRIVAL_DEPARTURE.withObject(_boat));
 					ThreadPool.schedule(this, 300000);
 					break;
 				case 9:
 					BoatManager.getInstance().broadcastPacket(TALKING_DOCK[0], GLUDIN_DOCK[0], LEAVE_GLUDIN5);
-					_boat.broadcastPacket(GLUDIN_SOUND_LEAVE_5MIN);
 					ThreadPool.schedule(this, 240000);
 					break;
 				case 10:
 					BoatManager.getInstance().broadcastPackets(TALKING_DOCK[0], GLUDIN_DOCK[0], LEAVE_GLUDIN1, LEAVE_TALKING1_2);
-					_boat.broadcastPacket(GLUDIN_SOUND_LEAVE_1MIN);
 					ThreadPool.schedule(this, 40000);
 					break;
 				case 11:
 					BoatManager.getInstance().broadcastPacket(TALKING_DOCK[0], GLUDIN_DOCK[0], LEAVE_GLUDIN0);
-					_boat.broadcastPacket(GLUDIN_SOUND_LEAVE_1MIN);
 					ThreadPool.schedule(this, 20000);
 					break;
 				case 12:
 					BoatManager.getInstance().dockShip(BoatManager.GLUDIN_HARBOR, false);
 					BoatManager.getInstance().broadcastPackets(TALKING_DOCK[0], GLUDIN_DOCK[0], LEAVING_GLUDIN);
-					_boat.broadcastPacket(GLUDIN_SOUND);
+					_boat.broadcastPacket(Sound.ITEMSOUND_SHIP_ARRIVAL_DEPARTURE.withObject(_boat));
 					_boat.payForRide(1075, 1, OUST_LOC_2);
 					_boat.executePath(GLUDIN_TO_TALKING);
 					ThreadPool.schedule(this, 150000);
@@ -248,7 +224,7 @@ public class BoatTalkingGludin implements Runnable
 					break;
 				case 17:
 					BoatManager.getInstance().broadcastPackets(TALKING_DOCK[0], GLUDIN_DOCK[0], ARRIVED_AT_TALKING, ARRIVED_AT_TALKING_2);
-					_boat.broadcastPacket(TALKING_SOUND);
+					_boat.broadcastPacket(Sound.ITEMSOUND_SHIP_ARRIVAL_DEPARTURE.withObject(_boat));
 					ThreadPool.schedule(this, 300000);
 					break;
 			}

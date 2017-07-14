@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q410_PathToAPalusKnight extends Quest
 {
@@ -63,13 +64,13 @@ public class Q410_PathToAPalusKnight extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(PALUS_TALISMAN, 1);
 		}
 		else if (event.equalsIgnoreCase("30329-10.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LYCANTHROPE_SKULL, -1);
 			st.takeItems(PALUS_TALISMAN, 1);
 			st.giveItems(VIRGIL_LETTER, 1);
@@ -77,14 +78,14 @@ public class Q410_PathToAPalusKnight extends Quest
 		else if (event.equalsIgnoreCase("30422-02.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(VIRGIL_LETTER, 1);
 			st.giveItems(MORTE_TALISMAN, 1);
 		}
 		else if (event.equalsIgnoreCase("30422-06.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(ARACHNID_TRACKER_SILK, -1);
 			st.takeItems(MORTE_TALISMAN, 1);
 			st.takeItems(PREDATOR_CARAPACE, -1);
@@ -126,7 +127,7 @@ public class Q410_PathToAPalusKnight extends Quest
 							st.giveItems(GAZE_OF_ABYSS, 1);
 							st.rewardExpAndSp(3200, 1500);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;

@@ -12,6 +12,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.actor.instance.RaidBoss;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q610_MagicalPowerOfWater_Part2 extends Quest
 {
@@ -91,7 +92,7 @@ public class Q610_MagicalPowerOfWater_Part2 extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 			}
 			else
 				htmltext = "31372-02.htm";
@@ -102,7 +103,7 @@ public class Q610_MagicalPowerOfWater_Part2 extends Quest
 			{
 				st.takeItems(ICE_HEART_OF_ASHUTAR, 1);
 				st.rewardExpAndSp(10000, 0);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 			else
@@ -118,7 +119,7 @@ public class Q610_MagicalPowerOfWater_Part2 extends Quest
 					if (spawnRaid())
 					{
 						st.set("cond", "2");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 						st.takeItems(GREEN_TOTEM, 1);
 					}
 				}
@@ -186,7 +187,7 @@ public class Q610_MagicalPowerOfWater_Part2 extends Quest
 		{
 			QuestState st = partyMember.getQuestState(qn);
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(ICE_HEART_OF_ASHUTAR, 1);
 		}
 		

@@ -12,6 +12,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q227_TestOfTheReformer extends Quest
 {
@@ -114,7 +115,7 @@ public class Q227_TestOfTheReformer extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(BOOK_OF_REFORM, 1);
 			
 			if (!player.getMemos().getBool("secondClassChange39", false))
@@ -127,7 +128,7 @@ public class Q227_TestOfTheReformer extends Quest
 		else if (event.equalsIgnoreCase("30118-06.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BOOK_OF_REFORM, 1);
 			st.takeItems(HUGE_NAIL, 1);
 			st.giveItems(LETTER_OF_INTRODUCTION, 1);
@@ -136,7 +137,7 @@ public class Q227_TestOfTheReformer extends Quest
 		else if (event.equalsIgnoreCase("30666-04.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(LETTER_OF_INTRODUCTION, 1);
 			st.giveItems(SLA_LETTER, 1);
 		}
@@ -146,7 +147,7 @@ public class Q227_TestOfTheReformer extends Quest
 			if (st.getInt("cond") != 12)
 			{
 				st.set("cond", "12");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 			
 			if (!_crimsonWerewolf)
@@ -162,7 +163,7 @@ public class Q227_TestOfTheReformer extends Quest
 		else if (event.equalsIgnoreCase("30670-03.htm"))
 		{
 			st.set("cond", "15");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			if (!_krudelLizardman)
 			{
 				addSpawn(KRUDEL_LIZARDMAN, 126019, -179983, -1781, 0, false, 299000, true);
@@ -270,7 +271,7 @@ public class Q227_TestOfTheReformer extends Quest
 						{
 							htmltext = "30666-06.htm";
 							st.set("cond", "11");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(OL_MAHUM_MONEY, 1);
 							st.giveItems(GREETINGS, 3);
 						}
@@ -286,7 +287,7 @@ public class Q227_TestOfTheReformer extends Quest
 							st.giveItems(MARK_OF_REFORMER, 1);
 							st.rewardExpAndSp(164032, 17500);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -299,7 +300,7 @@ public class Q227_TestOfTheReformer extends Quest
 							if (cond == 5)
 							{
 								st.set("cond", "6");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(SLA_LETTER, 1);
 							}
 							
@@ -349,7 +350,7 @@ public class Q227_TestOfTheReformer extends Quest
 						{
 							htmltext = "30668-03.htm";
 							st.set("cond", "10");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(LETTER_OF_BETRAYER, 1);
 							st.giveItems(KATARI_LETTER, 1);
 						}
@@ -362,7 +363,7 @@ public class Q227_TestOfTheReformer extends Quest
 						{
 							htmltext = "30732-01.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(OL_MAHUM_MONEY, 1);
 						}
 						break;
@@ -374,7 +375,7 @@ public class Q227_TestOfTheReformer extends Quest
 						{
 							htmltext = "30669-04.htm";
 							st.set("cond", "14");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(GREETINGS, 1);
 							st.giveItems(KAKAN_LETTER, 1);
 						}
@@ -389,7 +390,7 @@ public class Q227_TestOfTheReformer extends Quest
 						{
 							htmltext = "30670-04.htm";
 							st.set("cond", "17");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(GREETINGS, 1);
 							st.giveItems(NYAKURI_LETTER, 1);
 						}
@@ -402,7 +403,7 @@ public class Q227_TestOfTheReformer extends Quest
 						{
 							htmltext = "30667-01.htm";
 							st.set("cond", "18");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(GREETINGS, 1);
 							st.giveItems(UNDEAD_LIST, 1);
 						}
@@ -412,7 +413,7 @@ public class Q227_TestOfTheReformer extends Quest
 						{
 							htmltext = "30667-03.htm";
 							st.set("cond", "20");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BONE_FRAGMENT_4, 1);
 							st.takeItems(BONE_FRAGMENT_5, 1);
 							st.takeItems(BONE_FRAGMENT_6, 1);
@@ -485,7 +486,7 @@ public class Q227_TestOfTheReformer extends Quest
 				if (cond == 2)
 				{
 					st.set("cond", "3");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(HUGE_NAIL, 1);
 					npc.broadcastNpcSay("The concealed truth will always be revealed...!");
 				}
@@ -495,7 +496,7 @@ public class Q227_TestOfTheReformer extends Quest
 				if (cond == 6)
 				{
 					st.set("cond", "7");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				}
 				break;
 			
@@ -503,7 +504,7 @@ public class Q227_TestOfTheReformer extends Quest
 				if (cond == 8)
 				{
 					st.set("cond", "9");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					st.giveItems(LETTER_OF_BETRAYER, 1);
 					cancelQuestTimer("betrayer_despawn", null, player);
 					_olMahumBetrayer = null;
@@ -514,7 +515,7 @@ public class Q227_TestOfTheReformer extends Quest
 				if (cond == 12)
 				{
 					st.set("cond", "13");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					cancelQuestTimer("werewolf_cleanup", null, player);
 					_crimsonWerewolf = false;
 				}
@@ -524,7 +525,7 @@ public class Q227_TestOfTheReformer extends Quest
 				if (cond == 15)
 				{
 					st.set("cond", "16");
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					cancelQuestTimer("lizardman_cleanup", null, player);
 					_krudelLizardman = false;
 				}
@@ -537,10 +538,10 @@ public class Q227_TestOfTheReformer extends Quest
 					if (st.hasQuestItems(BONE_FRAGMENT_5, BONE_FRAGMENT_6, BONE_FRAGMENT_7, BONE_FRAGMENT_8))
 					{
 						st.set("cond", "19");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			
@@ -551,10 +552,10 @@ public class Q227_TestOfTheReformer extends Quest
 					if (st.hasQuestItems(BONE_FRAGMENT_4, BONE_FRAGMENT_6, BONE_FRAGMENT_7, BONE_FRAGMENT_8))
 					{
 						st.set("cond", "19");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			
@@ -565,10 +566,10 @@ public class Q227_TestOfTheReformer extends Quest
 					if (st.hasQuestItems(BONE_FRAGMENT_4, BONE_FRAGMENT_5, BONE_FRAGMENT_7, BONE_FRAGMENT_8))
 					{
 						st.set("cond", "19");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			
@@ -579,10 +580,10 @@ public class Q227_TestOfTheReformer extends Quest
 					if (st.hasQuestItems(BONE_FRAGMENT_4, BONE_FRAGMENT_5, BONE_FRAGMENT_6, BONE_FRAGMENT_8))
 					{
 						st.set("cond", "19");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 			
@@ -593,10 +594,10 @@ public class Q227_TestOfTheReformer extends Quest
 					if (st.hasQuestItems(BONE_FRAGMENT_4, BONE_FRAGMENT_5, BONE_FRAGMENT_6, BONE_FRAGMENT_7))
 					{
 						st.set("cond", "19");
-						st.playSound(QuestState.SOUND_MIDDLE);
+						st.playSound(Sound.SOUND_MIDDLE);
 					}
 					else
-						st.playSound(QuestState.SOUND_ITEMGET);
+						st.playSound(Sound.SOUND_ITEMGET);
 				}
 				break;
 		}

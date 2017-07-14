@@ -8,6 +8,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.UserInfo;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q422_RepentYourSins extends Quest
 {
@@ -82,7 +83,7 @@ public class Q422_RepentYourSins extends Quest
 				st.set("cond", "5");
 			}
 			st.setState(STATE_STARTED);
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30981-11.htm"))
 		{
@@ -95,7 +96,7 @@ public class Q422_RepentYourSins extends Quest
 				{
 					st.set("cond", "16");
 					st.set("level", String.valueOf(player.getLevel()));
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.takeItems(QITEM_PENITENT_MANACLES, -1);
 					st.giveItems(PENITENT_MANACLES, 1);
 				}
@@ -103,7 +104,7 @@ public class Q422_RepentYourSins extends Quest
 				else if (cond == 16)
 				{
 					st.set("level", String.valueOf(player.getLevel()));
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 					st.takeItems(LEFT_PENITENT_MANACLES, -1);
 					st.giveItems(PENITENT_MANACLES, 1);
 				}
@@ -115,7 +116,7 @@ public class Q422_RepentYourSins extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "16");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 			}
 		}
 		else if (event.equalsIgnoreCase("Pk"))
@@ -137,7 +138,7 @@ public class Q422_RepentYourSins extends Quest
 				if (player.getPkKills() <= removePkAmount)
 				{
 					htmltext = "30981-15.htm";
-					st.playSound(QuestState.SOUND_FINISH);
+					st.playSound(Sound.SOUND_FINISH);
 					st.exitQuest(true);
 					
 					player.setPkKills(0);
@@ -148,7 +149,7 @@ public class Q422_RepentYourSins extends Quest
 				{
 					htmltext = "30981-14.htm";
 					st.set("level", String.valueOf(player.getLevel()));
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 					
 					player.setPkKills(player.getPkKills() - removePkAmount);
 					player.sendPacket(new UserInfo(player));
@@ -168,7 +169,7 @@ public class Q422_RepentYourSins extends Quest
 			st.takeItems(PENITENT_MANACLES, -1);
 			st.takeItems(QITEM_PENITENT_MANACLES, -1);
 			
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		
@@ -203,7 +204,7 @@ public class Q422_RepentYourSins extends Quest
 						{
 							htmltext = "30981-08.htm";
 							st.set("cond", "14");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.giveItems(MANUAL_OF_MANACLES, 1);
 						}
 						else if (cond == 14)
@@ -224,7 +225,7 @@ public class Q422_RepentYourSins extends Quest
 						{
 							htmltext = "30668-01.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 6)
 						{
@@ -234,7 +235,7 @@ public class Q422_RepentYourSins extends Quest
 							{
 								htmltext = "30668-03.htm";
 								st.set("cond", "10");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(RATMAN_SCAVENGER_SKULL, -1);
 							}
 						}
@@ -247,7 +248,7 @@ public class Q422_RepentYourSins extends Quest
 						{
 							htmltext = "30597-01.htm";
 							st.set("cond", "7");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 7)
 						{
@@ -257,7 +258,7 @@ public class Q422_RepentYourSins extends Quest
 							{
 								htmltext = "30597-03.htm";
 								st.set("cond", "11");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(TUREK_WAR_HOUND_TAIL, -1);
 							}
 						}
@@ -270,7 +271,7 @@ public class Q422_RepentYourSins extends Quest
 						{
 							htmltext = "30612-01.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 8)
 						{
@@ -280,7 +281,7 @@ public class Q422_RepentYourSins extends Quest
 							{
 								htmltext = "30612-03.htm";
 								st.set("cond", "12");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(TYRANT_KINGPIN_HEART, -1);
 							}
 						}
@@ -293,7 +294,7 @@ public class Q422_RepentYourSins extends Quest
 						{
 							htmltext = "30718-01.htm";
 							st.set("cond", "9");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 9)
 						{
@@ -303,7 +304,7 @@ public class Q422_RepentYourSins extends Quest
 							{
 								htmltext = "30718-03.htm";
 								st.set("cond", "13");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								st.takeItems(TRISALIM_TARANTULA_VENOM_SAC, -1);
 							}
 						}
@@ -320,7 +321,7 @@ public class Q422_RepentYourSins extends Quest
 							{
 								htmltext = "30300-01.htm";
 								st.set("cond", "15");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 								
 								st.takeItems(MANUAL_OF_MANACLES, 1);
 								st.takeItems(SILVER_NUGGET, 10);

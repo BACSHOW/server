@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q432_BirthdayPartySong extends Quest
 {
@@ -39,7 +40,7 @@ public class Q432_BirthdayPartySong extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31043-06.htm"))
 		{
@@ -48,7 +49,7 @@ public class Q432_BirthdayPartySong extends Quest
 				htmltext = "31043-05.htm";
 				st.takeItems(RED_CRYSTAL, -1);
 				st.rewardItems(7061, 25);
-				st.playSound(QuestState.SOUND_FINISH);
+				st.playSound(Sound.SOUND_FINISH);
 				st.exitQuest(true);
 			}
 		}

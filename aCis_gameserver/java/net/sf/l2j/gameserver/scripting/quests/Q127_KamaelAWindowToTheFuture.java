@@ -5,6 +5,7 @@ import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.network.serverpackets.ExShowSlideshowKamael;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q127_KamaelAWindowToTheFuture extends Quest
 {
@@ -49,7 +50,7 @@ public class Q127_KamaelAWindowToTheFuture extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(MARK_DOMINIC, 1);
 		}
 		else if (event.equalsIgnoreCase("31350-06.htm"))
@@ -61,7 +62,7 @@ public class Q127_KamaelAWindowToTheFuture extends Quest
 			st.takeItems(MARK_ORC, -1);
 			st.takeItems(MARK_DOMINIC, -1);
 			st.rewardItems(57, 159100);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		else if (event.equalsIgnoreCase("30187-06.htm"))
@@ -69,44 +70,44 @@ public class Q127_KamaelAWindowToTheFuture extends Quest
 		else if (event.equalsIgnoreCase("30187-08.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(MARK_HUMAN, 1);
 		}
 		else if (event.equalsIgnoreCase("32092-05.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(MARK_DWARF, 1);
 		}
 		else if (event.equalsIgnoreCase("31288-04.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(MARK_ORC, 1);
 		}
 		else if (event.equalsIgnoreCase("30862-04.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(MARK_DELF, 1);
 		}
 		else if (event.equalsIgnoreCase("30113-04.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(MARK_ELF, 1);
 		}
 		else if (event.equalsIgnoreCase("kamaelstory"))
 		{
 			st.set("cond", "8");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			player.sendPacket(ExShowSlideshowKamael.STATIC_PACKET);
 			return null;
 		}
 		else if (event.equalsIgnoreCase("30756-05.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		
 		return htmltext;

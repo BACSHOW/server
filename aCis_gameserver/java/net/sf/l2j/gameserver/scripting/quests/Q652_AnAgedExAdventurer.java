@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q652_AnAgedExAdventurer extends Quest
 {
@@ -61,7 +62,7 @@ public class Q652_AnAgedExAdventurer extends Quest
 			{
 				st.setState(STATE_STARTED);
 				st.set("cond", "1");
-				st.playSound(QuestState.SOUND_ACCEPT);
+				st.playSound(Sound.SOUND_ACCEPT);
 				st.takeItems(SOULSHOT_C, 100);
 				
 				npc.getAI().setIntention(CtrlIntention.MOVE_TO, new Location(85326, 7869, -3620));
@@ -121,7 +122,7 @@ public class Q652_AnAgedExAdventurer extends Quest
 							htmltext = "30180-02.htm";
 							st.rewardItems(57, 10000);
 						}
-						st.playSound(QuestState.SOUND_FINISH);
+						st.playSound(Sound.SOUND_FINISH);
 						st.exitQuest(true);
 						break;
 					

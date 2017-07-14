@@ -9,6 +9,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q330_AdeptOfTaste extends Quest
 {
@@ -121,12 +122,12 @@ public class Q330_AdeptOfTaste extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(INGREDIENT_LIST, 1);
 		}
 		else if (event.equalsIgnoreCase("30062-05.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(SONIA_BOTANY_BOOK, 1);
 			st.takeItems(RED_MANDRAGORA_ROOT, -1);
 			st.takeItems(WHITE_MANDRAGORA_ROOT, -1);
@@ -135,7 +136,7 @@ public class Q330_AdeptOfTaste extends Quest
 		}
 		else if (event.equalsIgnoreCase("30073-05.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(JACOB_INSECT_BOOK, 1);
 			st.takeItems(NECTAR, -1);
 			st.takeItems(ROYAL_JELLY, -1);
@@ -143,7 +144,7 @@ public class Q330_AdeptOfTaste extends Quest
 		}
 		else if (event.equalsIgnoreCase("30067-05.htm"))
 		{
-			st.playSound(QuestState.SOUND_ITEMGET);
+			st.playSound(Sound.SOUND_ITEMGET);
 			st.takeItems(GLYVKA_BOTANY_BOOK, 1);
 			st.takeItems(GREEN_MARSH_MOSS, -1);
 			st.takeItems(BROWN_MARSH_MOSS, -1);
@@ -193,7 +194,7 @@ public class Q330_AdeptOfTaste extends Quest
 								}
 								
 								// Sound according dish.
-								st.playSound((dish == JONAS_STEAK_DISH_5) ? QuestState.SOUND_JACKPOT : QuestState.SOUND_ITEMGET);
+								st.playSound((dish == JONAS_STEAK_DISH_5) ? Sound.SOUND_JACKPOT : Sound.SOUND_ITEMGET);
 								
 								st.takeItems(INGREDIENT_LIST, 1);
 								st.takeItems(RED_MANDRAGORA_SAP, 1);
@@ -249,7 +250,7 @@ public class Q330_AdeptOfTaste extends Quest
 								st.giveItems(JONAS_STEAK_RECIPE, 1);
 								st.rewardExpAndSp(12000, 0);
 							}
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -259,7 +260,7 @@ public class Q330_AdeptOfTaste extends Quest
 							htmltext = "30461-01.htm";
 						else if (st.hasAtLeastOneQuestItem(JONAS_STEAK_DISH_1, JONAS_STEAK_DISH_2, JONAS_STEAK_DISH_3, JONAS_STEAK_DISH_4, JONAS_STEAK_DISH_5))
 						{
-							st.playSound(QuestState.SOUND_ITEMGET);
+							st.playSound(Sound.SOUND_ITEMGET);
 							if (st.hasQuestItems(JONAS_STEAK_DISH_1))
 							{
 								htmltext = "30461-02t1.htm";
@@ -302,7 +303,7 @@ public class Q330_AdeptOfTaste extends Quest
 							{
 								htmltext = "30062-01.htm";
 								st.giveItems(SONIA_BOTANY_BOOK, 1);
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 							{
@@ -315,7 +316,7 @@ public class Q330_AdeptOfTaste extends Quest
 									st.takeItems(RED_MANDRAGORA_ROOT, -1);
 									st.takeItems(WHITE_MANDRAGORA_ROOT, -1);
 									st.giveItems(WHITE_MANDRAGORA_SAP, 1);
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 								}
 								else
 									htmltext = "30062-03.htm";
@@ -332,7 +333,7 @@ public class Q330_AdeptOfTaste extends Quest
 							{
 								htmltext = "30073-01.htm";
 								st.giveItems(JACOB_INSECT_BOOK, 1);
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 							{
@@ -349,7 +350,7 @@ public class Q330_AdeptOfTaste extends Quest
 										st.takeItems(NECTAR, -1);
 										st.takeItems(ROYAL_JELLY, -1);
 										st.giveItems(GOLDEN_HONEY, 1);
-										st.playSound(QuestState.SOUND_ITEMGET);
+										st.playSound(Sound.SOUND_ITEMGET);
 									}
 								}
 							}
@@ -365,7 +366,7 @@ public class Q330_AdeptOfTaste extends Quest
 							{
 								htmltext = "30078-01.htm";
 								st.giveItems(PANO_CONTRACT, 1);
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 							{
@@ -377,7 +378,7 @@ public class Q330_AdeptOfTaste extends Quest
 									st.takeItems(PANO_CONTRACT, 1);
 									st.takeItems(HOBGOBLIN_AMULET, -1);
 									st.giveItems(DIONIAN_POTATO, 1);
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 								}
 							}
 						}
@@ -392,7 +393,7 @@ public class Q330_AdeptOfTaste extends Quest
 							{
 								st.giveItems(GLYVKA_BOTANY_BOOK, 1);
 								htmltext = "30067-01.htm";
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 							{
@@ -405,7 +406,7 @@ public class Q330_AdeptOfTaste extends Quest
 									st.takeItems(GREEN_MARSH_MOSS, -1);
 									st.takeItems(BROWN_MARSH_MOSS, -1);
 									st.giveItems(BROWN_MOSS_BUNDLE, 1);
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 								}
 								else
 									htmltext = "30067-03.htm";
@@ -422,7 +423,7 @@ public class Q330_AdeptOfTaste extends Quest
 							{
 								htmltext = "30069-01.htm";
 								st.giveItems(ROLANT_CREATURE_BOOK, 1);
-								st.playSound(QuestState.SOUND_ITEMGET);
+								st.playSound(Sound.SOUND_ITEMGET);
 							}
 							else
 							{
@@ -434,7 +435,7 @@ public class Q330_AdeptOfTaste extends Quest
 									st.takeItems(ROLANT_CREATURE_BOOK, 1);
 									st.takeItems(MONSTER_EYE_BODY, -1);
 									st.giveItems(MONSTER_EYE_MEAT, 1);
-									st.playSound(QuestState.SOUND_ITEMGET);
+									st.playSound(Sound.SOUND_ITEMGET);
 								}
 							}
 						}

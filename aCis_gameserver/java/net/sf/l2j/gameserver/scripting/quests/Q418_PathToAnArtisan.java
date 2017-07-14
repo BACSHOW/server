@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassId;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q418_PathToAnArtisan extends Quest
 {
@@ -65,13 +66,13 @@ public class Q418_PathToAnArtisan extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(SILVERA_RING, 1);
 		}
 		else if (event.equalsIgnoreCase("30527-08a.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BOOGLE_RATMAN_LEADER_TOOTH, -1);
 			st.takeItems(BOOGLE_RATMAN_TOOTH, -1);
 			st.takeItems(SILVERA_RING, 1);
@@ -80,7 +81,7 @@ public class Q418_PathToAnArtisan extends Quest
 		else if (event.equalsIgnoreCase("30527-08b.htm"))
 		{
 			st.set("cond", "8");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(BOOGLE_RATMAN_LEADER_TOOTH, -1);
 			st.takeItems(BOOGLE_RATMAN_TOOTH, -1);
 			st.takeItems(SILVERA_RING, 1);
@@ -88,7 +89,7 @@ public class Q418_PathToAnArtisan extends Quest
 		else if (event.equalsIgnoreCase("30317-04.htm") || event.equalsIgnoreCase("30317-07.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.giveItems(KLUTO_LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("30317-10.htm"))
@@ -99,7 +100,7 @@ public class Q418_PathToAnArtisan extends Quest
 			st.giveItems(FINAL_PASS_CERTIFICATE, 1);
 			st.rewardExpAndSp(3200, 6980);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30317-12.htm") || event.equalsIgnoreCase("30531-05.htm") || event.equalsIgnoreCase("32052-11.htm") || event.equalsIgnoreCase("31963-10.htm") || event.equalsIgnoreCase("31956-04.htm"))
@@ -110,20 +111,20 @@ public class Q418_PathToAnArtisan extends Quest
 			st.giveItems(FINAL_PASS_CERTIFICATE, 1);
 			st.rewardExpAndSp(3200, 3490);
 			player.broadcastPacket(new SocialAction(player, 3));
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(true);
 		}
 		else if (event.equalsIgnoreCase("30298-03.htm"))
 		{
 			st.set("cond", "5");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(KLUTO_LETTER, -1);
 			st.giveItems(FOOTPRINT_OF_THIEF, 1);
 		}
 		else if (event.equalsIgnoreCase("30298-06.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(FOOTPRINT_OF_THIEF, -1);
 			st.takeItems(STOLEN_SECRET_BOX, -1);
 			st.giveItems(SECOND_PASS_CERTIFICATE, 1);
@@ -132,22 +133,22 @@ public class Q418_PathToAnArtisan extends Quest
 		else if (event.equalsIgnoreCase("32052-06.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("31963-04.htm"))
 		{
 			st.set("cond", "10");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("31963-05.htm"))
 		{
 			st.set("cond", "11");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("31963-07.htm"))
 		{
 			st.set("cond", "12");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		
 		return htmltext;

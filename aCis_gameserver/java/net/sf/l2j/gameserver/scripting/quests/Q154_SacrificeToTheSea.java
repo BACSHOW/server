@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q154_SacrificeToTheSea extends Quest
 {
@@ -46,7 +47,7 @@ public class Q154_SacrificeToTheSea extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		
 		return htmltext;
@@ -83,7 +84,7 @@ public class Q154_SacrificeToTheSea extends Quest
 							st.takeItems(MAIDEN_DOLL, -1);
 							st.giveItems(EARING, 1);
 							st.rewardExpAndSp(100, 0);
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -95,7 +96,7 @@ public class Q154_SacrificeToTheSea extends Quest
 						{
 							htmltext = "30051-02.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(FOX_FUR, -1);
 							st.giveItems(FOX_FUR_YARN, 1);
 						}
@@ -112,7 +113,7 @@ public class Q154_SacrificeToTheSea extends Quest
 						{
 							htmltext = "30055-01.htm";
 							st.set("cond", "4");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(FOX_FUR_YARN, 1);
 							st.giveItems(MAIDEN_DOLL, 1);
 						}

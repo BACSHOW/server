@@ -12,7 +12,7 @@ import net.sf.l2j.gameserver.model.actor.Vehicle;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.clientpackets.Say2;
 import net.sf.l2j.gameserver.network.serverpackets.CreatureSay;
-import net.sf.l2j.gameserver.network.serverpackets.PlaySound;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class BoatRunePrimeval implements Runnable
 {
@@ -70,9 +70,6 @@ public class BoatRunePrimeval implements Runnable
 	private final CreatureSay LEAVING_PRIMEVAL;
 	private final CreatureSay BUSY_RUNE;
 	
-	private final PlaySound RUNE_SOUND;
-	private final PlaySound PRIMEVAL_SOUND;
-	
 	public BoatRunePrimeval(Vehicle boat)
 	{
 		_boat = boat;
@@ -84,9 +81,6 @@ public class BoatRunePrimeval implements Runnable
 		ARRIVED_AT_PRIMEVAL_2 = new CreatureSay(0, Say2.BOAT, 801, SystemMessageId.FERRY_LEAVING_FOR_RUNE_3_MINUTES);
 		LEAVING_PRIMEVAL = new CreatureSay(0, Say2.BOAT, 801, SystemMessageId.FERRY_LEAVING_PRIMEVAL_FOR_RUNE_NOW);
 		BUSY_RUNE = new CreatureSay(0, Say2.BOAT, 801, SystemMessageId.FERRY_FROM_PRIMEVAL_TO_RUNE_DELAYED);
-		
-		RUNE_SOUND = new PlaySound(0, "itemsound.ship_arrival_departure", 1, _boat.getObjectId(), RUNE_DOCK[0].x, RUNE_DOCK[0].y, RUNE_DOCK[0].z);
-		PRIMEVAL_SOUND = new PlaySound(0, "itemsound.ship_arrival_departure", 1, _boat.getObjectId(), PRIMEVAL_DOCK.x, PRIMEVAL_DOCK.y, PRIMEVAL_DOCK.z);
 	}
 	
 	@Override
@@ -98,16 +92,16 @@ public class BoatRunePrimeval implements Runnable
 			{
 				case 0:
 					BoatManager.getInstance().dockShip(BoatManager.RUNE_HARBOR, false);
-					BoatManager.getInstance().broadcastPackets(RUNE_DOCK[0], PRIMEVAL_DOCK, LEAVING_RUNE, RUNE_SOUND);
+					BoatManager.getInstance().broadcastPackets(RUNE_DOCK[0], PRIMEVAL_DOCK, LEAVING_RUNE, Sound.ITEMSOUND_SHIP_ARRIVAL_DEPARTURE.withObject(_boat));
 					_boat.payForRide(8925, 1, OUST_LOC_1);
 					_boat.executePath(RUNE_TO_PRIMEVAL);
 					break;
 				case 1:
-					BoatManager.getInstance().broadcastPackets(PRIMEVAL_DOCK, RUNE_DOCK[0], ARRIVED_AT_PRIMEVAL, ARRIVED_AT_PRIMEVAL_2, PRIMEVAL_SOUND);
+					BoatManager.getInstance().broadcastPackets(PRIMEVAL_DOCK, RUNE_DOCK[0], ARRIVED_AT_PRIMEVAL, ARRIVED_AT_PRIMEVAL_2, Sound.ITEMSOUND_SHIP_ARRIVAL_DEPARTURE.withObject(_boat));
 					ThreadPool.schedule(this, 180000);
 					break;
 				case 2:
-					BoatManager.getInstance().broadcastPackets(PRIMEVAL_DOCK, RUNE_DOCK[0], LEAVING_PRIMEVAL, PRIMEVAL_SOUND);
+					BoatManager.getInstance().broadcastPackets(PRIMEVAL_DOCK, RUNE_DOCK[0], LEAVING_PRIMEVAL, Sound.ITEMSOUND_SHIP_ARRIVAL_DEPARTURE.withObject(_boat));
 					_boat.payForRide(8924, 1, OUST_LOC_2);
 					_boat.executePath(PRIMEVAL_TO_RUNE);
 					break;
@@ -128,7 +122,7 @@ public class BoatRunePrimeval implements Runnable
 					_boat.executePath(RUNE_DOCK);
 					break;
 				case 4:
-					BoatManager.getInstance().broadcastPackets(RUNE_DOCK[0], PRIMEVAL_DOCK, ARRIVED_AT_RUNE, ARRIVED_AT_RUNE_2, RUNE_SOUND);
+					BoatManager.getInstance().broadcastPackets(RUNE_DOCK[0], PRIMEVAL_DOCK, ARRIVED_AT_RUNE, ARRIVED_AT_RUNE_2, Sound.ITEMSOUND_SHIP_ARRIVAL_DEPARTURE.withObject(_boat));
 					ThreadPool.schedule(this, 180000);
 					break;
 			}

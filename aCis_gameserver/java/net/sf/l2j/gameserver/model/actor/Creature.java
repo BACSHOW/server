@@ -40,7 +40,6 @@ import net.sf.l2j.gameserver.model.actor.instance.Door;
 import net.sf.l2j.gameserver.model.actor.instance.Pet;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.actor.instance.RiftInvader;
-import net.sf.l2j.gameserver.model.actor.instance.Servitor;
 import net.sf.l2j.gameserver.model.actor.instance.Walker;
 import net.sf.l2j.gameserver.model.actor.stat.CreatureStat;
 import net.sf.l2j.gameserver.model.actor.status.CreatureStatus;

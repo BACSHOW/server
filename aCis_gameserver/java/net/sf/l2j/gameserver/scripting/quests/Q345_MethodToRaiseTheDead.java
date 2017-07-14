@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q345_MethodToRaiseTheDead extends Quest
 {
@@ -54,12 +55,12 @@ public class Q345_MethodToRaiseTheDead extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("30970-06.htm"))
 		{
 			st.set("cond", "2");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("30912-04.htm"))
 		{
@@ -67,7 +68,7 @@ public class Q345_MethodToRaiseTheDead extends Quest
 			{
 				htmltext = "30912-03.htm";
 				st.set("cond", "3");
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 				st.takeItems(57, 1000);
 				st.giveItems(POWDER_TO_SUMMON_DEAD_SOULS, 1);
 			}
@@ -100,7 +101,7 @@ public class Q345_MethodToRaiseTheDead extends Quest
 				st.takeItems(VICTIM_RIB_BONE, -1);
 				st.takeItems(VICTIM_SPINE, -1);
 				
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			}
 		}
 		else if (event.equalsIgnoreCase("30971-02a.htm"))
@@ -173,7 +174,7 @@ public class Q345_MethodToRaiseTheDead extends Quest
 								st.rewardItems(57, 5390 + amount);
 								st.giveItems(BILL_OF_IASON_HEINE, 3);
 							}
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -211,7 +212,7 @@ public class Q345_MethodToRaiseTheDead extends Quest
 			final int randomPart = Rnd.get(VICTIM_ARM_BONE, VICTIM_SPINE);
 			if (!st.hasQuestItems(randomPart))
 			{
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.giveItems(randomPart, 1);
 				return null;
 			}

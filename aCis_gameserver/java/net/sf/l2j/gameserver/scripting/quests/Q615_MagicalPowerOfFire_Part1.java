@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q615_MagicalPowerOfFire_Part1 extends Quest
 {
@@ -47,7 +48,7 @@ public class Q615_MagicalPowerOfFire_Part1 extends Quest
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
 			st.set("spawned", "0");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31559-03.htm"))
 		{
@@ -60,7 +61,7 @@ public class Q615_MagicalPowerOfFire_Part1 extends Quest
 			else
 			{
 				st.set("cond", "3");
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.takeItems(THIEF_KEY, 1);
 				st.giveItems(STOLEN_RED_TOTEM, 1);
 			}
@@ -101,7 +102,7 @@ public class Q615_MagicalPowerOfFire_Part1 extends Quest
 						{
 							htmltext = "31379-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						else if (cond == 2)
 						{
@@ -111,7 +112,7 @@ public class Q615_MagicalPowerOfFire_Part1 extends Quest
 							{
 								htmltext = "31379-03.htm";
 								st.set("spawned", "0");
-								st.playSound(QuestState.SOUND_MIDDLE);
+								st.playSound(Sound.SOUND_MIDDLE);
 							}
 						}
 						else if (cond == 3 && st.hasQuestItems(STOLEN_RED_TOTEM))
@@ -123,7 +124,7 @@ public class Q615_MagicalPowerOfFire_Part1 extends Quest
 							st.giveItems(DIVINE_STONE, 1);
 							
 							st.unset("spawned");
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(true);
 						}
 						break;
@@ -159,7 +160,7 @@ public class Q615_MagicalPowerOfFire_Part1 extends Quest
 			{
 				startQuestTimer("UdanEyeDespawn", 9000, udanEye, player, false);
 				udanEye.broadcastNpcSay("You cannot escape Udan's Eye!");
-				st.playSound(QuestState.SOUND_GIVEUP);
+				st.playSound(Sound.SOUND_GIVEUP);
 			}
 		}
 		

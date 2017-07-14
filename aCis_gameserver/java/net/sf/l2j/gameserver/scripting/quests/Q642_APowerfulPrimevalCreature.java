@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q642_APowerfulPrimevalCreature extends Quest
 {
@@ -58,7 +59,7 @@ public class Q642_APowerfulPrimevalCreature extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("32105-08.htm"))
 		{
@@ -130,9 +131,9 @@ public class Q642_APowerfulPrimevalCreature extends Quest
 				st.giveItems(DINOSAUR_EGG, 1);
 				
 				if (st.getQuestItemsCount(DINOSAUR_TISSUE) >= 150)
-					st.playSound(QuestState.SOUND_MIDDLE);
+					st.playSound(Sound.SOUND_MIDDLE);
 				else
-					st.playSound(QuestState.SOUND_ITEMGET);
+					st.playSound(Sound.SOUND_ITEMGET);
 			}
 		}
 		else if (Rnd.get(100) < 33)
@@ -140,9 +141,9 @@ public class Q642_APowerfulPrimevalCreature extends Quest
 			st.rewardItems(DINOSAUR_TISSUE, 1);
 			
 			if (st.getQuestItemsCount(DINOSAUR_TISSUE) >= 150 && st.hasQuestItems(DINOSAUR_EGG))
-				st.playSound(QuestState.SOUND_MIDDLE);
+				st.playSound(Sound.SOUND_MIDDLE);
 			else
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 		}
 		
 		return null;

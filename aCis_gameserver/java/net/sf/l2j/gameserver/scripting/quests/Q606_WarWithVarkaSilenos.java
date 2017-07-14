@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 /**
  * The onKill section of that quest is directly written on Q605.
@@ -38,13 +39,13 @@ public class Q606_WarWithVarkaSilenos extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("31370-07.htm"))
 		{
 			if (st.getQuestItemsCount(VARKA_MANE) >= 100)
 			{
-				st.playSound(QuestState.SOUND_ITEMGET);
+				st.playSound(Sound.SOUND_ITEMGET);
 				st.takeItems(VARKA_MANE, 100);
 				st.giveItems(HORN_OF_BUFFALO, 20);
 			}

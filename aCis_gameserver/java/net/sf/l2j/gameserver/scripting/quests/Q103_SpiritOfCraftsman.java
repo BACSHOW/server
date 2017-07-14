@@ -6,6 +6,7 @@ import net.sf.l2j.gameserver.model.base.ClassRace;
 import net.sf.l2j.gameserver.network.serverpackets.SocialAction;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q103_SpiritOfCraftsman extends Quest
 {
@@ -63,7 +64,7 @@ public class Q103_SpiritOfCraftsman extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 			st.giveItems(KARROD_LETTER, 1);
 		}
 		
@@ -129,7 +130,7 @@ public class Q103_SpiritOfCraftsman extends Quest
 							st.giveItems(ECHO_FEAST, 10);
 							st.giveItems(ECHO_CELEBRATION, 10);
 							player.broadcastPacket(new SocialAction(player, 3));
-							st.playSound(QuestState.SOUND_FINISH);
+							st.playSound(Sound.SOUND_FINISH);
 							st.exitQuest(false);
 						}
 						break;
@@ -139,7 +140,7 @@ public class Q103_SpiritOfCraftsman extends Quest
 						{
 							htmltext = "30132-01.htm";
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(KARROD_LETTER, 1);
 							st.giveItems(CECKTINON_VOUCHER_1, 1);
 						}
@@ -149,7 +150,7 @@ public class Q103_SpiritOfCraftsman extends Quest
 						{
 							htmltext = "30132-03.htm";
 							st.set("cond", "6");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(SOUL_CATCHER, 1);
 							st.giveItems(PRESERVING_OIL, 1);
 						}
@@ -159,7 +160,7 @@ public class Q103_SpiritOfCraftsman extends Quest
 						{
 							htmltext = "30132-05.htm";
 							st.set("cond", "8");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(ZOMBIE_HEAD, 1);
 							st.giveItems(STEELBENDER_HEAD, 1);
 						}
@@ -172,7 +173,7 @@ public class Q103_SpiritOfCraftsman extends Quest
 						{
 							htmltext = "30144-01.htm";
 							st.set("cond", "3");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(CECKTINON_VOUCHER_1, 1);
 							st.giveItems(CECKTINON_VOUCHER_2, 1);
 						}
@@ -182,7 +183,7 @@ public class Q103_SpiritOfCraftsman extends Quest
 						{
 							htmltext = "30144-03.htm";
 							st.set("cond", "5");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(CECKTINON_VOUCHER_2, 1);
 							st.takeItems(BONE_FRAGMENT, 10);
 							st.giveItems(SOUL_CATCHER, 1);

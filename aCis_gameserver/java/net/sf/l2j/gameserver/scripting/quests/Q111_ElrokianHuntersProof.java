@@ -4,6 +4,7 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.scripting.Quest;
 import net.sf.l2j.gameserver.scripting.QuestState;
+import net.sf.l2j.gameserver.scripting.quests.audio.Sound;
 
 public class Q111_ElrokianHuntersProof extends Quest
 {
@@ -47,44 +48,44 @@ public class Q111_ElrokianHuntersProof extends Quest
 		{
 			st.setState(STATE_STARTED);
 			st.set("cond", "1");
-			st.playSound(QuestState.SOUND_ACCEPT);
+			st.playSound(Sound.SOUND_ACCEPT);
 		}
 		else if (event.equalsIgnoreCase("32115-002.htm"))
 		{
 			st.set("cond", "3");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32113-009.htm"))
 		{
 			st.set("cond", "4");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32113-018.htm"))
 		{
 			st.set("cond", "6");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 			st.takeItems(FRAGMENT, -1);
 			st.giveItems(EXPEDITION_LETTER, 1);
 		}
 		else if (event.equalsIgnoreCase("32116-003.htm"))
 		{
 			st.set("cond", "7");
-			st.playSound("EtcSound.elcroki_song_full");
+			st.playSound(Sound.ETCSOUND_ELROKI_SONG_FULL);
 		}
 		else if (event.equalsIgnoreCase("32116-005.htm"))
 		{
 			st.set("cond", "8");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32115-004.htm"))
 		{
 			st.set("cond", "9");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32115-006.htm"))
 		{
 			st.set("cond", "10");
-			st.playSound(QuestState.SOUND_MIDDLE);
+			st.playSound(Sound.SOUND_MIDDLE);
 		}
 		else if (event.equalsIgnoreCase("32116-007.htm"))
 		{
@@ -92,7 +93,7 @@ public class Q111_ElrokianHuntersProof extends Quest
 			st.giveItems(8763, 1);
 			st.giveItems(8764, 100);
 			st.rewardItems(57, 1022636);
-			st.playSound(QuestState.SOUND_FINISH);
+			st.playSound(Sound.SOUND_FINISH);
 			st.exitQuest(false);
 		}
 		
@@ -132,7 +133,7 @@ public class Q111_ElrokianHuntersProof extends Quest
 						if (cond == 1)
 						{
 							st.set("cond", "2");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 						}
 						htmltext = "32114-001.htm";
 						break;
@@ -152,7 +153,7 @@ public class Q111_ElrokianHuntersProof extends Quest
 						{
 							htmltext = "32115-007.htm";
 							st.set("cond", "12");
-							st.playSound(QuestState.SOUND_MIDDLE);
+							st.playSound(Sound.SOUND_MIDDLE);
 							st.takeItems(BONE, -1);
 							st.takeItems(CLAW, -1);
 							st.takeItems(SKIN, -1);
