@@ -1,11 +1,6 @@
 package net.sf.l2j.gameserver.model.zone.type;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.Properties;
-
 import net.sf.l2j.commons.concurrent.ThreadPool;
-import net.sf.l2j.commons.config.ExProperties;
 import net.sf.l2j.commons.random.Rnd;
 
 import net.sf.l2j.Config;
@@ -26,11 +21,7 @@ public class L2FlagZone extends L2ZoneType
 	public L2FlagZone(int id)
 	{
 		super(id);
-		loadConfigs();
 	}
-	
-	static int radius, respawn;
-	static int[][] spawn_loc;
 	
 	@Override
 	protected void onEnter(Creature character)
@@ -67,7 +58,7 @@ public class L2FlagZone extends L2ZoneType
 		if (character instanceof Player)
 		{
 			final Player activeChar = ((Player) character);
-			activeChar.sendPacket(new ExShowScreenMessage(+ respawn + " seconds until auto respawn", 4000, 2, true));
+			activeChar.sendPacket(new ExShowScreenMessage(+ Config.FLAGZONE_RESPAWN + " seconds until auto respawn", 4000, 2, true));
 			
 			ThreadPool.schedule(new Runnable()
 			{
@@ -75,10 +66,9 @@ public class L2FlagZone extends L2ZoneType
 				public void run()
 				{
 					activeChar.doRevive();
-					int[] loc = spawn_loc[Rnd.get(spawn_loc.length)];
-					activeChar.teleToLocation(loc[0] + Rnd.get(-radius, radius), loc[1] + Rnd.get(-radius, radius), loc[2], 0);
+					activeChar.teleToLocation(Config.FLAGZONE_SPAWN_LOC[0] + Rnd.get(-Config.FLAGZONE_RADIUS, Config.FLAGZONE_RADIUS), Config.FLAGZONE_SPAWN_LOC[1] + Rnd.get(-Config.FLAGZONE_RADIUS, Config.FLAGZONE_RADIUS), Config.FLAGZONE_SPAWN_LOC[2], 0);
 				}
-			}, 1000 * respawn);
+			}, 1000 * Config.FLAGZONE_RESPAWN);
 		}
 	}
 	
@@ -94,69 +84,5 @@ public class L2FlagZone extends L2ZoneType
 			player.setCurrentCp(player.getMaxCp());
 			player.setCurrentMp(player.getMaxMp());
 		}
-	}
-	
-	private static void loadConfigs()
-	{
-		try
-		{
-			Properties prop = new Properties();
-			prop.load(new FileInputStream(new File("./config/mods/flagzone.properties")));
-			spawn_loc = parseItemsList(prop.getProperty("SpawnLoc", "82273,148068,-3469"));
-			radius = Integer.parseInt(prop.getProperty("RespawnRadius", "500"));
-			respawn = Integer.parseInt(prop.getProperty("RespawnDelay", "5"));
-			
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	private static int[][] parseItemsList(String line)
-	{
-		final String[] propertySplit = line.split(";");
-		if (propertySplit.length == 0)
-			return null;
-		
-		int i = 0;
-		String[] valueSplit;
-		final int[][] result = new int[propertySplit.length][];
-		for (String value : propertySplit)
-		{
-			valueSplit = value.split(",");
-			if (valueSplit.length != 3)
-				return null;
-			
-			result[i] = new int[3];
-			try
-			{
-				result[i][0] = Integer.parseInt(valueSplit[0]);
-			}
-			catch (NumberFormatException e)
-			{
-				return null;
-			}
-			
-			try
-			{
-				result[i][1] = Integer.parseInt(valueSplit[1]);
-			}
-			catch (NumberFormatException e)
-			{
-				return null;
-			}
-			
-			try
-			{
-				result[i][2] = Integer.parseInt(valueSplit[2]);
-			}
-			catch (NumberFormatException e)
-			{
-				return null;
-			}
-			i++;
-		}
-		return result;
 	}
 }

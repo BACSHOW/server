@@ -42,6 +42,7 @@ public final class Config
 	public static final String DM_FILE = "./config/events/dm.properties";
 	public static final String LM_FILE = "./config/events/lm.properties";
 	public static final String CUSTOM_FILE = "./config/mods/custom.properties";
+	public static final String ZONE_FILE = "./config/mods/flagzone.properties";
 	public static final String NEWBIE_FILE = "./config/mods/newscharacters.properties";
 	public static final String SECURITY_FILE = "./config/protect/security.properties";
 	public static final String VOICED_FILE = "./config/voiced/voiced.properties";
@@ -877,6 +878,11 @@ public final class Config
 	
 	/** NPC Delay to Spawn */
 	public static long NPC_SERVER_DELAY;
+	
+	/** Flag Zone */
+	public static int[] FLAGZONE_SPAWN_LOC = new int[3];
+	public static int FLAGZONE_RADIUS;
+	public static int FLAGZONE_RESPAWN;
 	
 	// --------------------------------------------------
 	// Those "hidden" settings haven't configs to avoid admins to fuck their server
@@ -1742,6 +1748,22 @@ public final class Config
 	}
 	
 	/**
+	 * Loads zone flag settings.<br>
+	 */
+	private static final void loadZone()
+	{
+		final ExProperties zone = initProperties(ZONE_FILE);
+		
+		FLAGZONE_SPAWN_LOC = new int[3];
+		String[] propertySplit = zone.getProperty("SpawnLoc", "82273,148068,-3469").split(",");
+		FLAGZONE_SPAWN_LOC[0] = Integer.parseInt(propertySplit[0]);
+		FLAGZONE_SPAWN_LOC[1] = Integer.parseInt(propertySplit[1]);
+		FLAGZONE_SPAWN_LOC[2] = Integer.parseInt(propertySplit[2]);
+		FLAGZONE_RADIUS = zone.getProperty("RespawnRadius", 500);
+		FLAGZONE_RESPAWN = zone.getProperty("RespawnDelay", 5);
+	}
+	
+	/**
 	 * Loads security settings.<br>
 	 */
 	private static final void loadSecurity()
@@ -2534,6 +2556,9 @@ public final class Config
 		
 		// lm settings
 		loadLm();
+		
+		// zone settings
+		loadZone();
 	}
 	
 	public static final void loadLoginServer()

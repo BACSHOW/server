@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.communitybbs.CommunityBoard;
 import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
-import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.handler.AdminCommandHandler;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.handler.IVoicedCommandHandler;
