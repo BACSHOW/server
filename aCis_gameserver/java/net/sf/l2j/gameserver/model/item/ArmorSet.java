@@ -12,6 +12,7 @@ public final class ArmorSet
 	private final int[] _set = new int[5];
 	
 	private final int _skillId;
+	private final int _skillCustomId;
 	private final int _shield;
 	private final int _shieldSkillId;
 	private final int _enchant6Skill;
@@ -27,6 +28,7 @@ public final class ArmorSet
 		_set[4] = set.getInteger("feet");
 		
 		_skillId = set.getInteger("skillId");
+		_skillCustomId = set.getInteger("skillCustomId");
 		_shield = set.getInteger("shield");
 		_shieldSkillId = set.getInteger("shieldSkillId");
 		_enchant6Skill = set.getInteger("enchant6Skill");
@@ -52,6 +54,11 @@ public final class ArmorSet
 	public int getSkillId()
 	{
 		return _skillId;
+	}
+	
+	public int getSkillCustomId()
+	{
+		return _skillCustomId;
 	}
 	
 	public int getShieldSkillId()

@@ -97,6 +97,7 @@ public class ArmorSetListener implements OnEquipListener
 		int removeSkillId1 = 0; // set skill
 		int removeSkillId2 = 0; // shield skill
 		int removeSkillId3 = 0; // enchant +6 skill
+		int removeSkillId4 = 0;
 		
 		if (slot == Inventory.PAPERDOLL_CHEST)
 		{
@@ -108,6 +109,7 @@ public class ArmorSetListener implements OnEquipListener
 			removeSkillId1 = armorSet.getSkillId();
 			removeSkillId2 = armorSet.getShieldSkillId();
 			removeSkillId3 = armorSet.getEnchant6skillId();
+			removeSkillId4 = armorSet.getSkillCustomId();
 		}
 		else
 		{
@@ -125,6 +127,7 @@ public class ArmorSetListener implements OnEquipListener
 				removeSkillId1 = armorSet.getSkillId();
 				removeSkillId2 = armorSet.getShieldSkillId();
 				removeSkillId3 = armorSet.getEnchant6skillId();
+				removeSkillId4 = armorSet.getSkillCustomId();
 			}
 			else if (armorSet.containShield(item.getItemId())) // removed shield
 			{
@@ -158,6 +161,17 @@ public class ArmorSetListener implements OnEquipListener
 				if (skill != null)
 					player.removeSkill(skill);
 			}
+			
+			if (removeSkillId4 != 0)
+			{
+				L2Skill skill = SkillTable.getInstance().getInfo(removeSkillId4, 1);
+				if (skill != null)
+				{
+					player.removeSkill(SkillTable.getInstance().getInfo(3006, 1));
+					player.removeSkill(skill);
+				}
+			}
+			
 			player.sendSkillList();
 		}
 	}

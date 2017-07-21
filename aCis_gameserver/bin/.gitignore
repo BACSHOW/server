@@ -1,3 +1,14 @@
-/net/
-/mods/
+/engine/
+/events.properties
 /events/
+/geoengine.properties
+/logging.properties
+/loginserver.properties
+/mods/
+/net/
+/npcs.properties
+/players.properties
+/protect/
+/server.properties
+/siege.properties
+/voiced/

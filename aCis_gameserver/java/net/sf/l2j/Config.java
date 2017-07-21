@@ -876,9 +876,6 @@ public final class Config
 	/** Shift for Npcs */
 	public static boolean ENABLE_SHIFT_CLICK_TO_NPCS;
 	
-	/** NPC Delay to Spawn */
-	public static long NPC_SERVER_DELAY;
-	
 	/** Flag Zone */
 	public static int[] FLAGZONE_SPAWN_LOC = new int[3];
 	public static int FLAGZONE_RADIUS;
@@ -1741,8 +1738,6 @@ public final class Config
 			CUSTOM_CANCEL_SECONDS = custom.getProperty("CustomCancelSeconds", 5);
 			
 			ENABLE_SHIFT_CLICK_TO_NPCS = custom.getProperty("EnableShiftClickToNpcs", false);
-			
-			NPC_SERVER_DELAY = custom.getProperty("NPCServerDelay", 1);
 		}
 		
 	}

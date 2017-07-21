@@ -1,5 +1,6 @@
 package net.sf.l2j.gameserver.network.clientpackets;
 
+import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -7,6 +8,7 @@ import java.util.logging.Logger;
 import net.sf.l2j.Config;
 import net.sf.l2j.gameserver.communitybbs.CommunityBoard;
 import net.sf.l2j.gameserver.datatables.AdminCommandAccessRights;
+import net.sf.l2j.gameserver.datatables.ItemTable;
 import net.sf.l2j.gameserver.handler.AdminCommandHandler;
 import net.sf.l2j.gameserver.handler.IAdminCommandHandler;
 import net.sf.l2j.gameserver.handler.IVoicedCommandHandler;
@@ -18,6 +20,9 @@ import net.sf.l2j.gameserver.model.actor.Npc;
 import net.sf.l2j.gameserver.model.actor.instance.OlympiadManagerNpc;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.entity.Hero;
+import net.sf.l2j.gameserver.model.item.DropCategory;
+import net.sf.l2j.gameserver.model.item.DropData;
+import net.sf.l2j.gameserver.model.item.kind.Item;
 import net.sf.l2j.gameserver.model.olympiad.OlympiadManager;
 import net.sf.l2j.gameserver.network.FloodProtectors;
 import net.sf.l2j.gameserver.network.FloodProtectors.Action;
@@ -26,6 +31,7 @@ import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.network.serverpackets.NpcHtmlMessage;
 
 import main.EngineModsManager;
+import main.data.IconData;
 
 public final class RequestBypassToServer extends L2GameClientPacket
 {
@@ -198,6 +204,100 @@ public final class RequestBypassToServer extends L2GameClientPacket
 			}
 			else if (_command.startsWith("Engine"))
 				EngineModsManager.onEvent(activeChar, activeChar.getLastNpcTalk(),_command.replace("Engine ", ""));
+			else if (_command.startsWith("DropListNpc"))
+			{
+				final WorldObject object = activeChar.getTarget();
+				if (object instanceof Npc)
+				{
+					NpcHtmlMessage html = new NpcHtmlMessage(0);
+					StringBuilder html1 = new StringBuilder("<html>");
+					
+					html1.append("<title>NPC Name: " + object.getName() + "</title>");
+					html1.append("<body>");
+					html1.append("<br>");
+					html1.append("<table cellspacing=2 cellpadding=1 width=\"280\">");
+					
+					if (((Npc) object).getTemplate().getDropData() != null)
+					{
+						for (DropCategory cat : ((Npc) object).getTemplate().getDropData())
+						{
+							for (DropData drop : cat.getAllDrops())
+							{
+								final Item item = ItemTable.getInstance().getTemplate(drop.getItemId());
+								
+								if (item == null)
+									continue;
+								int mind = 0, maxd = 0;
+								String smind = null, smaxd = null;
+								String name = item.getName();
+								if (cat.isSweep())
+								{
+									mind = (int) (Config.RATE_DROP_SPOIL * drop.getMinDrop());
+									maxd = (int) (Config.RATE_DROP_SPOIL * drop.getMaxDrop());
+								}
+								else if (drop.getItemId() == 57)
+								{
+									mind = 300 * drop.getMinDrop();
+									maxd = 300 * drop.getMaxDrop();
+								}
+								else
+								{
+									mind = (int) (Config.RATE_DROP_ITEMS * drop.getMinDrop());
+									maxd = (int) (Config.RATE_DROP_ITEMS * drop.getMaxDrop());
+								}
+								if (mind > 999999)
+								{
+									DecimalFormat df = new DecimalFormat("###.#");
+									smind = df.format(((double) (mind)) / 1000000) + " KK";
+									smaxd = df.format(((double) (maxd)) / 1000000) + " KK";
+								}
+								else if (mind > 999)
+								{
+									smind = ((mind / 1000)) + " K";
+									smaxd = ((maxd / 1000)) + " K";
+								}
+								
+								else
+								{
+									smind = Integer.toString(mind);
+									smaxd = Integer.toString(maxd);
+								}
+								if (name.startsWith("Common Item - "))
+								{
+									name = "(CI)" + name.substring(14);
+								}
+								if (name.length() >= 34)
+								{
+									name = name.substring(0, 30) + "...";
+								}
+								html1.append("<tr>");
+								html1.append("<td valign=top align=center height=38 width=40><img src=\"" + IconData.getIconByItemId(item.getItemId()) + "\" height=32 width=32></td>");
+								html1.append("<td>");
+								html1.append("<table cellpadding=0 cellspacing=1 width=237>");
+								html1.append("<tr>");
+								html1.append("<td>" + (drop.getChance() >= 10000 ? (double) drop.getChance() / 10000 : drop.getChance() < 10000 ? (double) drop.getChance() / 10000 : "N/A") + "</td>");
+								html1.append("</tr>");
+								html1.append("<tr>");
+								html1.append("<td>Name: <font color=fff600>" + name + "</font> " + (maxd == 1 ? "[1]" : "[" + smind + " - " + smaxd + "]") + "</td>");
+								html1.append("</tr>");
+								html1.append("</table>");
+								html1.append("</td>");
+							}
+						}
+					}
+					
+					html1.append("</tr></table>");
+					html1.append("</body>");
+					html1.append("</html>");
+					
+					html.setHtml(html1.toString());
+					activeChar.sendPacket(html);
+					
+					html1 = null;
+					html = null;
+				}
+				
+			}
 		}
 		catch (Exception e)
 		{
