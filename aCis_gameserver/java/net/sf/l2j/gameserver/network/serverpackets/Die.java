@@ -7,6 +7,8 @@ import net.sf.l2j.gameserver.model.actor.Creature;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.entity.Siege;
 import net.sf.l2j.gameserver.model.entity.Siege.SiegeSide;
+import net.sf.l2j.gameserver.model.zone.ZoneId;
+import net.sf.l2j.gameserver.model.zone.type.L2MultiZone;
 
 public class Die extends L2GameServerPacket
 {
@@ -55,7 +57,7 @@ public class Die extends L2GameServerPacket
 		}
 		else
 		{
-			writeD(0x01); // to nearest village
+			writeD(_activeChar.isInsideZone(ZoneId.MULTI) && L2MultiZone.isReviveEnabled() ? 0x00 : 0x01); // to nearest village
 		
 			if (_funEvent && _clan != null)
 			{

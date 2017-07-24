@@ -97,6 +97,7 @@ public class AdminZone implements IAdminCommandHandler
 		html.replace("%DANGERAREA%", (activeChar.isInsideZone(ZoneId.DANGER_AREA) ? "<font color=\"LEVEL\">YES</font>" : "NO"));
 		html.replace("%CASTONARTIFACT%", (activeChar.isInsideZone(ZoneId.CAST_ON_ARTIFACT) ? "<font color=\"LEVEL\">YES</font>" : "NO"));
 		html.replace("%NORESTART%", (activeChar.isInsideZone(ZoneId.NO_RESTART) ? "<font color=\"LEVEL\">YES</font>" : "NO"));
+		html.replace("%MULTI%", (activeChar.isInsideZone(ZoneId.MULTI) ? "<font color=\"LEVEL\">YES</font>" : "NO"));
 		
 		final StringBuilder sb = new StringBuilder(100);
 		for (L2ZoneType zone : World.getInstance().getRegion(x, y).getZones())

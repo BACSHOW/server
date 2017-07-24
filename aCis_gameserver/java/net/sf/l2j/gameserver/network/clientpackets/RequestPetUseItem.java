@@ -7,6 +7,8 @@ import net.sf.l2j.gameserver.handler.ItemHandler;
 import net.sf.l2j.gameserver.model.actor.instance.Pet;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
 import net.sf.l2j.gameserver.model.item.instance.ItemInstance;
+import net.sf.l2j.gameserver.model.zone.ZoneId;
+import net.sf.l2j.gameserver.model.zone.type.L2MultiZone;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.PetItemList;
 import net.sf.l2j.gameserver.network.serverpackets.SystemMessage;
@@ -52,6 +54,12 @@ public final class RequestPetUseItem extends L2GameClientPacket
 		
 		if (!item.isEquipped() && !item.getItem().checkCondition(pet, pet, true))
 			return;
+		
+		if (activeChar.isInsideZone(ZoneId.MULTI) && L2MultiZone.isRestrictedItem(item.getItemId()))
+		{
+			activeChar.sendMessage(item.getName() + " cannot be used inside multi zone.");
+			return;
+		}
 		
 		// Check if item is pet armor or pet weapon
 		if (item.isPetItem())

@@ -20,6 +20,7 @@ import net.sf.l2j.gameserver.model.item.type.WeaponType;
 import net.sf.l2j.gameserver.model.itemcontainer.Inventory;
 import net.sf.l2j.gameserver.model.olympiad.OlympiadManager;
 import net.sf.l2j.gameserver.model.zone.ZoneId;
+import net.sf.l2j.gameserver.model.zone.type.L2MultiZone;
 import net.sf.l2j.gameserver.network.SystemMessageId;
 import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.network.serverpackets.ItemList;
@@ -212,6 +213,12 @@ public final class UseItem extends L2GameClientPacket
 		{
 			if (!item.getItem().checkCondition(activeChar, activeChar, true))
 				return;
+		}
+		
+		if (activeChar.isInsideZone(ZoneId.MULTI) && L2MultiZone.isRestrictedItem(item.getItemId()))
+		{
+			activeChar.sendMessage(item.getName() + " cannot be used inside multi zone.");
+			return;
 		}
 		
 		if (item.isEquipable())

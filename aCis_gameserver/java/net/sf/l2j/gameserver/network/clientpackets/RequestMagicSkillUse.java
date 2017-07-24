@@ -7,6 +7,8 @@ import net.sf.l2j.gameserver.model.actor.ai.CtrlEvent;
 import net.sf.l2j.gameserver.model.actor.ai.CtrlIntention;
 import net.sf.l2j.gameserver.model.actor.ai.NextAction;
 import net.sf.l2j.gameserver.model.actor.instance.Player;
+import net.sf.l2j.gameserver.model.zone.ZoneId;
+import net.sf.l2j.gameserver.model.zone.type.L2MultiZone;
 import net.sf.l2j.gameserver.network.serverpackets.ActionFailed;
 import net.sf.l2j.gameserver.templates.skills.L2SkillType;
 
@@ -65,6 +67,13 @@ public final class RequestMagicSkillUse extends L2GameClientPacket
 		
 		if (activeChar.isOutOfControl())
 		{
+			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
+			return;
+		}
+		
+		if (activeChar.isInsideZone(ZoneId.MULTI) && L2MultiZone.isRestrictedSkill(skill.getId()))
+		{
+			activeChar.sendMessage(skill.getName() + " cannot be used inside multi zone.");
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
