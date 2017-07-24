@@ -20,7 +20,6 @@ import java.util.List;
 import net.sf.l2j.commons.concurrent.ThreadPool;
 import net.sf.l2j.commons.random.Rnd;
 
-import net.sf.l2j.gameserver.datatables.MapRegionTable;
 import net.sf.l2j.gameserver.datatables.MapRegionTable.TeleportType;
 import net.sf.l2j.gameserver.model.L2Effect;
 import net.sf.l2j.gameserver.model.Location;
@@ -115,38 +114,41 @@ public class L2MultiZone extends L2ZoneType
    @Override
    protected void onEnter(Creature character)
    {
-       character.setInsideZone(ZoneId.MULTI, true);
-      
-       if (_isNoRestart)
-           character.setInsideZone(ZoneId.NO_RESTART, true);
-      
-       if (_isNoStore)
-           character.setInsideZone(ZoneId.NO_STORE, true);
-      
-       if (_isNoSummonFriend)
-           character.setInsideZone(ZoneId.NO_SUMMON_FRIEND, true);
-      
-       if (character instanceof Player || character instanceof Servitor)
-       {
-           final Player player = (Player) character;
-           //player.sendPacket(new ExShowScreenMessage("You have entered a multi zone.", 5000));
-          
-           if (_isFlagEnabled)
-               player.updatePvPFlag(1);
-           
-           if (_isPTZone)
-           {
-        	   if (character.getParty() != null)
-        	   {
-        		   character.setInsideZone(ZoneId.MULTI, true);
-        		   character.sendMessage("You have entered a party zone.");
-        	   }
-        	   else
-        	   {
-        		   character.sendMessage("This is strict area for party ONLY. You will be teleported at the nearest town.");
-        		   character.teleToLocation(TeleportType.TOWN);
-        	   }
-           }
+	   if (character instanceof Player)
+	   {
+		   character.setInsideZone(ZoneId.MULTI, true);
+		   
+		   if (_isNoRestart)
+			   character.setInsideZone(ZoneId.NO_RESTART, true);
+		   
+		   if (_isNoStore)
+			   character.setInsideZone(ZoneId.NO_STORE, true);
+		   
+		   if (_isNoSummonFriend)
+			   character.setInsideZone(ZoneId.NO_SUMMON_FRIEND, true);
+		   
+		   if (character instanceof Player || character instanceof Servitor)
+		   {
+			   final Player player = (Player) character;
+			   player.sendPacket(new ExShowScreenMessage("You have entered a multi zone.", 5000));
+			   
+			   if (_isFlagEnabled)
+				   player.updatePvPFlag(1);
+			   
+			   if (_isPTZone)
+			   {
+				   if (player.getParty() != null)
+				   {
+					   character.isInsideZone(ZoneId.MULTI);
+					   player.sendMessage("You have entered a party zone.");
+				   }
+				   else
+				   {
+					   player.sendMessage("This is strict area for party ONLY. You will be teleported at the nearest town.");
+					   player.teleToLocation(TeleportType.TOWN);
+				   }
+			   }
+		   }
           
            checkItemRestriction(character);
            checkSkillRestriction(character);
